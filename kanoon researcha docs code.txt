@@ -1,0 +1,116 @@
+# ============================
+# Indian Kanoon Research Demo
+# ============================
+
+!pip -q install requests
+
+import requests
+import json
+
+API_KEY = "464ac1a541c327a593d3214e9e9eda37540db4ac"
+
+HEADERS = {
+    "Authorization": f"Token {API_KEY}",
+    "Accept": "application/json"
+}
+
+BASE = "https://api.indiankanoon.org"
+
+# ----------------------------
+# Search
+# ----------------------------
+def search(query, page=0):
+    url = f"{BASE}/search/"
+    data = {
+        "formInput": query,
+        "pagenum": page
+    }
+
+    r = requests.post(
+        url,
+        headers=HEADERS,
+        data=data
+    )
+
+    r.raise_for_status()
+    return r.json()
+
+# ----------------------------
+# Fetch Full Judgment
+# ----------------------------
+def get_document(doc_id):
+    url = f"{BASE}/doc/{doc_id}/"
+    data = {
+        "docid": doc_id
+    }
+
+    r = requests.post(
+        url,
+        headers=HEADERS,
+        data=data
+    )
+
+    r.raise_for_status()
+    return r.json()
+
+# ----------------------------
+# Fetch Metadata
+# ----------------------------
+def get_metadata(doc_id):
+    url = f"{BASE}/docmeta/{doc_id}/"
+    data = {
+        "docid": doc_id
+    }
+
+    r = requests.post(
+        url,
+        headers=HEADERS,
+        data=data
+    )
+
+    r.raise_for_status()
+    return r.json()
+
+# ----------------------------
+# Research Example
+# ----------------------------
+
+query = "force majeure covid"
+
+results = search(query)
+
+docs = results.get("docs", [])
+
+print("="*60)
+print(f"Found {len(docs)} documents")
+print("="*60)
+
+for i, doc in enumerate(docs[:5], start=1):
+    print(f"\n{i}. {doc.get('title')}")
+    print("Doc ID:", doc.get("tid"))
+    print("Headline:")
+    print(doc.get("headline"))
+    print("-"*60)
+
+if docs:
+    first_doc_id = docs[0]["tid"]
+
+    print("\nDownloading full judgment...\n")
+
+    judgment = get_document(first_doc_id)
+
+    print("="*60)
+    print("Available Keys")
+    print("="*60)
+    print(judgment.keys())
+
+    print("\n\nFirst 3000 characters of the judgment:\n")
+
+    # The document body is typically returned in the 'doc' field
+    print(str(judgment.get("doc", ""))[:3000])
+
+    print("\n\nFetching metadata...\n")
+
+    metadata = get_metadata(first_doc_id)
+
+    print(json.dumps(metadata, indent=2)[:3000])
