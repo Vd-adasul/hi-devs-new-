@@ -37,10 +37,44 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+class WaitlistEntry(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: str
+    company: str = ""
+    team_size: str = ""
+    message: str = ""
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class WaitlistCreate(BaseModel):
+    name: str
+    email: str
+    company: str = ""
+    team_size: str = ""
+    message: str = ""
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
     return {"message": "Hello World"}
+
+@api_router.post("/waitlist", response_model=WaitlistEntry)
+async def create_waitlist_entry(input: WaitlistCreate):
+    entry = WaitlistEntry(**input.model_dump())
+    doc = entry.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.waitlist.insert_one(doc)
+    return entry
+
+@api_router.get("/waitlist", response_model=List[WaitlistEntry])
+async def get_waitlist():
+    entries = await db.waitlist.find({}, {"_id": 0}).sort("created_at", -1).to_list(1000)
+    for e in entries:
+        if isinstance(e.get('created_at'), str):
+            e['created_at'] = datetime.fromisoformat(e['created_at'])
+    return entries
 
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
