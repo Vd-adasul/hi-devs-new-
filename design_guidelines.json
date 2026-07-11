@@ -1,0 +1,157 @@
+{
+  "theme": "light",
+  "typography": {
+    "font_strategy": "The Old Money Tech",
+    "primary_font": "Playfair Display",
+    "primary_font_type": "serif",
+    "secondary_font": "Manrope",
+    "secondary_font_type": "sans",
+    "hierarchy": {
+      "h1": "text-5xl md:text-[7vw] lg:text-[8vw] font-serif leading-none tracking-tighter font-medium",
+      "h2": "text-4xl sm:text-5xl lg:text-6xl font-serif leading-tight tracking-tight",
+      "h3": "text-2xl sm:text-3xl font-serif leading-snug",
+      "h4": "text-lg sm:text-xl font-sans font-semibold tracking-tight",
+      "body": "text-base md:text-lg font-sans leading-relaxed text-foreground/80",
+      "overline": "text-xs md:text-sm font-sans uppercase tracking-[0.2em] text-primary font-semibold"
+    },
+    "rules": [
+      "NEVER use Inter, Roboto, or generic sans for headings.",
+      "Use extremely tight letter spacing for headings (>32px).",
+      "Use Playfair Display for all major headings to establish legacy, trust, and luxury.",
+      "Use Manrope for all body text, buttons, and UI elements for readability and modern precision."
+    ]
+  },
+  "colors": {
+    "archetype": "Swiss & High-Contrast mixed with Luxury",
+    "palette": {
+      "background": "#FDFDFC",
+      "foreground": "#0A0A0A",
+      "primary": "#2563EB",
+      "primary_foreground": "#FFFFFF",
+      "muted": "#F3F4F6",
+      "muted_foreground": "#6B7280",
+      "border": "rgba(10, 10, 10, 0.1)",
+      "card": "#FFFFFF",
+      "card_foreground": "#0A0A0A",
+      "destructive": "#EF4444",
+      "accent_dark": "#09090B"
+    },
+    "rules": [
+      "Base is 'Bone White' off-white to represent paper/contracts.",
+      "Text is 'Pitch Black' for ultimate high-contrast legibility.",
+      "Primary color is 'Signature Blue' (#2563EB) used sparingly for core actions, checkmarks, and active pipeline states.",
+      "Avoid excessive gradients. Color is used strictly for function and hierarchy.",
+      "AI Architecture section MUST use an inverted Dark Theme (bg: #09090B) to separate the 'tech engine' from the 'legal document' interface."
+    ]
+  },
+  "visual_enhancers": {
+    "surfaces": [
+      "Default Cards: Flat background (#FFFFFF), 1px solid border (border-black/5), soft ambient shadow (shadow-sm). Hover adds -translate-y-1 and shadow-lg.",
+      "AI Architecture Nodes: Glassmorphism over dark bg (bg-white/10 backdrop-blur-md border border-white/20).",
+      "Avoid excessive glassmorphism on the light theme. Keep it solid and premium."
+    ],
+    "textures": [
+      "Subtle noise overlay (opacity 2-3%) across the entire page to kill the digital flatness.",
+      "1px grid lines in the background of technical sections to add 'Swiss' structure."
+    ]
+  },
+  "layouts": {
+    "spacing_system": "Generous Spacing: py-24 to py-32 for sections. gap-8 to gap-16 for flex containers.",
+    "patterns": [
+      "Bento Grid: grid-cols-1 md:grid-cols-12 with wide gap-8. Mix tall (row-span-2) and wide items.",
+      "Numbered Manifesto: Sticky left column (sticky top-32) containing the chapter number, scrolling right column containing the text."
+    ]
+  },
+  "motion": {
+    "libraries": ["framer-motion", "lenis"],
+    "key_animations": [
+      "Kinetic Hero: Masked line-by-line text reveal. Wrap each line of text in an overflow-hidden span, and translate the text up from 100% to 0% over 1s.",
+      "Scroll Parallax: Use framer-motion useScroll to move hero background image at a slower rate than the foreground.",
+      "Count-Up Metrics: framer-motion animation on numbers when in view.",
+      "Self-Drawing Lines: For the AI architecture pipeline, use SVG <path> with framer-motion initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}.",
+      "Feature Cards: Subtle tilt on mouse move or gentle float up on scroll-reveal."
+    ],
+    "rules": [
+      "Every animation must have a purpose. No chaotic bouncing.",
+      "Respect prefers-reduced-motion."
+    ]
+  },
+  "components_usage": {
+    "buttons": "Pill-shaped (rounded-full) or completely sharp (rounded-none). No generic 6px radius.",
+    "marquee": "Use react-fast-marquee. Slow, elegant editorial speed. Muted colors.",
+    "accordion": "Animated height reveal, 1px bottom border per item, no background container.",
+    "forms": "Use pure HTML/Tailwind for structural layout, Shadcn logic for inputs if required. Generous padding inside inputs (py-4)."
+  },
+  "media": {
+    "image_urls": {
+      "hero_texture_parallax": [
+        {
+          "url": "https://images.unsplash.com/photo-1545987796-200677ee1011?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGRhdGElMjBjb25uZWN0aW9uJTIwbmV0d29ya3xlbnwwfHx8fDE3ODM4MDk0MTJ8MA&ixlib=rb-4.1.0&q=85",
+          "category": "Hero Section",
+          "description": "Abstract mesh structural architecture for subtle background parallax."
+        }
+      ],
+      "ai_architecture_bg": [
+        {
+          "url": "https://images.unsplash.com/photo-1644088379091-d574269d422f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGRhdGElMjBjb25uZWN0aW9uJTIwbmV0d29ya3xlbnwwfHx8fDE3ODM4MDk0MTJ8MA&ixlib=rb-4.1.0&q=85",
+          "category": "AI Pipeline Section",
+          "description": "Deep blue abstract data network for dark mode background."
+        }
+      ],
+      "trusted_logos": [
+        {
+          "url": "https://images.pexels.com/photos/26576975/pexels-photo-26576975.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "category": "Marquee",
+          "description": "Mock enterprise sponsor logo."
+        }
+      ],
+      "testimonials": [
+        {
+          "url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMHBlcnNvbiUyMHBvcnRyYWl0fGVufDB8fHx8MTc4MzgwOTQxMnww&ixlib=rb-4.1.0&q=85",
+          "category": "Testimonials",
+          "description": "Professional executive portrait."
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1560250097-0b93528c311a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMHBlcnNvbiUyMHBvcnRyYWl0fGVufDB8fHx8MTc4MzgwOTQxMnww&ixlib=rb-4.1.0&q=85",
+          "category": "Testimonials",
+          "description": "Professional executive portrait."
+        }
+      ],
+      "feature_imagery": [
+        {
+          "url": "https://images.unsplash.com/photo-1483366774565-c783b9f70e2c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwzfHxtaW5pbWFsaXN0JTIwbW9kZXJuJTIwb2ZmaWNlJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc4MzgwOTQxMnww&ixlib=rb-4.1.0&q=85",
+          "category": "Bento Grid Cards",
+          "description": "Minimalist modern concrete architecture for legal tech stability feeling."
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxtaW5pbWFsaXN0JTIwbW9kZXJuJTIwb2ZmaWNlJTIwYXJjaGl0ZWN0dXJlfGVufDB8fHx8MTc4MzgwOTQxMnww&ixlib=rb-4.1.0&q=85",
+          "category": "Bento Grid Cards",
+          "description": "Glass office hallway for transparency/compliance feature."
+        }
+      ]
+    }
+  },
+  "instructions_to_main_agent": [
+    "Install required libraries: `yarn add framer-motion @studio-freight/react-lenis react-fast-marquee lucide-react`.",
+    "Implement Lenis Provider at the root level for smooth scrolling.",
+    "Hero Section: Build the 'masked line-by-line reveal'. Split the headline into 3 lines. Each line must be wrapped in a <span className='overflow-hidden block'><motion.span>...</span>.",
+    "Manifesto Section: Use a 2-column layout. Left column sticky with a massive Serif number ('01', '02'). Right column scrolls normally with problem statements.",
+    "Interactive Product Demo: Build a visual pipeline using Tailwind and framer-motion. Upload -> Scanning -> Risk Score -> Suggestion -> Approval. Use overlapping absolute divs or a horizontal stepper that lights up (opacity transition) as the user scrolls or clicks.",
+    "AI Architecture Visualization: This section MUST be dark mode (bg-[#09090B] text-white). Use an SVG overlay to draw connecting lines between nodes (PDF -> Embeddings -> Qdrant -> Agents). Animate the lines using framer-motion pathLength.",
+    "Pricing: 3 cards. Enterprise card should be highlighted, visually distinct, with an 'Accordion' for detailed feature comparison if possible.",
+    "Footer: Make the logo and 'Let's Talk' text massive (text-[10vw])."
+  ],
+  "accessibility": {
+    "contrast": "Ensure all text against the Bone White background meets AAA contrast standards. The deep blue should only be used for text if large enough, else use as background with white text.",
+    "data_testid": "Add data-testid to all interactive elements, e.g., data-testid='hero-cta-button', data-testid='pricing-enterprise-card'."
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Make creative, distinctive frontends that surprise and delight.",
+    "Never apply `transition: all`. Use specific transitions like `transition-colors duration-200 ease-in-out`.",
+    "Never use `text-align: center` on the main app container.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "DO NOT use transparent backgrounds for headers over scrolling content. Always use backdrop-blur or solid colors.",
+    "Never use AI assistant Emojis for icons.",
+    "In JavaScript files, ensure you are exporting components correctly and not using TypeScript specific syntax."
+  ]
+}
