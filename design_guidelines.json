@@ -1,0 +1,252 @@
+{
+  "theme_decision": "Dark Theme (Editorial Luxe: Deep Obsidian/Navy & Brass/Gold)",
+  "colors": {
+    "background": {
+      "default": "#060913",
+      "paper": "#0D1322",
+      "glass": "rgba(13, 19, 34, 0.65)"
+    },
+    "primary": {
+      "main": "#D4AF37",
+      "light": "#F3D573",
+      "dark": "#9E8022",
+      "contrastText": "#060913"
+    },
+    "secondary": {
+      "main": "#1E293B",
+      "light": "#334155",
+      "dark": "#0F172A",
+      "contrastText": "#F8FAFC"
+    },
+    "accent": {
+      "brass": "#B5955C",
+      "gold": "#E5C158",
+      "ink": "#1E293B"
+    },
+    "text": {
+      "primary": "#F8FAFC",
+      "secondary": "#94A3B8",
+      "disabled": "#475569",
+      "gold": "#D4AF37"
+    },
+    "border": {
+      "default": "rgba(255, 255, 255, 0.1)",
+      "light": "rgba(255, 255, 255, 0.05)",
+      "focus": "#D4AF37"
+    }
+  },
+  "typography": {
+    "font_families": {
+      "heading": "'Cormorant Garamond', serif",
+      "body": "'Inter', sans-serif"
+    },
+    "scale": {
+      "h1": "text-5xl md:text-6xl+ font-serif tracking-tight leading-none text-white",
+      "h2": "text-3xl md:text-4xl font-serif tracking-tight text-white",
+      "h3": "text-2xl md:text-3xl font-serif tracking-tight text-white",
+      "h4": "text-xl font-serif tracking-tight text-white",
+      "subtitle": "text-lg md:text-xl font-sans text-slate-400 font-light",
+      "body": "text-base font-sans text-slate-300",
+      "small": "text-sm font-sans text-slate-400",
+      "overline": "text-xs font-sans tracking-[0.2em] uppercase text-primary-main font-semibold"
+    },
+    "weights": {
+      "light": 300,
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    }
+  },
+  "visual_enhancers": {
+    "shadows": {
+      "sm": "0 1px 2px 0 rgba(0, 0, 0, 0.5)",
+      "md": "0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3)",
+      "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3)",
+      "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3)",
+      "glow_gold": "0 0 20px rgba(212, 175, 55, 0.15)"
+    },
+    "radii": {
+      "none": "0",
+      "sm": "0.125rem",
+      "md": "0.25rem",
+      "lg": "0.5rem",
+      "xl": "0.75rem",
+      "2xl": "1rem",
+      "full": "9999px"
+    },
+    "surfaces": {
+      "glass": "backdrop-blur-xl bg-white/5 border border-white/10",
+      "solid_card": "bg-[#0D1322] border border-white/10 shadow-lg",
+      "hero_overlay": "bg-gradient-to-b from-[#060913]/80 via-[#060913]/50 to-[#060913]"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#D4AF37] hover:bg-[#F3D573] text-[#060913] font-medium px-6 py-3 rounded-md transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:shadow-[0_0_25px_rgba(212,175,55,0.5)] hover:-translate-y-0.5",
+      "secondary": "bg-white/5 hover:bg-white/10 text-white border border-white/10 px-6 py-3 rounded-md transition-all duration-300 backdrop-blur-sm",
+      "ghost": "text-slate-300 hover:text-white hover:bg-white/5 px-4 py-2 rounded-md transition-colors duration-200"
+    },
+    "cards": {
+      "base": "bg-[#0D1322] border border-white/10 rounded-xl p-6 md:p-8 hover:border-white/20 transition-all duration-300",
+      "interactive": "bg-[#0D1322] border border-white/10 rounded-xl p-6 md:p-8 hover:border-[#D4AF37]/50 hover:shadow-glow_gold hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+    },
+    "inputs": {
+      "base": "w-full bg-[#060913] border border-white/10 rounded-md px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all"
+    },
+    "badges": {
+      "gold": "bg-[#D4AF37]/10 text-[#D4AF37] border border-[#D4AF37]/20 px-2.5 py-0.5 rounded-full text-xs font-medium tracking-wide",
+      "neutral": "bg-white/5 text-slate-300 border border-white/10 px-2.5 py-0.5 rounded-full text-xs font-medium tracking-wide"
+    }
+  },
+  "grids": {
+    "bento": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6",
+    "features": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12",
+    "dashboard": "grid grid-cols-1 lg:grid-cols-12 gap-6"
+  },
+  "layouts": {
+    "landing_page_blueprint": {
+      "hero": {
+        "layout": "Min-h-screen flex items-center pt-32 pb-20 relative overflow-hidden",
+        "content": "Eyebrow badge (gold), massive H1 (Cormorant Garamond), subtitle, Primary & Secondary CTAs. Abstract gold waves background (low opacity). Product UI screenshot floating/skewed in 3D perspective below the fold.",
+        "vibe": "Gravitas, authority, expensive."
+      },
+      "trusted_by": {
+        "layout": "py-12 border-y border-white/5 bg-white/[0.02]",
+        "content": "Text: 'TRUSTED BY INNOVATIVE LEGAL TEAMS' (overline). Horizontal marquee of partner logos (rendered in solid white/slate-400 with 50% opacity)."
+      },
+      "core_capabilities": {
+        "layout": "py-24 max-w-7xl mx-auto px-6",
+        "content": "Bento grid layout. Cards for CLM, AI Legal Research, Knowledge Graph, E-signatures, Workflow Automation. Use glass surfaces and gold accents."
+      },
+      "interactive_showcase": {
+        "layout": "py-24 bg-[#0D1322]",
+        "content": "Split layout: Left sticky text (features list), Right scrolling visuals (product UI shots). 'The precision of Big Law. The speed of AI.'"
+      },
+      "how_it_works": {
+        "layout": "py-24 max-w-7xl mx-auto px-6",
+        "content": "Step-by-step linear flow with vertical timeline. Connecting lines in gold. Focus on AI-powered workflow."
+      },
+      "security_compliance": {
+        "layout": "py-24 border-t border-white/10",
+        "content": "Dark, technical aesthetic. Monospace elements mixed with Serif. Badges for SOC2, SSO, RBAC. 'Enterprise Grade by Default'."
+      },
+      "testimonials": {
+        "layout": "py-24 bg-[#0D1322]/50",
+        "content": "Masonry or carousel of elegant quote cards. High-quality professional headshots. Serif quotes."
+      },
+      "pricing": {
+        "layout": "py-24 max-w-7xl mx-auto px-6",
+        "content": "Enterprise-focused 'Contact Sales' primary path, but elegant tiered cards. Highlight 'Dedicated Knowledge Graph'."
+      },
+      "faq": {
+        "layout": "py-24 max-w-3xl mx-auto px-6",
+        "content": "Accordion style. Clean typography. Border-bottom only for items."
+      },
+      "cta": {
+        "layout": "py-32 text-center relative",
+        "content": "Massive typography 'Ready to upgrade your practice?'. Primary button. Subtle abstract background."
+      },
+      "footer": {
+        "layout": "pt-20 pb-10 border-t border-white/10 bg-[#060913]",
+        "content": "5-column grid. Branding, Product, Company, Legal, Contact. Subtle copyright text."
+      }
+    },
+    "auth_screens": {
+      "layout": "Split screen or elegant centered card with blurred background.",
+      "visuals": "Left/Background: Architectural/abstract dark luxury image with overlay. Right/Center: Glassmorphism auth panel.",
+      "elements": "Logo, 'Sign In to LawyerOS', Google/Microsoft/SAML SSO buttons (styled elegantly with white borders), 'OR' divider, Email/Password fields, 'Forgot Password', Submit button."
+    },
+    "app_shell": {
+      "sidebar": {
+        "layout": "w-64 fixed inset-y-0 left-0 bg-[#060913] border-r border-white/10 flex flex-col z-40",
+        "content": "Top: LawyerOS Logo. Middle: Scrollable rich nav (Dashboard, Contracts, Templates, Clauses, Matters, Negotiations, Approvals, Review Queue, Obligations, Counterparties, Renewals, Playbook, Research, Knowledge Graph, Diligence, Signatures, Analytics, Agent, Invoices, Requests, Team, Settings, Admin). Bottom: User profile."
+      },
+      "topbar": {
+        "layout": "h-16 fixed top-0 right-0 left-64 bg-[#060913]/80 backdrop-blur-md border-b border-white/10 flex items-center justify-between px-6 z-30",
+        "content": "Global Search (Cmd+K), Notifications, Context/Matter switcher."
+      },
+      "dashboard_content": {
+        "layout": "pt-24 pl-72 pr-8 pb-12 min-h-screen bg-[#0A0F1C]",
+        "content": "Page Header ('Good morning, Counsel'). KPI Cards (Active Matters, Pending Approvals, Risk Alerts). Split view below: Activity Feed (left) vs Upcoming Obligations/Renewals (right). Recent Contracts table."
+      }
+    }
+  },
+  "motion": {
+    "principles": "Subtle, restrained, purposeful. Avoid bouncy or overly playful animations. Opt for slow fades, elegant slides, and smooth scaling.",
+    "hover_states": "Buttons lift slightly (`-translate-y-0.5`). Cards glow borders faintly (`hover:border-white/20`).",
+    "page_transitions": "Fade in with a slight upward translation (`translate-y-4` to `0`, opacity 0 to 1 over 600ms ease-out)."
+  },
+  "accessibility": {
+    "contrast": "Ensure all text meets WCAG AA standards against the deep obsidian background. Use text-slate-300 for body text to maintain readability while softening the contrast compared to pure white.",
+    "focus": "All interactive elements must have a visible focus ring, utilizing the gold accent (`focus:ring-[#D4AF37]`).",
+    "aria": "Use semantic HTML. Ensure custom UI components (like the custom navigation and dropdowns) have correct ARIA roles.",
+    "testing": "All interactive and key informational elements MUST include a `data-testid` attribute (e.g., `data-testid=\"auth-login-button\"`)."
+  },
+  "media": {
+    "images": {
+      "hero_background": [
+        {
+          "url": "https://images.unsplash.com/photo-1634549709262-508c47d4c229?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGdvbGQlMjB3YXZlcyUyMGRhcmslMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc4MzgxMjM3NHww&ixlib=rb-4.1.0&q=85",
+          "category": "hero_background",
+          "description": "Abstract dark gold waves for hero overlay"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1741356474357-72188f76e801?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODB8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMGdvbGQlMjB3YXZlcyUyMGRhcmslMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc4MzgxMjM3NHww&ixlib=rb-4.1.0&q=85",
+          "category": "hero_background",
+          "description": "Golden light streaks for CTA or section backgrounds"
+        }
+      ],
+      "architectural": [
+        {
+          "url": "https://images.unsplash.com/photo-1712567604499-08f207054260?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjBhcmNoaXRlY3R1cmUlMjBidWlsZGluZyUyMGdsYXNzJTIwZGFya3xlbnwwfHx8fDE3ODM4MTIzNzR8MA&ixlib=rb-4.1.0&q=85",
+          "category": "auth_background",
+          "description": "Dark modern glass building looking up"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBhcmNoaXRlY3R1cmUlMjBidWlsZGluZyUyMGdsYXNzJTIwZGFya3xlbnwwfHx8fDE3ODM4MTIzNzR8MA&ixlib=rb-4.1.0&q=85",
+          "category": "showcase_visual",
+          "description": "Black and white modern architecture"
+        }
+      ],
+      "avatars": [
+        {
+          "url": "https://images.pexels.com/photos/31869537/pexels-photo-31869537.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "category": "testimonials",
+          "description": "Elegant professional woman"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1769636929231-3cd7f853d038?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMHBvcnRyYWl0JTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzgzNzQyNjQwfDA&ixlib=rb-4.1.0&q=85",
+          "category": "testimonials",
+          "description": "Professional man in maroon suit"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1758534063829-a72058381e21?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMHBvcnRyYWl0JTIwZGFyayUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzgzNzQyNjQwfDA&ixlib=rb-4.1.0&q=85",
+          "category": "testimonials",
+          "description": "Professional man in black turtleneck"
+        }
+      ]
+    }
+  },
+  "3d_libraries": {
+    "recommendation": "Use framer-motion for smooth, high-end 2D interactions. Avoid heavy WebGL/Three.js unless specifically creating an abstract knowledge-graph visualization. A lightweight use of TSParticles with subtle gold connections could represent the AI Knowledge Graph in a specific section."
+  },
+  "instructions_to_main_agent": [
+    "Implement the UI using React, TailwindCSS, and Shadcn UI components.",
+    "Add the Google Fonts import for 'Cormorant Garamond' and 'Inter' in the main index.css or index.html.",
+    "Ensure the application supports the new rich sidebar navigation for the App Shell.",
+    "All components should be written in JavaScript (.js or .jsx), NOT TypeScript (.tsx).",
+    "Replace generic default aesthetics with the strict Obsidian/Gold palette. Absolutely no 'Stripe blue' or 'Vercel white'.",
+    "Use framer-motion for section entrance animations (fade up gently) to sell the 'premium' feel."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You MUST NOT apply universal transition. Eg: `transition: all`. Always add transitions for specific interactive elements like button, input excluding transforms.",
+    "You MUST NOT center align the app container, ie do not add `.App { text-align: center; }` in the css file. This disrupts the human natural reading flow of text.",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯 etc for icons. Use lucide-react or phosphor-icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "All interactive and key informational elements MUST include a `data-testid` attribute.",
+    "DO NOT use complete `transparent` background in header, overlays, any surface that has content under it. Example: Dropdown with transparent background."
+  ]
+}
