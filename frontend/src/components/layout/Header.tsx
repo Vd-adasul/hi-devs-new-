@@ -5,8 +5,6 @@ import { useAuthStore } from '@/store/auth'
 import { NotificationBell } from '@/components/approvals/NotificationBell'
 import { GlobalSearch } from '@/components/common/GlobalSearch'
 
-// U.8 — derive a 1- or 2-letter avatar initial from the user's display
-// name. "Maya Goldberg" → "MG"; "alex" → "A"; "" → "?".
 function initialsOf(name?: string): string {
   if (!name) return '?'
   const parts = name.trim().split(/\s+/).filter(Boolean)
@@ -15,8 +13,6 @@ function initialsOf(name?: string): string {
   return (parts[0]!.charAt(0) + parts[parts.length - 1]!.charAt(0)).toUpperCase()
 }
 
-// U.4.3 — onChatToggle prop kept optional for back-compat with AppShell;
-// the "AI Assistant" pill it powered is deleted (doc 32 §11b item 7).
 interface HeaderProps {
   onChatToggle?: () => void
 }
@@ -27,7 +23,6 @@ export function Header(_props: HeaderProps) {
   const [searchOpen, setSearchOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
-  // Close menu on outside click
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
@@ -40,9 +35,6 @@ export function Header(_props: HeaderProps) {
     }
   }, [showUserMenu])
 
-  // B.6.25 — global ⌘/ (or Ctrl-/) opens the navigate-palette. We
-  // pick the slash so we don't conflict with the contract-scoped
-  // ⌘K Ask AI palette.
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if ((e.metaKey || e.ctrlKey) && e.key === '/') {
@@ -57,66 +49,59 @@ export function Header(_props: HeaderProps) {
   const isMac = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform)
 
   return (
-    <header className="h-14 border-b border-border bg-card flex items-center justify-between px-6 shrink-0">
-      {/* B.6.25 — global search affordance (left side of header). Click
-          or press ⌘/ to open. Kept visually distinct from the AI
-          assistant so users don't conflate "find" with "ask". */}
+    <header className="h-16 border-b border-white/5 bg-obsidian-900/70 backdrop-blur-xl flex items-center justify-between px-6 shrink-0">
       <button
         type="button"
         onClick={() => setSearchOpen(true)}
         data-testid="global-search-trigger"
-        className="inline-flex items-center gap-2 rounded-md border border-input bg-muted/40 px-3 py-1.5 text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors min-w-[16rem]"
+        className="inline-flex items-center gap-2.5 rounded-md border border-white/8 bg-obsidian-800/60 px-3.5 py-2 text-[13px] text-slate-400 hover:bg-obsidian-700 hover:border-brass-400/25 hover:text-slate-200 transition-colors min-w-[18rem] group"
         aria-label="Open global search"
       >
-        <Search className="h-3.5 w-3.5" />
+        <Search className="h-3.5 w-3.5 text-slate-500 group-hover:text-brass-400 transition-colors" />
         <span className="flex-1 text-left">Search contracts, counterparties…</span>
-        <kbd className="rounded border border-border bg-background px-1.5 py-0.5 font-mono text-[10px]">
+        <kbd className="rounded border border-white/8 bg-obsidian-900 px-1.5 py-0.5 font-mono text-[10px] text-slate-400">
           {isMac ? '⌘/' : 'Ctrl+/'}
         </kbd>
       </button>
-      <div className="flex items-center gap-2">
-        {/* U.4.3 — header agent-pill deleted. The right rail handles
-            its own expand/collapse; ⌘K from anywhere focuses the rail
-            composer; the sidebar Assistant link goes to /agent. */}
+
+      <div className="flex items-center gap-3">
         <NotificationBell />
 
-        {/* User dropdown */}
-        <div className="relative ml-2" ref={menuRef}>
+        <div className="relative ml-1" ref={menuRef}>
           <button
             onClick={() => setShowUserMenu(prev => !prev)}
             data-testid="user-menu-trigger"
-            className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-full pl-1 pr-2 py-1 hover:bg-accent"
+            className="flex items-center gap-2.5 text-[13px] text-slate-300 hover:text-white transition-colors rounded-full pl-1 pr-2.5 py-1 hover:bg-white/[0.04]"
             aria-label="Account menu"
           >
             <span
               aria-hidden
-              className="h-7 w-7 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-[11px] font-semibold tracking-wide ring-1 ring-indigo-200"
+              className="h-8 w-8 rounded-full bg-gradient-to-br from-brass-400 to-brass-600 text-obsidian-900 flex items-center justify-center text-[11px] font-semibold tracking-wide ring-1 ring-brass-400/40 shadow-glow-brass"
             >
               {initialsOf(user?.name)}
             </span>
             <span className="max-w-[8rem] truncate hidden sm:inline">{user?.name}</span>
-            <ChevronDown size={12} className="text-muted-foreground" />
+            <ChevronDown size={12} className="text-slate-500" />
           </button>
 
           {showUserMenu && (
             <div
               data-testid="user-menu"
-              className="absolute right-0 top-full mt-1.5 w-60 bg-card rounded-xl border border-border shadow-xl z-20 py-1 overflow-hidden"
+              className="absolute right-0 top-full mt-2 w-64 glass-panel z-30 py-1 overflow-hidden"
               role="menu"
             >
-              {/* Identity block — answers "am I logged in as the right person?" */}
-              <div className="px-3 pt-3 pb-3 border-b border-border flex items-center gap-2.5">
+              <div className="px-3 pt-3 pb-3 border-b border-white/5 flex items-center gap-3">
                 <span
                   aria-hidden
-                  className="h-9 w-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-semibold tracking-wide ring-1 ring-indigo-200 shrink-0"
+                  className="h-10 w-10 rounded-full bg-gradient-to-br from-brass-400 to-brass-600 text-obsidian-900 flex items-center justify-center text-xs font-semibold tracking-wide ring-1 ring-brass-400/40 shrink-0"
                 >
                   {initialsOf(user?.name)}
                 </span>
                 <div className="min-w-0">
-                  <p className="text-[13px] font-medium text-foreground truncate" data-testid="user-menu-name">
+                  <p className="text-[13px] font-medium text-white truncate" data-testid="user-menu-name">
                     {user?.name ?? 'Signed-in user'}
                   </p>
-                  <p className="text-[11px] text-muted-foreground truncate" data-testid="user-menu-email">
+                  <p className="text-[11px] text-slate-500 truncate" data-testid="user-menu-email">
                     {user?.email ?? ''}
                   </p>
                 </div>
@@ -127,37 +112,33 @@ export function Header(_props: HeaderProps) {
                   to="/profile"
                   onClick={() => setShowUserMenu(false)}
                   data-testid="user-menu-profile"
-                  className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                  className="flex items-center gap-2.5 px-3 py-2 text-[13px] text-slate-300 hover:text-white hover:bg-white/[0.04] transition-colors"
                   role="menuitem"
                 >
-                  <User size={14} className="text-muted-foreground" />
+                  <User size={14} className="text-slate-500" />
                   Profile
                 </Link>
                 <Link
                   to="/settings"
                   onClick={() => setShowUserMenu(false)}
                   data-testid="user-menu-settings"
-                  className="flex items-center gap-2 px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                  className="flex items-center gap-2.5 px-3 py-2 text-[13px] text-slate-300 hover:text-white hover:bg-white/[0.04] transition-colors"
                   role="menuitem"
                 >
-                  <Settings size={14} className="text-muted-foreground" />
+                  <Settings size={14} className="text-slate-500" />
                   Settings
                 </Link>
               </div>
 
-              <div className="border-t border-border py-1">
+              <div className="border-t border-white/5 py-1">
                 <button
                   onClick={() => {
                     setShowUserMenu(false)
-                    // B.6.20 — logout is a deliberate action; after it
-                    // we always send the user to /login fresh (no next
-                    // param). Restore-URL only applies when the user
-                    // was forced out by token expiry.
                     logout()
                     window.location.href = '/login'
                   }}
                   data-testid="user-menu-logout"
-                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-rose-600 hover:bg-rose-50 transition-colors"
+                  className="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] text-rose-400 hover:bg-rose-500/10 transition-colors"
                   role="menuitem"
                 >
                   <LogOut size={14} />

@@ -2,226 +2,284 @@
 @tailwind components;
 @tailwind utilities;
 
-/* LawyerOS Glassmorphism Theme System */
-:root {
-  --background-color: #0b0f19;
-  --foreground-color: #f3f4f6;
-  --card-color: #111827;
-  --border-color: rgba(255, 255, 255, 0.15);
+/* ─────────────────────────────────────────────────────────────────────────────
+   LawyerOS — Editorial Luxe theme
+   Deep obsidian + brushed brass. Cormorant Garamond display serif +
+   Inter body. Every semantic token flows through HSL CSS variables so
+   the entire app re-themes from a single place.
+   ────────────────────────────────────────────────────────────────────────── */
 
-  --bg-color: #0b0f19;
-  --bg-grid: rgba(99, 102, 241, 0.03);
-  --panel-bg: rgba(17, 24, 39, 0.7);
-  --panel-border: rgba(255, 255, 255, 0.08);
-  --panel-border-hover: rgba(129, 140, 248, 0.2);
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
-  
-  --accent-color: #6366f1;
-  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  --accent-glow: rgba(99, 102, 241, 0.15);
+@layer base {
+  :root {
+    /* DARK is default and only theme — no light-mode toggle. */
+    --background: 224 54% 5%;         /* #060913 obsidian-900 */
+    --foreground: 210 40% 98%;        /* #F8FAFC */
 
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  
-  font-family: 'Inter', sans-serif;
-  color: var(--text-primary);
-  background-color: var(--bg-color);
-}
+    --card: 224 45% 9%;               /* #0D1322 obsidian-700 */
+    --card-foreground: 210 40% 98%;
 
-.light, .bg-white, .bg-gray-50 {
-  --background-color: #ffffff;
-  --foreground-color: #111827;
-  --card-color: #ffffff;
-  --border-color: #e2e8f0;
-}
+    --popover: 224 45% 9%;
+    --popover-foreground: 210 40% 98%;
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    --primary: 44 65% 52%;            /* #D4AF37 brass */
+    --primary-foreground: 224 54% 5%;
 
-body {
-  min-height: 100vh;
-  background-color: var(--bg-color);
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.1) 0px, transparent 50%),
-    linear-gradient(var(--bg-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 24px 24px, 24px 24px;
-  overflow-x: hidden;
-}
+    --secondary: 217 33% 17%;         /* obsidian-500 */
+    --secondary-foreground: 210 40% 98%;
 
-h1, h2, h3, h4 {
-  font-family: 'Outfit', sans-serif;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
+    --muted: 217 33% 13%;
+    --muted-foreground: 215 20% 65%;  /* slate-400 */
 
-/* Glassmorphism card container */
-.glass-panel {
-  background: var(--panel-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--panel-border);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+    --accent: 217 33% 15%;
+    --accent-foreground: 210 40% 98%;
 
-.glass-panel:hover {
-  border-color: var(--panel-border-hover);
-  box-shadow: 0 8px 32px 0 rgba(99, 102, 241, 0.05);
-}
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 210 40% 98%;
 
-/* Accent buttons */
-.btn-primary {
-  background: var(--accent-gradient);
-  color: #ffffff;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 500;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.4);
-  transition: all 0.2s ease;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.6);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--panel-border);
-  color: var(--text-primary);
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 500;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.2s ease;
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--panel-border-hover);
-}
-
-/* Upload dropzone styling */
-.upload-dropzone {
-  border: 2px dashed rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
-  padding: 40px 20px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.01);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.upload-dropzone:hover {
-  border-color: var(--accent-color);
-  background: rgba(99, 102, 241, 0.02);
-}
-
-/* Input Fields */
-.input-field {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--panel-border);
-  border-radius: 10px;
-  padding: 12px 16px;
-  color: var(--text-primary);
-  font-family: inherit;
-  font-size: 14px;
-  outline: none;
-  transition: all 0.2s ease;
-}
-
-.input-field:focus {
-  border-color: var(--accent-color);
-  background: rgba(255, 255, 255, 0.06);
-  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
-}
-
-/* Scrollbars */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Micro-animations */
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.spinner {
-  animation: spin 1s linear infinite;
-}
-
-/* App Layout */
-.app-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo-text {
-  font-size: 28px;
-  font-weight: 800;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.grid-cols-layout {
-  display: grid;
-  grid-template-columns: 350px 1fr;
-  gap: 32px;
-}
-
-@media (max-width: 1024px) {
-  .grid-cols-layout {
-    grid-template-columns: 1fr;
+    --border: 0 0% 100% / 10%;
+    --input: 0 0% 100% / 10%;
+    --ring: 44 65% 52%;               /* brass focus ring */
   }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html, body, #root {
+    min-height: 100vh;
+    background-color: #060913;
+  }
+
+  body {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #F8FAFC;
+    background-color: #060913;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    letter-spacing: -0.02em;
+    color: #F8FAFC;
+  }
+
+  /* Editorial text-selection — brass instead of default OS blue. */
+  ::selection {
+    background: rgba(212, 175, 55, 0.35);
+    color: #FBF7EA;
+  }
+
+  /* Scrollbar — thin, obsidian, faintly brass-highlighted on hover. */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #060913;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    border: 2px solid #060913;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.35);
+  }
+}
+
+@layer components {
+  /* ─── Serif display headline (landing page + auth marquee) ────────────── */
+  .headline {
+    font-family: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+    font-weight: 500;
+  }
+  .headline-italic {
+    font-family: 'Cormorant Garamond', ui-serif, Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  /* ─── Overline eyebrow — small caps with brass ────────────────────────── */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #D4AF37;
+    font-family: 'Inter', sans-serif;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #D4AF37 100%);
+  }
+
+  /* ─── Brass gradient text ────────────────────────────────────────────── */
+  .text-brass-gradient {
+    background: linear-gradient(135deg, #F3D573 0%, #D4AF37 45%, #B5955C 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* ─── Glass panel — deep obsidian card w/ inner brass hairline ──────── */
+  .glass-panel {
+    position: relative;
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.35) 0%, rgba(13, 19, 34, 0.55) 100%);
+    backdrop-filter: blur(20px) saturate(1.1);
+    -webkit-backdrop-filter: blur(20px) saturate(1.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    box-shadow:
+      0 30px 60px -30px rgba(0, 0, 0, 0.8),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  }
+  .glass-panel-brass {
+    position: relative;
+    background: linear-gradient(180deg, rgba(30, 41, 59, 0.35) 0%, rgba(13, 19, 34, 0.55) 100%);
+    backdrop-filter: blur(20px) saturate(1.1);
+    -webkit-backdrop-filter: blur(20px) saturate(1.1);
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 14px;
+    box-shadow:
+      0 30px 60px -30px rgba(0, 0, 0, 0.8),
+      0 0 40px -8px rgba(212, 175, 55, 0.15),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /* ─── Solid card (dashboard KPI etc.) ────────────────────────────────── */
+  .luxe-card {
+    background: #0D1322;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+  }
+  .luxe-card:hover {
+    border-color: rgba(212, 175, 55, 0.35);
+    box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.8), 0 0 24px -8px rgba(212, 175, 55, 0.12);
+  }
+
+  /* ─── Brass button ────────────────────────────────────────────────────── */
+  .btn-brass {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: linear-gradient(180deg, #F3D573 0%, #D4AF37 60%, #B5955C 100%);
+    color: #060913;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: -0.005em;
+    border: 1px solid rgba(212, 175, 55, 0.6);
+    border-radius: 10px;
+    box-shadow:
+      0 12px 30px -12px rgba(212, 175, 55, 0.55),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+    transition: transform 200ms ease, box-shadow 240ms ease, filter 200ms ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-brass:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+    box-shadow:
+      0 18px 40px -14px rgba(212, 175, 55, 0.7),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+  }
+  .btn-brass:active {
+    transform: translateY(0);
+  }
+
+  /* ─── Ghost / outline button ─────────────────────────────────────────── */
+  .btn-ghost-luxe {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    background: rgba(255, 255, 255, 0.03);
+    color: #F8FAFC;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    backdrop-filter: blur(12px);
+    transition: background-color 200ms ease, border-color 200ms ease, transform 200ms ease;
+    cursor: pointer;
+  }
+  .btn-ghost-luxe:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(212, 175, 55, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* ─── Editorial rule (short brass horizontal accent line) ────────────── */
+  .rule-brass {
+    display: block;
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(90deg, #D4AF37 0%, rgba(212, 175, 55, 0) 100%);
+  }
+
+  /* ─── Grain overlay (adds paper texture on hero + landing) ───────────── */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ─── Soft radial hero glow (brass at top) ───────────────────────────── */
+  .hero-aurora {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(212, 175, 55, 0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 15% 20%, rgba(30, 58, 138, 0.15) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 85% 30%, rgba(120, 53, 15, 0.10) 0%, transparent 55%),
+      #060913;
+  }
+
+  /* ─── Marquee track for trusted-by logos ─────────────────────────────── */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 45s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+}
+
+/* ─── Keyframes (used outside tailwind config for portability) ─────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── Utility: subtle brass hairline divider ───────────────────────────── */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.35) 50%, transparent 100%);
+}
+
+/* ─── Focus ring — universal (brass) ───────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(212, 175, 55, 0.55);
+  outline-offset: 2px;
+  border-radius: 6px;
 }

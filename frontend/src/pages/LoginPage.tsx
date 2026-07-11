@@ -2,24 +2,10 @@ import { useState } from 'react'
 import { useNavigate, useSearchParams, Link, Navigate } from 'react-router-dom'
 import { useAuthStore } from '@/store/auth'
 import { api } from '@/lib/api'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { CheckCircle2, Loader2, MailCheck } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckCircle2, Loader2, MailCheck } from 'lucide-react'
 import { Wordmark } from '@/components/brand/Wordmark'
-
-/**
- * B.6.10 — login now exposes:
- *   - Single Sign-On buttons (Google / Microsoft / SAML) ABOVE the
- *     email/password form, matching Notion / Linear / Figma /
- *     Vercel. Enterprise users expect SSO at first glance.
- *   - "Forgot password?" link under the password field.
- *
- * The clicks route to a stubbed flow — a small dialog explaining what
- * will happen when the real backend lands (OIDC in A.5, reset email
- * in A.6). This ships the affordance + evaluator signal today without
- * faking a working backend.
- */
 
 type StubKind = 'sso-google' | 'sso-microsoft' | 'sso-saml'
 
@@ -44,38 +30,30 @@ const STUB_COPY: Record<StubKind, { title: string; body: string; eta: string }> 
 function StubDialog({ kind, onClose }: { kind: StubKind; onClose: () => void }) {
   const { title, body, eta } = STUB_COPY[kind]
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md" onClick={onClose}>
       <div
-        className="bg-card border border-border rounded-xl shadow-2xl w-full max-w-md mx-4 p-6 space-y-4"
+        className="glass-panel-brass w-full max-w-md mx-4 p-6 space-y-4"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between">
-          <h2 className="text-base font-semibold text-foreground">{title}</h2>
-          <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-amber-700">
+        <div className="flex items-start justify-between gap-4">
+          <h2 className="headline text-xl text-white">{title}</h2>
+          <span className="shrink-0 rounded-full bg-brass-400/15 border border-brass-400/30 px-2.5 py-0.5 text-[10.5px] font-semibold uppercase tracking-widest text-brass-300">
             {eta}
           </span>
         </div>
-        <p className="text-sm text-muted-foreground leading-relaxed">{body}</p>
-        <div className="flex items-center gap-2 rounded-md bg-muted/50 px-3 py-2 text-xs text-muted-foreground">
-          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
-          Sign in with email + password below to continue for now.
+        <p className="text-sm text-slate-400 leading-relaxed font-light">{body}</p>
+        <div className="flex items-center gap-2 rounded-md bg-white/[0.03] border border-white/5 px-3 py-2 text-xs text-slate-400">
+          <CheckCircle2 className="h-3.5 w-3.5 text-brass-400 shrink-0" />
+          Sign in with email &amp; password below to continue for now.
         </div>
-        <div className="flex justify-end">
-          <Button size="sm" onClick={onClose}>Got it</Button>
+        <div className="flex justify-end pt-2">
+          <button onClick={onClose} className="btn-brass text-[13px]">Got it</button>
         </div>
       </div>
     </div>
   )
 }
 
-/**
- * U.6.3 — real "forgot password" round-trip.
- *
- * Until full email-based reset lands (A.6), this dialog notifies every
- * admin in the user's org via the in-app notification system. The user
- * gets one definitive answer ("if an account exists, your admin's been
- * notified") rather than a stub modal that just says "ask your admin".
- */
 function ForgotPasswordDialog({ onClose }: { onClose: () => void }) {
   const [email, setEmail] = useState('')
   const [pending, setPending] = useState(false)
@@ -98,7 +76,7 @@ function ForgotPasswordDialog({ onClose }: { onClose: () => void }) {
       if (status === 400) {
         setErrorMsg('Please enter a valid email address.')
       } else {
-        setErrorMsg('Couldn\'t send the request. Please try again or contact your admin directly.')
+        setErrorMsg("Couldn't send the request. Please try again or contact your admin directly.")
       }
     } finally {
       setPending(false)
@@ -106,42 +84,42 @@ function ForgotPasswordDialog({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md" onClick={onClose}>
       <div
-        className="bg-card border border-border rounded-xl shadow-2xl w-full max-w-md mx-4 p-6 space-y-4"
+        className="glass-panel-brass w-full max-w-md mx-4 p-6 space-y-4"
         onClick={(e) => e.stopPropagation()}
         data-testid="forgot-password-dialog"
       >
         {done ? (
           <>
             <div className="flex items-center gap-2">
-              <MailCheck className="h-5 w-5 text-emerald-600" />
-              <h2 className="text-base font-semibold text-foreground">Request sent</h2>
+              <MailCheck className="h-5 w-5 text-brass-400" />
+              <h2 className="headline text-xl text-white">Request sent</h2>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              If an account exists for <span className="font-medium text-foreground">{email}</span>,
+            <p className="text-sm text-slate-400 font-light leading-relaxed">
+              If an account exists for <span className="text-white font-medium">{email}</span>,
               your administrator has been notified. They&apos;ll send you a new temporary password — usually within a few hours.
             </p>
-            <div className="rounded-md bg-muted/50 px-3 py-2 text-xs text-muted-foreground leading-relaxed">
-              Tip: still no email after a day? Reach out to your admin directly. We don&apos;t reveal whether an email is registered, so this prompt looks the same either way.
+            <div className="rounded-md bg-white/[0.03] border border-white/5 px-3 py-2 text-xs text-slate-500 leading-relaxed">
+              Tip: still no email after a day? Reach out to your admin directly.
             </div>
             <div className="flex justify-end">
-              <Button size="sm" onClick={onClose} data-testid="forgot-password-close">
+              <button onClick={onClose} className="btn-brass text-[13px]" data-testid="forgot-password-close">
                 Back to sign in
-              </Button>
+              </button>
             </div>
           </>
         ) : (
           <>
             <div>
-              <h2 className="text-base font-semibold text-foreground">Reset your password</h2>
-              <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+              <h2 className="headline text-xl text-white">Reset your password</h2>
+              <p className="text-xs text-slate-500 mt-1 leading-relaxed font-light">
                 Enter your work email and we&apos;ll notify your admin to send a new temporary password.
               </p>
             </div>
             <form onSubmit={submit} className="space-y-3">
               <div className="space-y-1.5">
-                <Label htmlFor="forgot-email">Email</Label>
+                <Label htmlFor="forgot-email" className="text-slate-300">Email</Label>
                 <Input
                   id="forgot-email"
                   type="email"
@@ -152,20 +130,21 @@ function ForgotPasswordDialog({ onClose }: { onClose: () => void }) {
                   placeholder="you@company.com"
                   data-testid="forgot-password-email"
                   autoFocus
+                  className="bg-obsidian-900 border-white/10 text-white placeholder:text-slate-600 focus-visible:ring-brass-400/40"
                 />
               </div>
-              {errorMsg && <p className="text-xs text-destructive" data-testid="forgot-password-error">{errorMsg}</p>}
+              {errorMsg && <p className="text-xs text-rose-400" data-testid="forgot-password-error">{errorMsg}</p>}
               <div className="flex items-center justify-end gap-2 pt-1">
-                <Button type="button" variant="ghost" size="sm" onClick={onClose} disabled={pending}>
+                <button type="button" onClick={onClose} disabled={pending} className="text-sm text-slate-400 hover:text-white px-3 py-2 transition-colors">
                   Cancel
-                </Button>
-                <Button type="submit" size="sm" disabled={pending || !email} data-testid="forgot-password-submit">
+                </button>
+                <button type="submit" disabled={pending || !email} className="btn-brass text-[13px] disabled:opacity-60 disabled:cursor-not-allowed" data-testid="forgot-password-submit">
                   {pending ? (
                     <span className="inline-flex items-center gap-1.5"><Loader2 className="h-3.5 w-3.5 animate-spin" /> Sending…</span>
                   ) : (
                     'Notify my admin'
                   )}
-                </Button>
+                </button>
               </div>
             </form>
           </>
@@ -175,8 +154,6 @@ function ForgotPasswordDialog({ onClose }: { onClose: () => void }) {
   )
 }
 
-// SVG brand marks — keep them lightweight + inline so we don't ship an
-// icon package just for the login screen.
 function GoogleMark() {
   return (
     <svg className="h-4 w-4" viewBox="0 0 48 48" aria-hidden>
@@ -187,7 +164,6 @@ function GoogleMark() {
     </svg>
   )
 }
-
 function MicrosoftMark() {
   return (
     <svg className="h-4 w-4" viewBox="0 0 23 23" aria-hidden>
@@ -211,7 +187,6 @@ export function LoginPage() {
   const [stub, setStub] = useState<StubKind | null>(null)
   const [forgotOpen, setForgotOpen] = useState(false)
 
-  // Already authenticated — skip login page
   if (isAuthenticated) {
     const rawNext = searchParams.get('next')
     const dest = rawNext && rawNext.startsWith('/') && !rawNext.startsWith('//') ? rawNext : '/dashboard'
@@ -224,10 +199,6 @@ export function LoginPage() {
     setLoading(true)
     try {
       await login(email, password)
-      // B.6.20 — restore intended URL (from ?next=…) when present.
-      // Only accept same-origin paths; anything else falls back to
-      // /dashboard so an attacker can't craft a redirect-to-external
-      // phishing link.
       const rawNext = searchParams.get('next')
       const safeNext =
         rawNext && rawNext.startsWith('/') && !rawNext.startsWith('//')
@@ -242,115 +213,170 @@ export function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="w-full max-w-sm space-y-6 p-8 border border-border rounded-lg bg-card shadow-sm">
-        {/* P7.4.9 / F-06 — wordmark above the form. Trust signal +
-            consistent brand identity across login / register / portal. */}
-        <div className="flex flex-col items-center text-center" data-testid="login-brand">
-          <div className="mb-4">
-            {/* Wordmark stands alone — single confident statement. The
-                color/weight split carries the brand without an icon
-                competing for attention. */}
-            <Wordmark size="xl" className="text-[28px]" />
-          </div>
-          <h1 className="text-xl font-semibold text-foreground">Sign in</h1>
-          <p className="text-[13px] text-muted-foreground mt-0.5">Welcome back — please enter your details.</p>
-        </div>
+    <div className="min-h-screen w-full bg-obsidian-900 text-white overflow-hidden relative">
+      {/* Background architecture image (left) */}
+      <div
+        aria-hidden
+        className="hidden lg:block absolute inset-y-0 left-0 w-1/2 bg-cover bg-center"
+        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1712567604499-08f207054260?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjBhcmNoaXRlY3R1cmUlMjBidWlsZGluZyUyMGdsYXNzJTIwZGFya3xlbnwwfHx8fDE3ODM4MTIzNzR8MA&ixlib=rb-4.1.0&q=85')" }}
+      />
+      <div aria-hidden className="hidden lg:block absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-obsidian-900/85 via-obsidian-900/70 to-obsidian-900" />
+      <div aria-hidden className="absolute inset-0 hero-aurora opacity-70" />
 
-        {/* B.6.10 — SSO buttons first (enterprise convention) */}
-        <div className="space-y-2">
-          <button
-            type="button"
-            onClick={() => setStub('sso-google')}
-            data-testid="sso-google"
-            className="w-full inline-flex items-center justify-center gap-2 h-10 rounded-md border border-input bg-background text-sm font-medium text-foreground hover:bg-accent transition-colors"
-          >
-            <GoogleMark />
-            Continue with Google
-          </button>
-          <button
-            type="button"
-            onClick={() => setStub('sso-microsoft')}
-            data-testid="sso-microsoft"
-            className="w-full inline-flex items-center justify-center gap-2 h-10 rounded-md border border-input bg-background text-sm font-medium text-foreground hover:bg-accent transition-colors"
-          >
-            <MicrosoftMark />
-            Continue with Microsoft
-          </button>
-          <button
-            type="button"
-            onClick={() => setStub('sso-saml')}
-            data-testid="sso-saml"
-            className="w-full h-9 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Use enterprise SSO (SAML / OIDC)
-          </button>
-        </div>
-
-        {/* Divider */}
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-border" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-card px-2 text-muted-foreground">or</span>
-          </div>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-4" data-testid="login-form">
-          <div className="space-y-1.5">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              data-testid="login-email"
-              type="email"
-              autoComplete="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@company.com"
-            />
-          </div>
-
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="password">Password</Label>
-              <button
-                type="button"
-                onClick={() => setForgotOpen(true)}
-                data-testid="forgot-password-link"
-                className="text-xs text-primary hover:underline"
-              >
-                Forgot password?
-              </button>
-            </div>
-            <Input
-              id="password"
-              data-testid="login-password"
-              type="password"
-              autoComplete="current-password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-            />
-          </div>
-
-          {error && (
-            <p className="text-sm text-destructive">{error}</p>
-          )}
-
-          <Button type="submit" data-testid="login-submit" className="w-full" disabled={loading}>
-            {loading ? 'Signing in…' : 'Sign in'}
-          </Button>
-        </form>
-
-        <p className="text-sm text-center text-muted-foreground">
-          No account?{' '}
-          <Link to="/register" className="text-primary underline underline-offset-2 hover:no-underline">
-            Create one
+      <div className="relative z-10 min-h-screen grid lg:grid-cols-2">
+        {/* Left column — editorial marquee */}
+        <div className="hidden lg:flex flex-col justify-between p-12 xl:p-16">
+          <Link to="/" data-testid="auth-brand" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+            <span className="text-sm">Back to home</span>
           </Link>
-        </p>
+
+          <div>
+            <p className="eyebrow">The AI workspace for modern legal</p>
+            <h1 className="headline mt-6 text-5xl xl:text-6xl text-white leading-[0.98]">
+              Welcome back to<br />
+              <span className="headline-italic text-brass-gradient">LawyerOS.</span>
+            </h1>
+            <p className="mt-6 text-slate-400 text-lg font-light max-w-md leading-relaxed">
+              Where the precision of Big Law meets the speed of AI. Your workspace is exactly where you left it.
+            </p>
+          </div>
+
+          <div className="text-[11px] text-slate-500 font-mono tracking-wider">
+            © {new Date().getFullYear()} LAWYEROS · EST MMXXVI
+          </div>
+        </div>
+
+        {/* Right column — auth card */}
+        <div className="flex items-center justify-center p-6 sm:p-10">
+          <div className="w-full max-w-md">
+            <Link to="/" className="lg:hidden inline-flex justify-center w-full mb-8">
+              <Wordmark size="2xl" />
+            </Link>
+
+            <div className="glass-panel p-8 md:p-10">
+              <div className="text-center">
+                <div className="inline-flex mx-auto">
+                  <Wordmark size="2xl" />
+                </div>
+                <h2 className="headline mt-6 text-3xl text-white">Sign in</h2>
+                <p className="mt-2 text-sm text-slate-400 font-light">Welcome back — please enter your details.</p>
+              </div>
+
+              <div className="mt-8 space-y-2">
+                <button
+                  type="button"
+                  onClick={() => setStub('sso-google')}
+                  data-testid="sso-google"
+                  className="w-full inline-flex items-center justify-center gap-2.5 h-11 rounded-md border border-white/10 bg-white/[0.02] text-sm font-medium text-white hover:bg-white/[0.06] hover:border-brass-400/30 transition-colors"
+                >
+                  <GoogleMark />
+                  Continue with Google
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setStub('sso-microsoft')}
+                  data-testid="sso-microsoft"
+                  className="w-full inline-flex items-center justify-center gap-2.5 h-11 rounded-md border border-white/10 bg-white/[0.02] text-sm font-medium text-white hover:bg-white/[0.06] hover:border-brass-400/30 transition-colors"
+                >
+                  <MicrosoftMark />
+                  Continue with Microsoft
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setStub('sso-saml')}
+                  data-testid="sso-saml"
+                  className="w-full h-10 text-xs font-medium text-slate-400 hover:text-brass-300 transition-colors"
+                >
+                  Use enterprise SSO (SAML / OIDC)
+                </button>
+              </div>
+
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t border-white/8" />
+                </div>
+                <div className="relative flex justify-center">
+                  <span className="bg-obsidian-700 px-3 text-[10.5px] uppercase tracking-widest text-slate-500 font-mono">or</span>
+                </div>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-4" data-testid="login-form">
+                <div className="space-y-1.5">
+                  <Label htmlFor="email" className="text-slate-300 text-[13px]">Email</Label>
+                  <Input
+                    id="email"
+                    data-testid="login-email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@company.com"
+                    className="h-11 bg-obsidian-900 border-white/10 text-white placeholder:text-slate-600 focus-visible:ring-brass-400/40 focus-visible:border-brass-400/60"
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="password" className="text-slate-300 text-[13px]">Password</Label>
+                    <button
+                      type="button"
+                      onClick={() => setForgotOpen(true)}
+                      data-testid="forgot-password-link"
+                      className="text-xs text-brass-400 hover:text-brass-300 transition-colors"
+                    >
+                      Forgot password?
+                    </button>
+                  </div>
+                  <Input
+                    id="password"
+                    data-testid="login-password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="h-11 bg-obsidian-900 border-white/10 text-white placeholder:text-slate-600 focus-visible:ring-brass-400/40 focus-visible:border-brass-400/60"
+                  />
+                </div>
+
+                {error && (
+                  <p className="text-sm text-rose-400" data-testid="login-error">{error}</p>
+                )}
+
+                <button
+                  type="submit"
+                  data-testid="login-submit"
+                  className="btn-brass w-full h-11 justify-center text-[14px] disabled:opacity-60 disabled:cursor-not-allowed"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <span className="inline-flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" /> Signing in…</span>
+                  ) : (
+                    <>Sign in <ArrowRight className="h-4 w-4" /></>
+                  )}
+                </button>
+              </form>
+
+              <p className="mt-8 text-sm text-center text-slate-400">
+                No account?{' '}
+                <Link to="/register" className="text-brass-400 hover:text-brass-300 transition-colors font-medium">
+                  Create one
+                </Link>
+              </p>
+            </div>
+
+            <div className="mt-6 text-center text-[11px] text-slate-500 space-x-3">
+              <Link to="/privacy" className="hover:text-slate-300 transition-colors">Privacy</Link>
+              <span>·</span>
+              <Link to="/terms" className="hover:text-slate-300 transition-colors">Terms</Link>
+              <span>·</span>
+              <Link to="/status" className="hover:text-slate-300 transition-colors">Status</Link>
+            </div>
+          </div>
+        </div>
       </div>
 
       {stub && <StubDialog kind={stub} onClose={() => setStub(null)} />}

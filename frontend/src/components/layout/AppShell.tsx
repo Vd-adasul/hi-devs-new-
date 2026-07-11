@@ -38,8 +38,8 @@ export function AppShell() {
   // Still waiting for localStorage hydration — show full-page spinner
   if (!hydrated) {
     return (
-      <div className="h-screen w-screen flex items-center justify-center bg-background">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
+      <div className="h-screen w-screen flex items-center justify-center bg-obsidian-900">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brass-400" />
       </div>
     )
   }
@@ -53,12 +53,12 @@ export function AppShell() {
   }
 
   return (
-    <div className="flex h-screen bg-background overflow-hidden">
+    <div className="flex h-screen bg-obsidian-900 overflow-hidden">
       <Sidebar />
       <div className="flex flex-col flex-1 min-w-0">
         <Header />
         <Breadcrumbs />
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto bg-obsidian-900">
           <Outlet />
         </main>
       </div>

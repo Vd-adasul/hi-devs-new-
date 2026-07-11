@@ -46,14 +46,14 @@ function resourceLink(entityType: string, entityId: string): string {
 // Deterministic colour-class for an actor id. Keeps the same avatar colour
 // across renders without pulling in a whole colour-hash library.
 const ACTOR_PALETTE = [
-  'bg-blue-100 text-blue-700',
-  'bg-emerald-100 text-emerald-700',
-  'bg-amber-100 text-amber-700',
-  'bg-violet-100 text-violet-700',
-  'bg-rose-100 text-rose-700',
-  'bg-sky-100 text-sky-700',
-  'bg-teal-100 text-teal-700',
-  'bg-indigo-100 text-indigo-700',
+  'bg-brass-400/15 text-brass-300 ring-1 ring-brass-400/25',
+  'bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/25',
+  'bg-amber-500/15 text-amber-300 ring-1 ring-amber-500/25',
+  'bg-violet-500/15 text-violet-300 ring-1 ring-violet-500/25',
+  'bg-rose-500/15 text-rose-300 ring-1 ring-rose-500/25',
+  'bg-sky-500/15 text-sky-300 ring-1 ring-sky-500/25',
+  'bg-teal-500/15 text-teal-300 ring-1 ring-teal-500/25',
+  'bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/25',
 ]
 function actorColor(actorId: string): string {
   let h = 0
@@ -149,43 +149,32 @@ export function DashboardPage() {
       label: 'Active Contracts',
       value: stats?.activeContracts,
       icon: FileText,
-      color: 'text-blue-600',
-      bg: 'bg-blue-50',
+      color: 'text-sky-300',
+      bg: 'bg-sky-500/10 border border-sky-500/20',
       to: '/contracts',
     },
     {
       label: 'Open Requests',
       value: stats?.openRequests,
       icon: ClipboardList,
-      color: 'text-amber-600',
-      bg: 'bg-amber-50',
+      color: 'text-brass-300',
+      bg: 'bg-brass-400/10 border border-brass-400/25',
       to: '/requests',
     },
     {
-      // P7.2.3 — Admin / legal-ops see the ORG-WIDE pending count
-      // ("how many deals are stuck somewhere in my org?"); everyone
-      // else sees their personal queue ("what needs my decision?").
-      // The `to` deep-link mirrors that — admins land on the All
-      // approvals tab, others on My Queue.
       label: isAdminLike ? 'Org Approvals' : 'Pending Approvals',
       value: isAdminLike ? (stats?.orgPendingApprovals ?? 0) : stats?.pendingApprovals,
       icon: CheckSquare,
-      color: 'text-green-600',
-      bg: 'bg-green-50',
+      color: 'text-emerald-300',
+      bg: 'bg-emerald-500/10 border border-emerald-500/20',
       to: '/approvals',
     },
     {
       label: 'Expiring Soon',
       value: stats?.expiringSoon,
       icon: AlertCircle,
-      // Dim the red when count is zero so we don't cry-wolf about
-      // a category that's actually empty.
-      color: (stats?.expiringSoon ?? 0) > 0 ? 'text-red-600' : 'text-muted-foreground',
-      bg: (stats?.expiringSoon ?? 0) > 0 ? 'bg-red-50' : 'bg-muted',
-      // B.6.5 — deep-link with the same 30-day window the KPI count
-      // uses on the server. ContractsPage reads this on mount and
-      // shows a dismissable "Expiring by <date>" chip so the user
-      // understands why the list is scoped.
+      color: (stats?.expiringSoon ?? 0) > 0 ? 'text-rose-300' : 'text-slate-500',
+      bg: (stats?.expiringSoon ?? 0) > 0 ? 'bg-rose-500/10 border border-rose-500/20' : 'bg-white/[0.03] border border-white/10',
       to: (() => {
         const d = new Date()
         d.setDate(d.getDate() + 30)
@@ -195,15 +184,24 @@ export function DashboardPage() {
   ]
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="px-6 lg:px-10 py-8 space-y-8 max-w-[1400px] mx-auto">
       {/* Greeting */}
-      <div>
-        <h1 className="text-2xl font-semibold text-foreground">
-          Welcome back, {user?.name?.split(' ')[0]}
-        </h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Here's what's happening with your contracts today.
-        </p>
+      <div className="flex items-end justify-between gap-6 flex-wrap">
+        <div>
+          <p className="eyebrow">Good day, counsel</p>
+          <h1 className="headline mt-3 text-4xl md:text-5xl text-white">
+            Welcome back, <span className="headline-italic text-brass-gradient">{user?.name?.split(' ')[0] ?? 'friend'}</span>.
+          </h1>
+          <p className="text-sm text-slate-400 mt-3 font-light max-w-xl">
+            Here&apos;s what&apos;s moving across your contracts, matters, and obligations today.
+          </p>
+        </div>
+        <div className="hidden md:block text-right">
+          <div className="text-[11px] uppercase tracking-widest text-slate-500">Today</div>
+          <div className="text-white font-serif text-lg mt-1">
+            {new Date().toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long' })}
+          </div>
+        </div>
       </div>
 
       {/* Welcome checklist — surfaces deferred onboarding tasks for admins
@@ -230,37 +228,33 @@ export function DashboardPage() {
       {/* Quick Actions — promoted above KPIs so the action-oriented buttons
           land in the first eye-stop (was buried below the cards). Same
           three actions, same selectors — only the position moved. */}
-      <div className="flex items-center gap-3" data-testid="dashboard-quick-actions">
-        <Button
+      <div className="flex items-center gap-3 flex-wrap" data-testid="dashboard-quick-actions">
+        <button
           onClick={() => setShowUpload(true)}
           data-testid="quick-upload-contract"
-          className="gap-2"
+          className="btn-brass text-[13px]"
         >
           <Upload className="h-4 w-4" /> Upload Contract
-        </Button>
-        <Button
-          variant="outline"
+        </button>
+        <button
           onClick={() => setShowNewRequest(true)}
           data-testid="quick-new-request"
-          className="gap-2"
+          className="btn-ghost-luxe text-[13px]"
         >
           <Plus className="h-4 w-4" /> New Request
-        </Button>
-        <Button
-          variant="outline"
+        </button>
+        <button
           onClick={() => navigate('/approvals')}
           data-testid="quick-view-approvals"
-          className="gap-2"
+          className="btn-ghost-luxe text-[13px]"
         >
           <CheckSquare className="h-4 w-4" /> View Approvals
-        </Button>
+        </button>
       </div>
 
       {/* KPI cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4" data-testid="dashboard-kpi-cards">
         {cards.map(({ label, value, icon: Icon, color, bg, to }) => {
-          // P18 — derive a stable testid slug per card so probes can
-          // target each KPI deterministically (label varies by role).
           const slug = label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
           return (
             <button
@@ -269,20 +263,20 @@ export function DashboardPage() {
               data-testid={`kpi-card-${slug}`}
               data-kpi-label={label}
               data-kpi-value={value ?? ''}
-              className="rounded-lg border border-border bg-card p-5 space-y-3 text-left hover:shadow-md transition-shadow group"
+              className="luxe-card group p-5 space-y-4 text-left"
             >
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-muted-foreground">{label}</span>
-                <div className={`p-1.5 rounded-lg ${bg}`}>
-                  <Icon size={16} className={color} />
+                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">{label}</span>
+                <div className={`p-1.5 rounded-md ${bg}`}>
+                  <Icon size={14} className={color} />
                 </div>
               </div>
               {isLoading ? (
-                <Loader2 className="h-5 w-5 animate-spin text-gray-300" />
+                <Loader2 className="h-5 w-5 animate-spin text-slate-600" />
               ) : (
                 <div className="flex items-end justify-between">
-                  <p className="text-2xl font-bold text-foreground" data-testid={`kpi-value-${slug}`}>{value ?? 0}</p>
-                  <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-gray-500 transition-colors" />
+                  <p className="font-serif text-4xl text-white tabular-nums" data-testid={`kpi-value-${slug}`}>{value ?? 0}</p>
+                  <ArrowRight className="h-4 w-4 text-slate-600 group-hover:text-brass-400 group-hover:translate-x-0.5 transition-all" />
                 </div>
               )}
             </button>
@@ -291,82 +285,75 @@ export function DashboardPage() {
       </div>
 
       {/* Recent Activity */}
-      <div className="rounded-lg border border-border bg-card p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-sm font-semibold text-foreground">Recent Activity</h2>
+      <div className="luxe-card p-6 md:p-8">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <p className="eyebrow">Signal</p>
+            <h2 className="headline text-2xl text-white mt-2">Recent Activity</h2>
+          </div>
           {stats?.recentActivity && stats.recentActivity.length > 0 && (
-            <span className="text-xs text-muted-foreground">
+            <span className="text-[11px] text-slate-500 font-mono uppercase tracking-widest">
               {stats.recentActivity.length} event{stats.recentActivity.length === 1 ? '' : 's'}
             </span>
           )}
         </div>
 
         {isLoading ? (
-          <div className="flex items-center gap-2 text-gray-400 py-4">
+          <div className="flex items-center gap-2 text-slate-500 py-4">
             <Loader2 className="h-4 w-4 animate-spin" />
-            <span className="text-sm">Loading activity...</span>
+            <span className="text-sm">Loading activity…</span>
           </div>
         ) : !stats?.recentActivity?.length ? (
-          // P7.4.10 / F-05 — empty-state copy adapts to whether the org
-          // is brand-new (0 contracts) vs has contracts but no audit
-          // events yet. The previous copy ("Upload a contract to get
-          // started") was misleading for orgs with 15+ contracts but
-          // direct-DB seed (no AuditEvent rows yet).
           (stats?.activeContracts ?? 0) > 0 ? (
-            <div className="text-center py-10" data-testid="activity-empty-warm">
-              <p className="text-sm text-muted-foreground">
+            <div className="text-center py-12" data-testid="activity-empty-warm">
+              <p className="text-sm text-slate-400">
                 No recent activity to show.
               </p>
-              <p className="text-xs text-muted-foreground/70 mt-1">
+              <p className="text-xs text-slate-600 mt-1.5">
                 Edits, comments, approvals and signatures will appear here as your team works.
               </p>
             </div>
           ) : (
-            <div className="text-center py-10" data-testid="activity-empty-cold">
-              <p className="text-sm text-muted-foreground">
+            <div className="text-center py-12" data-testid="activity-empty-cold">
+              <p className="text-sm text-slate-400">
                 No team activity yet.
               </p>
-              <p className="text-xs text-muted-foreground/70 mt-1">
+              <p className="text-xs text-slate-600 mt-1.5">
                 Upload a contract or submit a request to get started.
               </p>
             </div>
           )
         ) : (
-          <ul className="divide-y divide-border/70">
+          <ul className="divide-y divide-white/5">
             {stats.recentActivity.map((event) => (
               <li key={event.id}>
                 <button
                   type="button"
                   onClick={() => navigate(resourceLink(event.entityType, event.entityId))}
-                  className="w-full flex items-start gap-3 py-3 text-left hover:bg-accent/40 -mx-2 px-2 rounded transition-colors group"
+                  className="w-full flex items-start gap-3 py-3 text-left hover:bg-white/[0.02] -mx-2 px-2 rounded transition-colors group"
                 >
-                  {/* Actor avatar */}
                   <div
                     className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-semibold ${actorColor(event.actorId)}`}
                     aria-hidden
                   >
                     {event.actorInitials}
                   </div>
-
-                  {/* Sentence */}
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm text-foreground leading-snug">
-                      <span className="font-medium">{event.actorName}</span>
+                    <p className="text-[13.5px] text-slate-200 leading-snug">
+                      <span className="font-medium text-white">{event.actorName}</span>
                       {' '}
-                      <span className="text-muted-foreground">{event.verb}</span>
+                      <span className="text-slate-400">{event.verb}</span>
                       {' '}
-                      <span className="font-medium underline-offset-2 group-hover:underline decoration-foreground/40 truncate">
+                      <span className="font-medium text-white underline-offset-2 group-hover:underline decoration-brass-400/60 truncate">
                         {event.entityTitle}
                       </span>
                     </p>
                     {event.secondary && (
-                      <p className="mt-0.5 text-xs text-muted-foreground">{event.secondary}</p>
+                      <p className="mt-0.5 text-xs text-slate-500">{event.secondary}</p>
                     )}
                   </div>
-
-                  {/* Relative time */}
                   <time
-                    className="text-xs text-muted-foreground whitespace-nowrap shrink-0 pt-0.5"
+                    className="text-[11px] text-slate-500 whitespace-nowrap shrink-0 pt-0.5 font-mono"
                     dateTime={event.createdAt}
                     title={absoluteTime(event.createdAt)}
                   >
@@ -425,14 +412,14 @@ function YourDayBand({ yourDay }: YourDayBandProps) {
     return (
       <div
         data-testid="your-day-band"
-        className="rounded-lg border border-emerald-200 bg-emerald-50/60 px-5 py-4 flex items-center gap-3"
+        className="rounded-xl border border-emerald-500/25 bg-emerald-500/[0.06] px-6 py-5 flex items-center gap-4"
       >
-        <div className="h-8 w-8 rounded-full bg-emerald-100 flex items-center justify-center">
-          <CircleCheckBig className="h-4 w-4 text-emerald-600" />
+        <div className="h-10 w-10 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center">
+          <CircleCheckBig className="h-5 w-5 text-emerald-300" />
         </div>
         <div>
-          <p className="text-sm font-medium text-emerald-900">You're all caught up.</p>
-          <p className="text-xs text-emerald-700/80 mt-0.5">
+          <p className="text-[15px] font-medium text-emerald-100 font-serif">You&apos;re all caught up.</p>
+          <p className="text-xs text-emerald-200/70 mt-0.5 font-light">
             No approvals, requests, or expiring contracts need your attention today.
           </p>
         </div>
@@ -508,27 +495,27 @@ function YourDayBand({ yourDay }: YourDayBandProps) {
   })
 
   const accentStyles: Record<string, { chip: string; icon: string; dot: string }> = {
-    amber: { chip: 'bg-amber-50 hover:bg-amber-100 border-amber-200 text-amber-900', icon: 'text-amber-600', dot: 'bg-amber-500' },
-    blue:  { chip: 'bg-blue-50  hover:bg-blue-100  border-blue-200  text-blue-900',  icon: 'text-blue-600',  dot: 'bg-blue-500' },
-    red:   { chip: 'bg-red-50   hover:bg-red-100   border-red-200   text-red-900',   icon: 'text-red-600',   dot: 'bg-red-500' },
-    gray:  { chip: 'bg-muted/50 hover:bg-muted    border-border    text-foreground', icon: 'text-muted-foreground', dot: 'bg-muted-foreground/60' },
+    amber: { chip: 'bg-brass-400/8 hover:bg-brass-400/15 border-brass-400/30 text-brass-100', icon: 'text-brass-300', dot: 'bg-brass-400' },
+    blue:  { chip: 'bg-sky-500/8 hover:bg-sky-500/15 border-sky-500/30 text-sky-100',         icon: 'text-sky-300',   dot: 'bg-sky-400' },
+    red:   { chip: 'bg-rose-500/8 hover:bg-rose-500/15 border-rose-500/30 text-rose-100',     icon: 'text-rose-300',  dot: 'bg-rose-400' },
+    gray:  { chip: 'bg-white/[0.03] hover:bg-white/[0.06] border-white/10 text-slate-200',    icon: 'text-slate-400', dot: 'bg-slate-500' },
   }
 
   return (
-    <div data-testid="your-day-band" className="rounded-lg border border-border bg-card p-4">
-      <div className="flex items-center justify-between mb-3">
+    <div data-testid="your-day-band" className="luxe-card p-5 md:p-6">
+      <div className="flex items-center justify-between mb-4">
         <div>
-          <p className="text-sm font-semibold text-foreground">
+          <p className="eyebrow">
             {yourDay.total > 0 ? 'Your day' : 'In progress'}
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-[13px] text-slate-400 mt-2 font-light">
             {yourDay.total > 0
               ? `${yourDay.total} item${yourDay.total === 1 ? '' : 's'} need${yourDay.total === 1 ? 's' : ''} your attention.`
-              : "Nothing is blocking on you — just your ongoing drafts."}
+              : 'Nothing is blocking on you — just your ongoing drafts.'}
           </p>
         </div>
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2.5">
         {chips.map((c) => {
           const s = accentStyles[c.accent]
           return (
@@ -536,15 +523,15 @@ function YourDayBand({ yourDay }: YourDayBandProps) {
               key={c.key}
               onClick={() => navigate(c.to)}
               data-testid={`your-day-chip-${c.key}`}
-              className={`inline-flex items-center gap-2 rounded-md border px-3 py-2 text-left transition-colors ${s.chip}`}
+              className={`inline-flex items-center gap-2.5 rounded-lg border px-3.5 py-2 text-left transition-colors ${s.chip}`}
             >
               <c.icon className={`h-4 w-4 ${s.icon}`} />
-              <span className="text-sm">
-                <span className="font-semibold tabular-nums">{c.count}</span>{' '}
+              <span className="text-[13px]">
+                <span className="font-semibold tabular-nums text-white">{c.count}</span>{' '}
                 <span className="font-medium">{c.label}</span>{' '}
                 <span className="opacity-70">{c.verb}</span>
               </span>
-              <ArrowRight className="h-3.5 w-3.5 opacity-50" />
+              <ArrowRight className="h-3.5 w-3.5 opacity-40" />
             </button>
           )
         })}
@@ -571,13 +558,13 @@ function YourDayBand({ yourDay }: YourDayBandProps) {
                     </span>
                   )}
                   {typeof r.riskScore === 'number' && r.riskScore > 0.4 && (
-                    <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded bg-red-50 text-red-700 border border-red-200">
+                    <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded bg-rose-500/10 text-rose-300 border border-rose-500/30">
                       <AlertTriangle className="h-2.5 w-2.5" />
                       RISK {Math.round((r.riskScore ?? 0) * 100)}%
                     </span>
                   )}
                   {typeof r.daysSinceUpdate === 'number' && (
-                    <span className="text-muted-foreground">
+                    <span className="text-slate-500">
                       updated {r.daysSinceUpdate === 0 ? 'today' : `${r.daysSinceUpdate}d ago`}
                     </span>
                   )}
@@ -595,12 +582,12 @@ function YourDayBand({ yourDay }: YourDayBandProps) {
               renderMeta={(r) => (
                 <>
                   {r.value && (
-                    <span className="font-medium text-foreground">
+                    <span className="font-medium text-white">
                       {(r.currency ?? 'USD')} {r.value.toLocaleString()}
                     </span>
                   )}
                   {typeof r.daysToExpiry === 'number' && (
-                    <span className={r.daysToExpiry <= 30 ? 'text-red-700 font-medium' : r.daysToExpiry <= 60 ? 'text-amber-700 font-medium' : 'text-muted-foreground'}>
+                    <span className={r.daysToExpiry <= 30 ? 'text-rose-300 font-medium' : r.daysToExpiry <= 60 ? 'text-brass-300 font-medium' : 'text-slate-500'}>
                       {r.daysToExpiry < 0 ? `${-r.daysToExpiry}d overdue` :
                        r.daysToExpiry === 0 ? 'expires today' :
                        `expires in ${r.daysToExpiry}d`}
@@ -630,30 +617,30 @@ interface YourDayListProps {
 
 function YourDayList({ title, icon: Icon, accent, rows, renderMeta, onClickRow }: YourDayListProps) {
   const headerColor = {
-    amber: 'text-amber-700',
-    red:   'text-red-700',
-    blue:  'text-blue-700',
+    amber: 'text-brass-300',
+    red:   'text-rose-300',
+    blue:  'text-sky-300',
   }[accent]
 
   return (
-    <div className="rounded-lg border border-border bg-background/50 overflow-hidden" data-testid={`your-day-list-${title.toLowerCase().replace(/\s+/g, '-')}`}>
-      <div className="px-3 py-2 border-b border-border bg-muted/40 flex items-center gap-1.5">
+    <div className="rounded-xl border border-white/8 bg-obsidian-900/60 overflow-hidden" data-testid={`your-day-list-${title.toLowerCase().replace(/\s+/g, '-')}`}>
+      <div className="px-4 py-2.5 border-b border-white/5 bg-obsidian-800/50 flex items-center gap-2">
         <Icon className={`h-3.5 w-3.5 ${headerColor}`} />
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground">{title}</h3>
-        <span className="text-xs text-muted-foreground">· {rows.length}</span>
+        <h3 className="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-slate-300">{title}</h3>
+        <span className="text-[11px] text-slate-500 font-mono">· {rows.length}</span>
       </div>
-      <ul className="divide-y divide-border">
+      <ul className="divide-y divide-white/5">
         {rows.map(r => (
           <li
             key={r.id}
             onClick={() => onClickRow(r)}
-            className="px-3 py-2 hover:bg-accent/40 cursor-pointer transition-colors"
+            className="px-4 py-2.5 hover:bg-white/[0.03] cursor-pointer transition-colors"
             data-testid={`your-day-row-${r.id}`}
           >
             <div className="flex items-center justify-between gap-2">
               <div className="min-w-0 flex-1">
-                <div className="text-sm font-medium text-foreground truncate">{r.title}</div>
-                <div className="text-xs text-muted-foreground flex items-center gap-2 mt-0.5 flex-wrap">
+                <div className="text-[13.5px] font-medium text-white truncate">{r.title}</div>
+                <div className="text-[11.5px] text-slate-500 flex items-center gap-2 mt-1 flex-wrap">
                   {r.counterpartyName && (
                     <span className="inline-flex items-center gap-1">
                       <Building2 className="h-3 w-3" />
@@ -663,7 +650,7 @@ function YourDayList({ title, icon: Icon, accent, rows, renderMeta, onClickRow }
                   {renderMeta(r)}
                 </div>
               </div>
-              <ArrowRight className="h-3.5 w-3.5 text-muted-foreground/60 flex-shrink-0" />
+              <ArrowRight className="h-3.5 w-3.5 text-slate-600 flex-shrink-0" />
             </div>
           </li>
         ))}

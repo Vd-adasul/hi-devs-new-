@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppShell } from './components/layout/AppShell.js';
 
 // Lazy loading all pages (stubs defined below or imported)
+const LandingPage = lazy(() => import('./pages/LandingPage.js'));
 const LoginPage = lazy(() => import('./pages/LoginPage.js').then(m => ({ default: m.LoginPage })));
 const RegisterPage = lazy(() => import('./pages/RegisterPage.js').then(m => ({ default: m.RegisterPage })));
 const AcceptInvitePage = lazy(() => import('./pages/AcceptInvitePage.js').then(m => ({ default: m.AcceptInvitePage })));
@@ -53,12 +54,15 @@ export default function App() {
     <BrowserRouter>
       <Suspense
         fallback={
-          <div className="h-screen w-screen flex items-center justify-center bg-slate-50">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+          <div className="h-screen w-screen flex items-center justify-center bg-obsidian-900">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brass-400"></div>
           </div>
         }
       >
         <Routes>
+          {/* Public marketing landing */}
+          <Route path="/" element={<LandingPage />} />
+
           {/* Public Authentication routes */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -71,9 +75,8 @@ export default function App() {
           <Route path="/portal/:token" element={<ExternalPortalPage />} />
           <Route path="/sign/:token" element={<SignerPortal />} />
 
-          {/* Gated Application shell routes */}
+          {/* Gated Application shell routes (all paths under /) */}
           <Route path="/" element={<AppShell />}>
-            <Route index element={<Navigate to="/dashboard" replace />} />
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="matters" element={<MattersPage />} />
             <Route path="matters/:id" element={<MatterDetailPage />} />

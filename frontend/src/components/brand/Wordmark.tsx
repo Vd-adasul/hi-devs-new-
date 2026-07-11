@@ -1,28 +1,23 @@
 /**
- * Wordmark — the lawOS brand wordmark.
+ * LawyerOS wordmark — editorial luxe.
  *
- *   draft   slate-600 / semibold — graphite pencil gray, the
- *                                  "work-in-progress" half
- *   Legal   emerald-700 / bold   — authoritative, the
- *                                  "signed and final" half
+ *   Lawyer   slate-100, light-weight serif italic (Cormorant Garamond)
+ *   OS       brass, semibold serif — the "operating system" carries the tech gravitas
  *
- * The color split is the brand: drafts (gray, in-flux) become legally
- * binding (green, final). Same component used in the sidebar, login
- * page, invite page — anywhere the brand needs to render.
- *
- * `kind="full"` shows "lawOS"; `kind="mark"` shows just "dL"
- * for the collapsed sidebar.
+ * `kind="full"` shows "LawyerOS"; `kind="mark"` shows just "L·OS" for
+ * the collapsed sidebar.
  */
 import { cn } from '@/lib/utils'
 
-type Size = 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+type Size = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
 
 const SIZE: Record<Size, string> = {
-  sm:    'text-sm',
-  md:    'text-base',
-  lg:    'text-lg',
-  xl:    'text-xl',
-  '2xl': 'text-2xl',
+  sm:    'text-base',
+  md:    'text-lg',
+  lg:    'text-xl',
+  xl:    'text-2xl',
+  '2xl': 'text-[26px]',
+  '3xl': 'text-[34px]',
 }
 
 export function Wordmark({
@@ -34,18 +29,34 @@ export function Wordmark({
   kind?:      'full' | 'mark'
   className?: string
 }) {
-  const draft = kind === 'full' ? 'draft' : 'd'
-  const legal = kind === 'full' ? 'Legal' : 'L'
+  if (kind === 'mark') {
+    return (
+      <span
+        aria-label="LawyerOS"
+        className={cn(
+          'inline-flex items-center gap-[2px] font-serif tracking-tight select-none leading-none',
+          SIZE[size],
+          className,
+        )}
+      >
+        <span className="font-medium text-slate-100 italic">L</span>
+        <span className="text-brass-400" aria-hidden>·</span>
+        <span className="font-semibold text-brass-400">OS</span>
+      </span>
+    )
+  }
+
   return (
     <span
-      className={cn('inline-flex tracking-tight select-none', SIZE[size], className)}
-      aria-label="lawOS"
+      aria-label="LawyerOS"
+      className={cn(
+        'inline-flex items-baseline font-serif tracking-tight select-none leading-none',
+        SIZE[size],
+        className,
+      )}
     >
-      {/* Weight contrast (medium → bold) reinforces "tentative → committed".
-          Slate-700 reads as ink-on-paper graphite; emerald-700 carries the
-          authority. Together: "drafts become legally binding". */}
-      <span className="font-medium text-slate-700">{draft}</span>
-      <span className="font-bold text-emerald-700">{legal}</span>
+      <span className="font-normal text-slate-100 italic">Lawyer</span>
+      <span className="font-semibold text-brass-gradient ml-[1px]">OS</span>
     </span>
   )
 }
