@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node --dns-result-order=ipv4first --env-file=.env node_modules/tsx/dist/cli.mjs watch src/index.ts",
-    "build": "tsc",
+    "build": "npm --prefix packages/types run build && tsc",
     "start": "node --dns-result-order=ipv4first dist/index.js",
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
