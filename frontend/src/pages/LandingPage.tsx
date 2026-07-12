@@ -201,7 +201,7 @@ function Hero() {
           <span className="inline-flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-brass-400" /> Attorney-only data</span>
         </motion.div>
 
-        {/* Product screenshot mockup — a stylised app frame */}
+        {/* Product screenshot — high-fidelity replica of the live dashboard */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -210,78 +210,107 @@ function Hero() {
           className="mt-20 relative"
           data-testid="hero-product-frame"
         >
-          <div className="relative mx-auto max-w-5xl">
+          <div className="relative mx-auto max-w-6xl">
             {/* Reflective floor */}
             <div className="absolute -inset-x-20 -bottom-24 h-40 bg-gradient-to-t from-brass-400/10 via-brass-400/5 to-transparent blur-2xl" />
-            <div className="glass-panel-brass overflow-hidden shadow-glow-brass-lg">
+            <div className="glass-panel-brass overflow-hidden shadow-glow-brass-lg text-left">
               <div className="flex items-center gap-2 px-5 py-3 border-b border-white/6 bg-obsidian-800/50">
                 <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
                 <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
                 <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                <span className="ml-4 text-[11px] text-slate-500 font-mono">app.lawyeros.ai / matters / project-atlas</span>
+                <span className="ml-4 text-[11px] text-slate-500 font-mono">app.lawyeros.ai / dashboard</span>
               </div>
-              <div className="grid grid-cols-12 min-h-[380px] md:min-h-[460px]">
+              <div className="grid grid-cols-12 min-h-[440px] md:min-h-[540px]">
                 {/* Faux sidebar */}
-                <div className="col-span-3 border-r border-white/6 bg-obsidian-900/60 p-4 space-y-1.5 hidden md:block">
-                  <div className="text-[10px] uppercase tracking-widest text-slate-500 mb-3">Workspace</div>
-                  {['Dashboard', 'Matters', 'Contracts', 'Negotiations', 'Research', 'Playbook'].map((it, i) => (
-                    <div
-                      key={it}
-                      className={
-                        'flex items-center gap-2 px-3 py-1.5 rounded-md text-[12.5px] ' +
-                        (i === 1 ? 'bg-brass-400/10 text-brass-300 border border-brass-400/20' : 'text-slate-400')
-                      }
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-60" />
-                      {it}
+                <div className="col-span-3 border-r border-white/6 bg-obsidian-950 p-4 space-y-0.5 hidden md:block">
+                  <div className="mb-4 px-2 font-serif text-lg">
+                    <span className="italic text-slate-100">Lawyer</span>
+                    <span className="font-semibold text-brass-gradient">OS</span>
+                  </div>
+                  {[
+                    { l: 'Dashboard',      active: true },
+                    { l: 'Assistant' },
+                  ].map(it => (
+                    <div key={it.l} className={'flex items-center gap-2 px-2 py-1.5 rounded-md text-[12px] ' + (it.active ? 'bg-brass-400/12 text-brass-200 shadow-[inset_1px_0_0_0_rgba(212,175,55,0.6)]' : 'text-slate-400')}>
+                      <span className={'h-1 w-1 rounded-full ' + (it.active ? 'bg-brass-400' : 'bg-slate-600')} />
+                      {it.l}
+                    </div>
+                  ))}
+                  <div className="pt-4 pb-1 px-2 text-[9px] uppercase tracking-[0.2em] text-brass-400/70">Workspace</div>
+                  {['Matters', 'Contracts', 'Requests', 'Counterparties'].map((l, i) => (
+                    <div key={l} className="flex items-center justify-between gap-2 px-2 py-1.5 rounded-md text-[12px] text-slate-400">
+                      <div className="flex items-center gap-2">
+                        <span className="h-1 w-1 rounded-full bg-slate-600" />
+                        {l}
+                      </div>
+                      {i === 2 && <span className="text-[9.5px] font-semibold px-1.5 rounded bg-brass-400/15 text-brass-300 border border-brass-400/25">5</span>}
+                    </div>
+                  ))}
+                  <div className="pt-4 pb-1 px-2 text-[9px] uppercase tracking-[0.2em] text-brass-400/70">Queues</div>
+                  {['Approvals', 'Signatures'].map(l => (
+                    <div key={l} className="flex items-center gap-2 px-2 py-1.5 rounded-md text-[12px] text-slate-400">
+                      <span className="h-1 w-1 rounded-full bg-slate-600" />
+                      {l}
+                    </div>
+                  ))}
+                  <div className="pt-4 pb-1 px-2 text-[9px] uppercase tracking-[0.2em] text-brass-400/70">Library</div>
+                  {['Templates', 'Playbook', 'Research'].map(l => (
+                    <div key={l} className="flex items-center gap-2 px-2 py-1.5 rounded-md text-[12px] text-slate-400">
+                      <span className="h-1 w-1 rounded-full bg-slate-600" />
+                      {l}
                     </div>
                   ))}
                 </div>
-                {/* Faux main content */}
+                {/* Faux main content — dashboard */}
                 <div className="col-span-12 md:col-span-9 p-6 md:p-8 space-y-6">
                   <div>
-                    <div className="text-[10px] uppercase tracking-widest text-brass-400 mb-1">Matter · M&amp;A</div>
-                    <div className="font-serif text-2xl md:text-3xl tracking-tight text-white">Project Atlas — Series C acquisition</div>
-                    <div className="text-[12.5px] text-slate-500 mt-1">4 contracts · 12 obligations · $4.2M ARR at stake</div>
+                    <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-brass-400 font-semibold mb-2.5">
+                      <span className="w-4 h-px bg-brass-400" />
+                      Good day, counsel
+                    </div>
+                    <div className="font-serif text-2xl md:text-4xl leading-none tracking-tight text-white">
+                      Welcome back, <span className="italic text-brass-gradient">Maya</span>.
+                    </div>
+                    <div className="text-[12.5px] text-slate-500 mt-2 font-light">Here&apos;s what&apos;s moving across your contracts today.</div>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <div className="rounded-xl border border-white/8 bg-obsidian-800/40 p-4">
+                    <div className="text-[9.5px] uppercase tracking-[0.22em] text-brass-400 font-semibold mb-1.5">— Your day</div>
+                    <div className="text-[12px] text-slate-400">3 items need your attention.</div>
+                  </div>
+                  <div className="grid grid-cols-4 gap-3">
                     {[
-                      { l: 'Contracts', v: '48' },
-                      { l: 'Obligations', v: '162' },
-                      { l: 'Approvals', v: '7', accent: true },
-                      { l: 'Renewals', v: '3' },
+                      { l: 'Active',      v: '48',  c: 'text-sky-300',    b: 'border-sky-500/20 bg-sky-500/10' },
+                      { l: 'Requests',    v: '5',   c: 'text-brass-300',  b: 'border-brass-400/25 bg-brass-400/10' },
+                      { l: 'Approvals',   v: '7',   c: 'text-emerald-300',b: 'border-emerald-500/20 bg-emerald-500/10' },
+                      { l: 'Expiring',    v: '3',   c: 'text-rose-300',   b: 'border-rose-500/20 bg-rose-500/10' },
                     ].map(k => (
-                      <div key={k.l} className="rounded-lg border border-white/5 bg-obsidian-800/60 px-4 py-3">
-                        <div className="text-[10.5px] uppercase tracking-widest text-slate-500">{k.l}</div>
-                        <div className={'font-serif text-xl mt-1 ' + (k.accent ? 'text-brass-400' : 'text-white')}>{k.v}</div>
+                      <div key={k.l} className="rounded-lg border border-white/8 bg-obsidian-800 px-3 py-3">
+                        <div className="flex items-center justify-between">
+                          <div className="text-[9px] uppercase tracking-[0.18em] text-slate-500 font-semibold">{k.l}</div>
+                          <span className={'h-4 w-4 rounded border ' + k.b} />
+                        </div>
+                        <div className={'mt-2 font-serif text-2xl md:text-3xl tabular-nums text-white'}>{k.v}</div>
                       </div>
                     ))}
                   </div>
-                  <div className="space-y-1.5">
-                    {[
-                      ['MSA — Zenith Labs, Inc.',       'Under negotiation', 'brass'],
-                      ['DPA — Nova Systems Ltd.',       'Awaiting counsel',  'slate'],
-                      ['Employment — J. Chen',          'Signed',            'emerald'],
-                      ['Vendor SLA — Aegis Cloud',      'Expiring in 21d',   'red'],
-                    ].map(([title, status, color], i) => (
-                      <div key={i} className="flex items-center justify-between px-3 py-2.5 rounded-md hover:bg-white/[0.02] border border-transparent hover:border-white/5 transition-colors">
-                        <div className="flex items-center gap-3 min-w-0">
-                          <span className="h-1.5 w-1.5 rounded-full bg-slate-500" />
-                          <span className="text-[13px] text-slate-200 truncate">{title}</span>
+                  <div>
+                    <div className="text-[9.5px] uppercase tracking-[0.22em] text-brass-400 font-semibold mb-3">— Signal</div>
+                    <div className="font-serif text-lg text-white mb-3">Recent Activity</div>
+                    <div className="space-y-2">
+                      {[
+                        { i: 'JW', c: 'bg-emerald-500/15 text-emerald-300 ring-emerald-500/25', name: 'James Whitfield', v: 'signed',      e: 'Employment — J. Chen',       t: 'Jan 11' },
+                        { i: 'MG', c: 'bg-brass-400/15 text-brass-300 ring-brass-400/25',        name: 'Maya Goldberg',   v: 'approved',    e: 'MSA — Nova Systems Renewal', t: 'Jan 11' },
+                        { i: 'AD', c: 'bg-sky-500/15 text-sky-300 ring-sky-500/25',              name: 'Amara Devi',      v: 'commented on',e: 'MSA — Zenith Labs, Inc.',    t: 'Jan 11' },
+                      ].map((r, i) => (
+                        <div key={i} className="flex items-center gap-2.5 py-1.5">
+                          <span className={'h-6 w-6 rounded-full text-[10px] font-semibold flex items-center justify-center ring-1 ' + r.c}>{r.i}</span>
+                          <div className="text-[12px] text-slate-300 flex-1 truncate">
+                            <span className="font-medium text-white">{r.name}</span> <span className="text-slate-500">{r.v}</span> <span className="font-medium text-white">{r.e}</span>
+                          </div>
+                          <span className="text-[10px] text-slate-500 font-mono">{r.t}</span>
                         </div>
-                        <span
-                          className={
-                            'text-[10.5px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full border ' +
-                            (color === 'brass' ? 'text-brass-300 border-brass-400/30 bg-brass-400/5' :
-                             color === 'emerald' ? 'text-emerald-400 border-emerald-500/25 bg-emerald-500/5' :
-                             color === 'red' ? 'text-rose-400 border-rose-500/25 bg-rose-500/5' :
-                             'text-slate-300 border-white/10 bg-white/[0.03]')
-                          }
-                        >
-                          {status}
-                        </span>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

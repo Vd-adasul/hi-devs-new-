@@ -47,7 +47,7 @@ export function DiligenceRoomsPage() {
         <Button
           onClick={() => setCreateOpen(true)}
           data-testid="create-room-btn"
-          className="gap-1.5 bg-violet-600 hover:bg-violet-700 text-white"
+          className="gap-1.5 bg-brass-gradient hover:brightness-105 text-obsidian-900 border border-brass-400/60 shadow-glow-brass"
         >
           <Plus className="h-4 w-4" />
           New room
@@ -306,7 +306,7 @@ function CreateRoomDialog({ onClose, onCreated }: { onClose: () => void; onCreat
             onClick={() => create.mutate()}
             disabled={!name.trim() || create.isPending}
             data-testid="create-room-confirm"
-            className="bg-violet-600 hover:bg-violet-700"
+            className="bg-brass-gradient hover:brightness-105 text-obsidian-900 border border-brass-400/60 shadow-glow-brass"
           >
             {create.isPending ? (
               <><Loader2 className="h-4 w-4 animate-spin mr-1" /> Creating…</>

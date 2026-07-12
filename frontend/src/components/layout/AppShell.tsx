@@ -53,7 +53,7 @@ export function AppShell() {
   }
 
   return (
-    <div className="flex h-screen bg-obsidian-900 overflow-hidden">
+    <div className="flex h-screen bg-obsidian-900 overflow-hidden" data-luxe="1">
       <Sidebar />
       <div className="flex flex-col flex-1 min-w-0">
         <Header />

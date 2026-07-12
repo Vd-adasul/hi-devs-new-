@@ -1,0 +1,195 @@
+/**
+ * Editorial-luxe scoped remap.
+ *
+ * Every inner app page in LawyerOS hardcodes light-mode pastel Tailwind
+ * classes (`bg-blue-100 text-blue-700`, `bg-amber-50`, etc.). Instead of
+ * touching all 3,800+ lines of ContractDetailPage, we scope-override
+ * those utilities under a single wrapper (`[data-luxe]`) which we set
+ * on the AppShell root.
+ *
+ * Effect: inner pages get automatic dark-mode-appropriate status pills,
+ * chips, and semantic colours — while the public landing / auth pages
+ * (which don't have [data-luxe]) keep their bespoke editorial styling.
+ *
+ * IMPORTANT: this file is a `@layer components` block so it beats Tailwind
+ * utilities via specificity ([data-luxe] .bg-blue-100 wins over .bg-blue-100)
+ * without needing !important. It never touches semantic tokens (bg-card,
+ * bg-background, text-foreground) — those already flow through CSS vars.
+ */
+
+@layer components {
+  /* ─── Neutral / gray family ─────────────────────────────────────────── */
+  [data-luxe] .bg-white { background-color: rgba(13, 19, 34, 1); }
+  [data-luxe] .bg-white\/50 { background-color: rgba(13, 19, 34, 0.5); }
+  [data-luxe] .bg-white\/80 { background-color: rgba(13, 19, 34, 0.8); }
+  [data-luxe] .bg-slate-50, [data-luxe] .bg-gray-50, [data-luxe] .bg-zinc-50, [data-luxe] .bg-neutral-50, [data-luxe] .bg-stone-50 { background-color: rgba(255, 255, 255, 0.02); }
+  [data-luxe] .bg-slate-100, [data-luxe] .bg-gray-100, [data-luxe] .bg-zinc-100, [data-luxe] .bg-neutral-100, [data-luxe] .bg-stone-100 { background-color: rgba(255, 255, 255, 0.04); }
+  [data-luxe] .bg-slate-200, [data-luxe] .bg-gray-200, [data-luxe] .bg-zinc-200, [data-luxe] .bg-neutral-200, [data-luxe] .bg-stone-200 { background-color: rgba(255, 255, 255, 0.08); }
+  [data-luxe] .bg-slate-300, [data-luxe] .bg-gray-300, [data-luxe] .bg-zinc-300, [data-luxe] .bg-neutral-300, [data-luxe] .bg-stone-300 { background-color: rgba(255, 255, 255, 0.12); }
+  [data-luxe] .bg-slate-800, [data-luxe] .bg-gray-800, [data-luxe] .bg-zinc-800, [data-luxe] .bg-neutral-800, [data-luxe] .bg-stone-800 { background-color: rgba(255, 255, 255, 0.06); }
+  [data-luxe] .bg-slate-900, [data-luxe] .bg-gray-900, [data-luxe] .bg-zinc-900, [data-luxe] .bg-neutral-900, [data-luxe] .bg-stone-900 { background-color: #0A0F1C; }
+  [data-luxe] .text-slate-400, [data-luxe] .text-gray-400, [data-luxe] .text-zinc-400, [data-luxe] .text-neutral-400 { color: #94a3b8; }
+  [data-luxe] .text-slate-500, [data-luxe] .text-gray-500, [data-luxe] .text-zinc-500, [data-luxe] .text-neutral-500 { color: #94a3b8; }
+  [data-luxe] .text-slate-600, [data-luxe] .text-gray-600, [data-luxe] .text-zinc-600, [data-luxe] .text-neutral-600 { color: #cbd5e1; }
+  [data-luxe] .text-slate-700, [data-luxe] .text-gray-700, [data-luxe] .text-zinc-700, [data-luxe] .text-neutral-700 { color: #e2e8f0; }
+  [data-luxe] .text-slate-800, [data-luxe] .text-gray-800, [data-luxe] .text-zinc-800, [data-luxe] .text-neutral-800 { color: #F1F5F9; }
+  [data-luxe] .text-slate-900, [data-luxe] .text-gray-900, [data-luxe] .text-zinc-900, [data-luxe] .text-neutral-900 { color: #F8FAFC; }
+  [data-luxe] .text-black { color: #F8FAFC; }
+  [data-luxe] .border-slate-100, [data-luxe] .border-gray-100, [data-luxe] .border-zinc-100 { border-color: rgba(255, 255, 255, 0.06); }
+  [data-luxe] .border-slate-200, [data-luxe] .border-gray-200, [data-luxe] .border-zinc-200 { border-color: rgba(255, 255, 255, 0.10); }
+  [data-luxe] .border-slate-300, [data-luxe] .border-gray-300, [data-luxe] .border-zinc-300 { border-color: rgba(255, 255, 255, 0.14); }
+  [data-luxe] .divide-slate-100 > * + *, [data-luxe] .divide-gray-100 > * + * { border-color: rgba(255, 255, 255, 0.06); }
+  [data-luxe] .divide-slate-200 > * + *, [data-luxe] .divide-gray-200 > * + * { border-color: rgba(255, 255, 255, 0.08); }
+
+  /* ─── Red / rose (destructive) ──────────────────────────────────────── */
+  [data-luxe] .bg-red-50, [data-luxe] .bg-rose-50 { background-color: rgba(244, 63, 94, 0.08); }
+  [data-luxe] .bg-red-100, [data-luxe] .bg-rose-100 { background-color: rgba(244, 63, 94, 0.12); }
+  [data-luxe] .bg-red-200, [data-luxe] .bg-rose-200 { background-color: rgba(244, 63, 94, 0.18); }
+  [data-luxe] .text-red-500, [data-luxe] .text-rose-500 { color: #fb7185; }
+  [data-luxe] .text-red-600, [data-luxe] .text-rose-600 { color: #fb7185; }
+  [data-luxe] .text-red-700, [data-luxe] .text-rose-700 { color: #fda4af; }
+  [data-luxe] .text-red-800, [data-luxe] .text-rose-800 { color: #fecdd3; }
+  [data-luxe] .text-red-900, [data-luxe] .text-rose-900 { color: #fecdd3; }
+  [data-luxe] .border-red-200, [data-luxe] .border-rose-200 { border-color: rgba(244, 63, 94, 0.30); }
+  [data-luxe] .border-red-300, [data-luxe] .border-rose-300 { border-color: rgba(244, 63, 94, 0.40); }
+
+  /* ─── Orange ─────────────────────────────────────────────────────────── */
+  [data-luxe] .bg-orange-50 { background-color: rgba(249, 115, 22, 0.08); }
+  [data-luxe] .bg-orange-100 { background-color: rgba(249, 115, 22, 0.12); }
+  [data-luxe] .bg-orange-200 { background-color: rgba(249, 115, 22, 0.18); }
+  [data-luxe] .text-orange-600 { color: #fdba74; }
+  [data-luxe] .text-orange-700 { color: #fed7aa; }
+  [data-luxe] .text-orange-800 { color: #fed7aa; }
+  [data-luxe] .border-orange-200 { border-color: rgba(249, 115, 22, 0.30); }
+
+  /* ─── Amber / yellow (warning) ──────────────────────────────────────── */
+  [data-luxe] .bg-amber-50, [data-luxe] .bg-yellow-50 { background-color: rgba(212, 175, 55, 0.08); }
+  [data-luxe] .bg-amber-100, [data-luxe] .bg-yellow-100 { background-color: rgba(212, 175, 55, 0.12); }
+  [data-luxe] .bg-amber-200, [data-luxe] .bg-yellow-200 { background-color: rgba(212, 175, 55, 0.20); }
+  [data-luxe] .text-amber-600, [data-luxe] .text-yellow-600 { color: #E5C158; }
+  [data-luxe] .text-amber-700, [data-luxe] .text-yellow-700 { color: #EFD989; }
+  [data-luxe] .text-amber-800, [data-luxe] .text-yellow-800 { color: #F6ECC1; }
+  [data-luxe] .text-amber-900, [data-luxe] .text-yellow-900 { color: #FBF7EA; }
+  [data-luxe] .border-amber-200, [data-luxe] .border-yellow-200 { border-color: rgba(212, 175, 55, 0.30); }
+  [data-luxe] .border-amber-300, [data-luxe] .border-yellow-300 { border-color: rgba(212, 175, 55, 0.40); }
+
+  /* ─── Green / emerald / teal (success) ──────────────────────────────── */
+  [data-luxe] .bg-green-50, [data-luxe] .bg-emerald-50, [data-luxe] .bg-teal-50 { background-color: rgba(16, 185, 129, 0.08); }
+  [data-luxe] .bg-green-100, [data-luxe] .bg-emerald-100, [data-luxe] .bg-teal-100 { background-color: rgba(16, 185, 129, 0.12); }
+  [data-luxe] .bg-green-200, [data-luxe] .bg-emerald-200, [data-luxe] .bg-teal-200 { background-color: rgba(16, 185, 129, 0.18); }
+  [data-luxe] .text-green-500, [data-luxe] .text-emerald-500, [data-luxe] .text-teal-500 { color: #34d399; }
+  [data-luxe] .text-green-600, [data-luxe] .text-emerald-600, [data-luxe] .text-teal-600 { color: #34d399; }
+  [data-luxe] .text-green-700, [data-luxe] .text-emerald-700, [data-luxe] .text-teal-700 { color: #6ee7b7; }
+  [data-luxe] .text-green-800, [data-luxe] .text-emerald-800, [data-luxe] .text-teal-800 { color: #a7f3d0; }
+  [data-luxe] .text-green-900, [data-luxe] .text-emerald-900, [data-luxe] .text-teal-900 { color: #d1fae5; }
+  [data-luxe] .border-green-200, [data-luxe] .border-emerald-200, [data-luxe] .border-teal-200 { border-color: rgba(16, 185, 129, 0.30); }
+
+  /* ─── Blue / sky / cyan (info) ──────────────────────────────────────── */
+  [data-luxe] .bg-blue-50, [data-luxe] .bg-sky-50, [data-luxe] .bg-cyan-50 { background-color: rgba(56, 189, 248, 0.08); }
+  [data-luxe] .bg-blue-100, [data-luxe] .bg-sky-100, [data-luxe] .bg-cyan-100 { background-color: rgba(56, 189, 248, 0.12); }
+  [data-luxe] .bg-blue-200, [data-luxe] .bg-sky-200, [data-luxe] .bg-cyan-200 { background-color: rgba(56, 189, 248, 0.18); }
+  [data-luxe] .text-blue-500, [data-luxe] .text-sky-500, [data-luxe] .text-cyan-500 { color: #38bdf8; }
+  [data-luxe] .text-blue-600, [data-luxe] .text-sky-600, [data-luxe] .text-cyan-600 { color: #38bdf8; }
+  [data-luxe] .text-blue-700, [data-luxe] .text-sky-700, [data-luxe] .text-cyan-700 { color: #7dd3fc; }
+  [data-luxe] .text-blue-800, [data-luxe] .text-sky-800, [data-luxe] .text-cyan-800 { color: #bae6fd; }
+  [data-luxe] .text-blue-900, [data-luxe] .text-sky-900, [data-luxe] .text-cyan-900 { color: #e0f2fe; }
+  [data-luxe] .border-blue-200, [data-luxe] .border-sky-200, [data-luxe] .border-cyan-200 { border-color: rgba(56, 189, 248, 0.30); }
+
+  /* ─── Indigo / violet / purple / fuchsia (accent) ───────────────────── */
+  [data-luxe] .bg-indigo-50, [data-luxe] .bg-violet-50, [data-luxe] .bg-purple-50, [data-luxe] .bg-fuchsia-50 { background-color: rgba(168, 85, 247, 0.08); }
+  [data-luxe] .bg-indigo-100, [data-luxe] .bg-violet-100, [data-luxe] .bg-purple-100, [data-luxe] .bg-fuchsia-100 { background-color: rgba(168, 85, 247, 0.12); }
+  [data-luxe] .bg-indigo-200, [data-luxe] .bg-violet-200, [data-luxe] .bg-purple-200, [data-luxe] .bg-fuchsia-200 { background-color: rgba(168, 85, 247, 0.18); }
+  [data-luxe] .text-indigo-600, [data-luxe] .text-violet-600, [data-luxe] .text-purple-600, [data-luxe] .text-fuchsia-600 { color: #c4b5fd; }
+  [data-luxe] .text-indigo-700, [data-luxe] .text-violet-700, [data-luxe] .text-purple-700, [data-luxe] .text-fuchsia-700 { color: #ddd6fe; }
+  [data-luxe] .text-indigo-800, [data-luxe] .text-violet-800, [data-luxe] .text-purple-800, [data-luxe] .text-fuchsia-800 { color: #ede9fe; }
+  [data-luxe] .border-indigo-200, [data-luxe] .border-violet-200, [data-luxe] .border-purple-200 { border-color: rgba(168, 85, 247, 0.30); }
+
+  /* ─── Pink ───────────────────────────────────────────────────────────── */
+  [data-luxe] .bg-pink-50 { background-color: rgba(236, 72, 153, 0.08); }
+  [data-luxe] .bg-pink-100 { background-color: rgba(236, 72, 153, 0.12); }
+  [data-luxe] .text-pink-600 { color: #f9a8d4; }
+  [data-luxe] .text-pink-700 { color: #fbcfe8; }
+  [data-luxe] .border-pink-200 { border-color: rgba(236, 72, 153, 0.30); }
+
+  /* ─── Muted / accent-hover / hover states ───────────────────────────── */
+  [data-luxe] .hover\:bg-slate-50:hover, [data-luxe] .hover\:bg-gray-50:hover { background-color: rgba(255, 255, 255, 0.03); }
+  [data-luxe] .hover\:bg-slate-100:hover, [data-luxe] .hover\:bg-gray-100:hover { background-color: rgba(255, 255, 255, 0.05); }
+  [data-luxe] .hover\:bg-slate-200:hover, [data-luxe] .hover\:bg-gray-200:hover { background-color: rgba(255, 255, 255, 0.08); }
+
+  /* ─── Common heavy backgrounds used as "page" surfaces ──────────────── */
+  [data-luxe] .bg-slate-50\/50 { background-color: rgba(255, 255, 255, 0.015); }
+  [data-luxe] .bg-gray-50\/50 { background-color: rgba(255, 255, 255, 0.015); }
+
+  /* ─── Card + paper surfaces ─────────────────────────────────────────── */
+  [data-luxe] .shadow-sm, [data-luxe] .shadow { box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); }
+  [data-luxe] .shadow-md { box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.5); }
+  [data-luxe] .shadow-lg { box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.6); }
+
+  /* ─── Ring / focus ──────────────────────────────────────────────────── */
+  [data-luxe] .ring-slate-200, [data-luxe] .ring-gray-200 { --tw-ring-color: rgba(255, 255, 255, 0.10); }
+  [data-luxe] .ring-slate-300, [data-luxe] .ring-gray-300 { --tw-ring-color: rgba(255, 255, 255, 0.14); }
+
+  /* ─── Inputs get luxe treatment across the board ────────────────────── */
+  [data-luxe] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),
+  [data-luxe] textarea,
+  [data-luxe] select {
+    background-color: rgba(10, 15, 28, 0.6);
+    border-color: rgba(255, 255, 255, 0.10);
+    color: #F8FAFC;
+  }
+  [data-luxe] input::placeholder,
+  [data-luxe] textarea::placeholder {
+    color: rgba(148, 163, 184, 0.5);
+  }
+  [data-luxe] input:focus-visible,
+  [data-luxe] textarea:focus-visible,
+  [data-luxe] select:focus-visible {
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.12);
+  }
+}
+
+/* ─── Editorial page-header pattern used across inner pages ───────────── */
+@layer components {
+  .page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 1.5rem;
+  }
+  .page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.25rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: #F8FAFC;
+  }
+  .page-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: #94a3b8;
+    font-weight: 300;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+  /* Small "chip" badge — obsidian tinted, no colored bg required by consumers */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}

@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './styles/luxe-remap.css';
+
 /* ─────────────────────────────────────────────────────────────────────────────
    LawyerOS — Editorial Luxe theme
    Deep obsidian + brushed brass. Cormorant Garamond display serif +
