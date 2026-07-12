@@ -23,7 +23,9 @@
   [data-luxe] .bg-white\/50 { background-color: rgba(13, 19, 34, 0.5); }
   [data-luxe] .bg-white\/80 { background-color: rgba(13, 19, 34, 0.8); }
   [data-luxe] .bg-slate-50, [data-luxe] .bg-gray-50, [data-luxe] .bg-zinc-50, [data-luxe] .bg-neutral-50, [data-luxe] .bg-stone-50 { background-color: rgba(255, 255, 255, 0.02); }
+  [data-luxe] .hover\:bg-slate-50:hover, [data-luxe] .hover\:bg-gray-50:hover, [data-luxe] .hover\:bg-zinc-50:hover, [data-luxe] .hover\:bg-neutral-50:hover, [data-luxe] .hover\:bg-stone-50:hover { background-color: rgba(255, 255, 255, 0.03); }
   [data-luxe] .bg-slate-100, [data-luxe] .bg-gray-100, [data-luxe] .bg-zinc-100, [data-luxe] .bg-neutral-100, [data-luxe] .bg-stone-100 { background-color: rgba(255, 255, 255, 0.04); }
+  [data-luxe] .hover\:bg-slate-100:hover, [data-luxe] .hover\:bg-gray-100:hover, [data-luxe] .hover\:bg-zinc-100:hover, [data-luxe] .hover\:bg-neutral-100:hover, [data-luxe] .hover\:bg-stone-100:hover { background-color: rgba(255, 255, 255, 0.06); }
   [data-luxe] .bg-slate-200, [data-luxe] .bg-gray-200, [data-luxe] .bg-zinc-200, [data-luxe] .bg-neutral-200, [data-luxe] .bg-stone-200 { background-color: rgba(255, 255, 255, 0.08); }
   [data-luxe] .bg-slate-300, [data-luxe] .bg-gray-300, [data-luxe] .bg-zinc-300, [data-luxe] .bg-neutral-300, [data-luxe] .bg-stone-300 { background-color: rgba(255, 255, 255, 0.12); }
   [data-luxe] .bg-slate-800, [data-luxe] .bg-gray-800, [data-luxe] .bg-zinc-800, [data-luxe] .bg-neutral-800, [data-luxe] .bg-stone-800 { background-color: rgba(255, 255, 255, 0.06); }
@@ -32,8 +34,10 @@
   [data-luxe] .text-slate-500, [data-luxe] .text-gray-500, [data-luxe] .text-zinc-500, [data-luxe] .text-neutral-500 { color: #94a3b8; }
   [data-luxe] .text-slate-600, [data-luxe] .text-gray-600, [data-luxe] .text-zinc-600, [data-luxe] .text-neutral-600 { color: #cbd5e1; }
   [data-luxe] .text-slate-700, [data-luxe] .text-gray-700, [data-luxe] .text-zinc-700, [data-luxe] .text-neutral-700 { color: #e2e8f0; }
+  [data-luxe] .hover\:text-slate-700:hover, [data-luxe] .hover\:text-gray-700:hover, [data-luxe] .hover\:text-zinc-700:hover, [data-luxe] .hover\:text-neutral-700:hover { color: #e2e8f0; }
   [data-luxe] .text-slate-800, [data-luxe] .text-gray-800, [data-luxe] .text-zinc-800, [data-luxe] .text-neutral-800 { color: #F1F5F9; }
   [data-luxe] .text-slate-900, [data-luxe] .text-gray-900, [data-luxe] .text-zinc-900, [data-luxe] .text-neutral-900 { color: #F8FAFC; }
+  [data-luxe] .hover\:text-slate-900:hover, [data-luxe] .hover\:text-gray-900:hover, [data-luxe] .hover\:text-zinc-900:hover, [data-luxe] .hover\:text-neutral-900:hover { color: #F8FAFC; }
   [data-luxe] .text-black { color: #F8FAFC; }
   [data-luxe] .border-slate-100, [data-luxe] .border-gray-100, [data-luxe] .border-zinc-100 { border-color: rgba(255, 255, 255, 0.06); }
   [data-luxe] .border-slate-200, [data-luxe] .border-gray-200, [data-luxe] .border-zinc-200 { border-color: rgba(255, 255, 255, 0.10); }
