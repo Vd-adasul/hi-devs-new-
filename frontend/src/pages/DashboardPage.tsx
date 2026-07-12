@@ -9,7 +9,7 @@ import {
   MessageSquareWarning, Repeat, AlertTriangle, Building2,
 } from 'lucide-react'
 import { toast } from '@/components/common/Toaster'
-import { Button } from '@/components/ui/button'
+
 import { UploadModal } from '@/components/contracts/UploadModal'
 import { NewRequestModal } from '@/components/requests/NewRequestModal'
 import { WelcomeChecklist } from '@/components/onboarding/WelcomeChecklist'
