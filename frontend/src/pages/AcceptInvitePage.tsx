@@ -102,7 +102,7 @@ export function AcceptInvitePage() {
           <div className="h-12 w-12 rounded-full bg-red-50 flex items-center justify-center">
             <AlertCircle className="h-6 w-6 text-red-500" />
           </div>
-          <h1 className="text-lg font-semibold text-gray-900">Invalid or expired invite</h1>
+          <h1 className="text-lg font-semibold text-white">Invalid or expired invite</h1>
           <p className="text-sm text-muted-foreground max-w-xs">
             This invite link is no longer valid. It may have been used already,
             expired, or the URL is incorrect. Ask your admin to send a new one.
@@ -126,16 +126,16 @@ export function AcceptInvitePage() {
 
         {/* Inviter context — F-09 explicit ask: tell the user what
             they're accepting into BEFORE they fill the form */}
-        <div className="mt-4 rounded-lg border border-border bg-gray-50/60 px-3.5 py-3 space-y-1.5">
-          <div className="flex items-center gap-2 text-[12.5px] text-gray-700">
+        <div className="mt-4 rounded-lg border border-border bg-obsidian-900/60 px-3.5 py-3 space-y-1.5">
+          <div className="flex items-center gap-2 text-[12.5px] text-slate-300">
             <Building2 className="h-3.5 w-3.5 text-blue-600" />
             <span>You're joining</span>
-            <span className="font-semibold text-gray-900" data-testid="invite-org">{data.orgName}</span>
+            <span className="font-semibold text-white" data-testid="invite-org">{data.orgName}</span>
           </div>
-          <div className="flex items-center gap-2 text-[12.5px] text-gray-700">
+          <div className="flex items-center gap-2 text-[12.5px] text-slate-300">
             <Mail className="h-3.5 w-3.5 text-gray-400" />
             <span>as</span>
-            <span className="font-mono text-gray-900" data-testid="invite-email">{data.email}</span>
+            <span className="font-mono text-white" data-testid="invite-email">{data.email}</span>
           </div>
         </div>
 

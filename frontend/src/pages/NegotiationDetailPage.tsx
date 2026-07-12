@@ -71,7 +71,7 @@ export default function NegotiationDetailPage() {
 
   if (loading) {
     return (
-      <div className="h-screen w-full flex items-center justify-center bg-slate-50">
+      <div className="h-screen w-full flex items-center justify-center bg-obsidian-900">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
       </div>
     );
@@ -94,7 +94,7 @@ export default function NegotiationDetailPage() {
       {/* Grid workspace */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Col: Historical rounds */}
-        <div className="md:col-span-2 glass-panel bg-white border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
+        <div className="md:col-span-2 glass-panel bg-obsidian-700 border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
           <h3 className="text-sm font-semibold text-slate-800 border-b border-slate-100 pb-2 flex items-center gap-2">
             <Clock size={16} className="text-indigo-600" /> Alternating Offers Timeline
           </h3>
@@ -102,7 +102,7 @@ export default function NegotiationDetailPage() {
           <div className="flex flex-col gap-4 max-h-[350px] overflow-y-auto pr-2">
             {session?.rounds?.map((r: any) => (
               <div key={r.roundNumber} className={`p-4 border rounded-lg text-xs leading-relaxed flex flex-col gap-2 ${
-                r.offerBy === 'us' ? 'bg-indigo-50/20 border-indigo-100 self-end w-4/5' : 'bg-slate-50 border-slate-200 w-4/5'
+                r.offerBy === 'us' ? 'bg-indigo-50/20 border-indigo-100 self-end w-4/5' : 'bg-obsidian-900 border-slate-200 w-4/5'
               }`}>
                 <div className="flex justify-between items-center font-bold text-slate-700 border-b border-slate-100 pb-1.5 mb-1.5">
                   <span>{r.offerBy === 'us' ? 'Firm Offer' : 'Counterparty Offer'} (Round {r.roundNumber})</span>
@@ -142,14 +142,14 @@ export default function NegotiationDetailPage() {
         {/* Right Col: Submit Counter / Actions */}
         <div className="flex flex-col gap-6">
           {session?.status === 'active' ? (
-            <div className="glass-panel bg-white border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
+            <div className="glass-panel bg-obsidian-700 border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
               <h3 className="text-sm font-semibold text-slate-800 border-b border-slate-100 pb-2">Propose Counter</h3>
               <form onSubmit={handlePostOffer} className="flex flex-col gap-3 text-xs">
                 <textarea
                   value={proposedText}
                   onChange={(e) => setProposedText(e.target.value)}
                   placeholder="Detail your counter proposal terms..."
-                  className="w-full bg-slate-50 border border-slate-200 rounded p-2 h-32 focus:outline-none"
+                  className="w-full bg-obsidian-900 border border-slate-200 rounded p-2 h-32 focus:outline-none"
                   required
                 />
                 <button
@@ -177,7 +177,7 @@ export default function NegotiationDetailPage() {
               </div>
             </div>
           ) : (
-            <div className="glass-panel bg-white border border-slate-200 shadow-sm rounded-xl p-6 text-center text-xs">
+            <div className="glass-panel bg-obsidian-700 border border-slate-200 shadow-sm rounded-xl p-6 text-center text-xs">
               <span className={`inline-block font-bold uppercase px-3 py-1 rounded-full mb-2 ${
                 session?.status === 'accepted' ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-700'
               }`}>

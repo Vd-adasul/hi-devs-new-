@@ -103,25 +103,25 @@ export function ApprovalTimeline({ instance, steps }: Props) {
                 isActive ? 'border-blue-500 bg-blue-500' :
                 group.some(s => s.status === 'APPROVED') ? 'border-emerald-500 bg-emerald-500' :
                 group.some(s => s.status === 'REJECTED') ? 'border-red-500 bg-red-500' :
-                'border-gray-300 bg-white'
+                'border-white/14 bg-obsidian-700'
               }`} />
 
               {group.length > 1 && (
-                <p className="text-xs font-medium text-gray-500 mb-2">Step {order + 1} — Parallel</p>
+                <p className="text-xs font-medium text-slate-500 mb-2">Step {order + 1} — Parallel</p>
               )}
 
               {group.map(step => (
                 <div key={step.id} className={`${group.length > 1 ? 'ml-2 border-l-2 pl-3 mb-2' : ''} ${
                   group.length > 1 && step.status === 'APPROVED' ? 'border-emerald-400' :
-                  group.length > 1 && step.status === 'REJECTED' ? 'border-red-400' : 'border-gray-200'
+                  group.length > 1 && step.status === 'REJECTED' ? 'border-red-400' : 'border-white/10'
                 }`}>
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <p className="text-sm font-medium text-gray-800">
+                      <p className="text-sm font-medium text-white">
                         {step.stepName}
                         {group.length === 1 && <span className="text-gray-400 font-normal"> — Step {step.stepOrder + 1}</span>}
                       </p>
-                      <p className="text-xs text-gray-500 mt-0.5">{step.approverName ?? step.approverId}</p>
+                      <p className="text-xs text-slate-500 mt-0.5">{step.approverName ?? step.approverId}</p>
                     </div>
                     <StatusBadge status={step.status} />
                   </div>
@@ -135,7 +135,7 @@ export function ApprovalTimeline({ instance, steps }: Props) {
                     </p>
                   )}
                   {step.comment && (
-                    <p className="text-xs italic text-gray-500 mt-1 border-l-2 border-gray-200 pl-2">
+                    <p className="text-xs italic text-slate-500 mt-1 border-l-2 border-white/10 pl-2">
                       "{step.comment}"
                     </p>
                   )}
@@ -152,12 +152,12 @@ export function ApprovalTimeline({ instance, steps }: Props) {
               ? 'bg-emerald-50 border-emerald-200'
               : 'bg-red-50 border-red-200'
           }`}>
-            <div className="absolute -left-[26px] top-3 w-3 h-3 rounded-full border-2 bg-white border-gray-300" />
+            <div className="absolute -left-[26px] top-3 w-3 h-3 rounded-full border-2 bg-obsidian-700 border-white/14" />
             <div className="flex items-center gap-2">
               {instance.status === 'APPROVED'
                 ? <CheckCircle2 className="h-4 w-4 text-emerald-600" />
                 : <XCircle className="h-4 w-4 text-red-600" />}
-              <p className="text-sm font-semibold text-gray-800">
+              <p className="text-sm font-semibold text-white">
                 {instance.status === 'APPROVED' ? 'Contract Approved' : 'Contract Rejected — Returned to Draft'}
               </p>
             </div>

@@ -78,11 +78,11 @@ export function TeamPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+          <h1 className="text-xl font-semibold text-white flex items-center gap-2">
             <UsersRound className="h-5 w-5" />
             Team Workload
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-slate-500 mt-1">
             Monitor team capacity, workload, and out-of-office status.
           </p>
         </div>
@@ -102,19 +102,19 @@ export function TeamPage() {
       {/* Grid */}
       {isLoading ? (
         <div className="flex justify-center py-12">
-          <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+          <div className="w-5 h-5 border-2 border-white/14 border-t-blue-500 rounded-full animate-spin" />
         </div>
       ) : team.length === 0 ? (
-        <div className="bg-white rounded-xl border border-dashed border-gray-300 p-12 text-center">
+        <div className="bg-obsidian-700 rounded-xl border border-dashed border-white/14 p-12 text-center">
           <UsersRound className="h-8 w-8 text-gray-300 mx-auto mb-3" />
-          <p className="text-gray-600 font-medium">No team members found</p>
+          <p className="text-slate-400 font-medium">No team members found</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {team.map(member => (
             <div
               key={member.id}
-              className="bg-white rounded-xl border shadow-sm p-5 space-y-4 hover:shadow-md transition-shadow"
+              className="bg-obsidian-700 rounded-xl border shadow-sm p-5 space-y-4 hover:shadow-md transition-shadow"
             >
               {/* Avatar + Info */}
               <div className="flex items-start gap-3">
@@ -131,7 +131,7 @@ export function TeamPage() {
                 )}
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <p className="text-sm font-semibold text-gray-900 truncate">
+                    <p className="text-sm font-semibold text-white truncate">
                       {member.name}
                     </p>
                     {member.outOfOffice && (
@@ -140,7 +140,7 @@ export function TeamPage() {
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-gray-500 truncate">{member.email}</p>
+                  <p className="text-xs text-slate-500 truncate">{member.email}</p>
                   {member.outOfOffice && member.outOfOfficeUntil && (
                     <p className="text-[11px] text-orange-600 mt-0.5">
                       Returns {new Date(member.outOfOfficeUntil).toLocaleDateString()}
@@ -149,7 +149,7 @@ export function TeamPage() {
                 </div>
                 <button
                   onClick={() => handleSetOoo(member.id)}
-                  className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors shrink-0"
+                  className="p-1.5 rounded-lg text-gray-400 hover:text-slate-400 hover:bg-obsidian-800 transition-colors shrink-0"
                   title="Set out-of-office"
                 >
                   <CalendarOff className="h-3.5 w-3.5" />
@@ -169,24 +169,24 @@ export function TeamPage() {
               </div>
 
               {/* Stats */}
-              <div className="flex items-center gap-4 text-xs text-gray-600">
+              <div className="flex items-center gap-4 text-xs text-slate-400">
                 <span>
-                  <span className="font-semibold text-gray-900">{member.activeContracts}</span>{' '}
+                  <span className="font-semibold text-white">{member.activeContracts}</span>{' '}
                   contracts
                 </span>
                 <span>
-                  <span className="font-semibold text-gray-900">{member.pendingApprovals}</span>{' '}
+                  <span className="font-semibold text-white">{member.pendingApprovals}</span>{' '}
                   approvals pending
                 </span>
               </div>
 
               {/* Workload bar */}
               <div>
-                <div className="flex items-center justify-between text-[11px] text-gray-500 mb-1">
+                <div className="flex items-center justify-between text-[11px] text-slate-500 mb-1">
                   <span>Workload</span>
                   <span>{member.activeContracts} active</span>
                 </div>
-                <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-obsidian-800 rounded-full overflow-hidden">
                   <div
                     className={`h-full rounded-full transition-all ${workloadColor(member.activeContracts)}`}
                     style={{ width: `${workloadPercent(member.activeContracts)}%` }}
@@ -262,13 +262,13 @@ function OooModal({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4">
+      <div className="bg-obsidian-700 rounded-xl shadow-xl w-full max-w-md mx-4">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b">
-          <h2 className="text-lg font-semibold text-gray-900">Set Out-of-Office</h2>
+          <h2 className="text-lg font-semibold text-white">Set Out-of-Office</h2>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+            className="p-1 rounded-lg text-gray-400 hover:text-slate-400 hover:bg-obsidian-800"
           >
             <X className="h-4 w-4" />
           </button>
@@ -278,7 +278,7 @@ function OooModal({
         <div className="px-6 py-4 space-y-4">
           {/* User selector */}
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Team Member *</Label>
+            <Label className="text-xs text-slate-500 mb-1.5 block">Team Member *</Label>
             <select
               value={userId}
               onChange={e => {
@@ -294,7 +294,7 @@ function OooModal({
                   setDelegateId(m.delegateToId ?? '')
                 }
               }}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-md border border-white/14 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Select a member...</option>
               {members.map(m => (
@@ -312,15 +312,15 @@ function OooModal({
                 type="checkbox"
                 checked={outOfOffice}
                 onChange={e => setOutOfOffice(e.target.checked)}
-                className="rounded border-gray-300 text-blue-600"
+                className="rounded border-white/14 text-blue-600"
               />
-              <span className="text-sm text-gray-700">Mark as out-of-office</span>
+              <span className="text-sm text-slate-300">Mark as out-of-office</span>
             </label>
           </div>
 
           {/* Return date */}
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Return Date</Label>
+            <Label className="text-xs text-slate-500 mb-1.5 block">Return Date</Label>
             <Input
               type="date"
               value={returnDate}
@@ -330,11 +330,11 @@ function OooModal({
 
           {/* Delegate */}
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Delegate To</Label>
+            <Label className="text-xs text-slate-500 mb-1.5 block">Delegate To</Label>
             <select
               value={delegateId}
               onChange={e => setDelegateId(e.target.value)}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-md border border-white/14 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">None</option>
               {members

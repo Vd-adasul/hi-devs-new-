@@ -83,14 +83,14 @@ const DECISION_PILL: Record<string, { bg: string; label: string }> = {
   renew:        { bg: 'bg-emerald-50 border-emerald-200 text-emerald-700', label: 'Renew' },
   renegotiate:  { bg: 'bg-amber-50 border-amber-200 text-amber-700',       label: 'Renegotiate' },
   let_expire:   { bg: 'bg-red-50 border-red-200 text-red-700',             label: 'Let expire' },
-  pause:        { bg: 'bg-gray-100 border-gray-200 text-gray-600',         label: 'Pause' },
+  pause:        { bg: 'bg-obsidian-800 border-white/10 text-slate-400',         label: 'Pause' },
 }
 
 const ADVICE_PILL: Record<string, { bg: string; label: string }> = {
   RENEW:        { bg: 'bg-emerald-50 border-emerald-200 text-emerald-700', label: 'AI: Renew' },
   RENEGOTIATE:  { bg: 'bg-amber-50 border-amber-200 text-amber-700',       label: 'AI: Renegotiate' },
   LET_EXPIRE:   { bg: 'bg-red-50 border-red-200 text-red-700',             label: 'AI: Let expire' },
-  PAUSE:        { bg: 'bg-gray-100 border-gray-200 text-gray-600',         label: 'AI: Pause' },
+  PAUSE:        { bg: 'bg-obsidian-800 border-white/10 text-slate-400',         label: 'AI: Pause' },
 }
 
 function daysUntil(iso: string | null): number | null {
@@ -105,12 +105,12 @@ function dueText(iso: string | null): { text: string; tone: string } {
   if (!iso) return { text: 'No date', tone: 'text-muted-foreground' }
   const d = daysUntil(iso)
   const dateStr = new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-  if (d == null) return { text: dateStr, tone: 'text-gray-700' }
+  if (d == null) return { text: dateStr, tone: 'text-slate-300' }
   if (d < 0)  return { text: `${dateStr} · ${-d}d ago`,        tone: 'text-red-700 font-medium' }
   if (d === 0) return { text: `${dateStr} · today`,             tone: 'text-amber-700 font-medium' }
   if (d <= 7)  return { text: `${dateStr} · in ${d}d`,          tone: 'text-amber-700 font-medium' }
   if (d <= 30) return { text: `${dateStr} · in ${d}d`,          tone: 'text-amber-700' }
-  return { text: `${dateStr} · in ${d}d`, tone: 'text-gray-600' }
+  return { text: `${dateStr} · in ${d}d`, tone: 'text-slate-400' }
 }
 
 function formatMoney(n: number, currency = 'USD'): string {
@@ -152,7 +152,7 @@ export function RenewalsPage() {
       <div className="flex items-center justify-between gap-4 mb-1">
         <div className="flex items-center gap-3">
           <CalendarDays className="h-5 w-5 text-purple-600" />
-          <h1 className="text-2xl font-semibold text-gray-900">Renewals</h1>
+          <h1 className="text-2xl font-semibold text-white">Renewals</h1>
         </div>
         <Button
           variant="outline"
@@ -171,7 +171,7 @@ export function RenewalsPage() {
           Export CSV
         </Button>
       </div>
-      <p className="text-sm text-gray-500 mb-5">
+      <p className="text-sm text-slate-500 mb-5">
         Every executed contract heading toward its expiry — grouped by month so you can see what decisions are needed when.
       </p>
 
@@ -191,7 +191,7 @@ export function RenewalsPage() {
       </div>
 
       {/* Filter row */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 border-b border-gray-200 pb-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 border-b border-white/10 pb-2">
         <div className="flex items-center gap-1 -mb-2 overflow-x-auto">
           {BUCKETS.map(b => {
             const active = bucket === b.key
@@ -205,13 +205,13 @@ export function RenewalsPage() {
                 className={`px-3 py-2 text-sm border-b-2 transition-colors whitespace-nowrap ${
                   active
                     ? 'border-purple-600 text-purple-700 font-medium'
-                    : 'border-transparent text-gray-500 hover:text-gray-800'
+                    : 'border-transparent text-slate-500 hover:text-white'
                 }`}
               >
                 {b.label}
                 {count != null && count > 0 && (
                   <span className={`ml-1.5 text-xs px-1.5 py-0.5 rounded-full ${
-                    active ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-gray-500'
+                    active ? 'bg-purple-100 text-purple-700' : 'bg-obsidian-800 text-slate-500'
                   }`}>{count}</span>
                 )}
               </button>
@@ -223,7 +223,7 @@ export function RenewalsPage() {
             value={statusFilter}
             onChange={e => setStatusFilter(e.target.value as StatusFilter)}
             data-testid="renewal-decision-filter"
-            className="text-sm border border-gray-200 rounded-md px-2 py-2 bg-white focus:outline-none focus:ring-1 focus:ring-purple-400"
+            className="text-sm border border-white/10 rounded-md px-2 py-2 bg-obsidian-700 focus:outline-none focus:ring-1 focus:ring-purple-400"
           >
             <option value="all">All decisions</option>
             <option value="pending">No decision yet</option>
@@ -237,7 +237,7 @@ export function RenewalsPage() {
               value={q}
               onChange={e => setQ(e.target.value)}
               data-testid="renewals-search"
-              className="pl-8 pr-3 py-2 text-sm border border-gray-200 rounded-md focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400 w-full sm:w-64"
+              className="pl-8 pr-3 py-2 text-sm border border-white/10 rounded-md focus:border-purple-400 focus:outline-none focus:ring-1 focus:ring-purple-400 w-full sm:w-64"
             />
           </div>
         </div>
@@ -254,9 +254,9 @@ export function RenewalsPage() {
           Failed to load renewals.
         </div>
       ) : filteredMonths.length === 0 ? (
-        <div className="text-center py-16 px-6 border border-dashed border-gray-200 rounded-xl" data-testid="renewals-empty">
+        <div className="text-center py-16 px-6 border border-dashed border-white/10 rounded-xl" data-testid="renewals-empty">
           <CalendarDays className="h-8 w-8 text-gray-300 mx-auto mb-2" />
-          <p className="text-sm text-gray-500 mb-1">
+          <p className="text-sm text-slate-500 mb-1">
             {q ? `No renewals match "${q}".` : 'No upcoming renewals in this window.'}
           </p>
           <p className="text-xs text-gray-400">
@@ -269,22 +269,22 @@ export function RenewalsPage() {
             <section
               key={m.month}
               data-testid={`renewal-month-${m.month}`}
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden"
+              className="bg-obsidian-700 border border-white/10 rounded-xl overflow-hidden"
             >
-              <header className="flex items-center justify-between bg-gray-50 px-5 py-3 border-b border-gray-200">
+              <header className="flex items-center justify-between bg-obsidian-900 px-5 py-3 border-b border-white/10">
                 <div className="flex items-baseline gap-2">
-                  <h3 className="text-sm font-semibold text-gray-900">{m.label}</h3>
-                  <span className="text-xs text-gray-500">
+                  <h3 className="text-sm font-semibold text-white">{m.label}</h3>
+                  <span className="text-xs text-slate-500">
                     {m.rows.length} {m.rows.length === 1 ? 'renewal' : 'renewals'}
                   </span>
                 </div>
                 {m.totalValue > 0 && (
-                  <span className="text-xs font-medium text-gray-700 tabular-nums">
+                  <span className="text-xs font-medium text-slate-300 tabular-nums">
                     {formatMoney(m.totalValue, m.currency)} ACV
                   </span>
                 )}
               </header>
-              <ul className="divide-y divide-gray-100">
+              <ul className="divide-y divide-white/5">
                 {m.rows.map(r => {
                   const due = dueText(r.expiryDate)
                   const decisionPill = r.renewalDecision ? DECISION_PILL[r.renewalDecision] : null
@@ -296,13 +296,13 @@ export function RenewalsPage() {
                       key={r.id}
                       data-testid={`renewal-row-${r.id}`}
                       data-decision={r.renewalDecision ?? 'none'}
-                      className="flex items-center px-5 py-3 gap-3 hover:bg-gray-50/60"
+                      className="flex items-center px-5 py-3 gap-3 hover:bg-obsidian-900/60"
                     >
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
                           <Link
                             to={`/contracts/${r.id}`}
-                            className="text-sm font-medium text-gray-900 hover:text-purple-700 truncate max-w-[400px]"
+                            className="text-sm font-medium text-white hover:text-purple-700 truncate max-w-[400px]"
                             title={r.title}
                           >
                             {r.title}
@@ -311,7 +311,7 @@ export function RenewalsPage() {
                             {r.type.replace(/_/g, ' ')}
                           </span>
                         </div>
-                        <div className="text-xs text-gray-500 mt-0.5 flex items-center gap-2">
+                        <div className="text-xs text-slate-500 mt-0.5 flex items-center gap-2">
                           {r.counterpartyName && <span>{r.counterpartyName}</span>}
                           {r.value && <span>· {formatMoney(Number(r.value), r.currency ?? 'USD')}</span>}
                           {r.ownerName && <span>· {r.ownerName}</span>}
@@ -376,13 +376,13 @@ function StatCard({ label, value, tone, icon: Icon, subtitle, ...rest }: {
     emerald: 'text-emerald-700',
   }[tone]
   return (
-    <div className="border border-gray-200 rounded-xl p-3 bg-white" {...rest}>
-      <div className="flex items-center gap-1.5 text-xs text-gray-500">
+    <div className="border border-white/10 rounded-xl p-3 bg-obsidian-700" {...rest}>
+      <div className="flex items-center gap-1.5 text-xs text-slate-500">
         <Icon className="h-3.5 w-3.5" />
         {label}
       </div>
       <div className={`text-2xl font-semibold mt-0.5 ${toneClass}`}>{value}</div>
-      {subtitle && <div className="text-[10.5px] text-gray-500 mt-0.5">{subtitle}</div>}
+      {subtitle && <div className="text-[10.5px] text-slate-500 mt-0.5">{subtitle}</div>}
     </div>
   )
 }

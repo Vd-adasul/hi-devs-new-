@@ -84,9 +84,9 @@ export function AdminOrgPage() {
   }
 
   return (
-    <div className="h-full flex bg-gray-50 text-gray-900">
+    <div className="h-full flex bg-obsidian-900 text-white">
       {/* Sidebar tabs */}
-      <aside className="w-52 border-r bg-white flex-shrink-0 p-4">
+      <aside className="w-52 border-r bg-obsidian-700 flex-shrink-0 p-4">
         <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">
           Organization
         </p>
@@ -98,7 +98,7 @@ export function AdminOrgPage() {
               className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${
                 activeTab === id
                   ? 'bg-blue-600 text-white font-medium'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-slate-400 hover:bg-obsidian-800'
               }`}
             >
               <Icon className="h-4 w-4" />
@@ -114,15 +114,15 @@ export function AdminOrgPage() {
         {activeTab === 'general' && (
           <div className="max-w-2xl space-y-6">
             <div>
-              <h1 className="text-xl font-semibold text-gray-900">Organization Settings</h1>
-              <p className="text-sm text-gray-500 mt-1">
+              <h1 className="text-xl font-semibold text-white">Organization Settings</h1>
+              <p className="text-sm text-slate-500 mt-1">
                 Manage your organization profile and branding.
               </p>
             </div>
 
-            <div className="bg-white rounded-xl border shadow-sm p-6 space-y-5">
+            <div className="bg-obsidian-700 rounded-xl border shadow-sm p-6 space-y-5">
               <div>
-                <Label className="text-xs text-gray-500 mb-1.5 block">Organization Name</Label>
+                <Label className="text-xs text-slate-500 mb-1.5 block">Organization Name</Label>
                 <Input
                   value={orgName}
                   onChange={e => setOrgName(e.target.value)}
@@ -131,10 +131,10 @@ export function AdminOrgPage() {
               </div>
 
               <div>
-                <Label className="text-xs text-gray-500 mb-1.5 block">Logo</Label>
+                <Label className="text-xs text-slate-500 mb-1.5 block">Logo</Label>
                 <div className="flex items-start gap-3">
                   {/* Preview — shows uploaded/URLed logo or a subtle placeholder */}
-                  <div className="w-16 h-16 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-center overflow-hidden shrink-0">
+                  <div className="w-16 h-16 rounded-lg border border-white/10 bg-obsidian-900 flex items-center justify-center overflow-hidden shrink-0">
                     {logoUrl ? (
                       <img
                         src={logoUrl}
@@ -164,7 +164,7 @@ export function AdminOrgPage() {
               </div>
 
               <div>
-                <Label className="text-xs text-gray-500 mb-1.5 block">Brand Color</Label>
+                <Label className="text-xs text-slate-500 mb-1.5 block">Brand Color</Label>
                 {/*
                   B.6.24 — native color picker + synced hex input. The
                   picker is the primary affordance (click the swatch to
@@ -184,7 +184,7 @@ export function AdminOrgPage() {
                       className="sr-only"
                     />
                     <span
-                      className="block w-10 h-10 rounded-lg border border-gray-200 shadow-sm"
+                      className="block w-10 h-10 rounded-lg border border-white/10 shadow-sm"
                       style={{ backgroundColor: isValidHex(brandColor) ? brandColor : '#3B82F6' }}
                       aria-hidden
                     />
@@ -203,8 +203,8 @@ export function AdminOrgPage() {
               </div>
 
               <div>
-                <Label className="text-xs text-gray-500 mb-1.5 block">Subscription Tier</Label>
-                <div className="px-3 py-2 bg-gray-50 rounded-lg border text-sm text-gray-700">
+                <Label className="text-xs text-slate-500 mb-1.5 block">Subscription Tier</Label>
+                <div className="px-3 py-2 bg-obsidian-900 rounded-lg border text-sm text-slate-300">
                   {org?.subscriptionTier ?? 'FREE'}
                 </div>
               </div>
@@ -254,10 +254,10 @@ export function AdminOrgPage() {
 function PlaceholderTab({ icon: Icon, title }: { icon: React.ElementType; title: string }) {
   return (
     <div className="max-w-2xl">
-      <h1 className="text-xl font-semibold text-gray-900 mb-6">{title}</h1>
-      <div className="bg-white rounded-xl border shadow-sm p-6 text-center py-16">
+      <h1 className="text-xl font-semibold text-white mb-6">{title}</h1>
+      <div className="bg-obsidian-700 rounded-xl border shadow-sm p-6 text-center py-16">
         <Icon className="h-8 w-8 text-gray-300 mx-auto mb-3" />
-        <p className="text-gray-500">Coming soon</p>
+        <p className="text-slate-500">Coming soon</p>
       </div>
     </div>
   )

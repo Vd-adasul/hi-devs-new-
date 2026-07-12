@@ -135,10 +135,10 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl flex flex-col max-h-[90vh]">
+      <div className="bg-obsidian-700 rounded-xl shadow-2xl w-full max-w-2xl flex flex-col max-h-[90vh]">
         <div className="flex items-center justify-between p-5 border-b flex-shrink-0">
           <h2 className="text-lg font-semibold">Upload Contracts</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <button onClick={onClose} className="text-gray-400 hover:text-slate-400">
             <X className="h-5 w-5" />
           </button>
         </div>
@@ -155,7 +155,7 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
                   <div
                     key={i}
                     className={`w-full flex items-center gap-2 px-2 py-2 rounded-lg text-left text-xs transition-colors ${
-                      i === activeIdx ? 'bg-blue-50 text-blue-700' : 'hover:bg-gray-50 text-gray-700'
+                      i === activeIdx ? 'bg-blue-50 text-blue-700' : 'hover:bg-obsidian-900 text-slate-300'
                     }`}
                   >
                     <span className="flex-shrink-0">
@@ -176,7 +176,7 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
                         type="button"
                         onClick={() => remove(i)}
                         aria-label={`Remove ${e.title || e.file.name}`}
-                        className="ml-auto text-gray-300 hover:text-gray-500 flex-shrink-0"
+                        className="ml-auto text-gray-300 hover:text-slate-500 flex-shrink-0"
                       >
                         <X className="h-3 w-3" />
                       </button>
@@ -185,7 +185,7 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
                 ))}
               </div>
               <div className="p-2 border-t">
-                <div {...getRootProps()} className="w-full flex items-center justify-center gap-1.5 py-2 rounded-lg border border-dashed border-gray-300 text-xs text-gray-500 hover:border-blue-400 hover:text-blue-600 cursor-pointer transition-colors">
+                <div {...getRootProps()} className="w-full flex items-center justify-center gap-1.5 py-2 rounded-lg border border-dashed border-white/14 text-xs text-slate-500 hover:border-blue-400 hover:text-blue-600 cursor-pointer transition-colors">
                   <input {...getInputProps()} />
                   <Plus className="h-3.5 w-3.5" /> Add files
                 </div>
@@ -200,13 +200,13 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
                 {...getRootProps()}
                 data-testid="upload-modal-dropzone"
                 className={`h-full min-h-48 border-2 border-dashed rounded-xl flex flex-col items-center justify-center gap-3 cursor-pointer transition-colors ${
-                  isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-blue-400 hover:bg-gray-50'
+                  isDragActive ? 'border-blue-500 bg-blue-50' : 'border-white/14 hover:border-blue-400 hover:bg-obsidian-900'
                 }`}
               >
                 <input {...getInputProps()} data-testid="upload-modal-input" />
                 <Upload className="h-10 w-10 text-gray-300" />
                 <div className="text-center">
-                  <p className="text-sm font-medium text-gray-600">
+                  <p className="text-sm font-medium text-slate-400">
                     {isDragActive ? 'Drop files here' : 'Drag & drop or click to browse'}
                   </p>
                   <p className="text-xs text-gray-400 mt-1">PDF, DOCX, or TXT · up to 50 MB each · multiple files supported</p>
@@ -214,7 +214,7 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
               </div>
             ) : activeEntry ? (
               <div className="space-y-4">
-                <div className="flex items-center gap-2 text-sm text-gray-500">
+                <div className="flex items-center gap-2 text-sm text-slate-500">
                   <FileText className="h-4 w-4 text-gray-400" />
                   <span className="truncate">{activeEntry.file.name}</span>
                   <span className="text-gray-300">·</span>
@@ -252,10 +252,10 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
                     value={activeEntry.type}
                     onChange={e => update(activeIdx, { type: e.target.value })}
                     disabled={activeEntry.status !== 'pending'}
-                    className="w-full mt-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-60"
+                    className="w-full mt-1 rounded-md border border-white/14 bg-obsidian-800 text-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-60"
                   >
                     {CONTRACT_TYPES.map(t => (
-                      <option key={t} value={t}>{t.replace('_', ' ')}</option>
+                      <option key={t} value={t} className="bg-obsidian-800 text-white">{t.replace('_', ' ')}</option>
                     ))}
                   </select>
                 </div>
@@ -272,10 +272,10 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
                 </div>
 
                 {/* ── Link to parent contract ─────────────────────────────── */}
-                <div className="border rounded-lg p-3 bg-gray-50 space-y-3">
+                <div className="border rounded-lg p-3 bg-obsidian-900 space-y-3">
                   <div className="flex items-center gap-2">
                     <Link className="h-3.5 w-3.5 text-gray-400" />
-                    <span className="text-xs font-medium text-gray-600">Link to existing contract</span>
+                    <span className="text-xs font-medium text-slate-400">Link to existing contract</span>
                     <span className="text-xs text-gray-400">(optional)</span>
                   </div>
 
@@ -287,7 +287,7 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
                       </span>
                       <button
                         onClick={() => update(activeIdx, { parentContractId: '', relationshipType: '' })}
-                        className="text-gray-400 hover:text-gray-600"
+                        className="text-gray-400 hover:text-slate-400"
                         disabled={activeEntry.status !== 'pending'}
                       >
                         <X className="h-3.5 w-3.5" />
@@ -303,17 +303,17 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
                         className="text-xs"
                       />
                       {showParentDropdown && (
-                        <div className="absolute z-10 top-full mt-1 left-0 right-0 bg-white border rounded-lg shadow-lg overflow-hidden">
+                        <div className="absolute z-10 top-full mt-1 left-0 right-0 bg-obsidian-700 border rounded-lg shadow-lg overflow-hidden">
                           {(parentSearchResults as any[]).map((c: any) => (
                             <button
                               key={c.id}
-                              className="w-full text-left px-3 py-2 text-xs hover:bg-gray-50 border-b last:border-0"
+                              className="w-full text-left px-3 py-2 text-xs hover:bg-obsidian-900 border-b last:border-0"
                               onClick={() => {
                                 update(activeIdx, { parentContractId: c.id, relationshipType: 'amendment' })
                                 setParentSearch('')
                               }}
                             >
-                              <span className="font-medium text-gray-800">{c.title}</span>
+                              <span className="font-medium text-white">{c.title}</span>
                               <span className="ml-2 text-gray-400">{c.type}</span>
                             </button>
                           ))}
@@ -328,11 +328,11 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
                         value={activeEntry.relationshipType}
                         onChange={e => update(activeIdx, { relationshipType: e.target.value })}
                         disabled={activeEntry.status !== 'pending'}
-                        className="w-full rounded-md border border-gray-300 px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-60"
+                        className="w-full rounded-md border border-white/14 bg-obsidian-800 text-white px-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-60"
                       >
-                        <option value="">Select relationship…</option>
+                        <option value="" className="bg-obsidian-800 text-white">Select relationship…</option>
                         {RELATIONSHIP_TYPES.map(r => (
-                          <option key={r.value} value={r.value}>{r.label}</option>
+                          <option key={r.value} value={r.value} className="bg-obsidian-800 text-white">{r.label}</option>
                         ))}
                       </select>
                     </div>
@@ -343,7 +343,7 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
           </div>
         </div>
 
-        <div className="flex items-center justify-between gap-3 px-5 py-4 border-t bg-gray-50 rounded-b-xl flex-shrink-0">
+        <div className="flex items-center justify-between gap-3 px-5 py-4 border-t bg-obsidian-900 rounded-b-xl flex-shrink-0">
           {allDone ? (
             <>
               <p className="text-xs text-emerald-600 font-medium flex items-center gap-1.5">
@@ -361,7 +361,7 @@ export function UploadModal({ onClose, onSuccess, defaultParentContractId = '' }
             </>
           ) : (
             <>
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-slate-500">
                 {entries.length === 0
                   ? 'No files selected'
                   : `${entries.length} file${entries.length > 1 ? 's' : ''} queued`}

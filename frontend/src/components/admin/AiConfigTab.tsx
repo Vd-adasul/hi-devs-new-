@@ -159,24 +159,24 @@ export function AiConfigTab() {
     <div className="max-w-3xl space-y-6">
       {/* ─── Page heading ─────────────────────────────────────────────── */}
       <div>
-        <h1 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+        <h1 className="text-xl font-semibold text-white flex items-center gap-2">
           <Cpu className="h-5 w-5 text-blue-600" />
           AI Config
         </h1>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-slate-500 mt-1">
           Control how this organization's AI calls are routed, billed, and audited.
         </p>
       </div>
 
       {/* ─── Section: Model routing ───────────────────────────────────── */}
-      <section className="bg-white rounded-xl border shadow-sm p-6 space-y-5">
+      <section className="bg-obsidian-700 rounded-xl border shadow-sm p-6 space-y-5">
         <header className="flex items-start justify-between gap-4">
           <div>
-            <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+            <h2 className="text-sm font-semibold text-white flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-blue-600" />
               Model routing
             </h2>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-slate-500 mt-1">
               Leave a tier on <span className="font-medium">Platform default</span> to let us pick the best available model,
               or pin it to a specific provider + model for reproducibility.
             </p>
@@ -186,21 +186,21 @@ export function AiConfigTab() {
         {isLoading && <div className="text-sm text-gray-400">Loading…</div>}
 
         {settings && (
-          <div className="divide-y divide-gray-100 -mx-2">
+          <div className="divide-y divide-white/5 -mx-2">
             {TIER_META.map(({ key, platformKey, label, description }) => {
               const candidates = settings.platformRouting[platformKey] ?? []
               const value = draft[key] ?? '' // '' = platform default
               return (
                 <div key={key} className="grid grid-cols-[minmax(0,140px)_1fr] gap-4 items-start px-2 py-3.5">
                   <div>
-                    <div className="text-sm font-medium text-gray-900">{label}</div>
+                    <div className="text-sm font-medium text-white">{label}</div>
                     <div className="text-[11px] text-gray-400 leading-snug mt-0.5">{description}</div>
                   </div>
                   <div className="space-y-1.5">
                     <select
                       value={value}
                       onChange={e => setDraft(d => ({ ...d, [key]: e.target.value || null }))}
-                      className="w-full text-sm rounded-lg border border-gray-200 bg-white px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors"
+                      className="w-full text-sm rounded-lg border border-white/10 bg-obsidian-700 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors"
                     >
                       <option value="">
                         Platform default{candidates[0] ? ` — ${candidates[0].provider}/${candidates[0].model}` : ''}
@@ -324,14 +324,14 @@ function AuditLogSection() {
     })
 
   return (
-    <section className="bg-white rounded-xl border shadow-sm p-6 space-y-4">
+    <section className="bg-obsidian-700 rounded-xl border shadow-sm p-6 space-y-4">
       <header className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+          <h2 className="text-sm font-semibold text-white flex items-center gap-2">
             <ScrollText className="h-4 w-4 text-blue-600" />
             Audit log
           </h2>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             Every change to model routing, BYOK keys, and the cost cap. Append-only —
             entries can never be edited or removed. Plaintext keys are never logged.
           </p>
@@ -340,7 +340,7 @@ function AuditLogSection() {
           <select
             value={actionFilter}
             onChange={e => setActionFilter(e.target.value)}
-            className="text-xs rounded-lg border border-gray-200 bg-white px-2.5 py-1.5 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+            className="text-xs rounded-lg border border-white/10 bg-obsidian-700 px-2.5 py-1.5 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
             data-testid="audit-filter"
           >
             {AI_ACTIONS.map(a => (
@@ -355,7 +355,7 @@ function AuditLogSection() {
       {data && data.events.length === 0 && (
         <div className="py-10 text-center border border-dashed rounded-lg">
           <ScrollText className="h-7 w-7 text-gray-300 mx-auto mb-2" />
-          <p className="text-sm text-gray-600 font-medium">
+          <p className="text-sm text-slate-400 font-medium">
             {actionFilter ? `No "${AI_ACTIONS.find(a => a.value === actionFilter)?.label.toLowerCase()}" events yet` : 'No changes yet'}
           </p>
           <p className="text-[11px] text-gray-400 mt-1">
@@ -365,7 +365,7 @@ function AuditLogSection() {
       )}
 
       {data && data.events.length > 0 && (
-        <div className="divide-y divide-gray-100 -mx-2">
+        <div className="divide-y divide-white/5 -mx-2">
           {data.events.map(ev => (
             <AuditRow key={ev.id} event={ev} isOpen={expanded.has(ev.id)} onToggle={() => toggle(ev.id)} />
           ))}
@@ -388,7 +388,7 @@ function AuditRow({ event, isOpen, onToggle }: { event: AuditEvent; isOpen: bool
   const summary = summarizeEvent(event)
 
   return (
-    <div className="px-2 py-2.5 hover:bg-gray-50 transition-colors">
+    <div className="px-2 py-2.5 hover:bg-obsidian-900 transition-colors">
       <button
         type="button"
         onClick={onToggle}
@@ -400,7 +400,7 @@ function AuditRow({ event, isOpen, onToggle }: { event: AuditEvent; isOpen: bool
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-baseline gap-2 flex-wrap">
-            <span className="text-[12px] text-gray-900" dangerouslySetInnerHTML={{ __html: sanitizeHtml(summary) }} />
+            <span className="text-[12px] text-white" dangerouslySetInnerHTML={{ __html: sanitizeHtml(summary) }} />
             <span className="text-[10px] text-gray-400 tabular-nums ml-auto flex-shrink-0" title={new Date(event.createdAt).toLocaleString()}>
               {formatRel(event.createdAt)}
             </span>
@@ -412,11 +412,11 @@ function AuditRow({ event, isOpen, onToggle }: { event: AuditEvent; isOpen: bool
         </div>
       </button>
       {isOpen && (
-        <div className="mt-2 ml-10 p-2.5 bg-gray-50 border border-gray-100 rounded-md">
+        <div className="mt-2 ml-10 p-2.5 bg-obsidian-900 border border-white/[0.06] rounded-md">
           <div className="text-[10px] font-medium uppercase tracking-wider text-gray-400 mb-1.5">
             Metadata
           </div>
-          <pre className="text-[10px] font-mono text-gray-700 whitespace-pre-wrap break-all leading-relaxed">
+          <pre className="text-[10px] font-mono text-slate-300 whitespace-pre-wrap break-all leading-relaxed">
 {JSON.stringify(event.metadata, null, 2)}
           </pre>
           {event.userAgent && (
@@ -436,8 +436,8 @@ function actionVisual(action: string): { icon: React.ElementType; color: string;
     case 'AI_KEY_CREATED':      return { icon: Plus,        color: 'text-emerald-600', bg: 'bg-emerald-50'}
     case 'AI_KEY_UPDATED':      return { icon: RotateCw,    color: 'text-amber-600',   bg: 'bg-amber-50'  }
     case 'AI_KEY_DELETED':      return { icon: Trash2,      color: 'text-red-600',     bg: 'bg-red-50'    }
-    case 'AI_KEY_TESTED':       return { icon: ShieldCheck, color: 'text-gray-600',    bg: 'bg-gray-100'  }
-    default:                    return { icon: Info,        color: 'text-gray-600',    bg: 'bg-gray-100'  }
+    case 'AI_KEY_TESTED':       return { icon: ShieldCheck, color: 'text-slate-400',    bg: 'bg-obsidian-800'  }
+    default:                    return { icon: Info,        color: 'text-slate-400',    bg: 'bg-obsidian-800'  }
   }
 }
 
@@ -607,13 +607,13 @@ function ApiKeysSection() {
   const rowByProvider = new Map((data?.data ?? []).map(r => [r.provider, r]))
 
   return (
-    <section className="bg-white rounded-xl border shadow-sm p-6 space-y-5">
+    <section className="bg-obsidian-700 rounded-xl border shadow-sm p-6 space-y-5">
       <header>
-        <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+        <h2 className="text-sm font-semibold text-white flex items-center gap-2">
           <KeyRound className="h-4 w-4 text-blue-600" />
           API keys (BYOK)
         </h2>
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-slate-500 mt-1">
           Use your own provider accounts. When a key is set for a provider, this org's calls to that provider
           bill your account and skip the platform cost cap.
         </p>
@@ -622,7 +622,7 @@ function ApiKeysSection() {
       {isLoading && <div className="text-sm text-gray-400">Loading…</div>}
 
       {data && (
-        <div className="divide-y divide-gray-100 -mx-2">
+        <div className="divide-y divide-white/5 -mx-2">
           {PROVIDER_META.map(({ id, label, placeholder, liveTest }) => {
             const row = rowByProvider.get(id)
             const isEditing = editing === id
@@ -631,12 +631,12 @@ function ApiKeysSection() {
               <div key={id} className="px-2 py-3.5">
                 <div className="flex items-center gap-3">
                   {/* Provider glyph — plain text for now; swap for brand marks later */}
-                  <div className="h-9 w-9 rounded-lg border bg-gray-50 flex items-center justify-center text-[10px] font-bold uppercase tracking-wider text-gray-500 flex-shrink-0">
+                  <div className="h-9 w-9 rounded-lg border bg-obsidian-900 flex items-center justify-center text-[10px] font-bold uppercase tracking-wider text-slate-500 flex-shrink-0">
                     {label.slice(0, 3)}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-gray-900">{label}</span>
+                      <span className="text-sm font-medium text-white">{label}</span>
                       <KeyStatusPill row={row ?? null} liveTest={liveTest} />
                     </div>
                     <div className="text-[11px] text-gray-400 mt-0.5">
@@ -704,7 +704,7 @@ function ApiKeysSection() {
                 {isEditing && (
                   <div className="mt-3 ml-12 p-3 bg-blue-50/50 border border-blue-100 rounded-lg space-y-2.5">
                     <div>
-                      <label className="text-[11px] text-gray-600 font-medium block mb-1.5">
+                      <label className="text-[11px] text-slate-400 font-medium block mb-1.5">
                         {row?.configured ? `New ${label} key (replaces current)` : `${label} API key`}
                       </label>
                       <Input
@@ -763,7 +763,7 @@ function ApiKeysSection() {
 function KeyStatusPill({ row, liveTest }: { row: KeyRow | null; liveTest: boolean }) {
   if (!row?.configured) {
     return (
-      <span className="text-[10px] font-medium uppercase tracking-wider text-gray-400 bg-gray-50 border border-gray-200 rounded px-1.5 py-0.5">
+      <span className="text-[10px] font-medium uppercase tracking-wider text-gray-400 bg-obsidian-900 border border-white/10 rounded px-1.5 py-0.5">
         Not set
       </span>
     )
@@ -888,13 +888,13 @@ function CostCapSection() {
   const trackColor = zone === 'green' ? 'bg-emerald-100' : zone === 'amber' ? 'bg-amber-100' : 'bg-red-100'
 
   return (
-    <section className="bg-white rounded-xl border shadow-sm p-6 space-y-5">
+    <section className="bg-obsidian-700 rounded-xl border shadow-sm p-6 space-y-5">
       <header>
-        <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+        <h2 className="text-sm font-semibold text-white flex items-center gap-2">
           <Gauge className="h-4 w-4 text-blue-600" />
           Cost cap
         </h2>
-        <p className="text-xs text-gray-500 mt-1">
+        <p className="text-xs text-slate-500 mt-1">
           Daily USD ceiling for platform-paid calls. BYOK calls (where you've pasted your own key above)
           bypass this cap — you bill your own provider directly.
         </p>
@@ -905,11 +905,11 @@ function CostCapSection() {
         <div className="space-y-2">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <div className="text-2xl font-semibold text-gray-900 tabular-nums">
+              <div className="text-2xl font-semibold text-white tabular-nums">
                 ${capStatus.usedUsd.toFixed(4)}
                 <span className="text-sm font-normal text-gray-400"> / ${capStatus.capUsd.toFixed(2)}</span>
               </div>
-              <div className="text-[11px] text-gray-500 mt-0.5">
+              <div className="text-[11px] text-slate-500 mt-0.5">
                 {(capStatus.pctUsed * 100).toFixed(1)}% of today's cap used
                 {capStatus.remainingUsd > 0 && <> · ${capStatus.remainingUsd.toFixed(4)} remaining</>}
               </div>
@@ -940,7 +940,7 @@ function CostCapSection() {
       {/* ─── Controls ────────────────────────────────────────────────── */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-2">
         <div>
-          <label className="text-[11px] text-gray-600 font-medium block mb-1.5">
+          <label className="text-[11px] text-slate-400 font-medium block mb-1.5">
             Daily cap (USD)
           </label>
           <div className="relative">
@@ -966,10 +966,10 @@ function CostCapSection() {
         </div>
 
         <div>
-          <label className="text-[11px] text-gray-600 font-medium block mb-1.5">
+          <label className="text-[11px] text-slate-400 font-medium block mb-1.5">
             Enforcement policy
           </label>
-          <div className="inline-flex rounded-lg border border-gray-200 p-0.5 bg-gray-50" role="radiogroup" aria-label="Enforcement policy">
+          <div className="inline-flex rounded-lg border border-white/10 p-0.5 bg-obsidian-900" role="radiogroup" aria-label="Enforcement policy">
             <PolicyChip
               value="block"
               current={policyDraft}
@@ -1036,14 +1036,14 @@ function UsageSection() {
   })
 
   return (
-    <section className="bg-white rounded-xl border shadow-sm p-6 space-y-5">
+    <section className="bg-obsidian-700 rounded-xl border shadow-sm p-6 space-y-5">
       <header className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+          <h2 className="text-sm font-semibold text-white flex items-center gap-2">
             <Activity className="h-4 w-4 text-blue-600" />
             Usage
           </h2>
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             Platform-paid AI spend over the last {data?.windowDays ?? 30} days.
             BYOK traffic isn't tracked here — that bills your provider account directly.
           </p>
@@ -1060,7 +1060,7 @@ function UsageSection() {
       {data && data.totals.callCount === 0 && (
         <div className="py-10 text-center border border-dashed rounded-lg">
           <Activity className="h-7 w-7 text-gray-300 mx-auto mb-2" />
-          <p className="text-sm text-gray-600 font-medium">No platform-paid calls yet</p>
+          <p className="text-sm text-slate-400 font-medium">No platform-paid calls yet</p>
           <p className="text-[11px] text-gray-400 mt-1 max-w-md mx-auto leading-relaxed">
             Usage fills in as the agents service records costs via <span className="font-mono">OrgUsageDaily</span>.
             BYOK calls (pasted above) do not appear here.
@@ -1109,9 +1109,9 @@ function UsageSection() {
         </>
       )}
 
-      <div className="flex items-start gap-2.5 p-3 bg-gray-50 border border-gray-100 rounded-lg">
-        <Info className="h-4 w-4 text-gray-500 flex-shrink-0 mt-0.5" />
-        <div className="text-[11px] text-gray-500 leading-relaxed">
+      <div className="flex items-start gap-2.5 p-3 bg-obsidian-900 border border-white/[0.06] rounded-lg">
+        <Info className="h-4 w-4 text-slate-500 flex-shrink-0 mt-0.5" />
+        <div className="text-[11px] text-slate-500 leading-relaxed">
           Totals reflect completed calls only. For per-request prompts, tool invocations, and latency
           traces, open Langfuse — every call the agents service makes is recorded there with a link
           back to the contract or thread that triggered it.
@@ -1125,7 +1125,7 @@ function UsageTile({ label, value, sub }: { label: string; value: string; sub?: 
   return (
     <div className="border rounded-lg p-3">
       <div className="text-[10px] font-medium uppercase tracking-wider text-gray-400">{label}</div>
-      <div className="text-xl font-semibold text-gray-900 mt-0.5 tabular-nums">{value}</div>
+      <div className="text-xl font-semibold text-white mt-0.5 tabular-nums">{value}</div>
       {sub && <div className="text-[11px] text-gray-400 mt-0.5">{sub}</div>}
     </div>
   )
@@ -1140,12 +1140,12 @@ function UsageBarCard({ title, rows }: { title: string; rows: Array<{ label: str
       {rows.map(r => (
         <div key={r.label} className="space-y-1">
           <div className="flex items-baseline justify-between text-[11px] gap-2">
-            <span className="text-gray-700 font-medium truncate">{r.label}</span>
-            <span className="text-gray-500 tabular-nums flex-shrink-0">
+            <span className="text-slate-300 font-medium truncate">{r.label}</span>
+            <span className="text-slate-500 tabular-nums flex-shrink-0">
               ${r.cost.toFixed(2)} · {r.calls.toLocaleString()}
             </span>
           </div>
-          <div className="h-1.5 rounded-full bg-gray-100 overflow-hidden">
+          <div className="h-1.5 rounded-full bg-obsidian-800 overflow-hidden">
             <div
               className="h-full bg-blue-500"
               style={{ width: `${max > 0 ? (r.cost / max) * 100 : 0}%` }}
@@ -1193,7 +1193,7 @@ function PolicyChip({
           ? (value === 'block'
               ? 'bg-red-600 text-white shadow-sm'
               : 'bg-amber-500 text-white shadow-sm')
-          : 'text-gray-600 hover:bg-white')
+          : 'text-slate-400 hover:bg-obsidian-700')
       }
     >
       {label}

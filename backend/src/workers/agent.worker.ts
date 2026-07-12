@@ -50,9 +50,9 @@ async function handleDetectBinder(data: DetectBinderJob): Promise<void> {
     return
   }
 
-  const googleKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY
-  if (!googleKey) {
-    throw new Error('Gemini API key is not configured')
+  const featherlessKey = process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY
+  if (!featherlessKey) {
+    throw new Error('Featherless API key is not configured')
   }
 
   const prompt = `
@@ -74,21 +74,27 @@ async function handleDetectBinder(data: DetectBinderJob): Promise<void> {
   `
 
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${googleKey}`,
+    `https://api.featherless.ai/v1/chat/completions`,
     {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${featherlessKey}`
+      },
+      body: JSON.stringify({
+        model: 'Qwen/Qwen2.5-7B-Instruct',
+        messages: [{ role: 'user', content: prompt }]
+      })
     }
   )
 
   if (!res.ok) {
     const text = await res.text()
-    throw new Error(`Gemini detect-binder returned ${res.status}: ${text}`)
+    throw new Error(`Featherless detect-binder returned ${res.status}: ${text}`)
   }
 
   const dataRes = await res.json() as any
-  let text = dataRes?.candidates?.[0]?.content?.parts?.[0]?.text || ''
+  let text = dataRes?.choices?.[0]?.message?.content || ''
   text = text.replace(/```json/g, '').replace(/```/g, '').trim()
   
   const result = JSON.parse(text) as {
@@ -192,9 +198,9 @@ async function handleClassifyDocument(data: ClassifyDocumentJob): Promise<void> 
     return
   }
 
-  const googleKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY
-  if (!googleKey) {
-    throw new Error('Gemini API key is not configured')
+  const featherlessKey = process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY
+  if (!featherlessKey) {
+    throw new Error('Featherless API key is not configured')
   }
 
   const prompt = `
@@ -212,21 +218,27 @@ async function handleClassifyDocument(data: ClassifyDocumentJob): Promise<void> 
   `
 
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${googleKey}`,
+    `https://api.featherless.ai/v1/chat/completions`,
     {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${featherlessKey}`
+      },
+      body: JSON.stringify({
+        model: 'Qwen/Qwen2.5-7B-Instruct',
+        messages: [{ role: 'user', content: prompt }]
+      })
     }
   )
 
   if (!res.ok) {
     const text = await res.text()
-    throw new Error(`Gemini classify returned ${res.status}: ${text}`)
+    throw new Error(`Featherless classify returned ${res.status}: ${text}`)
   }
 
   const dataRes = await res.json() as any
-  let text = dataRes?.candidates?.[0]?.content?.parts?.[0]?.text || ''
+  let text = dataRes?.choices?.[0]?.message?.content || ''
   text = text.replace(/```json/g, '').replace(/```/g, '').trim()
   
   const result = JSON.parse(text) as { contractType: string; confidence: number; reason: string }
@@ -310,9 +322,9 @@ async function handleClassifyRequest(data: ClassifyRequestJob): Promise<void> {
   })
   if (!request) throw new Error(`Request not found: ${requestId}`)
 
-  const googleKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY
-  if (!googleKey) {
-    throw new Error('Gemini API key is not configured')
+  const featherlessKey = process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY
+  if (!featherlessKey) {
+    throw new Error('Featherless API key is not configured')
   }
 
   const prompt = `
@@ -333,21 +345,27 @@ async function handleClassifyRequest(data: ClassifyRequestJob): Promise<void> {
   `
 
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${googleKey}`,
+    `https://api.featherless.ai/v1/chat/completions`,
     {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${featherlessKey}`
+      },
+      body: JSON.stringify({
+        model: 'Qwen/Qwen2.5-7B-Instruct',
+        messages: [{ role: 'user', content: prompt }]
+      })
     }
   )
 
   if (!res.ok) {
     const text = await res.text()
-    throw new Error(`Gemini classify-request returned ${res.status}: ${text}`)
+    throw new Error(`Featherless classify-request returned ${res.status}: ${text}`)
   }
 
   const dataRes = await res.json() as any
-  let text = dataRes?.candidates?.[0]?.content?.parts?.[0]?.text || ''
+  let text = dataRes?.choices?.[0]?.message?.content || ''
   text = text.replace(/```json/g, '').replace(/```/g, '').trim()
   
   const result = JSON.parse(text) as {
@@ -389,6 +407,7 @@ async function handleRedlineAnalysis(data: RedlineAnalysisJob): Promise<void> {
     const run = await redlineWorkflow.createRun()
     await run.start({
       inputData: {
+        contractId,
         diffHtml: v2?.htmlContent || '',
         contractType: contractType || 'general commercial',
         playbookPositions: []
@@ -421,7 +440,8 @@ async function handleApprovalSummary(data: ApprovalSummaryJob): Promise<void> {
     await run.start({
       inputData: {
         documentId: contractId,
-        playbookId: 'default'
+        playbookId: 'default',
+        instanceId,
       }
     })
   } catch (err) {
@@ -448,9 +468,9 @@ async function handleDraftContract(data: DraftContractJobData): Promise<void> {
   const { contractId, orgId, userId, requestTitle, requestDescription, contractType, counterpartyName, estimatedValue } = data
   console.info('[agent-worker] draft-contract start contractId=%s type=%s', contractId, contractType)
 
-  const googleKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY
-  if (!googleKey) {
-    throw new Error('Gemini API key is not configured')
+  const featherlessKey = process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY
+  if (!featherlessKey) {
+    throw new Error('Featherless API key is not configured')
   }
 
   const prompt = `
@@ -463,21 +483,27 @@ async function handleDraftContract(data: DraftContractJobData): Promise<void> {
   `
 
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${googleKey}`,
+    `https://api.featherless.ai/v1/chat/completions`,
     {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${featherlessKey}`
+      },
+      body: JSON.stringify({
+        model: 'Qwen/Qwen2.5-7B-Instruct',
+        messages: [{ role: 'user', content: prompt }]
+      })
     }
   )
 
   if (!res.ok) {
     const text = await res.text()
-    throw new Error(`Gemini draft-contract returned ${res.status}: ${text}`)
+    throw new Error(`Featherless draft-contract returned ${res.status}: ${text}`)
   }
 
   const dataRes = await res.json() as any
-  let html = dataRes?.candidates?.[0]?.content?.parts?.[0]?.text || ''
+  let html = dataRes?.choices?.[0]?.message?.content || ''
   html = html.replace(/```html/g, '').replace(/```/g, '').trim()
 
   if (!html) {

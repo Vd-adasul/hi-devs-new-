@@ -150,15 +150,15 @@ export function NegotiationStatusStrip({
     <div
       role="region"
       aria-label="Negotiation status"
-      className="border-b border-gray-200 bg-gray-50/70"
+      className="border-b border-white/10 bg-obsidian-900/70"
     >
-      <div className="px-6 py-2 flex items-center gap-3 text-xs text-gray-600 flex-wrap">
+      <div className="px-6 py-2 flex items-center gap-3 text-xs text-slate-400 flex-wrap">
         <div className="flex items-center gap-1.5 shrink-0">
           <ArrowRight className="h-3 w-3 text-gray-400" />
           <span className="text-gray-400">You</span>
           <ArrowRight className="h-3 w-3 text-gray-400" />
           <span className={cn(
-            'font-medium text-gray-800',
+            'font-medium text-white',
             status === 'UNDER_NEGOTIATION' && 'text-amber-700',
             status === 'PENDING_APPROVAL' && 'text-blue-700',
           )}>
@@ -167,14 +167,14 @@ export function NegotiationStatusStrip({
         </div>
 
         {waitDays != null && (
-          <div className="flex items-center gap-1 text-gray-500 shrink-0" title={new Date(waitingSince!).toLocaleString()}>
+          <div className="flex items-center gap-1 text-slate-500 shrink-0" title={new Date(waitingSince!).toLocaleString()}>
             <Hourglass className="h-3 w-3" />
             Waiting {waitDays === 0 ? 'today' : `${waitDays}d`}
           </div>
         )}
 
         {last && (
-          <div className="flex items-center gap-1 text-gray-500 truncate">
+          <div className="flex items-center gap-1 text-slate-500 truncate">
             <span className="text-gray-400 shrink-0">Last:</span>
             <span className="shrink-0">{last.icon}</span>
             <span className="truncate">{last.label}</span>
@@ -182,9 +182,9 @@ export function NegotiationStatusStrip({
         )}
 
         {next && (
-          <div className="flex items-center gap-1 text-gray-500 shrink-0">
+          <div className="flex items-center gap-1 text-slate-500 shrink-0">
             <span className="text-gray-400">Next:</span>
-            <span className="text-gray-700">{next}</span>
+            <span className="text-slate-300">{next}</span>
           </div>
         )}
 

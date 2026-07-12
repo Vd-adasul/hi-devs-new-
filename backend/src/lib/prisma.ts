@@ -24,9 +24,16 @@ const log = pino({ level: process.env.LOG_LEVEL ?? 'info', name: 'prisma' })
 // not already specified. This is the documented way per Prisma docs.
 function withPoolLimit(url: string | undefined): string | undefined {
   if (!url) return url
-  if (/[?&]connection_limit=/.test(url)) return url
-  const sep = url.includes('?') ? '&' : '?'
-  return `${url}${sep}connection_limit=${POOL_LIMIT}`
+  let res = url
+  if (!/[?&]connection_limit=/.test(res)) {
+    const sep = res.includes('?') ? '&' : '?'
+    res = `${res}${sep}connection_limit=${POOL_LIMIT}`
+  }
+  if (!/[?&]pool_timeout=/.test(res)) {
+    const sep = res.includes('?') ? '&' : '?'
+    res = `${res}${sep}pool_timeout=15`
+  }
+  return res
 }
 
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient }

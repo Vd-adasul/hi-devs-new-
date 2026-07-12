@@ -163,10 +163,10 @@ export function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => 
       onClick={onClose}
     >
       <div
-        className="w-full max-w-xl mx-4 bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200"
+        className="w-full max-w-xl mx-4 bg-obsidian-700 rounded-xl shadow-2xl overflow-hidden border border-white/10"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-100">
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06]">
           <Search className="h-4 w-4 text-gray-400 shrink-0" />
           <input
             ref={inputRef}
@@ -176,12 +176,12 @@ export function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => 
             onKeyDown={onKeyDown}
             placeholder="Search contracts, counterparties, templates, clauses, requests…"
             data-testid="global-search-input"
-            className="flex-1 outline-none text-sm text-gray-900 placeholder-gray-400 bg-transparent"
+            className="flex-1 outline-none text-sm text-white placeholder-gray-400 bg-transparent"
           />
           <button
             onClick={onClose}
             aria-label="Close"
-            className="p-1 rounded hover:bg-gray-100 text-gray-400"
+            className="p-1 rounded hover:bg-obsidian-800 text-gray-400"
           >
             <X className="h-4 w-4" />
           </button>
@@ -194,7 +194,7 @@ export function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => 
             </p>
           ) : hits.length === 0 ? (
             <p className="px-4 py-6 text-sm text-gray-400">
-              No matches for <span className="font-medium text-gray-600">"{debounced}"</span>.
+              No matches for <span className="font-medium text-slate-400">"{debounced}"</span>.
             </p>
           ) : (
             (Object.keys(KIND_META) as Hit['kind'][]).map((kind) => {
@@ -217,12 +217,12 @@ export function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => 
                         data-testid={`global-search-hit-${h.kind}`}
                         className={cn(
                           'w-full flex items-center gap-3 px-4 py-2 text-left text-sm',
-                          isActive ? 'bg-gray-50' : 'hover:bg-gray-50',
+                          isActive ? 'bg-obsidian-900' : 'hover:bg-obsidian-900',
                         )}
                       >
                         <KindIcon className="h-4 w-4 text-gray-400 shrink-0" />
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm text-gray-800 truncate">{h.title}</p>
+                          <p className="text-sm text-white truncate">{h.title}</p>
                           {h.subtitle && (
                             <p className="text-[11px] text-gray-400 truncate">{h.subtitle}</p>
                           )}
@@ -236,7 +236,7 @@ export function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => 
           )}
         </div>
 
-        <div className="flex items-center gap-4 px-4 py-2 border-t border-gray-100 text-[11px] text-gray-400 bg-gray-50">
+        <div className="flex items-center gap-4 px-4 py-2 border-t border-white/[0.06] text-[11px] text-gray-400 bg-obsidian-900">
           <span className="flex items-center gap-1"><CornerDownLeft className="h-3 w-3" /> Go</span>
           <span className="flex items-center gap-1"><ArrowUp className="h-3 w-3" /><ArrowDown className="h-3 w-3" /> Navigate</span>
           <span>Esc to close</span>

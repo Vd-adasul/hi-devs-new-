@@ -115,7 +115,7 @@ export function ActionPreview({ action, onApply, onCancel, onUndo }: ActionPrevi
       : isUndone
         ? { border: 'border-amber-200', bg: 'bg-amber-50', text: 'text-amber-800', icon: Undo2 }
         : isCancelled
-          ? { border: 'border-gray-200', bg: 'bg-gray-50', text: 'text-gray-600', icon: X }
+          ? { border: 'border-white/10', bg: 'bg-obsidian-900', text: 'text-slate-400', icon: X }
           : { border: 'border-red-200', bg: 'bg-red-50', text: 'text-red-800', icon: AlertTriangle }
     const Icon = palette.icon
     const label = isApplied ? 'Applied' : isUndone ? 'Undone' : isCancelled ? 'Cancelled' : 'Failed'
@@ -168,24 +168,24 @@ export function ActionPreview({ action, onApply, onCancel, onUndo }: ActionPrevi
 
       <div className="px-3 py-2.5 space-y-2">
         {/* Plain-English summary — always first, always visible */}
-        <div className="text-gray-900 leading-relaxed">{action.summary}</div>
+        <div className="text-white leading-relaxed">{action.summary}</div>
 
         {/* Target + diff */}
         {action.target && (
-          <div className="text-[10.5px] text-gray-600">
+          <div className="text-[10.5px] text-slate-400">
             <span className="font-medium">Target:</span>{' '}
             <span className="font-mono">{action.target}</span>
           </div>
         )}
 
         {action.diff && action.diff.length > 0 && (
-          <div className="rounded border border-amber-100 bg-white/70 divide-y divide-amber-100">
+          <div className="rounded border border-amber-100 bg-obsidian-700/70 divide-y divide-amber-100">
             <div className="px-2 py-1 text-[9.5px] font-medium uppercase tracking-wider text-gray-400">
               Changes
             </div>
             {action.diff.map(d => (
               <div key={d.field} className="px-2 py-1.5 text-[11px]">
-                <div className="text-gray-600 font-medium">{d.field}</div>
+                <div className="text-slate-400 font-medium">{d.field}</div>
                 <div className="font-mono text-[10.5px] flex items-baseline gap-1.5">
                   <span className="line-through text-red-600 bg-red-50 px-1 rounded">
                     {d.before === null || d.before === '' ? '∅' : String(d.before)}
@@ -210,7 +210,7 @@ export function ActionPreview({ action, onApply, onCancel, onUndo }: ActionPrevi
               value={draftJson}
               onChange={e => { setDraftJson(e.target.value); setJsonError(null) }}
               data-testid="action-preview-args"
-              className="w-full text-[10.5px] font-mono rounded-md border border-amber-200 bg-white p-2 resize-y min-h-[6em] focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+              className="w-full text-[10.5px] font-mono rounded-md border border-amber-200 bg-obsidian-700 p-2 resize-y min-h-[6em] focus:outline-none focus:ring-2 focus:ring-amber-500/20"
             />
             {jsonError && (
               <div className="text-[10.5px] text-red-600 mt-1">Invalid JSON: {jsonError}</div>
@@ -225,7 +225,7 @@ export function ActionPreview({ action, onApply, onCancel, onUndo }: ActionPrevi
               variant="ghost" size="sm"
               onClick={onCancel}
               data-testid="action-preview-cancel"
-              className="h-7 text-[11px] gap-1 text-gray-600 hover:text-red-700"
+              className="h-7 text-[11px] gap-1 text-slate-400 hover:text-red-700"
             >
               <X className="h-3 w-3" />
               Cancel

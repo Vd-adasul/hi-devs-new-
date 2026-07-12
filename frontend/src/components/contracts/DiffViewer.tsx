@@ -35,11 +35,11 @@ export function DiffViewer({ diffHtml, stats, v1Label = 'Original', v2Label = 'C
             {stats.deletions} deletion{stats.deletions !== 1 ? 's' : ''}
           </span>
         </div>
-        <div className="flex items-center gap-1 p-0.5 bg-gray-100 rounded-lg">
+        <div className="flex items-center gap-1 p-0.5 bg-obsidian-800 rounded-lg">
           <button
             onClick={() => setMode('unified')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
-              mode === 'unified' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'
+              mode === 'unified' ? 'bg-obsidian-700 shadow-sm text-white' : 'text-slate-500 hover:text-slate-300'
             }`}
           >
             <AlignLeft className="h-3.5 w-3.5" /> Unified
@@ -47,7 +47,7 @@ export function DiffViewer({ diffHtml, stats, v1Label = 'Original', v2Label = 'C
           <button
             onClick={() => setMode('side-by-side')}
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
-              mode === 'side-by-side' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'
+              mode === 'side-by-side' ? 'bg-obsidian-700 shadow-sm text-white' : 'text-slate-500 hover:text-slate-300'
             }`}
           >
             <ArrowLeftRight className="h-3.5 w-3.5" /> Side by side
@@ -56,7 +56,7 @@ export function DiffViewer({ diffHtml, stats, v1Label = 'Original', v2Label = 'C
       </div>
 
       {mode === 'unified' ? (
-        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+        <div className="bg-obsidian-700 border border-white/10 rounded-xl overflow-hidden">
           <div
             className="diff-unified prose prose-sm max-w-none p-6 overflow-auto max-h-[70vh]"
             dangerouslySetInnerHTML={{ __html: sanitizeHtml(diffHtml) }}
@@ -64,8 +64,8 @@ export function DiffViewer({ diffHtml, stats, v1Label = 'Original', v2Label = 'C
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-3">
-          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-            <div className="px-4 py-2 border-b bg-gray-50 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+          <div className="bg-obsidian-700 border border-white/10 rounded-xl overflow-hidden">
+            <div className="px-4 py-2 border-b bg-obsidian-900 text-xs font-semibold text-slate-500 uppercase tracking-wide">
               {v1Label}
             </div>
             <div
@@ -73,8 +73,8 @@ export function DiffViewer({ diffHtml, stats, v1Label = 'Original', v2Label = 'C
               dangerouslySetInnerHTML={{ __html: sanitizeHtml(diffHtml) }}
             />
           </div>
-          <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-            <div className="px-4 py-2 border-b bg-gray-50 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+          <div className="bg-obsidian-700 border border-white/10 rounded-xl overflow-hidden">
+            <div className="px-4 py-2 border-b bg-obsidian-900 text-xs font-semibold text-slate-500 uppercase tracking-wide">
               {v2Label}
             </div>
             <div

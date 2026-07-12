@@ -98,7 +98,7 @@ export function NewRequestModal({ onClose }: Props) {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
       data-testid="new-request-modal"
     >
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 flex flex-col max-h-[90vh]">
+      <div className="bg-obsidian-700 rounded-2xl shadow-2xl w-full max-w-lg mx-4 flex flex-col max-h-[90vh]">
         {/* Success banner */}
         {submitted && (
           <div className="px-6 py-4 bg-emerald-50 border-b border-emerald-100 flex items-center gap-2 text-emerald-700 text-sm font-medium">
@@ -107,13 +107,13 @@ export function NewRequestModal({ onClose }: Props) {
           </div>
         )}
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
           <div>
-            <h2 className="text-base font-semibold text-gray-900">New Contract Request</h2>
+            <h2 className="text-base font-semibold text-white">New Contract Request</h2>
             <p className="text-xs text-gray-400 mt-0.5">AI will classify and extract key terms automatically</p>
           </div>
-          <button onClick={onClose} className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors">
-            <X className="h-4 w-4 text-gray-500" />
+          <button onClick={onClose} className="p-1.5 hover:bg-obsidian-800 rounded-lg transition-colors">
+            <X className="h-4 w-4 text-slate-500" />
           </button>
         </div>
 
@@ -121,7 +121,7 @@ export function NewRequestModal({ onClose }: Props) {
         <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4">
           {/* Title */}
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1.5">
+            <label className="block text-xs font-medium text-slate-300 mb-1.5">
               Request title <span className="text-red-400">*</span>
             </label>
             <Input
@@ -136,11 +136,11 @@ export function NewRequestModal({ onClose }: Props) {
           {/* Type + Priority row */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">Contract type</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Contract type</label>
               <select
                 value={form.type}
                 onChange={set('type')}
-                className="w-full h-9 text-sm border border-gray-200 rounded-lg px-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+                className="w-full h-9 text-sm border border-white/10 rounded-lg px-2.5 bg-obsidian-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
               >
                 {CONTRACT_TYPES.map(t => (
                   <option key={t.value} value={t.value}>{t.label}</option>
@@ -148,11 +148,11 @@ export function NewRequestModal({ onClose }: Props) {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">Priority</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Priority</label>
               <select
                 value={form.priority}
                 onChange={set('priority')}
-                className="w-full h-9 text-sm border border-gray-200 rounded-lg px-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+                className="w-full h-9 text-sm border border-white/10 rounded-lg px-2.5 bg-obsidian-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
               >
                 {PRIORITIES.map(p => (
                   <option key={p.value} value={p.value}>{p.label}</option>
@@ -166,7 +166,7 @@ export function NewRequestModal({ onClose }: Props) {
               existing rows as the user types. */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">Counterparty</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Counterparty</label>
               <CounterpartyPicker
                 value={counterparty}
                 onChange={(sel) => {
@@ -178,7 +178,7 @@ export function NewRequestModal({ onClose }: Props) {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">Estimated value (USD)</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Estimated value (USD)</label>
               <Input
                 type="number"
                 value={form.estimatedValue}
@@ -192,7 +192,7 @@ export function NewRequestModal({ onClose }: Props) {
 
           {/* Description */}
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1.5">
+            <label className="block text-xs font-medium text-slate-300 mb-1.5">
               Description <span className="text-red-400">*</span>
             </label>
             <textarea
@@ -200,14 +200,14 @@ export function NewRequestModal({ onClose }: Props) {
               onChange={set('description')}
               placeholder="Describe the purpose, key terms, deadlines, or any special requirements…"
               rows={4}
-              className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+              className="w-full text-sm border border-white/10 rounded-lg px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
               data-testid="request-description"
             />
           </div>
 
           {/* Optional document attachment */}
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1.5">
+            <label className="block text-xs font-medium text-slate-300 mb-1.5">
               Attach document <span className="text-gray-400">(optional — PDF or DOCX)</span>
             </label>
             {attachedFile ? (
@@ -228,7 +228,7 @@ export function NewRequestModal({ onClose }: Props) {
               <button
                 type="button"
                 onClick={() => fileRef.current?.click()}
-                className="w-full flex items-center gap-2 px-3 py-2 border border-dashed border-gray-300 rounded-lg text-sm text-gray-400 hover:border-blue-400 hover:text-blue-500 transition-colors"
+                className="w-full flex items-center gap-2 px-3 py-2 border border-dashed border-white/14 rounded-lg text-sm text-gray-400 hover:border-blue-400 hover:text-blue-500 transition-colors"
               >
                 <Paperclip className="h-4 w-4" />
                 Click to attach a draft contract for AI analysis
@@ -253,7 +253,7 @@ export function NewRequestModal({ onClose }: Props) {
         </div>
 
         {/* Footer */}
-        <div className="flex justify-end gap-2 px-6 py-4 border-t border-gray-100">
+        <div className="flex justify-end gap-2 px-6 py-4 border-t border-white/[0.06]">
           <Button variant="ghost" size="sm" onClick={onClose} disabled={create.isPending}>
             Cancel
           </Button>

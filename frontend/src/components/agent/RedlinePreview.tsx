@@ -136,7 +136,7 @@ export function RedlinePreview({
               onClick={() => setActiveIdx(i)}
               data-testid={`redline-preview-tab-${v.aggression}`}
               className={`text-[11px] rounded-md border px-2 py-1 font-medium transition-colors ${
-                active ? tone.color + ' ring-2 ring-purple-400/20' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+                active ? tone.color + ' ring-2 ring-purple-400/20' : 'bg-obsidian-700 border-white/10 text-slate-400 hover:bg-obsidian-900'
               }`}
               title={tone.hint}
             >
@@ -148,7 +148,7 @@ export function RedlinePreview({
 
       <div className="px-3 pb-3 space-y-2">
         {/* Rationale */}
-        <div className="text-[11px] text-gray-800 leading-relaxed">
+        <div className="text-[11px] text-white leading-relaxed">
           <span className="text-[9.5px] font-medium uppercase tracking-wider text-gray-400 block mb-0.5">
             Rationale
           </span>
@@ -157,8 +157,8 @@ export function RedlinePreview({
 
         {/* Changes */}
         {active?.changes && active.changes.length > 0 && (
-          <div className="rounded-md border border-purple-100 bg-white/80 divide-y divide-purple-100">
-            <div className="px-2 py-1 text-[9.5px] font-medium uppercase tracking-wider text-gray-500">
+          <div className="rounded-md border border-purple-100 bg-obsidian-700/80 divide-y divide-purple-100">
+            <div className="px-2 py-1 text-[9.5px] font-medium uppercase tracking-wider text-slate-500">
               Changes ({active.changes.length})
             </div>
             {active.changes.map((ch, i) => (
@@ -178,7 +178,7 @@ export function RedlinePreview({
                   </span>
                 </div>
                 {ch.reason && (
-                  <div className="text-[10px] text-gray-500 italic">
+                  <div className="text-[10px] text-slate-500 italic">
                     <ChevronRight className="inline h-2.5 w-2.5" /> {ch.reason}
                   </div>
                 )}
@@ -192,7 +192,7 @@ export function RedlinePreview({
 
         {/* Apply button */}
         <div className="flex items-center justify-between gap-2 pt-1">
-          <div className="text-[10.5px] text-gray-500">
+          <div className="text-[10.5px] text-slate-500">
             Applying creates ContractVersion (n+1). Reversible via Undo.
           </div>
           <Button
@@ -214,12 +214,12 @@ function ProposedText({ text }: { text: string }) {
   const [open, setOpen] = useState(false)
   if (!text) return null
   return (
-    <div className="rounded-md border border-gray-200 bg-white">
+    <div className="rounded-md border border-white/10 bg-obsidian-700">
       <button
         type="button"
         onClick={() => setOpen(v => !v)}
         data-testid="redline-preview-proposed-toggle"
-        className="w-full px-2 py-1 text-left text-[10.5px] font-medium text-gray-600 hover:bg-gray-50 flex items-center gap-1"
+        className="w-full px-2 py-1 text-left text-[10.5px] font-medium text-slate-400 hover:bg-obsidian-900 flex items-center gap-1"
       >
         <ChevronRight className={`h-3 w-3 transition-transform ${open ? 'rotate-90' : ''}`} />
         Full proposed text ({text.length} chars)
@@ -227,7 +227,7 @@ function ProposedText({ text }: { text: string }) {
       {open && (
         <pre
           data-testid="redline-preview-proposed-text"
-          className="px-2 py-1.5 text-[10.5px] font-mono whitespace-pre-wrap break-words border-t border-gray-100 max-h-60 overflow-y-auto text-gray-800"
+          className="px-2 py-1.5 text-[10.5px] font-mono whitespace-pre-wrap break-words border-t border-white/[0.06] max-h-60 overflow-y-auto text-white"
         >
           {text}
         </pre>

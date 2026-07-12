@@ -72,18 +72,18 @@ export function BulkImportDialog({ onClose, onSuccess }: { onClose: () => void; 
       onClick={onClose}
       data-testid="bulk-import-dialog"
     >
-      <div className="bg-white rounded-xl max-w-2xl w-full shadow-2xl my-8" onClick={(e) => e.stopPropagation()}>
+      <div className="bg-obsidian-700 rounded-xl max-w-2xl w-full shadow-2xl my-8" onClick={(e) => e.stopPropagation()}>
         <div className="px-6 py-4 border-b flex items-start justify-between">
           <div>
             <h2 className="text-lg font-semibold flex items-center gap-2">
               <Upload className="h-5 w-5 text-emerald-600" />
               Bulk import contracts
             </h2>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-slate-500 mt-1">
               Upload a CSV with one row per contract. Up to 1,000 rows per file.
             </p>
           </div>
-          <button onClick={onClose} className="p-1 rounded hover:bg-gray-100 text-gray-400">
+          <button onClick={onClose} className="p-1 rounded hover:bg-obsidian-800 text-gray-400">
             <X className="h-4 w-4" />
           </button>
         </div>
@@ -102,22 +102,22 @@ export function BulkImportDialog({ onClose, onSuccess }: { onClose: () => void; 
               className={`rounded-xl border-2 border-dashed p-8 text-center transition-colors ${
                 dragActive
                   ? 'border-emerald-400 bg-emerald-50'
-                  : 'border-gray-300 hover:border-emerald-300 hover:bg-emerald-50/30'
+                  : 'border-white/14 hover:border-emerald-300 hover:bg-emerald-50/30'
               }`}
             >
               {file ? (
                 <div className="flex items-center justify-center gap-2">
                   <FileText className="h-5 w-5 text-emerald-600" />
-                  <span className="font-medium text-gray-900">{file.name}</span>
-                  <span className="text-xs text-gray-500">({Math.round(file.size / 1024)} KB)</span>
+                  <span className="font-medium text-white">{file.name}</span>
+                  <span className="text-xs text-slate-500">({Math.round(file.size / 1024)} KB)</span>
                   <button onClick={() => setFile(null)} className="ml-2 text-xs text-red-600">remove</button>
                 </div>
               ) : (
                 <>
                   <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                  <p className="text-sm font-medium text-gray-900 mb-1">Drop a CSV here or click to browse</p>
-                  <p className="text-xs text-gray-500 mb-3">
-                    Required column: <code className="bg-gray-100 px-1 rounded">title</code>
+                  <p className="text-sm font-medium text-white mb-1">Drop a CSV here or click to browse</p>
+                  <p className="text-xs text-slate-500 mb-3">
+                    Required column: <code className="bg-obsidian-800 px-1 rounded">title</code>
                   </p>
                   <Button
                     variant="outline"
@@ -138,9 +138,9 @@ export function BulkImportDialog({ onClose, onSuccess }: { onClose: () => void; 
               />
             </div>
 
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-slate-500">
               <p className="mb-1">Supported columns:</p>
-              <code className="block bg-gray-50 border border-gray-200 rounded px-2 py-1.5 font-mono text-[10.5px] leading-relaxed">
+              <code className="block bg-obsidian-900 border border-white/10 rounded px-2 py-1.5 font-mono text-[10.5px] leading-relaxed">
                 title (required) · type · status · counterpartyName · value · currency · effectiveDate · expiryDate · jurisdiction
               </code>
               <button
@@ -164,7 +164,7 @@ export function BulkImportDialog({ onClose, onSuccess }: { onClose: () => void; 
                 <CheckCircle2 className="h-5 w-5 text-emerald-600" />
               </div>
               <div>
-                <div className="text-base font-semibold text-gray-900">
+                <div className="text-base font-semibold text-white">
                   Imported {result.created} of {result.total} contracts
                 </div>
                 {result.failed > 0 && (
@@ -173,22 +173,22 @@ export function BulkImportDialog({ onClose, onSuccess }: { onClose: () => void; 
               </div>
             </div>
 
-            <div className="bg-white border border-gray-200 rounded-lg overflow-hidden max-h-72 overflow-y-auto">
+            <div className="bg-obsidian-700 border border-white/10 rounded-lg overflow-hidden max-h-72 overflow-y-auto">
               <table className="w-full text-xs" data-testid="bulk-import-results">
-                <thead className="bg-gray-50 text-gray-500 sticky top-0">
+                <thead className="bg-obsidian-900 text-slate-500 sticky top-0">
                   <tr>
                     <th className="text-left px-3 py-2 font-medium w-12">Row</th>
                     <th className="text-left px-3 py-2 font-medium">Title / Error</th>
                     <th className="text-left px-3 py-2 font-medium w-20">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-white/5">
                   {result.results.map(r => (
                     <tr key={r.row}>
-                      <td className="px-3 py-2 text-gray-500 tabular-nums">{r.row}</td>
+                      <td className="px-3 py-2 text-slate-500 tabular-nums">{r.row}</td>
                       <td className="px-3 py-2">
                         {r.ok ? (
-                          <span className="text-gray-900">{r.title}</span>
+                          <span className="text-white">{r.title}</span>
                         ) : (
                           <span className="text-red-700">{r.title ?? '—'} — {r.error}</span>
                         )}
@@ -212,7 +212,7 @@ export function BulkImportDialog({ onClose, onSuccess }: { onClose: () => void; 
           </div>
         )}
 
-        <div className="px-6 py-4 border-t flex justify-end gap-2 bg-gray-50 rounded-b-xl">
+        <div className="px-6 py-4 border-t flex justify-end gap-2 bg-obsidian-900 rounded-b-xl">
           {!result ? (
             <>
               <Button variant="outline" onClick={onClose}>Cancel</Button>

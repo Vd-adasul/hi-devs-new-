@@ -38,18 +38,18 @@ const OFF_PATH: Record<string, { label: string; tone: 'red' | 'amber' | 'gray' }
 function dotTone(status: string): { dot: string; text: string } {
   if (status in OFF_PATH) {
     const t = OFF_PATH[status].tone
-    if (t === 'red')   return { dot: 'bg-red-500',    text: 'text-red-700'    }
-    if (t === 'amber') return { dot: 'bg-amber-500',  text: 'text-amber-700'  }
-    return { dot: 'bg-gray-400', text: 'text-gray-600' }
+    if (t === 'red')   return { dot: 'bg-red-500',    text: 'text-rose-300'    }
+    if (t === 'amber') return { dot: 'bg-amber-500',  text: 'text-amber-300'  }
+    return { dot: 'bg-gray-400', text: 'text-slate-400' }
   }
   if (status === 'APPROVED' || status === 'EXECUTED') {
-    return { dot: 'bg-emerald-500', text: 'text-emerald-700' }
+    return { dot: 'bg-emerald-500', text: 'text-emerald-300' }
   }
   if (status === 'PENDING_REVIEW' || status === 'UNDER_NEGOTIATION' || status === 'PENDING_APPROVAL' || status === 'PENDING_SIGNATURE') {
-    return { dot: 'bg-blue-500', text: 'text-blue-700' }
+    return { dot: 'bg-blue-500', text: 'text-sky-300' }
   }
   // DRAFT and anything else
-  return { dot: 'bg-gray-400', text: 'text-gray-700' }
+  return { dot: 'bg-gray-400', text: 'text-slate-300' }
 }
 
 function resolveIndex(status: string): number {
@@ -107,7 +107,7 @@ export function StatusPill({ status, className }: { status: string; className?: 
         aria-expanded={open}
         className={cn(
           'inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-xs font-medium',
-          'hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1',
+          'hover:bg-obsidian-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1',
           tone.text,
         )}
       >
@@ -121,7 +121,7 @@ export function StatusPill({ status, className }: { status: string; className?: 
           ref={popRef}
           role="dialog"
           aria-label="Contract lifecycle"
-          className="absolute z-50 left-0 top-full mt-2 w-64 rounded-lg border bg-white p-3 shadow-lg"
+          className="absolute z-50 left-0 top-full mt-2 w-64 rounded-lg border bg-obsidian-700 p-3 shadow-lg"
         >
           <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-400">Lifecycle</div>
 
@@ -132,7 +132,7 @@ export function StatusPill({ status, className }: { status: string; className?: 
                 <span className={cn('h-2 w-2 rounded-full', tone.dot)} aria-hidden />
                 {label}
               </div>
-              <p className="text-xs text-gray-500 pl-4">
+              <p className="text-xs text-slate-500 pl-4">
                 This contract is off the active lifecycle. No further automatic transitions.
               </p>
             </div>
@@ -148,8 +148,8 @@ export function StatusPill({ status, className }: { status: string; className?: 
                         className={cn(
                           'flex h-4 w-4 items-center justify-center rounded-full border',
                           done    && 'bg-blue-600 border-blue-600 text-white',
-                          current && 'bg-white border-blue-600 text-blue-600',
-                          !done && !current && 'bg-white border-gray-300 text-gray-300',
+                          current && 'bg-obsidian-700 border-blue-600 text-blue-600',
+                          !done && !current && 'bg-obsidian-700 border-white/14 text-gray-300',
                         )}
                       >
                         {done ? (
@@ -159,12 +159,12 @@ export function StatusPill({ status, className }: { status: string; className?: 
                         )}
                       </div>
                       {i < STEPS.length - 1 && (
-                        <span className={cn('w-px flex-1 min-h-[14px] mt-1', done ? 'bg-blue-500/40' : 'bg-gray-200')} aria-hidden />
+                        <span className={cn('w-px flex-1 min-h-[14px] mt-1', done ? 'bg-blue-500/40' : 'bg-white/10')} aria-hidden />
                       )}
                     </div>
                     <span className={cn(
                       'text-sm leading-4 pt-[1px]',
-                      current ? 'text-gray-900 font-medium' : done ? 'text-gray-600' : 'text-gray-400',
+                      current ? 'text-white font-medium' : done ? 'text-slate-400' : 'text-gray-400',
                     )}>
                       {step.label}
                     </span>

@@ -20,7 +20,7 @@ export const DropdownMenuContent = React.forwardRef<
       sideOffset={sideOffset}
       align={align}
       className={cn(
-        'z-50 min-w-[12rem] overflow-hidden rounded-lg border bg-white p-1 shadow-lg',
+        'z-50 min-w-[12rem] overflow-hidden rounded-lg border bg-obsidian-700 p-1 shadow-lg',
         'animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-1',
         className,
       )}
@@ -37,8 +37,8 @@ export const DropdownMenuItem = React.forwardRef<
   <Radix.Item
     ref={ref}
     className={cn(
-      'flex items-center gap-2 rounded-md px-3 py-2 text-sm text-gray-700 cursor-pointer outline-none',
-      'hover:bg-gray-50 focus:bg-gray-50 data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed',
+      'flex items-center gap-2 rounded-md px-3 py-2 text-sm text-slate-300 cursor-pointer outline-none',
+      'hover:bg-obsidian-900 focus:bg-obsidian-900 data-[disabled]:opacity-50 data-[disabled]:cursor-not-allowed',
       className,
     )}
     {...props}
@@ -52,7 +52,7 @@ export const DropdownMenuSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <Radix.Separator
     ref={ref}
-    className={cn('my-1 h-px bg-gray-100', className)}
+    className={cn('my-1 h-px bg-obsidian-800', className)}
     {...props}
   />
 ))

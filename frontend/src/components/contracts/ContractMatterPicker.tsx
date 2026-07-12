@@ -106,7 +106,7 @@ export function ContractMatterPicker({
         type="button"
         onClick={() => setOpen(true)}
         data-testid="contract-matter-add-btn"
-        className="inline-flex items-center gap-1 rounded-full border border-dashed border-gray-300 px-2 py-0.5 text-[10.5px] text-muted-foreground hover:text-indigo-700 hover:border-indigo-300"
+        className="inline-flex items-center gap-1 rounded-full border border-dashed border-white/14 px-2 py-0.5 text-[10.5px] text-muted-foreground hover:text-indigo-700 hover:border-indigo-300"
       >
         <Briefcase className="h-3 w-3" /> Add to matter
       </button>
@@ -117,9 +117,9 @@ export function ContractMatterPicker({
     <div className="relative">
       <div
         data-testid="contract-matter-picker"
-        className="absolute top-6 left-0 z-20 w-80 rounded-lg border border-gray-200 bg-white shadow-lg text-gray-900"
+        className="absolute top-6 left-0 z-20 w-80 rounded-lg border border-white/10 bg-obsidian-700 shadow-lg text-white"
       >
-        <div className="p-2 border-b border-gray-100 bg-gray-50 rounded-t-lg">
+        <div className="p-2 border-b border-white/[0.06] bg-obsidian-900 rounded-t-lg">
           <div className="relative">
             <Search className="absolute left-2 top-2 h-3 w-3 text-gray-400" />
             <input
@@ -128,14 +128,14 @@ export function ContractMatterPicker({
               value={search}
               onChange={e => setSearch(e.target.value)}
               autoFocus
-              className="w-full pl-7 pr-2 py-1 text-[12px] rounded border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="w-full pl-7 pr-2 py-1 text-[12px] rounded border border-white/14 bg-obsidian-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
               data-testid="contract-matter-picker-search"
             />
           </div>
         </div>
-        <ul className="max-h-72 overflow-y-auto divide-y divide-gray-100 bg-white">
+        <ul className="max-h-72 overflow-y-auto divide-y divide-white/5 bg-obsidian-700">
           {filtered.length === 0 && (
-            <li className="px-3 py-3 text-[11.5px] text-gray-500 italic">
+            <li className="px-3 py-3 text-[11.5px] text-slate-500 italic">
               No matching open matters. <Link to="/matters" className="underline text-indigo-600">Create one.</Link>
             </li>
           )}
@@ -148,18 +148,18 @@ export function ContractMatterPicker({
                 className="w-full text-left px-3 py-2 hover:bg-indigo-50/70 flex items-baseline gap-2 transition-colors"
               >
                 <Briefcase className="h-3 w-3 text-indigo-600 flex-shrink-0" />
-                <span className="font-medium text-[12px] text-gray-900 truncate">{m.name}</span>
-                {m.counterpartyName && <span className="text-[10.5px] text-gray-500 truncate">· {m.counterpartyName}</span>}
+                <span className="font-medium text-[12px] text-white truncate">{m.name}</span>
+                {m.counterpartyName && <span className="text-[10.5px] text-slate-500 truncate">· {m.counterpartyName}</span>}
                 <span className="ml-auto text-[10px] text-gray-400 font-semibold">{m.contractCount}</span>
               </button>
             </li>
           ))}
         </ul>
-        <div className="px-3 py-2 border-t border-gray-100 flex items-center justify-between text-[10.5px] bg-gray-50 rounded-b-lg">
+        <div className="px-3 py-2 border-t border-white/[0.06] flex items-center justify-between text-[10.5px] bg-obsidian-900 rounded-b-lg">
           <Link to="/matters" className="text-indigo-600 hover:underline font-semibold" onClick={() => setOpen(false)}>
             + New matter
           </Link>
-          <button type="button" onClick={() => setOpen(false)} className="text-gray-500 hover:text-gray-900 font-medium">
+          <button type="button" onClick={() => setOpen(false)} className="text-slate-500 hover:text-white font-medium">
             Cancel
           </button>
         </div>

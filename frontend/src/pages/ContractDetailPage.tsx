@@ -65,15 +65,15 @@ import '@react-pdf-viewer/default-layout/lib/styles/index.css'
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 const TYPE_COLORS: Record<string, string> = {
-  NDA:              'bg-purple-100 text-purple-700 border-purple-200',
-  MSA:              'bg-blue-100 text-blue-700 border-blue-200',
-  SOW:              'bg-cyan-100 text-cyan-700 border-cyan-200',
-  SLA:              'bg-teal-100 text-teal-700 border-teal-200',
-  VENDOR_AGREEMENT: 'bg-orange-100 text-orange-700 border-orange-200',
-  EMPLOYMENT:       'bg-green-100 text-green-700 border-green-200',
-  PARTNERSHIP:      'bg-indigo-100 text-indigo-700 border-indigo-200',
-  LICENSE:          'bg-yellow-100 text-yellow-700 border-yellow-200',
-  OTHER:            'bg-gray-100 text-gray-600 border-gray-200',
+  NDA:              'bg-sky-500/10 text-sky-300 border-sky-500/20',
+  MSA:              'bg-sky-500/10 text-sky-300 border-sky-500/20',
+  SOW:              'bg-sky-500/10 text-sky-300 border-sky-500/20',
+  SLA:              'bg-sky-500/10 text-sky-300 border-sky-500/20',
+  VENDOR_AGREEMENT: 'bg-sky-500/10 text-sky-300 border-sky-500/20',
+  EMPLOYMENT:       'bg-sky-500/10 text-sky-300 border-sky-500/20',
+  PARTNERSHIP:      'bg-sky-500/10 text-sky-300 border-sky-500/20',
+  LICENSE:          'bg-sky-500/10 text-sky-300 border-sky-500/20',
+  OTHER:            'bg-obsidian-800 text-slate-400 border-white/10',
 }
 
 const CONTRACT_TYPES = [
@@ -112,14 +112,14 @@ const PIPELINE_STEPS = [
 // variant later. Delete after one sprint if unused.
 //
 // const STATUS_COLORS: Record<string, string> = {
-//   DRAFT:             'bg-gray-100 text-gray-600',
+//   DRAFT:             'bg-obsidian-800 text-slate-400',
 //   PENDING_REVIEW:    'bg-amber-100 text-amber-700',
 //   UNDER_NEGOTIATION: 'bg-orange-100 text-orange-700',
 //   PENDING_APPROVAL:  'bg-blue-100 text-blue-700',
 //   APPROVED:          'bg-emerald-100 text-emerald-700',
 //   EXECUTED:          'bg-emerald-100 text-emerald-700',
 //   EXPIRED:           'bg-red-100 text-red-700',
-//   ARCHIVED:          'bg-gray-100 text-gray-500',
+//   ARCHIVED:          'bg-obsidian-800 text-slate-500',
 // }
 
 const CLAUSE_FLAG_LABELS: Record<string, string> = {
@@ -199,10 +199,10 @@ const CLAUSE_TYPE_LABELS: Record<string, string> = {
 }
 
 const RISK_RATING_BADGE: Record<string, { label: string; cls: string }> = {
-  unfavorable: { label: 'Unfavorable', cls: 'bg-red-100 text-red-700 border border-red-200' },
-  favorable:   { label: 'Favorable',   cls: 'bg-emerald-100 text-emerald-700 border border-emerald-200' },
-  unusual:     { label: 'Unusual',     cls: 'bg-amber-100 text-amber-700 border border-amber-200' },
-  neutral:     { label: 'Neutral',     cls: 'bg-gray-100 text-gray-500 border border-gray-200' },
+  unfavorable: { label: 'Unfavorable', cls: 'bg-rose-500/10 text-rose-300 border border-rose-500/20' },
+  favorable:   { label: 'Favorable',   cls: 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20' },
+  unusual:     { label: 'Unusual',     cls: 'bg-amber-500/10 text-amber-300 border border-amber-500/20' },
+  neutral:     { label: 'Neutral',     cls: 'bg-obsidian-800 text-slate-500 border border-white/10' },
 }
 
 interface FieldDef {
@@ -233,9 +233,9 @@ function RiskMeter({ score }: { score: number }) {
     <div>
       <div className="flex items-center justify-between mb-1.5">
         <span className={`text-sm font-semibold ${labelColor}`}>{label}</span>
-        <span className="text-sm font-bold text-gray-900">{pct}%</span>
+        <span className="text-sm font-bold text-white">{pct}%</span>
       </div>
-      <div className="h-2 rounded-full bg-gray-100 overflow-hidden">
+      <div className="h-2 rounded-full bg-obsidian-800 overflow-hidden">
         <div className={`h-full rounded-full transition-all ${color}`} style={{ width: `${pct}%` }} />
       </div>
     </div>
@@ -273,7 +273,7 @@ function ClauseCard({
 }) {
   const [expanded, setExpanded] = useState(false)
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow transition-shadow">
+    <div className="bg-obsidian-700 border border-white/10 rounded-xl p-4 shadow-sm hover:shadow transition-shadow">
       <div className="flex items-start justify-between gap-3 mb-2">
         <div className="flex items-center gap-2 flex-wrap">
           {badge && (
@@ -281,14 +281,14 @@ function ClauseCard({
               {badge.label}
             </span>
           )}
-          <span className="text-sm font-semibold text-gray-800">{typeLabel}</span>
+          <span className="text-sm font-semibold text-white">{typeLabel}</span>
         </div>
         {sectionRef && (
           <span className="text-xs text-gray-400 flex-shrink-0 mt-0.5">{sectionRef}</span>
         )}
       </div>
       {interpretation ? (
-        <p className="text-sm text-gray-600 leading-relaxed mb-2">{interpretation}</p>
+        <p className="text-sm text-slate-400 leading-relaxed mb-2">{interpretation}</p>
       ) : (
         <p className="text-sm text-gray-400 italic mb-2">No interpretation available.</p>
       )}
@@ -300,8 +300,8 @@ function ClauseCard({
         {expanded ? 'Hide' : 'View'} verbatim text
       </button>
       {expanded && (
-        <div className="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-100">
-          <p className="text-xs text-gray-600 font-mono leading-relaxed whitespace-pre-wrap">{content}</p>
+        <div className="mt-2 p-3 bg-obsidian-900 rounded-lg border border-white/[0.06]">
+          <p className="text-xs text-slate-400 font-mono leading-relaxed whitespace-pre-wrap">{content}</p>
         </div>
       )}
     </div>
@@ -316,7 +316,7 @@ function DetailRow({ label, value, hideIfEmpty = true }: { label: string; value:
   return (
     <div className="flex items-start justify-between gap-4 py-2.5 border-b border-gray-50 last:border-0">
       <span className="text-xs text-gray-400 whitespace-nowrap pt-0.5">{label}</span>
-      <span className="text-sm text-gray-800 font-medium text-right">{value}</span>
+      <span className="text-sm text-white font-medium text-right">{value}</span>
     </div>
   )
 }
@@ -919,7 +919,7 @@ export function ContractDetailPage() {
     return (
       <div className="flex flex-col items-center justify-center h-full gap-3">
         <AlertCircle className="h-10 w-10 text-gray-300" />
-        <p className="text-gray-500 font-medium">Contract not found</p>
+        <p className="text-slate-500 font-medium">Contract not found</p>
         <Button variant="outline" onClick={() => navigate('/contracts')}>Back to Contracts</Button>
       </div>
     )
@@ -974,7 +974,7 @@ export function ContractDetailPage() {
   // the rail, the canonical seed list is in git history.
 
   return (
-    <div className="h-full flex flex-col bg-gray-50">
+    <div className="h-full flex flex-col bg-obsidian-900">
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       {/*
         U.8 (header v2) — restructured into two explicit rows so metadata
@@ -986,18 +986,18 @@ export function ContractDetailPage() {
         whole row's width up to the buttons; metadata has the whole row
         below. Same JTBDs, no 4-row stack.
       */}
-      <div className="bg-white border-b px-6 py-4 space-y-2.5">
+      <div className="bg-obsidian-700 border-b px-6 py-4 space-y-2.5">
         {/* Row 1 — title + action buttons */}
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-start gap-3 flex-1 min-w-0">
             <button
               onClick={() => navigate('/contracts')}
-              className="mt-0.5 p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors flex-shrink-0"
+              className="mt-0.5 p-1.5 rounded-lg text-gray-400 hover:text-slate-400 hover:bg-obsidian-800 transition-colors flex-shrink-0"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
             <h1
-              className="text-xl font-semibold text-gray-900 leading-tight line-clamp-2 break-words flex-1 min-w-0"
+              className="text-xl font-semibold text-white leading-tight line-clamp-2 break-words flex-1 min-w-0"
               title={contract.title}
             >
               {contract.title}
@@ -1017,7 +1017,7 @@ export function ContractDetailPage() {
               B.6.12 — hide on <1280px. The toggle moves into the
               Actions menu below xl so the primary CTA stays visible.
             */}
-            <div className="hidden xl:inline-flex items-center rounded-md border border-gray-200 bg-gray-50 p-0.5">
+            <div className="hidden xl:inline-flex items-center rounded-md border border-white/10 bg-obsidian-900 p-0.5">
               <button
                 onClick={() => setDocView('styled')}
                 aria-pressed={docView === 'styled'}
@@ -1026,9 +1026,9 @@ export function ContractDetailPage() {
                 className={cn(
                   'px-2.5 py-1 text-xs font-medium rounded transition-colors',
                   docView === 'styled'
-                    ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-500 hover:text-gray-800',
-                  isEditing && 'opacity-60 cursor-not-allowed',
+                    ? 'bg-obsidian-700 text-white shadow-sm'
+                    : 'text-slate-500 hover:text-white',
+                  isEditing && 'text-slate-500 cursor-not-allowed',
                 )}
               >
                 Styled
@@ -1048,9 +1048,9 @@ export function ContractDetailPage() {
                 className={cn(
                   'px-2.5 py-1 text-xs font-medium rounded transition-colors',
                   docView === 'original'
-                    ? 'bg-white text-gray-900 shadow-sm'
-                    : 'text-gray-500 hover:text-gray-800',
-                  (isEditing || !hasOriginal) && 'opacity-60 cursor-not-allowed',
+                    ? 'bg-obsidian-700 text-white shadow-sm'
+                    : 'text-slate-500 hover:text-white',
+                  (isEditing || !hasOriginal) && 'text-slate-500 cursor-not-allowed',
                 )}
               >
                 Original
@@ -1066,7 +1066,7 @@ export function ContractDetailPage() {
             {docView === 'styled' && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="hidden 2xl:inline-flex gap-1 text-xs text-gray-600">
+                  <Button variant="outline" size="sm" className="hidden 2xl:inline-flex gap-1 text-xs text-slate-400">
                     Risks: <span className="font-semibold capitalize">{riskView}</span>
                     <ChevronDown className="h-3 w-3" />
                   </Button>
@@ -1081,7 +1081,7 @@ export function ContractDetailPage() {
                     Summary — margin dots only
                   </DropdownMenuItem>
                   <DropdownMenuItem onSelect={() => setRiskView('off')}>
-                    <span className="h-1.5 w-1.5 rounded-full bg-transparent border border-gray-300" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-transparent border border-white/14" />
                     Off — no markers
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -1118,7 +1118,7 @@ export function ContractDetailPage() {
                 setCompareOpen(true)
                 track('compare_opened', { versionCount: versions.length })
               }}
-              className="hidden xl:inline-flex gap-1.5 text-gray-600"
+              className="hidden xl:inline-flex gap-1.5 text-slate-400"
               title={versions.length < 2
                 ? 'Upload a second version to compare. Until then there is nothing to diff.'
                 : 'Compare two versions with redline attribution'}
@@ -1140,7 +1140,7 @@ export function ContractDetailPage() {
                   size="sm"
                   onClick={() => canvasEditorRef.current?.chain().focus().undo().run()}
                   disabled={!canvasEditorRef.current?.can().undo()}
-                  className="gap-1.5 text-gray-600"
+                  className="gap-1.5 text-slate-400"
                   aria-label="Undo"
                   title="Undo (⌘Z)"
                 >
@@ -1151,7 +1151,7 @@ export function ContractDetailPage() {
                   size="sm"
                   onClick={() => canvasEditorRef.current?.chain().focus().redo().run()}
                   disabled={!canvasEditorRef.current?.can().redo()}
-                  className="gap-1.5 text-gray-600"
+                  className="gap-1.5 text-slate-400"
                   aria-label="Redo"
                   title="Redo (⌘⇧Z)"
                 >
@@ -1176,7 +1176,7 @@ export function ContractDetailPage() {
                 variant="outline"
                 size="sm"
                 onClick={enterEdit}
-                className="gap-1.5 text-gray-600"
+                className="gap-1.5 text-slate-400"
                 title="Edit this document (⌘E)"
                 data-testid="enter-edit-btn"
               >
@@ -1248,7 +1248,7 @@ export function ContractDetailPage() {
                   removed — editing now happens on this same canvas via
                   the Edit toggle (B.5.3).
                 */}
-                <Button variant="outline" size="sm" className="gap-1.5 text-gray-600" aria-label="More actions">
+                <Button variant="outline" size="sm" className="gap-1.5 text-slate-400" aria-label="More actions">
                   Actions <ChevronDown className="h-3.5 w-3.5" />
                 </Button>
               </DropdownMenuTrigger>
@@ -1371,7 +1371,7 @@ export function ContractDetailPage() {
             <span
               data-testid="contract-ocr-badge"
               title={`Text was OCR'd from scan (${extractionMeta.ocrBackend ?? 'unknown'}, ${extractionMeta.ocrPages ?? 0}/${extractionMeta.pageCount ?? 0} pages). Treat extracted fields with higher review bar.`}
-              className="inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 text-[10.5px] font-medium text-amber-900"
+              className="inline-flex items-center gap-1 rounded-full border border-amber-500/25 bg-amber-500/10 text-amber-300"
             >
               <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M7 8h10M7 12h10M7 16h6" /></svg>
               OCR'd
@@ -1392,7 +1392,7 @@ export function ContractDetailPage() {
                 if (e.target.value !== contract.type) retype.mutate(e.target.value)
                 else setEditingType(false)
               }}
-              className="text-xs font-semibold border rounded-full px-2.5 py-0.5 bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-xs font-semibold border rounded-full px-2.5 py-0.5 bg-obsidian-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {CONTRACT_TYPES.map(t => (
                 <option key={t} value={t}>{t.replace(/_/g, ' ')}</option>
@@ -1418,9 +1418,9 @@ export function ContractDetailPage() {
           )}
           {contract.riskScore != null && (
             <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium ${
-              contract.riskScore >= 0.67 ? 'bg-red-50 text-red-600' :
-              contract.riskScore >= 0.34 ? 'bg-amber-50 text-amber-600' :
-              'bg-emerald-50 text-emerald-600'
+              contract.riskScore >= 0.67 ? 'bg-rose-500/10 text-rose-300' :
+              contract.riskScore >= 0.34 ? 'bg-amber-500/10 text-amber-300' :
+              'bg-emerald-500/10 text-emerald-300'
             }`}>
               <TrendingUp className="h-3 w-3" />
               Risk {Math.round(contract.riskScore * 100)}%
@@ -1430,7 +1430,7 @@ export function ContractDetailPage() {
               (no `hidden xl:` gate). The dedicated Row 2 has the room. */}
           {contract.owner?.name && (
             <span
-              className="inline-flex items-center gap-1.5 text-xs text-gray-600"
+              className="inline-flex items-center gap-1.5 text-xs text-slate-400"
               title={`Owner: ${contract.owner.name}`}
               data-testid="contract-owner-chip"
             >
@@ -1441,12 +1441,12 @@ export function ContractDetailPage() {
               >
                 {contract.owner.name.split(/\s+/).filter(Boolean).slice(0, 2).map((p: string) => p[0]?.toUpperCase()).join('') || '?'}
               </span>
-              <span className="font-medium text-gray-700">{contract.owner.name}</span>
+              <span className="font-medium text-slate-300">{contract.owner.name}</span>
             </span>
           )}
           {contract.updatedAt && (
             <span
-              className="inline-flex items-center gap-1.5 text-xs text-gray-500"
+              className="inline-flex items-center gap-1.5 text-xs text-slate-500"
               title={new Date(contract.updatedAt).toLocaleString()}
               data-testid="contract-edited-chip"
             >
@@ -1467,14 +1467,14 @@ export function ContractDetailPage() {
               data-testid="contract-value-chip"
             >
               <span className="text-gray-300" aria-hidden>·</span>
-              <span className="font-medium text-gray-700 tabular-nums">
+              <span className="font-medium text-slate-300 tabular-nums">
                 {(contract.currency ?? 'USD')} {Number(contract.value).toLocaleString()}
               </span>
             </span>
           )}
           {contract.expiryDate && (
             <span
-              className="inline-flex items-center gap-1.5 text-xs text-gray-500"
+              className="inline-flex items-center gap-1.5 text-xs text-slate-500"
               title={`Expires ${new Date(contract.expiryDate).toLocaleDateString()}`}
               data-testid="contract-expiry-chip"
             >
@@ -1650,11 +1650,11 @@ export function ContractDetailPage() {
                 <div
                   key={i}
                   className={`flex items-center gap-1 text-[10px] font-medium transition-colors ${
-                    isActive ? 'text-white' : isPast ? 'text-blue-300' : 'text-blue-500/50'
+                    isActive ? 'text-white' : isPast ? 'text-blue-300' : 'text-sky-300'
                   }`}
                 >
                   <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 transition-colors ${
-                    isActive ? 'bg-white' : isPast ? 'bg-blue-300' : 'bg-blue-500/30'
+                    isActive ? 'bg-obsidian-700' : isPast ? 'bg-blue-300' : 'bg-sky-500/10'
                   }`} />
                   {step.label}
                 </div>
@@ -1674,7 +1674,7 @@ export function ContractDetailPage() {
               <button
                 onClick={() => analyze.mutate()}
                 disabled={analyze.isPending}
-                className="text-xs bg-white/20 hover:bg-white/30 text-white px-2.5 py-1 rounded"
+                className="text-xs bg-obsidian-700/20 hover:bg-obsidian-700/30 text-white px-2.5 py-1 rounded"
               >
                 Retry
               </button>
@@ -1780,12 +1780,12 @@ export function ContractDetailPage() {
           to the contract." `setTab` was reachable via "View all" links but
           had no visible tab bar to switch back. This renders one. */}
       {tab !== 'document' && (
-        <div className="flex items-center gap-1 px-6 py-2 border-b border-gray-100 bg-white sticky top-0 z-10">
+        <div className="flex items-center gap-1 px-6 py-2 border-b border-white/[0.06] bg-obsidian-700 sticky top-0 z-10">
           <button
             type="button"
             onClick={() => setTab('document')}
             data-testid="tab-back-to-document"
-            className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 mr-2"
+            className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs font-medium text-slate-400 hover:text-blue-600 hover:bg-obsidian-800 mr-2"
             title="Back to document view"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
@@ -1801,8 +1801,8 @@ export function ContractDetailPage() {
               className={cn(
                 'px-2.5 py-1 rounded-md text-xs font-medium capitalize transition-colors',
                 tab === t
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100',
+                  ? 'bg-sky-500/10 text-sky-300'
+                  : 'text-slate-500 hover:text-white hover:bg-obsidian-800',
               )}
             >
               {t}
@@ -1823,8 +1823,8 @@ export function ContractDetailPage() {
               <div className="col-span-3 space-y-4">
 
                 {/* AI Summary */}
-                <div className="bg-white rounded-xl border shadow-sm overflow-hidden">
-                  <div className="px-5 py-4 border-b bg-gradient-to-r from-blue-50 to-indigo-50 flex items-center justify-between">
+                <div className="bg-obsidian-700 rounded-xl border shadow-sm overflow-hidden">
+                  <div className="px-5 py-4 border-b bg-obsidian-800 border-b border-white/10 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Sparkles className="h-4 w-4 text-blue-500" />
                       <span className="text-sm font-semibold text-blue-800">AI Analysis</span>
@@ -1838,7 +1838,7 @@ export function ContractDetailPage() {
                             <button
                               onClick={() => { analyze.mutate(); setShowReanalyzeMenu(false) }}
                               disabled={isAnalyzing}
-                              className="flex items-center gap-1 px-3 text-xs font-medium text-blue-700 bg-white hover:bg-blue-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                              className="flex items-center gap-1 px-3 text-xs font-medium text-blue-700 bg-obsidian-700 hover:bg-obsidian-800 disabled:text-slate-500 disabled:bg-white/5 disabled:cursor-not-allowed transition-colors"
                             >
                               {isAnalyzing
                                 ? <><Loader2 className="h-3 w-3 animate-spin" /> Analyzing…</>
@@ -1848,17 +1848,17 @@ export function ContractDetailPage() {
                             {hasAnalysis && !isAnalyzing && (
                               <button
                                 onClick={e => { e.stopPropagation(); setShowReanalyzeMenu(m => !m) }}
-                                className="px-1.5 border-l border-blue-200 text-blue-500 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                                className="px-1.5 border-l border-blue-200 text-blue-500 hover:bg-obsidian-800 hover:text-blue-700 transition-colors"
                               >
                                 <ChevronDown className="h-3 w-3" />
                               </button>
                             )}
                           </div>
                           {showReanalyzeMenu && (
-                            <div className="absolute right-0 top-full mt-1 z-50 bg-white border border-gray-200 rounded-lg shadow-lg py-1 w-52" onMouseDown={e => e.stopPropagation()}>
+                            <div className="absolute right-0 top-full mt-1 z-50 bg-obsidian-700 border border-white/10 rounded-lg shadow-lg py-1 w-52" onMouseDown={e => e.stopPropagation()}>
                               <button
                                 onClick={() => { reprocess.mutate(); setShowReanalyzeMenu(false) }}
-                                className="w-full px-3 py-2 text-left text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                                className="w-full px-3 py-2 text-left text-xs text-slate-300 hover:bg-obsidian-900 flex items-center gap-2"
                               >
                                 <RefreshCw className="h-3.5 w-3.5 text-gray-400 flex-shrink-0" />
                                 <div>
@@ -1874,14 +1874,14 @@ export function ContractDetailPage() {
                   </div>
                   <div className="p-5">
                     {contract.summary ? (
-                      <p className="text-sm text-gray-700 leading-relaxed">{contract.summary}</p>
+                      <p className="text-sm text-slate-300 leading-relaxed">{contract.summary}</p>
                     ) : (
                       <div className="flex flex-col items-center py-6 gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-full bg-obsidian-800 flex items-center justify-center">
                           <Sparkles className="h-5 w-5 text-gray-400" />
                         </div>
                         <div className="text-center">
-                          <p className="text-sm font-medium text-gray-600">No analysis yet</p>
+                          <p className="text-sm font-medium text-slate-400">No analysis yet</p>
                           <p className="text-xs text-gray-400 mt-0.5">Click "Run Analysis" to extract key terms, risk score, and summary</p>
                         </div>
                         <Button size="sm" onClick={() => analyze.mutate()} disabled={analyze.isPending || IN_PROGRESS_STATUSES.includes(contract.analysisStatus)} className="gap-1.5">
@@ -1894,10 +1894,10 @@ export function ContractDetailPage() {
 
                 {/* Clause Flags */}
                 {presentFlags.length > 0 && (
-                  <div className="bg-white rounded-xl border shadow-sm p-5">
+                  <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
                     <div className="flex items-center gap-2 mb-3">
                       <Shield className="h-4 w-4 text-amber-500" />
-                      <h3 className="text-sm font-semibold text-gray-800">Clause Flags</h3>
+                      <h3 className="text-sm font-semibold text-white">Clause Flags</h3>
                       <span className="ml-auto text-xs text-gray-400">{presentFlags.length} detected</span>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -1910,7 +1910,7 @@ export function ContractDetailPage() {
                       {presentFlags.length > 6 && (
                         <button
                           onClick={() => setShowAllFlags(!showAllFlags)}
-                          className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs text-gray-400 hover:text-gray-600"
+                          className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs text-gray-400 hover:text-slate-400"
                         >
                           {showAllFlags ? <><ChevronUp className="h-3 w-3" /> Less</> : <><ChevronDown className="h-3 w-3" /> +{presentFlags.length - 6} more</>}
                         </button>
@@ -1921,9 +1921,9 @@ export function ContractDetailPage() {
 
                 {/* Key Terms */}
                 {keyTermEntries.length > 0 ? (
-                  <div className="bg-white rounded-xl border shadow-sm p-5">
+                  <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-sm font-semibold text-gray-800">Key Terms</h3>
+                      <h3 className="text-sm font-semibold text-white">Key Terms</h3>
                       <div className="flex items-center gap-3 text-xs text-gray-400">
                         <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3 text-emerald-500" />High</span>
                         <span className="flex items-center gap-1"><AlertTriangle className="h-3 w-3 text-amber-400" />Review</span>
@@ -1934,14 +1934,14 @@ export function ContractDetailPage() {
                       {keyTermEntries.map(([k, v]) => {
                         const conf = fieldConfidence[k]
                         return (
-                          <div key={k} className="group relative rounded-lg p-3 bg-gray-50 hover:bg-gray-100 transition-colors">
+                          <div key={k} className="group relative rounded-lg p-3 bg-obsidian-900 hover:bg-obsidian-800 transition-colors">
                             <div className="flex items-start gap-2">
                               {conf && <ConfidenceIcon confidence={conf.confidence} />}
                               <div className="min-w-0">
                                 <p className="text-xs text-gray-400 capitalize mb-0.5">
                                   {k.replace(/([A-Z])/g, ' $1').trim()}
                                 </p>
-                                <p className="text-sm font-semibold text-gray-800 truncate">
+                                <p className="text-sm font-semibold text-white truncate">
                                   {formatTermValue(k, v)}
                                 </p>
                                 {conf?.issue && (
@@ -1950,7 +1950,7 @@ export function ContractDetailPage() {
                               </div>
                             </div>
                             {conf?.quote && (
-                              <div className="hidden group-hover:block absolute z-20 bottom-full left-0 mb-1.5 w-72 bg-gray-900 text-white text-xs rounded-xl p-3 shadow-2xl">
+                              <div className="hidden group-hover:block absolute z-20 bottom-full left-0 mb-1.5 w-72 bg-obsidian-700 text-white text-xs rounded-xl p-3 shadow-2xl">
                                 <p className="text-gray-400 text-[10px] uppercase tracking-wider mb-1.5">Source</p>
                                 <p className="italic text-gray-100">&ldquo;{conf.quote}&rdquo;</p>
                                 {conf.section && <p className="text-gray-400 mt-1.5 text-[10px]">{conf.section}</p>}
@@ -1965,25 +1965,25 @@ export function ContractDetailPage() {
 
                 {/* Contract-Type-Specific Fields */}
                 {typeFieldEntries.length > 0 && (
-                  <div className="bg-white rounded-xl border shadow-sm p-5">
+                  <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-sm font-semibold text-gray-800">
+                      <h3 className="text-sm font-semibold text-white">
                         {contract.type.replace(/_/g, ' ')} — Specific Terms
                       </h3>
                       <span className="text-xs text-gray-400">{typeFieldEntries.length} fields extracted</span>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       {typeFieldEntries.map(([key, field]) => (
-                        <div key={key} className="group relative rounded-lg p-3 bg-gray-50 hover:bg-gray-100 transition-colors">
-                          <p className="text-xs text-gray-500 mb-1 truncate">{field.label}</p>
+                        <div key={key} className="group relative rounded-lg p-3 bg-obsidian-900 hover:bg-obsidian-800 transition-colors">
+                          <p className="text-xs text-slate-500 mb-1 truncate">{field.label}</p>
                           <div className="flex items-center gap-1.5">
-                            <p className="text-xs font-semibold text-gray-800 truncate flex-1">
+                            <p className="text-xs font-semibold text-white truncate flex-1">
                               {formatTermValue(key, field.value)}
                             </p>
                             <ConfidenceIcon confidence={field.confidence} />
                           </div>
                           {field.quote && (
-                            <div className="hidden group-hover:block absolute z-20 bottom-full left-0 mb-1.5 w-72 bg-gray-900 text-white text-xs rounded-xl p-3 shadow-2xl">
+                            <div className="hidden group-hover:block absolute z-20 bottom-full left-0 mb-1.5 w-72 bg-obsidian-700 text-white text-xs rounded-xl p-3 shadow-2xl">
                               <p className="text-gray-400 text-[10px] uppercase tracking-wider mb-1.5">Source</p>
                               <p className="italic text-gray-100">&ldquo;{field.quote}&rdquo;</p>
                             </div>
@@ -1996,8 +1996,8 @@ export function ContractDetailPage() {
 
                 {/* Custom Fields */}
                 {populatedFields.length > 0 && (
-                  <div className="bg-white rounded-xl border shadow-sm p-5">
-                    <h3 className="text-sm font-semibold text-gray-800 mb-3">Custom Fields</h3>
+                  <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
+                    <h3 className="text-sm font-semibold text-white mb-3">Custom Fields</h3>
                     <div className="divide-y divide-gray-50">
                       {populatedFields.map((fd: FieldDef) => (
                         <DetailRow
@@ -2012,15 +2012,15 @@ export function ContractDetailPage() {
 
                 {/* AI Findings — extra terms the LLM found beyond defined fields */}
                 {aiFindings.length > 0 && (
-                  <div className="bg-white rounded-xl border shadow-sm p-5">
+                  <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
                     <button
                       onClick={() => setShowFindings(v => !v)}
                       className="flex items-center justify-between w-full mb-1"
                     >
                       <div className="flex items-center gap-2">
                         <Sparkles className="h-4 w-4 text-purple-400" />
-                        <h3 className="text-sm font-semibold text-gray-800">AI Findings</h3>
-                        <span className="px-1.5 py-0.5 rounded-full bg-purple-100 text-purple-700 text-xs font-medium">
+                        <h3 className="text-sm font-semibold text-white">AI Findings</h3>
+                        <span className="px-1.5 py-0.5 rounded-full bg-sky-500/10 text-sky-300 text-xs font-medium">
                           {aiFindings.length}
                         </span>
                       </div>
@@ -2033,9 +2033,9 @@ export function ContractDetailPage() {
                       <div className="mt-3 divide-y divide-gray-50">
                         {aiFindings.map((f) => (
                           <div key={f.key} className="py-2.5 flex items-start justify-between gap-3">
-                            <span className="text-xs text-gray-500 w-1/3 flex-shrink-0">{f.label}</span>
+                            <span className="text-xs text-slate-500 w-1/3 flex-shrink-0">{f.label}</span>
                             <div className="flex items-center gap-2 flex-1 justify-end">
-                              <span className="text-xs text-gray-800 text-right">
+                              <span className="text-xs text-white text-right">
                                 {formatTermValue(f.key, f.value)}
                               </span>
                               <ConfidenceIcon confidence={f.confidence} />
@@ -2049,14 +2049,14 @@ export function ContractDetailPage() {
 
                 {/* Tags */}
                 {contract.tags?.length > 0 && (
-                  <div className="bg-white rounded-xl border shadow-sm p-5">
+                  <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
                     <div className="flex items-center gap-2 mb-3">
                       <Tag className="h-4 w-4 text-gray-400" />
-                      <h3 className="text-sm font-semibold text-gray-800">Tags</h3>
+                      <h3 className="text-sm font-semibold text-white">Tags</h3>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {contract.tags.map((tag: string) => (
-                        <span key={tag} className="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600 font-medium">{tag}</span>
+                        <span key={tag} className="px-3 py-1 bg-obsidian-800 rounded-full text-xs text-slate-400 font-medium">{tag}</span>
                       ))}
                     </div>
                   </div>
@@ -2067,8 +2067,8 @@ export function ContractDetailPage() {
               <div className="col-span-2 space-y-4">
 
                 {/* Contract Details */}
-                <div className="bg-white rounded-xl border shadow-sm p-5">
-                  <h3 className="text-sm font-semibold text-gray-800 mb-3">Contract Details</h3>
+                <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
+                  <h3 className="text-sm font-semibold text-white mb-3">Contract Details</h3>
                   <div>
                     <DetailRow label="Owner" value={contract.owner?.name ?? '—'} />
                     <DetailRow label="Counterparty" value={contract.counterpartyName ?? contract.counterparty?.name ?? formatTermValue('parties', keyTerms.parties) !== '—' ? formatTermValue('parties', keyTerms.parties) : '—'} />
@@ -2091,18 +2091,18 @@ export function ContractDetailPage() {
 
                 {/* Risk Assessment */}
                 {contract.riskScore != null && (
-                  <div className="bg-white rounded-xl border shadow-sm p-5">
+                  <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
                     <div className="flex items-center gap-2 mb-4">
                       <TrendingUp className="h-4 w-4 text-gray-400" />
-                      <h3 className="text-sm font-semibold text-gray-800">Risk Assessment</h3>
+                      <h3 className="text-sm font-semibold text-white">Risk Assessment</h3>
                     </div>
                     <RiskMeter score={contract.riskScore} />
                     {riskFactors.length > 0 && (
                       <div className="mt-4">
-                        <p className="text-xs font-medium text-gray-500 mb-2">Risk Factors</p>
+                        <p className="text-xs font-medium text-slate-500 mb-2">Risk Factors</p>
                         <ul className="space-y-1.5">
                           {riskFactors.map((f, i) => (
-                            <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
+                            <li key={i} className="flex items-start gap-2 text-xs text-slate-400">
                               <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 flex-shrink-0" />
                               {f}
                             </li>
@@ -2113,7 +2113,7 @@ export function ContractDetailPage() {
                     {contract.overallConfidence != null && (
                       <div className="mt-4 pt-4 border-t">
                         <p className="text-xs text-gray-400">
-                          Extraction confidence: <span className="font-semibold text-gray-700">{Math.round((contract.overallConfidence ?? 0) * 100)}%</span>
+                          Extraction confidence: <span className="font-semibold text-slate-300">{Math.round((contract.overallConfidence ?? 0) * 100)}%</span>
                         </p>
                       </div>
                     )}
@@ -2121,9 +2121,9 @@ export function ContractDetailPage() {
                 )}
 
                 {/* Versions quick view */}
-                <div className="bg-white rounded-xl border shadow-sm p-5">
+                <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm font-semibold text-gray-800">Versions</h3>
+                    <h3 className="text-sm font-semibold text-white">Versions</h3>
                     <button onClick={() => setTab('versions')} className="text-xs text-blue-600 hover:underline">View all</button>
                   </div>
                   {versions.length === 0 ? (
@@ -2133,12 +2133,12 @@ export function ContractDetailPage() {
                       {versions.slice(0, 3).map((v: any) => (
                         <div key={v.id} className="flex items-center justify-between">
                           <div>
-                            <p className="text-xs font-medium text-gray-700">v{v.versionNumber}</p>
+                            <p className="text-xs font-medium text-slate-300">v{v.versionNumber}</p>
                             <p className="text-[10px] text-gray-400">{new Date(v.createdAt).toLocaleDateString()}</p>
                           </div>
                           <button
                             onClick={() => handleDownload(v.id)}
-                            className="p-1 rounded hover:bg-gray-100 text-gray-400 hover:text-gray-600"
+                            className="p-1 rounded hover:bg-obsidian-800 text-gray-400 hover:text-slate-400"
                           >
                             <Download className="h-3.5 w-3.5" />
                           </button>
@@ -2149,11 +2149,11 @@ export function ContractDetailPage() {
                 </div>
 
                 {/* Contract Family */}
-                <div className="bg-white rounded-xl border shadow-sm p-5">
+                <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <Link className="h-4 w-4 text-gray-400" />
-                      <h3 className="text-sm font-semibold text-gray-800">Contract Family</h3>
+                      <h3 className="text-sm font-semibold text-white">Contract Family</h3>
                     </div>
                     <button
                       onClick={() => setShowAddRelated(true)}
@@ -2185,10 +2185,10 @@ export function ContractDetailPage() {
                         <button
                           key={child.id}
                           onClick={() => navigate(`/contracts/${child.id}`)}
-                          className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg hover:bg-gray-50 transition-colors text-left"
+                          className="w-full flex items-center gap-2 px-2.5 py-2 rounded-lg hover:bg-obsidian-900 transition-colors text-left"
                         >
                           <FileText className="h-3 w-3 text-gray-400 flex-shrink-0" />
-                          <span className="text-xs text-gray-700 truncate">{child.title}</span>
+                          <span className="text-xs text-slate-300 truncate">{child.title}</span>
                           {child.relationshipType && (
                             <span className="ml-auto text-[10px] text-gray-400 flex-shrink-0 capitalize">
                               {child.relationshipType.replace(/_/g, ' ')}
@@ -2203,17 +2203,17 @@ export function ContractDetailPage() {
                 </div>
 
                 {/* Attachments */}
-                <div className="bg-white rounded-xl border shadow-sm p-5">
+                <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <Paperclip className="h-4 w-4 text-gray-400" />
-                      <h3 className="text-sm font-semibold text-gray-800">Attachments</h3>
+                      <h3 className="text-sm font-semibold text-white">Attachments</h3>
                       <span className="text-xs text-gray-400">(exhibits, schedules)</span>
                     </div>
                     <button
                       onClick={() => attachFileRef.current?.click()}
                       disabled={attachMutation.isPending}
-                      className="text-xs text-blue-600 hover:underline disabled:opacity-50"
+                      className="text-xs text-blue-600 hover:underline disabled:text-slate-500 disabled:bg-white/5"
                     >
                       {attachMutation.isPending ? 'Uploading…' : '+ Attach'}
                     </button>
@@ -2236,13 +2236,13 @@ export function ContractDetailPage() {
                   ) : (
                     <div className="space-y-1">
                       {(contract.attachments as any[]).map((att: any, idx: number) => (
-                        <div key={idx} className="flex items-center gap-2 px-2.5 py-2 rounded-lg hover:bg-gray-50 group">
+                        <div key={idx} className="flex items-center gap-2 px-2.5 py-2 rounded-lg hover:bg-obsidian-900 group">
                           <Paperclip className="h-3 w-3 text-gray-400 flex-shrink-0" />
-                          <span className="text-xs text-gray-700 truncate flex-1">{att.label || att.filename}</span>
+                          <span className="text-xs text-slate-300 truncate flex-1">{att.label || att.filename}</span>
                           <span className="text-[10px] text-gray-400">{(att.size / 1024).toFixed(0)} KB</span>
                           <button
                             onClick={() => downloadAttachment(idx, att.filename)}
-                            className="p-1 rounded opacity-0 group-hover:opacity-100 hover:bg-gray-200 text-gray-500 transition-all"
+                            className="p-1 rounded opacity-0 group-hover:opacity-100 hover:bg-white/10 text-slate-500 transition-all"
                             title="Download"
                           >
                             <Download className="h-3 w-3" />
@@ -2305,7 +2305,7 @@ export function ContractDetailPage() {
                         placeholder="Search clauses…"
                         value={clauseSearch}
                         onChange={e => setClauseSearch(e.target.value)}
-                        className="w-full px-3 py-1.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-1.5 text-sm border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
                     <div className="flex gap-1.5">
@@ -2322,7 +2322,7 @@ export function ContractDetailPage() {
                           className={`px-2.5 py-1 text-xs rounded-full font-medium border transition-colors ${
                             clauseRatingFilter === f.key
                               ? 'bg-blue-600 text-white border-blue-600'
-                              : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'
+                              : 'bg-obsidian-700 text-slate-400 border-white/10 hover:border-white/14'
                           }`}
                         >
                           {f.label}
@@ -2368,9 +2368,9 @@ export function ContractDetailPage() {
             // a red "Invalid PDF structure" error.
             if (!hasOriginal) {
               return (
-                <div className="flex flex-col items-center justify-center h-64 bg-white rounded-xl border shadow-sm m-4" data-testid="no-original-pdf">
+                <div className="flex flex-col items-center justify-center h-64 bg-obsidian-700 rounded-xl border shadow-sm m-4" data-testid="no-original-pdf">
                   <FileText className="h-8 w-8 text-gray-300 mb-3" />
-                  <p className="text-gray-700 text-sm font-medium">No original file</p>
+                  <p className="text-slate-300 text-sm font-medium">No original file</p>
                   <p className="text-gray-400 text-xs mt-1 text-center max-w-sm">This contract was created from text or a template — there's no source PDF to display.</p>
                   <Button variant="outline" size="sm" className="mt-3 text-xs" onClick={() => setDocView('styled')}>
                     Switch to Styled view
@@ -2380,9 +2380,9 @@ export function ContractDetailPage() {
             }
             if (pdfError) {
               return (
-                <div className="flex flex-col items-center justify-center h-64 bg-white rounded-xl border shadow-sm m-4">
+                <div className="flex flex-col items-center justify-center h-64 bg-obsidian-700 rounded-xl border shadow-sm m-4">
                   <AlertCircle className="h-8 w-8 text-red-400 mb-3" />
-                  <p className="text-gray-700 text-sm font-medium">Failed to load original PDF</p>
+                  <p className="text-slate-300 text-sm font-medium">Failed to load original PDF</p>
                   <p className="text-gray-400 text-xs mt-1 text-center max-w-sm">{pdfError}</p>
                   <Button variant="outline" className="mt-3" onClick={handleViewPdf}>Retry</Button>
                   <Button variant="ghost" size="sm" className="mt-2 text-xs" onClick={() => setDocView('styled')}>
@@ -2393,15 +2393,15 @@ export function ContractDetailPage() {
             }
             if (!pdfUrl) {
               return (
-                <div className="flex flex-col items-center justify-center h-64 bg-gray-50">
+                <div className="flex flex-col items-center justify-center h-64 bg-obsidian-900">
                   <Loader2 className="h-6 w-6 text-gray-300 mb-3 animate-spin" />
-                  <p className="text-sm text-gray-500">Loading original PDF…</p>
+                  <p className="text-sm text-slate-500">Loading original PDF…</p>
                 </div>
               )
             }
             return (
-              <div className="h-full overflow-hidden bg-gray-50 p-4">
-                <div className="bg-white rounded-sm shadow-sm h-full">
+              <div className="h-full overflow-hidden bg-obsidian-900 p-4">
+                <div className="bg-obsidian-700 rounded-sm shadow-sm h-full">
                   <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
                     <Viewer fileUrl={pdfUrl} plugins={[layoutPlugin]} />
                   </Worker>
@@ -2484,18 +2484,18 @@ export function ContractDetailPage() {
         {/* ─── Versions ──────────────────────────────────────────────────── */}
         {tab === 'versions' && (
           <div className="p-6 max-w-3xl mx-auto">
-            <div className="bg-white rounded-xl border shadow-sm divide-y">
+            <div className="bg-obsidian-700 rounded-xl border shadow-sm divide-y">
               {versions.length === 0 ? (
                 <p className="p-8 text-sm text-gray-400 text-center">No versions yet</p>
               ) : versions.map((v: any) => (
-                <div key={v.id} className="flex items-center justify-between p-4 hover:bg-gray-50">
+                <div key={v.id} className="flex items-center justify-between p-4 hover:bg-obsidian-900">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-xs font-bold text-blue-600">
                       v{v.versionNumber}
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-900">Version {v.versionNumber}</p>
-                      {v.changeNote && <p className="text-xs text-gray-500 mt-0.5">{v.changeNote}</p>}
+                      <p className="text-sm font-medium text-white">Version {v.versionNumber}</p>
+                      {v.changeNote && <p className="text-xs text-slate-500 mt-0.5">{v.changeNote}</p>}
                       {v.changeSummary && <p className="text-xs text-blue-500 mt-0.5 italic">{v.changeSummary}</p>}
                       <p className="text-xs text-gray-400 mt-0.5 flex items-center gap-1">
                         <Clock className="h-3 w-3" />
@@ -2520,12 +2520,12 @@ export function ContractDetailPage() {
               {/* Left: Diff viewer */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-semibold text-gray-700">Version diff</p>
+                  <p className="text-sm font-semibold text-slate-300">Version diff</p>
                   <div className="flex items-center gap-2">
                     <select
                       value={diffV1Id}
                       onChange={e => setDiffV1Id(e.target.value)}
-                      className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="text-xs border border-white/10 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="">v1 (baseline)</option>
                       {versions.map((v: any) => (
@@ -2536,7 +2536,7 @@ export function ContractDetailPage() {
                     <select
                       value={diffV2Id}
                       onChange={e => setDiffV2Id(e.target.value)}
-                      className="text-xs border border-gray-200 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="text-xs border border-white/10 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="">v2 (redlines)</option>
                       {versions.map((v: any) => (
@@ -2557,7 +2557,7 @@ export function ContractDetailPage() {
                     v2Label={`v${versions.find((v: any) => v.id === diffV2Id)?.versionNumber ?? '2'}`}
                   />
                 ) : (
-                  <div className="bg-white border border-gray-200 rounded-xl p-8 text-center text-gray-400 text-sm">
+                  <div className="bg-obsidian-700 border border-white/10 rounded-xl p-8 text-center text-gray-400 text-sm">
                     Select two versions above to view tracked changes
                   </div>
                 )}
@@ -2600,14 +2600,14 @@ export function ContractDetailPage() {
                 <div className="absolute left-5 top-0 bottom-0 w-px bg-gray-200" />
                 {timeline.map((e: any) => (
                   <div key={e.id} className="flex items-start gap-4 mb-4 relative pl-12">
-                    <div className="absolute left-3.5 top-1.5 w-3 h-3 rounded-full bg-white border-2 border-blue-400" />
-                    <div className="bg-white rounded-xl border shadow-sm px-4 py-3 flex-1">
+                    <div className="absolute left-3.5 top-1.5 w-3 h-3 rounded-full bg-obsidian-700 border-2 border-blue-400" />
+                    <div className="bg-obsidian-700 rounded-xl border shadow-sm px-4 py-3 flex-1">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-semibold text-gray-700">{e.action.replace(/_/g, ' ')}</span>
+                        <span className="text-xs font-semibold text-slate-300">{e.action.replace(/_/g, ' ')}</span>
                         <span className="text-xs text-gray-400">{new Date(e.createdAt).toLocaleString()}</span>
                       </div>
                       {e.userId && (
-                        <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
+                        <p className="text-xs text-slate-500 mt-1 flex items-center gap-1">
                           <User className="h-3 w-3" /> {e.userId}
                         </p>
                       )}
@@ -2638,9 +2638,9 @@ export function ContractDetailPage() {
 
             {/* No instance yet — show submit prompt */}
             {!approvalInstanceData && !['PENDING_APPROVAL', 'APPROVED', 'REJECTED'].includes(contract?.status ?? '') && (
-              <div className="text-center py-10 border-2 border-dashed rounded-xl border-gray-200">
+              <div className="text-center py-10 border-2 border-dashed rounded-xl border-white/10">
                 <CheckCircle2 className="h-10 w-10 text-gray-300 mx-auto mb-3" />
-                <p className="text-sm font-semibold text-gray-600 mb-1">Not yet in review</p>
+                <p className="text-sm font-semibold text-slate-400 mb-1">Not yet in review</p>
                 <p className="text-sm text-gray-400 mb-4">Send this contract to the approval workflow to start the review.</p>
                 <Button
                   size="sm"
@@ -2663,7 +2663,7 @@ export function ContractDetailPage() {
             {/* My pending step on this contract */}
             {approvalData && (
               <div>
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">Your Pending Approval</h3>
+                <h3 className="text-sm font-semibold text-slate-300 mb-3">Your Pending Approval</h3>
                 <ApprovalCard
                   stepId={approvalData.stepId}
                   instanceId={approvalData.instanceId}
@@ -2683,8 +2683,8 @@ export function ContractDetailPage() {
             {/* Timeline */}
             {approvalInstanceData && (
               <div>
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">Approval Timeline</h3>
-                <div className="bg-white rounded-xl border shadow-sm p-5">
+                <h3 className="text-sm font-semibold text-slate-300 mb-3">Approval Timeline</h3>
+                <div className="bg-obsidian-700 rounded-xl border shadow-sm p-5">
                   <ApprovalTimeline
                     instance={approvalInstanceData}
                     steps={approvalInstanceData.steps ?? []}
@@ -2860,7 +2860,7 @@ export function ContractDetailPage() {
               className={cn(
                 'fixed right-4 bottom-4 z-30 xl:hidden',
                 'inline-flex items-center gap-1.5 px-4 py-2 rounded-full',
-                'bg-gray-900 text-white shadow-lg hover:bg-gray-800',
+                'bg-obsidian-700 text-white shadow-lg hover:bg-gray-800',
                 'text-xs font-medium',
               )}
             >
@@ -2876,15 +2876,15 @@ export function ContractDetailPage() {
         className={cn(
           // B.5.16 — responsive positioning.
           isXl
-            ? 'hidden xl:flex w-80 border-l bg-white overflow-y-auto flex-col'
+            ? 'hidden xl:flex w-80 border-l bg-obsidian-700 overflow-y-auto flex-col'
             : isMd
               ? cn(
-                  'fixed inset-y-0 right-0 z-40 w-[min(420px,100vw)] bg-white shadow-2xl border-l overflow-y-auto flex flex-col transition-transform',
+                  'fixed inset-y-0 right-0 z-40 w-[min(420px,100vw)] bg-obsidian-700 shadow-2xl border-l overflow-y-auto flex flex-col transition-transform',
                   railOpen ? 'translate-x-0' : 'translate-x-full',
                 )
               : cn(
                   // Mobile bottom sheet: always anchored to bottom, 64px peek when closed, near-full when open.
-                  'fixed inset-x-0 bottom-0 z-40 bg-white shadow-2xl border-t rounded-t-2xl overflow-y-auto flex flex-col transition-[max-height]',
+                  'fixed inset-x-0 bottom-0 z-40 bg-obsidian-700 shadow-2xl border-t rounded-t-2xl overflow-y-auto flex flex-col transition-[max-height]',
                   railOpen ? 'max-h-[85vh]' : 'max-h-16',
                 ),
           // When the focused-review drawer is showing, hide the normal rail.
@@ -2906,7 +2906,7 @@ export function ContractDetailPage() {
               if (!isMd) setRailOpen(o => !o)
             }}
             className={cn(
-              'flex items-center justify-between px-4 py-2 border-b border-gray-100 bg-gray-50',
+              'flex items-center justify-between px-4 py-2 border-b border-white/[0.06] bg-obsidian-900',
               !isMd && 'cursor-pointer',
             )}
           >
@@ -2917,13 +2917,13 @@ export function ContractDetailPage() {
                   className="inline-block h-1 w-10 rounded-full bg-gray-300"
                 />
               )}
-              <span className="text-[11px] font-semibold uppercase tracking-wide text-gray-600">
+              <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
                 Details
               </span>
             </div>
             <button
               onClick={(e) => { e.stopPropagation(); setRailOpen(false) }}
-              className="p-1 rounded text-gray-400 hover:text-gray-700 hover:bg-gray-100"
+              className="p-1 rounded text-gray-400 hover:text-slate-300 hover:bg-obsidian-800"
               aria-label="Close details"
             >
               <X className="h-4 w-4" />
@@ -2955,7 +2955,7 @@ export function ContractDetailPage() {
           }
 
           return (
-            <div className="px-5 pt-4 pb-3 border-b border-gray-100" data-testid="review-progress">
+            <div className="px-5 pt-4 pb-3 border-b border-white/[0.06]" data-testid="review-progress">
               {/* Click the row header to expand/collapse the checklist */}
               <button
                 type="button"
@@ -2964,7 +2964,7 @@ export function ContractDetailPage() {
                 data-testid="review-progress-toggle"
                 className="w-full flex items-center justify-between mb-1.5 group"
               >
-                <span className="text-[11px] font-semibold uppercase tracking-wide text-gray-600 inline-flex items-center gap-1">
+                <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 inline-flex items-center gap-1">
                   Review progress
                   <ChevronRight
                     className={cn(
@@ -2975,12 +2975,12 @@ export function ContractDetailPage() {
                 </span>
                 <span className={cn(
                   'text-xs tabular-nums font-medium',
-                  complete ? 'text-emerald-700' : 'text-gray-600',
+                  complete ? 'text-emerald-700' : 'text-slate-400',
                 )}>
                   {reviewedCount} / {risky.length}{complete && ' ✓'}
                 </span>
               </button>
-              <div className="h-1.5 w-full rounded-full bg-gray-100 overflow-hidden">
+              <div className="h-1.5 w-full rounded-full bg-obsidian-800 overflow-hidden">
                 <div
                   className={cn(
                     'h-full transition-all',
@@ -3002,7 +3002,7 @@ export function ContractDetailPage() {
                         data-testid={`review-row-${c.id}`}
                         className={cn(
                           'group flex items-center gap-2 text-[11.5px] rounded px-1.5 py-1 transition-colors',
-                          isReviewed ? 'opacity-60 hover:bg-gray-50' : 'hover:bg-blue-50',
+                          isReviewed ? 'opacity-60 hover:bg-obsidian-900' : 'hover:bg-obsidian-800',
                         )}
                       >
                         <span
@@ -3014,7 +3014,7 @@ export function ContractDetailPage() {
                         <button
                           type="button"
                           onClick={() => setFocusedClauseId(c.id)}
-                          className="flex-1 min-w-0 text-left truncate text-gray-800 hover:text-blue-700"
+                          className="flex-1 min-w-0 text-left truncate text-white hover:text-blue-700"
                           title={`${cleanType}${c.sectionRef ? ' · §' + c.sectionRef : ''}`}
                         >
                           {cleanType}
@@ -3090,7 +3090,7 @@ export function ContractDetailPage() {
                     ? 'bg-red-50 text-red-700 border-red-200'
                     : /lower/.test(precedentsData.riskDeltaLabel)
                     ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                    : 'bg-gray-50 text-gray-600 border-gray-200',
+                    : 'bg-obsidian-900 text-slate-400 border-white/10',
                 )}
                 title="Compared to signed peers of the same contract type"
               >
@@ -3113,7 +3113,7 @@ export function ContractDetailPage() {
                     <div className="min-w-0 flex-1">
                       <button
                         onClick={() => navigate(`/contracts/${p.contractId}`)}
-                        className="text-sm text-gray-900 hover:text-blue-700 hover:underline truncate text-left w-full"
+                        className="text-sm text-white hover:text-blue-700 hover:underline truncate text-left w-full"
                         title={p.title}
                       >
                         {p.title}
@@ -3153,7 +3153,7 @@ export function ContractDetailPage() {
 
         <RailSection title="Overview" defaultOpen>
           {contract.summary ? (
-            <p className="text-sm text-gray-700 leading-relaxed">{contract.summary}</p>
+            <p className="text-sm text-slate-300 leading-relaxed">{contract.summary}</p>
           ) : (
             <p className="text-sm text-gray-400 italic">
               {contract.analysisStatus === 'DONE'
@@ -3258,10 +3258,10 @@ export function ContractDetailPage() {
                         if (match) match.scrollIntoView({ behavior: 'smooth', block: 'start' })
                       }}
                       title={`${n.title}${n.page ? ` — page ${n.page}` : ''}`}
-                      className="text-left w-full truncate py-0.5 px-1 rounded hover:bg-blue-50 hover:text-blue-700 transition-colors flex items-baseline gap-1.5"
+                      className="text-left w-full truncate py-0.5 px-1 rounded hover:bg-obsidian-800 hover:text-blue-700 transition-colors flex items-baseline gap-1.5"
                     >
                       {n.ref && (
-                        <span className="font-mono text-[10.5px] text-gray-500 flex-shrink-0">
+                        <span className="font-mono text-[10.5px] text-slate-500 flex-shrink-0">
                           {n.ref}
                         </span>
                       )}
@@ -3338,9 +3338,9 @@ export function ContractDetailPage() {
                   {contract.riskScore >= 0.67 ? 'High Risk' :
                    contract.riskScore >= 0.34 ? 'Medium Risk' : 'Low Risk'}
                 </span>
-                <span className="text-gray-500 tabular-nums">{Math.round(contract.riskScore * 100)}%</span>
+                <span className="text-slate-500 tabular-nums">{Math.round(contract.riskScore * 100)}%</span>
               </div>
-              <div className="h-1.5 w-full rounded-full bg-gray-100 overflow-hidden">
+              <div className="h-1.5 w-full rounded-full bg-obsidian-800 overflow-hidden">
                 <div
                   className={cn(
                     'h-full rounded-full transition-all',
@@ -3355,7 +3355,7 @@ export function ContractDetailPage() {
           {riskFactors.length > 0 ? (
             <ul className="space-y-1.5">
               {riskFactors.map((rf, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                <li key={i} className="flex items-start gap-2 text-sm text-slate-300">
                   <span className="mt-1.5 h-1 w-1 rounded-full bg-red-400 flex-shrink-0" />
                   <span>{rf}</span>
                 </li>
@@ -3401,7 +3401,7 @@ export function ContractDetailPage() {
             <ul className="space-y-2">
               {clausesData.data.slice(0, 6).map((c: any) => (
                 <li key={c.id} className="text-sm">
-                  <div className="font-medium text-gray-900 truncate">
+                  <div className="font-medium text-white truncate">
                     {CLAUSE_TYPE_LABELS[c.clauseType] ?? c.clauseType.replace(/_/g, ' ')}
                   </div>
                   {c.riskRating && (
@@ -3460,11 +3460,11 @@ export function ContractDetailPage() {
             {/* Versions */}
             {versions.map((v: any) => (
               <li key={v.id} className="flex items-start gap-2.5">
-                <div className="h-5 w-5 rounded-full bg-blue-50 text-blue-700 text-[10px] font-semibold flex items-center justify-center flex-shrink-0">
+                <div className="h-5 w-5 rounded-full bg-sky-500/10 text-sky-300 text-[10px] font-semibold flex items-center justify-center flex-shrink-0">
                   v{v.versionNumber}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="text-sm text-gray-900 font-medium truncate">
+                  <div className="text-sm text-white font-medium truncate">
                     {v.changeNote?.replace(/\s*\(\s*\)\s*$/, '') || `Version ${v.versionNumber}`}
                   </div>
                   <div className="text-[11px] text-gray-400">
@@ -3479,7 +3479,7 @@ export function ContractDetailPage() {
               <li key={`att-${i}`} className="flex items-start gap-2.5">
                 <Paperclip className="h-3.5 w-3.5 text-gray-400 mt-1 flex-shrink-0" />
                 <div className="min-w-0 flex-1">
-                  <div className="text-sm text-gray-700 truncate">{att.label || att.filename}</div>
+                  <div className="text-sm text-slate-300 truncate">{att.label || att.filename}</div>
                   <div className="text-[11px] text-gray-400">Attachment</div>
                 </div>
               </li>
@@ -3514,8 +3514,8 @@ export function ContractDetailPage() {
           >
             {approvalData ? (
               <div className="space-y-2">
-                <div className="text-xs text-gray-500">
-                  Waiting on you: <span className="font-medium text-gray-900">{approvalData.stepName}</span>
+                <div className="text-xs text-slate-500">
+                  Waiting on you: <span className="font-medium text-white">{approvalData.stepName}</span>
                 </div>
                 <button
                   onClick={() => {
@@ -3537,7 +3537,7 @@ export function ContractDetailPage() {
                 </button>
               </div>
             ) : approvalInstanceData?.instance ? (
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-slate-400">
                 Status: <span className="font-medium">{approvalInstanceData.instance.status}</span>
               </p>
             ) : (
@@ -3552,7 +3552,7 @@ export function ContractDetailPage() {
           count={commentCount || null}
         >
           {commentCount ? (
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-slate-400">
               {commentCount} comment{commentCount === 1 ? '' : 's'}. Full thread in the editor's inline comments (coming in B.3).
             </p>
           ) : (
@@ -3572,7 +3572,7 @@ export function ContractDetailPage() {
                   <span className="text-gray-400 tabular-nums min-w-[3.5rem]">
                     {new Date(evt.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   </span>
-                  <span className="text-gray-700">
+                  <span className="text-slate-300">
                     {evt.action?.replace(/_/g, ' ').toLowerCase().replace(/\b./g, (c: string) => c.toUpperCase())}
                   </span>
                 </li>
@@ -3598,13 +3598,13 @@ export function ContractDetailPage() {
       {/* Binder split modal */}
       {showSplitModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg">
+          <div className="bg-obsidian-700 rounded-xl shadow-2xl w-full max-w-lg">
             <div className="flex items-center justify-between p-5 border-b">
               <div>
                 <h2 className="text-lg font-semibold">Split into separate contracts</h2>
-                <p className="text-xs text-gray-500 mt-0.5">Set the page range, title, and type for each agreement</p>
+                <p className="text-xs text-slate-500 mt-0.5">Set the page range, title, and type for each agreement</p>
               </div>
-              <button onClick={() => setShowSplitModal(false)} className="text-gray-400 hover:text-gray-600">
+              <button onClick={() => setShowSplitModal(false)} className="text-gray-400 hover:text-slate-400">
                 <XCircle className="h-5 w-5" />
               </button>
             </div>
@@ -3612,7 +3612,7 @@ export function ContractDetailPage() {
               {splitSpecs.map((spec, i) => (
                 <div key={i} className="border rounded-lg p-4 space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold text-gray-600">Agreement {i + 1}</span>
+                    <span className="text-xs font-semibold text-slate-400">Agreement {i + 1}</span>
                     {splitSpecs.length > 2 && (
                       <button
                         onClick={() => setSplitSpecs(prev => prev.filter((_, j) => j !== i))}
@@ -3630,7 +3630,7 @@ export function ContractDetailPage() {
                   />
                   <div className="flex gap-2">
                     <div className="flex-1">
-                      <label className="text-xs text-gray-500 mb-1 block">Page start</label>
+                      <label className="text-xs text-slate-500 mb-1 block">Page start</label>
                       <Input
                         type="number" min={1}
                         value={spec.pageStart}
@@ -3639,7 +3639,7 @@ export function ContractDetailPage() {
                       />
                     </div>
                     <div className="flex-1">
-                      <label className="text-xs text-gray-500 mb-1 block">Page end</label>
+                      <label className="text-xs text-slate-500 mb-1 block">Page end</label>
                       <Input
                         type="number" min={1}
                         value={spec.pageEnd}
@@ -3648,11 +3648,11 @@ export function ContractDetailPage() {
                       />
                     </div>
                     <div className="flex-1">
-                      <label className="text-xs text-gray-500 mb-1 block">Type</label>
+                      <label className="text-xs text-slate-500 mb-1 block">Type</label>
                       <select
                         value={spec.type}
                         onChange={e => setSplitSpecs(prev => prev.map((s, j) => j === i ? { ...s, type: e.target.value } : s))}
-                        className="w-full rounded-md border border-gray-300 px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full rounded-md border border-white/14 px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                       >
                         {CONTRACT_TYPES.map(t => <option key={t} value={t}>{t.replace(/_/g, ' ')}</option>)}
                       </select>
@@ -3667,7 +3667,7 @@ export function ContractDetailPage() {
                 + Add another split
               </button>
             </div>
-            <div className="flex justify-end gap-2 px-5 py-4 border-t bg-gray-50 rounded-b-xl">
+            <div className="flex justify-end gap-2 px-5 py-4 border-t bg-obsidian-900 rounded-b-xl">
               <Button variant="outline" onClick={() => setShowSplitModal(false)}>Cancel</Button>
               <Button
                 onClick={() => splitMutation.mutate(splitSpecs)}

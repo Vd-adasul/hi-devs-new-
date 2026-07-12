@@ -45,7 +45,7 @@ interface MatterDetail {
 
 const STATUS_STYLE: Record<string, string> = {
   OPEN:     'bg-emerald-50 text-emerald-700 border-emerald-200',
-  CLOSED:   'bg-gray-100  text-gray-700    border-gray-300',
+  CLOSED:   'bg-obsidian-800  text-slate-300    border-white/14',
   ARCHIVED: 'bg-amber-50  text-amber-800   border-amber-200',
 }
 
@@ -83,7 +83,7 @@ export function MatterRailSection({ matterId }: { matterId: string | null | unde
           <Link
             to={`/matters/${matter.id}`}
             data-testid="matter-rail-link"
-            className="flex items-start gap-1.5 text-[12.5px] font-medium text-gray-900 hover:text-blue-700 leading-tight min-w-0"
+            className="flex items-start gap-1.5 text-[12.5px] font-medium text-white hover:text-blue-700 leading-tight min-w-0"
           >
             <Briefcase className="h-3.5 w-3.5 text-blue-600 mt-0.5 shrink-0" />
             <span className="truncate">{matter.name}</span>
@@ -103,7 +103,7 @@ export function MatterRailSection({ matterId }: { matterId: string | null | unde
         )}
 
         {/* Sibling counts */}
-        <div className="text-[11px] text-gray-700 flex items-center gap-1.5 flex-wrap">
+        <div className="text-[11px] text-slate-300 flex items-center gap-1.5 flex-wrap">
           {siblingContracts > 0 ? (
             <Link
               to={`/matters/${matter.id}`}
@@ -127,13 +127,13 @@ export function MatterRailSection({ matterId }: { matterId: string | null | unde
         {/* Counterparty + Owner */}
         <div className="space-y-0.5">
           {matter.counterpartyName && (
-            <div className="text-[11px] text-gray-700 flex items-center gap-1">
+            <div className="text-[11px] text-slate-300 flex items-center gap-1">
               <Building2 className="h-3 w-3 text-gray-400" />
               <span className="truncate">{matter.counterpartyName}</span>
             </div>
           )}
           {matter.owner?.name && (
-            <div className="text-[11px] text-gray-700 flex items-center gap-1">
+            <div className="text-[11px] text-slate-300 flex items-center gap-1">
               <UserIcon className="h-3 w-3 text-gray-400" />
               <span className="truncate">{matter.owner.name}</span>
             </div>

@@ -14,11 +14,11 @@ const STATUS_BADGE: Record<string, { label: string; cls: string }> = {
   ACCEPTED:         { label: 'Accepted',         cls: 'bg-green-50 text-green-700 border-green-200' },
   REJECTED:         { label: 'Rejected',         cls: 'bg-red-50 text-red-700 border-red-200' },
   MORE_INFO_NEEDED: { label: 'More Info Needed', cls: 'bg-orange-50 text-orange-700 border-orange-200' },
-  COMPLETED:        { label: 'Completed',        cls: 'bg-gray-100 text-gray-600 border-gray-200' },
+  COMPLETED:        { label: 'Completed',        cls: 'bg-obsidian-800 text-slate-400 border-white/10' },
 }
 
 const PRIORITY_BADGE: Record<string, string> = {
-  LOW:    'bg-gray-100 text-gray-500',
+  LOW:    'bg-obsidian-800 text-slate-500',
   MEDIUM: 'bg-blue-50 text-blue-600',
   HIGH:   'bg-amber-50 text-amber-700',
   URGENT: 'bg-red-50 text-red-600',
@@ -35,7 +35,7 @@ const TYPE_COLORS: Record<string, string> = {
   LICENSE:          'bg-violet-100 text-violet-700',
   DATA_PROCESSING:  'bg-green-100 text-green-700',
   ORDER_FORM:       'bg-yellow-100 text-yellow-700',
-  OTHER:            'bg-gray-100 text-gray-600',
+  OTHER:            'bg-obsidian-800 text-slate-400',
 }
 
 interface AiClassification {
@@ -116,9 +116,9 @@ export function RequestDetailPanel({ request, onClose }: Props) {
       <div className="flex-1 bg-black/30 backdrop-blur-sm" onClick={onClose} />
 
       {/* Panel */}
-      <div className="w-full max-w-md bg-white shadow-2xl flex flex-col h-full overflow-hidden">
+      <div className="w-full max-w-md bg-obsidian-700 shadow-2xl flex flex-col h-full overflow-hidden">
         {/* Header */}
-        <div className="flex items-start justify-between px-5 py-4 border-b border-gray-100">
+        <div className="flex items-start justify-between px-5 py-4 border-b border-white/[0.06]">
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
               {request.requestNumber && (
@@ -131,19 +131,19 @@ export function RequestDetailPanel({ request, onClose }: Props) {
                 {request.priority}
               </span>
             </div>
-            <h2 className="text-sm font-semibold text-gray-900 mt-1.5 leading-snug">{request.title}</h2>
+            <h2 className="text-sm font-semibold text-white mt-1.5 leading-snug">{request.title}</h2>
           </div>
-          <button onClick={onClose} className="ml-3 p-1.5 hover:bg-gray-100 rounded-lg flex-shrink-0">
+          <button onClick={onClose} className="ml-3 p-1.5 hover:bg-obsidian-800 rounded-lg flex-shrink-0">
             <X className="h-4 w-4 text-gray-400" />
           </button>
         </div>
 
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
           {/* AI Classification card */}
-          <div className="rounded-xl border border-gray-100 bg-gray-50 p-4">
+          <div className="rounded-xl border border-white/[0.06] bg-obsidian-900 p-4">
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="h-3.5 w-3.5 text-blue-500" />
-              <span className="text-xs font-semibold text-gray-700">AI Classification</span>
+              <span className="text-xs font-semibold text-slate-300">AI Classification</span>
               {!aiClassification && (
                 <span className="flex items-center gap-1 text-[10px] text-blue-500 ml-auto">
                   <Loader2 className="h-3 w-3 animate-spin" /> Classifying…
@@ -167,7 +167,7 @@ export function RequestDetailPanel({ request, onClose }: Props) {
                   </div>
                 </div>
                 {aiClassification.reason && (
-                  <p className="text-xs text-gray-500 italic">{aiClassification.reason}</p>
+                  <p className="text-xs text-slate-500 italic">{aiClassification.reason}</p>
                 )}
                 {/* Extracted terms */}
                 {(() => {
@@ -181,9 +181,9 @@ export function RequestDetailPanel({ request, onClose }: Props) {
                   return terms.length > 0 ? (
                     <div className="grid grid-cols-2 gap-1.5 pt-1">
                       {terms.map(([label, val]) => (
-                        <div key={label} className="bg-white rounded-lg px-2.5 py-1.5 border border-gray-100">
+                        <div key={label} className="bg-obsidian-700 rounded-lg px-2.5 py-1.5 border border-white/[0.06]">
                           <p className="text-[9px] uppercase tracking-wide text-gray-400">{label}</p>
-                          <p className="text-xs font-medium text-gray-700 truncate">{val}</p>
+                          <p className="text-xs font-medium text-slate-300 truncate">{val}</p>
                         </div>
                       ))}
                     </div>
@@ -198,45 +198,45 @@ export function RequestDetailPanel({ request, onClose }: Props) {
           {/* Meta */}
           <div className="space-y-3">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-gray-500">Contract type</span>
+              <span className="text-slate-500">Contract type</span>
               <span className={`font-medium px-2 py-0.5 rounded-full text-[11px] ${TYPE_COLORS[request.type] ?? TYPE_COLORS.OTHER}`}>
                 {request.type.replace(/_/g, ' ')}
               </span>
             </div>
             {request.counterpartyName && (
               <div className="flex items-center justify-between text-xs">
-                <span className="text-gray-500">Counterparty</span>
-                <span className="font-medium text-gray-800">{request.counterpartyName}</span>
+                <span className="text-slate-500">Counterparty</span>
+                <span className="font-medium text-white">{request.counterpartyName}</span>
               </div>
             )}
             {request.estimatedValue && (
               <div className="flex items-center justify-between text-xs">
-                <span className="text-gray-500">Est. value</span>
-                <span className="font-medium text-gray-800">${Number(request.estimatedValue).toLocaleString()}</span>
+                <span className="text-slate-500">Est. value</span>
+                <span className="font-medium text-white">${Number(request.estimatedValue).toLocaleString()}</span>
               </div>
             )}
             <div className="flex items-center justify-between text-xs">
-              <span className="text-gray-500">Submitted</span>
-              <span className="text-gray-700">{new Date(request.createdAt).toLocaleDateString()}</span>
+              <span className="text-slate-500">Submitted</span>
+              <span className="text-slate-300">{new Date(request.createdAt).toLocaleDateString()}</span>
             </div>
           </div>
 
           {/* Description */}
           <div>
-            <p className="text-xs font-medium text-gray-500 mb-1.5">Description</p>
-            <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">{request.description}</p>
+            <p className="text-xs font-medium text-slate-500 mb-1.5">Description</p>
+            <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">{request.description}</p>
           </div>
 
           {/* Assignee */}
           <div>
-            <p className="text-xs font-medium text-gray-500 mb-1.5">Assignee</p>
+            <p className="text-xs font-medium text-slate-500 mb-1.5">Assignee</p>
             <div className="relative">
               <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-400 pointer-events-none" />
               <select
                 value={selectedAssignee}
                 onChange={e => handleAssign(e.target.value)}
                 disabled={!isActionable || patch.isPending}
-                className="w-full h-9 text-sm border border-gray-200 rounded-lg pl-8 pr-3 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full h-9 text-sm border border-white/10 rounded-lg pl-8 pr-3 bg-obsidian-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <option value="">Unassigned</option>
                 {users.map((u) => (
@@ -249,7 +249,7 @@ export function RequestDetailPanel({ request, onClose }: Props) {
 
         {/* Action footer */}
         {isActionable && (
-          <div className="border-t border-gray-100 px-5 py-4 space-y-2">
+          <div className="border-t border-white/[0.06] px-5 py-4 space-y-2">
             <Button
               className="w-full gap-2 bg-green-600 hover:bg-green-700 text-white"
               size="sm"

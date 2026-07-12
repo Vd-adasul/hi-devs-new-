@@ -52,20 +52,20 @@ export class ErrorBoundary extends Component<Props, State> {
             <AlertTriangle className="h-5 w-5 text-amber-700" />
           </div>
           <div className="min-w-0 flex-1">
-            <h3 className="text-sm font-semibold text-gray-900">
+            <h3 className="text-sm font-semibold text-white">
               Something went wrong{this.props.label ? ` rendering ${this.props.label}` : ''}
             </h3>
-            <p className="mt-1 text-[12.5px] text-gray-700 leading-snug">
+            <p className="mt-1 text-[12.5px] text-slate-300 leading-snug">
               The page caught an error before it could blank. You can retry, or
               navigate elsewhere and come back.
             </p>
-            <pre className="mt-2 text-[11px] text-amber-900 bg-white/60 border border-amber-200 rounded px-2 py-1.5 overflow-x-auto whitespace-pre-wrap">
+            <pre className="mt-2 text-[11px] text-amber-900 bg-obsidian-700/60 border border-amber-200 rounded px-2 py-1.5 overflow-x-auto whitespace-pre-wrap">
               {error.message.slice(0, 600)}
             </pre>
             <button
               type="button"
               onClick={this.reset}
-              className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-amber-300 bg-white text-[12px] font-medium text-amber-900 hover:bg-amber-100"
+              className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-amber-300 bg-obsidian-700 text-[12px] font-medium text-amber-900 hover:bg-amber-100"
             >
               <RefreshCw className="h-3 w-3" />
               Retry

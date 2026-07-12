@@ -48,7 +48,7 @@ const STATUS_FILTERS: { key: SrStatus | 'ALL'; label: string }[] = [
 const STATUS_PILL: Record<SrStatus, { bg: string; fg: string; icon: React.ComponentType<{ className?: string }>; label: string }> = {
   PENDING:   { bg: 'bg-amber-50 border-amber-200',   fg: 'text-amber-700',   icon: Clock,         label: 'Awaiting' },
   COMPLETED: { bg: 'bg-emerald-50 border-emerald-200', fg: 'text-emerald-700', icon: CheckCircle2, label: 'Completed' },
-  VOIDED:    { bg: 'bg-gray-100 border-gray-200',     fg: 'text-gray-600',    icon: Ban,           label: 'Voided' },
+  VOIDED:    { bg: 'bg-obsidian-800 border-white/10',     fg: 'text-slate-400',    icon: Ban,           label: 'Voided' },
   EXPIRED:   { bg: 'bg-red-50 border-red-200',        fg: 'text-red-700',     icon: XCircle,       label: 'Expired' },
 }
 
@@ -81,14 +81,14 @@ export function SignaturesPage() {
     <div className="px-6 py-6 max-w-6xl mx-auto" data-testid="signatures-page">
       <div className="flex items-center gap-3 mb-1">
         <PenSquare className="h-5 w-5 text-emerald-600" />
-        <h1 className="text-2xl font-semibold text-gray-900">Signatures</h1>
+        <h1 className="text-2xl font-semibold text-white">Signatures</h1>
       </div>
-      <p className="text-sm text-gray-500 mb-5">
+      <p className="text-sm text-slate-500 mb-5">
         Every contract sent for signature across your organization.
       </p>
 
       {/* Filter tabs */}
-      <div className="flex items-center gap-1 mb-5 border-b border-gray-200">
+      <div className="flex items-center gap-1 mb-5 border-b border-white/10">
         {STATUS_FILTERS.map(f => {
           const isActive = filter === f.key
           const count = f.key === 'ALL' ? items.length : counts[f.key] ?? 0
@@ -101,13 +101,13 @@ export function SignaturesPage() {
               className={`px-4 py-2 text-sm border-b-2 -mb-px transition-colors ${
                 isActive
                   ? 'border-emerald-600 text-emerald-700 font-medium'
-                  : 'border-transparent text-gray-500 hover:text-gray-800'
+                  : 'border-transparent text-slate-500 hover:text-white'
               }`}
             >
               {f.label}
               {count > 0 && (
                 <span className={`ml-2 text-xs px-1.5 py-0.5 rounded-full ${
-                  isActive ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-500'
+                  isActive ? 'bg-emerald-100 text-emerald-700' : 'bg-obsidian-800 text-slate-500'
                 }`}>
                   {count}
                 </span>
@@ -128,9 +128,9 @@ export function SignaturesPage() {
           Failed to load signature requests.
         </div>
       ) : items.length === 0 ? (
-        <div className="text-center py-16 px-6 border border-dashed border-gray-200 rounded-xl">
+        <div className="text-center py-16 px-6 border border-dashed border-white/10 rounded-xl">
           <PenSquare className="h-8 w-8 text-gray-300 mx-auto mb-2" />
-          <p className="text-sm text-gray-500 mb-1">
+          <p className="text-sm text-slate-500 mb-1">
             {filter === 'ALL' ? 'No signature requests yet.' : `No ${filter.toLowerCase()} signature requests.`}
           </p>
           <p className="text-xs text-gray-400">
@@ -138,9 +138,9 @@ export function SignaturesPage() {
           </p>
         </div>
       ) : (
-        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+        <div className="bg-obsidian-700 border border-white/10 rounded-xl overflow-hidden">
           <table className="w-full text-sm" data-testid="signatures-table">
-            <thead className="bg-gray-50 text-xs uppercase tracking-wider text-gray-500">
+            <thead className="bg-obsidian-900 text-xs uppercase tracking-wider text-slate-500">
               <tr>
                 <th className="text-left px-5 py-3 font-medium">Contract</th>
                 <th className="text-left px-5 py-3 font-medium">Signers</th>
@@ -149,29 +149,29 @@ export function SignaturesPage() {
                 <th className="text-right px-5 py-3 font-medium">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-white/5">
               {items.map(it => {
                 const pill = STATUS_PILL[it.status]
                 const StatusIcon = pill.icon
                 return (
-                  <tr key={it.id} className="hover:bg-gray-50" data-testid={`signature-row-${it.id}`}>
+                  <tr key={it.id} className="hover:bg-obsidian-900" data-testid={`signature-row-${it.id}`}>
                     <td className="px-5 py-3">
                       <Link
                         to={`/contracts/${it.contract?.id ?? ''}`}
-                        className="font-medium text-gray-900 hover:text-blue-600 truncate block max-w-xs"
+                        className="font-medium text-white hover:text-blue-600 truncate block max-w-xs"
                         title={it.contract?.title}
                       >
                         {it.contract?.title ?? '(deleted contract)'}
                       </Link>
-                      <div className="text-xs text-gray-500 mt-0.5 flex items-center gap-1.5">
+                      <div className="text-xs text-slate-500 mt-0.5 flex items-center gap-1.5">
                         <span className="uppercase tracking-wide">{it.contract?.type?.replace(/_/g, ' ') ?? ''}</span>
                         {it.contract?.counterpartyName && <span>· {it.contract.counterpartyName}</span>}
                       </div>
                     </td>
                     <td className="px-5 py-3">
-                      <div className="text-xs text-gray-700">
+                      <div className="text-xs text-slate-300">
                         <div className="font-medium">{it.signedCount} / {it.totalSigners} signed</div>
-                        <div className="text-gray-500 mt-0.5 truncate max-w-[180px]">
+                        <div className="text-slate-500 mt-0.5 truncate max-w-[180px]">
                           {it.signers.slice(0, 3).map(s => s.name).join(', ')}
                           {it.signers.length > 3 && ` +${it.signers.length - 3}`}
                         </div>
@@ -183,7 +183,7 @@ export function SignaturesPage() {
                         {pill.label}
                       </span>
                     </td>
-                    <td className="px-5 py-3 text-xs text-gray-500">
+                    <td className="px-5 py-3 text-xs text-slate-500">
                       {relTime(it.createdAt)}
                       {it.completedAt && (
                         <div className="text-emerald-600 mt-0.5">

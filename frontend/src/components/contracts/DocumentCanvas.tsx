@@ -170,23 +170,23 @@ export function DocumentCanvas({
   // canvas during analysis.
   if (state.kind === 'loading') {
     return (
-      <div className={cn('flex flex-col items-center justify-center h-full bg-gray-50', className)}>
+      <div className={cn('flex flex-col items-center justify-center h-full bg-obsidian-900', className)}>
         <Loader2 className="h-6 w-6 text-gray-300 animate-spin mb-3" />
-        <p className="text-sm text-gray-500">Preparing document…</p>
+        <p className="text-sm text-slate-500">Preparing document…</p>
       </div>
     )
   }
 
   if (state.kind === 'analysis_failed') {
     return (
-      <div className={cn('flex flex-col items-center justify-center h-full bg-gray-50', className)}>
-        <div className="max-w-md mx-auto text-center bg-white rounded-xl border border-amber-200 shadow-sm p-8">
+      <div className={cn('flex flex-col items-center justify-center h-full bg-obsidian-900', className)}>
+        <div className="max-w-md mx-auto text-center bg-obsidian-700 rounded-xl border border-amber-200 shadow-sm p-8">
           <FileWarning className="h-8 w-8 text-amber-500 mx-auto mb-3" />
-          <p className="text-sm font-semibold text-gray-800">Document extraction failed</p>
+          <p className="text-sm font-semibold text-white">Document extraction failed</p>
           {state.reason && (
-            <p className="text-xs text-gray-500 mt-2 leading-relaxed">{state.reason}</p>
+            <p className="text-xs text-slate-500 mt-2 leading-relaxed">{state.reason}</p>
           )}
-          <p className="text-xs text-gray-500 mt-3">
+          <p className="text-xs text-slate-500 mt-3">
             The contract is still uploaded — you can view the original PDF from <span className="font-medium">Actions</span>,
             or retry analysis.
           </p>
@@ -205,10 +205,10 @@ export function DocumentCanvas({
 
   if (state.kind === 'empty') {
     return (
-      <div className={cn('flex flex-col items-center justify-center h-full bg-gray-50', className)}>
+      <div className={cn('flex flex-col items-center justify-center h-full bg-obsidian-900', className)}>
         <div className="text-center">
           <AlertTriangle className="h-8 w-8 text-gray-300 mx-auto mb-3" />
-          <p className="text-sm text-gray-500">No content yet.</p>
+          <p className="text-sm text-slate-500">No content yet.</p>
           <p className="text-xs text-gray-400 mt-1">Upload a PDF or draft from a template.</p>
         </div>
       </div>
@@ -250,7 +250,7 @@ export function DocumentCanvas({
   return (
     <div
       ref={scrollRef}
-      className={cn('h-full overflow-auto bg-gray-50', className)}
+      className={cn('h-full overflow-auto bg-obsidian-900', className)}
       onClick={onClickDocument}
       onKeyDown={onKeyDownDocument}
     >
@@ -280,7 +280,7 @@ export function DocumentCanvas({
         <BubbleMenu
           editor={editor}
           updateDelay={100}
-          className="inline-flex items-center gap-0.5 rounded-lg border border-gray-200 bg-white p-1 shadow-lg"
+          className="inline-flex items-center gap-0.5 rounded-lg border border-white/10 bg-obsidian-700 p-1 shadow-lg"
         >
           <MenuButton
             active={editor.isActive('bold')}
@@ -356,8 +356,8 @@ function MenuButton({
       className={cn(
         'inline-flex items-center justify-center w-7 h-7 rounded transition-colors',
         active
-          ? 'bg-gray-100 text-gray-900'
-          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+          ? 'bg-obsidian-800 text-white'
+          : 'text-slate-400 hover:bg-obsidian-900 hover:text-white',
         className,
       )}
     >

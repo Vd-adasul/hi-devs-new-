@@ -70,16 +70,16 @@ export function AdminIntegrationsPage() {
 
   if (!canConfigureIntegrations) {
     return (
-      <div className="px-6 py-6 max-w-2xl mx-auto bg-white text-gray-900 rounded-xl shadow-sm border border-gray-100 mt-4" data-testid="admin-integrations-page">
+      <div className="px-6 py-6 max-w-2xl mx-auto bg-obsidian-700 text-white rounded-xl shadow-sm border border-white/[0.06] mt-4" data-testid="admin-integrations-page">
         <div className="flex items-center gap-3 mb-2">
           <Plug className="h-5 w-5 text-indigo-600" />
-          <h1 className="text-2xl font-semibold text-gray-900">Integrations</h1>
+          <h1 className="text-2xl font-semibold text-white">Integrations</h1>
         </div>
-        <div className="mt-6 flex items-start gap-3 rounded-xl border border-gray-200 bg-gray-50 p-4 text-sm text-gray-700">
+        <div className="mt-6 flex items-start gap-3 rounded-xl border border-white/10 bg-obsidian-900 p-4 text-sm text-slate-300">
           <Lock className="h-4 w-4 text-gray-400 mt-0.5 flex-shrink-0" />
           <div>
-            <p className="font-medium text-gray-900">Admin access required</p>
-            <p className="text-gray-500 mt-1">
+            <p className="font-medium text-white">Admin access required</p>
+            <p className="text-slate-500 mt-1">
               Integrations (API keys, webhooks) are managed by your organization
               admin. Contact your admin to enable an API key or webhook for your team.
             </p>
@@ -90,16 +90,16 @@ export function AdminIntegrationsPage() {
   }
 
   return (
-    <div className="px-6 py-6 max-w-6xl mx-auto bg-white text-gray-900 rounded-xl shadow-sm border border-gray-100 mt-4" data-testid="admin-integrations-page">
+    <div className="px-6 py-6 max-w-6xl mx-auto bg-obsidian-700 text-white rounded-xl shadow-sm border border-white/[0.06] mt-4" data-testid="admin-integrations-page">
       <div className="flex items-center gap-3 mb-1">
         <Plug className="h-5 w-5 text-indigo-600" />
-        <h1 className="text-2xl font-semibold text-gray-900">Integrations</h1>
+        <h1 className="text-2xl font-semibold text-white">Integrations</h1>
       </div>
-      <p className="text-sm text-gray-500 mb-5">
+      <p className="text-sm text-slate-500 mb-5">
         API keys for external systems to call CLM, and webhooks for CLM to push events to you.
       </p>
 
-      <div className="flex items-center gap-1 mb-5 border-b border-gray-200">
+      <div className="flex items-center gap-1 mb-5 border-b border-white/10">
         <TabButton active={tab === 'keys'} onClick={() => setTab('keys')} testId="tab-api-keys">
           <Key className="h-4 w-4" /> API Keys
         </TabButton>
@@ -136,7 +136,7 @@ function TabButton({ active, onClick, children, testId }: {
       className={`px-4 py-2 text-sm border-b-2 transition-colors flex items-center gap-2 -mb-px ${
         active
           ? 'border-indigo-600 text-indigo-700 font-medium'
-          : 'border-transparent text-gray-500 hover:text-gray-800'
+          : 'border-transparent text-slate-500 hover:text-white'
       }`}
     >
       {children}
@@ -168,7 +168,7 @@ function ApiKeysSection() {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-sm font-medium text-gray-700">{keys.length} {keys.length === 1 ? 'key' : 'keys'}</h2>
+        <h2 className="text-sm font-medium text-slate-300">{keys.length} {keys.length === 1 ? 'key' : 'keys'}</h2>
         <Button onClick={() => setCreateOpen(true)} data-testid="create-key-btn" className="gap-1.5 bg-indigo-600 hover:bg-indigo-700">
           <Plus className="h-4 w-4" />
           New API key
@@ -176,17 +176,17 @@ function ApiKeysSection() {
       </div>
 
       {keys.length === 0 ? (
-        <div className="text-center py-12 px-6 border border-dashed border-gray-200 rounded-xl">
+        <div className="text-center py-12 px-6 border border-dashed border-white/10 rounded-xl">
           <Key className="h-7 w-7 text-gray-300 mx-auto mb-2" />
-          <p className="text-sm text-gray-500 mb-1">No API keys yet.</p>
+          <p className="text-sm text-slate-500 mb-1">No API keys yet.</p>
           <p className="text-xs text-gray-400">
-            Create one to let an external system call <code className="text-[10.5px] bg-gray-100 px-1 rounded">/api/v1/*</code> with Bearer auth.
+            Create one to let an external system call <code className="text-[10.5px] bg-obsidian-800 px-1 rounded">/api/v1/*</code> with Bearer auth.
           </p>
         </div>
       ) : (
-        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+        <div className="bg-obsidian-700 border border-white/10 rounded-xl overflow-hidden">
           <table className="w-full text-sm" data-testid="api-keys-table">
-            <thead className="bg-gray-50 text-xs uppercase tracking-wider text-gray-500">
+            <thead className="bg-obsidian-900 text-xs uppercase tracking-wider text-slate-500">
               <tr>
                 <th className="text-left px-4 py-3 font-medium">Name</th>
                 <th className="text-left px-4 py-3 font-medium">Prefix</th>
@@ -195,19 +195,19 @@ function ApiKeysSection() {
                 <th className="text-right px-4 py-3 font-medium"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-white/5">
               {keys.map(k => (
                 <tr key={k.id} data-testid={`api-key-row-${k.id}`}>
-                  <td className="px-4 py-3 font-medium text-gray-900">{k.name}</td>
-                  <td className="px-4 py-3 font-mono text-xs text-gray-600">{k.prefix}…</td>
-                  <td className="px-4 py-3 text-xs text-gray-500">
+                  <td className="px-4 py-3 font-medium text-white">{k.name}</td>
+                  <td className="px-4 py-3 font-mono text-xs text-slate-400">{k.prefix}…</td>
+                  <td className="px-4 py-3 text-xs text-slate-500">
                     {k.lastUsedAt ? new Date(k.lastUsedAt).toLocaleString() : 'never'}
                   </td>
                   <td className="px-4 py-3">
                     {k.revokedAt ? (
                       <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium border bg-red-50 border-red-200 text-red-700">Revoked</span>
                     ) : k.expiresAt && new Date(k.expiresAt) < new Date() ? (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium border bg-gray-100 border-gray-200 text-gray-600">Expired</span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium border bg-obsidian-800 border-white/10 text-slate-400">Expired</span>
                     ) : (
                       <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium border bg-emerald-50 border-emerald-200 text-emerald-700">Active</span>
                     )}
@@ -256,14 +256,14 @@ function CreateApiKeyDialog({ onClose, onCreated }: { onClose: () => void; onCre
   })
   return (
     <div role="dialog" className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-white rounded-xl max-w-md w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
+      <div className="bg-obsidian-700 rounded-xl max-w-md w-full shadow-2xl" onClick={(e) => e.stopPropagation()}>
         <div className="px-6 py-4 border-b flex items-start justify-between">
           <h2 className="text-lg font-semibold flex items-center gap-2"><Key className="h-5 w-5 text-indigo-600" /> New API key</h2>
-          <button onClick={onClose} className="p-1 rounded hover:bg-gray-100 text-gray-400"><X className="h-4 w-4" /></button>
+          <button onClick={onClose} className="p-1 rounded hover:bg-obsidian-800 text-gray-400"><X className="h-4 w-4" /></button>
         </div>
         <div className="px-6 py-5 space-y-3">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Name</label>
             <Input
               value={name}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
@@ -274,7 +274,7 @@ function CreateApiKeyDialog({ onClose, onCreated }: { onClose: () => void; onCre
           </div>
           {error && <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">{error}</div>}
         </div>
-        <div className="px-6 py-4 border-t flex justify-end gap-2 bg-gray-50 rounded-b-xl">
+        <div className="px-6 py-4 border-t flex justify-end gap-2 bg-obsidian-900 rounded-b-xl">
           <Button variant="outline" onClick={onClose}>Cancel</Button>
           <Button
             onClick={() => create.mutate()}
@@ -294,7 +294,7 @@ function RevealKeyModal({ id: _id, keyValue, onClose }: { id: string; keyValue: 
   const [copied, setCopied] = useState(false)
   return (
     <div role="dialog" className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4" data-testid="reveal-key-modal">
-      <div className="bg-white rounded-xl max-w-lg w-full shadow-2xl">
+      <div className="bg-obsidian-700 rounded-xl max-w-lg w-full shadow-2xl">
         <div className="px-6 py-4 border-b">
           <h2 className="text-lg font-semibold flex items-center gap-2 text-emerald-700">
             <Check className="h-5 w-5" /> API key created
@@ -306,7 +306,7 @@ function RevealKeyModal({ id: _id, keyValue, onClose }: { id: string; keyValue: 
         </div>
         <div className="px-6 py-5">
           <div className="flex gap-2">
-            <code className="flex-1 text-xs bg-gray-50 border border-gray-200 rounded-md px-3 py-2.5 font-mono break-all" data-testid="key-value">
+            <code className="flex-1 text-xs bg-obsidian-900 border border-white/10 rounded-md px-3 py-2.5 font-mono break-all" data-testid="key-value">
               {keyValue}
             </code>
             <Button
@@ -320,11 +320,11 @@ function RevealKeyModal({ id: _id, keyValue, onClose }: { id: string; keyValue: 
               {copied ? 'Copied' : 'Copy'}
             </Button>
           </div>
-          <p className="text-[11px] text-gray-500 mt-3">
-            Use it as <code className="text-[10.5px] bg-gray-100 px-1 rounded">Authorization: Bearer {keyValue.slice(0, 20)}…</code>
+          <p className="text-[11px] text-slate-500 mt-3">
+            Use it as <code className="text-[10.5px] bg-obsidian-800 px-1 rounded">Authorization: Bearer {keyValue.slice(0, 20)}…</code>
           </p>
         </div>
-        <div className="px-6 py-4 border-t flex justify-end bg-gray-50 rounded-b-xl">
+        <div className="px-6 py-4 border-t flex justify-end bg-obsidian-900 rounded-b-xl">
           <Button onClick={onClose}>Done</Button>
         </div>
       </div>
@@ -370,7 +370,7 @@ function WebhooksSection() {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-sm font-medium text-gray-700">{webhooks.length} {webhooks.length === 1 ? 'webhook' : 'webhooks'}</h2>
+        <h2 className="text-sm font-medium text-slate-300">{webhooks.length} {webhooks.length === 1 ? 'webhook' : 'webhooks'}</h2>
         <Button onClick={() => setCreateOpen(true)} data-testid="create-webhook-btn" className="gap-1.5 bg-indigo-600 hover:bg-indigo-700">
           <Plus className="h-4 w-4" />
           New webhook
@@ -378,9 +378,9 @@ function WebhooksSection() {
       </div>
 
       {webhooks.length === 0 ? (
-        <div className="text-center py-12 px-6 border border-dashed border-gray-200 rounded-xl">
+        <div className="text-center py-12 px-6 border border-dashed border-white/10 rounded-xl">
           <WebhookIcon className="h-7 w-7 text-gray-300 mx-auto mb-2" />
-          <p className="text-sm text-gray-500 mb-1">No webhooks configured.</p>
+          <p className="text-sm text-slate-500 mb-1">No webhooks configured.</p>
           <p className="text-xs text-gray-400">
             Add a webhook to receive HMAC-signed POSTs when events fire (contract executed, signature completed, etc.).
           </p>
@@ -388,7 +388,7 @@ function WebhooksSection() {
       ) : (
         <div className="space-y-3">
           {webhooks.map(w => (
-            <div key={w.id} className="bg-white border border-gray-200 rounded-xl" data-testid={`webhook-row-${w.id}`}>
+            <div key={w.id} className="bg-obsidian-700 border border-white/10 rounded-xl" data-testid={`webhook-row-${w.id}`}>
               <div className="flex items-center justify-between px-4 py-3">
                 <button
                   onClick={() => setExpandedId(expandedId === w.id ? null : w.id)}
@@ -396,16 +396,16 @@ function WebhooksSection() {
                 >
                   {expandedId === w.id ? <ChevronDown className="h-4 w-4 text-gray-400" /> : <ChevronRight className="h-4 w-4 text-gray-400" />}
                   <div className="flex-1 min-w-0">
-                    <div className="font-medium text-gray-900 truncate flex items-center gap-2">
+                    <div className="font-medium text-white truncate flex items-center gap-2">
                       {w.name}
-                      {!w.enabled && <span className="text-[10px] uppercase tracking-wider px-1.5 py-0.5 bg-gray-100 text-gray-500 rounded">Disabled</span>}
+                      {!w.enabled && <span className="text-[10px] uppercase tracking-wider px-1.5 py-0.5 bg-obsidian-800 text-slate-500 rounded">Disabled</span>}
                       {w.lastDeliveryStatus === 'failed' && (
                         <span className="text-[10px] uppercase tracking-wider px-1.5 py-0.5 bg-red-100 text-red-700 rounded">
                           {w.failureCount} failure{w.failureCount === 1 ? '' : 's'}
                         </span>
                       )}
                     </div>
-                    <div className="text-xs text-gray-500 truncate font-mono">{w.url}</div>
+                    <div className="text-xs text-slate-500 truncate font-mono">{w.url}</div>
                     <div className="text-[10.5px] text-gray-400 mt-0.5">
                       {w.events.length} event{w.events.length === 1 ? '' : 's'} ·
                       {w.lastDeliveryAt ? ` last fired ${new Date(w.lastDeliveryAt).toLocaleString()}` : ' never fired'}
@@ -416,7 +416,7 @@ function WebhooksSection() {
                   <button
                     onClick={() => test.mutate(w.id)}
                     disabled={test.isPending}
-                    className="text-xs text-gray-600 hover:text-gray-900 inline-flex items-center gap-1 px-2 py-1 rounded hover:bg-gray-100"
+                    className="text-xs text-slate-400 hover:text-white inline-flex items-center gap-1 px-2 py-1 rounded hover:bg-obsidian-800"
                     title="Send a test event"
                     data-testid={`test-${w.id}`}
                   >
@@ -424,7 +424,7 @@ function WebhooksSection() {
                   </button>
                   <button
                     onClick={() => toggle.mutate({ id: w.id, enabled: !w.enabled })}
-                    className="text-xs text-gray-600 hover:text-gray-900 px-2 py-1 rounded hover:bg-gray-100"
+                    className="text-xs text-slate-400 hover:text-white px-2 py-1 rounded hover:bg-obsidian-800"
                   >
                     {w.enabled ? 'Disable' : 'Enable'}
                   </button>
@@ -461,25 +461,25 @@ function WebhookDetail({ webhook }: { webhook: Webhook }) {
   })
   const items = data?.data ?? []
   return (
-    <div className="border-t border-gray-100 px-4 py-3 bg-gray-50/50">
-      <div className="text-xs font-medium text-gray-700 mb-2">Subscribed events</div>
+    <div className="border-t border-white/[0.06] px-4 py-3 bg-obsidian-900/50">
+      <div className="text-xs font-medium text-slate-300 mb-2">Subscribed events</div>
       <div className="flex flex-wrap gap-1 mb-3">
         {webhook.events.map(e => (
-          <span key={e} className="inline-flex items-center px-1.5 py-0.5 rounded text-[10.5px] font-mono bg-white border border-gray-200 text-gray-700">
+          <span key={e} className="inline-flex items-center px-1.5 py-0.5 rounded text-[10.5px] font-mono bg-obsidian-700 border border-white/10 text-slate-300">
             {e}
           </span>
         ))}
       </div>
-      <div className="text-xs font-medium text-gray-700 mb-2">Recent deliveries ({items.length})</div>
+      <div className="text-xs font-medium text-slate-300 mb-2">Recent deliveries ({items.length})</div>
       {items.length === 0 ? (
         <div className="text-[11px] text-gray-400 italic">No deliveries yet — fire a test event to verify connectivity.</div>
       ) : (
         <div className="space-y-1">
           {items.map(d => (
-            <div key={d.id} className="flex items-center gap-2 text-[11px] py-1 border-b border-gray-100 last:border-b-0">
+            <div key={d.id} className="flex items-center gap-2 text-[11px] py-1 border-b border-white/[0.06] last:border-b-0">
               <span className={`inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 ${d.succeeded ? 'bg-emerald-500' : 'bg-red-500'}`} />
-              <span className="font-mono text-gray-700 w-44 truncate">{d.event}</span>
-              <span className="text-gray-500 w-32">{new Date(d.createdAt).toLocaleString()}</span>
+              <span className="font-mono text-slate-300 w-44 truncate">{d.event}</span>
+              <span className="text-slate-500 w-32">{new Date(d.createdAt).toLocaleString()}</span>
               <span className={d.succeeded ? 'text-emerald-700' : 'text-red-700'}>
                 {d.responseStatus ?? '—'} · {d.attempts} attempt{d.attempts === 1 ? '' : 's'}
               </span>
@@ -522,14 +522,14 @@ function CreateWebhookDialog({ events, onClose, onCreated }: {
 
   return (
     <div role="dialog" className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4 overflow-auto" onClick={onClose}>
-      <div className="bg-white rounded-xl max-w-lg w-full shadow-2xl my-8" onClick={(e) => e.stopPropagation()}>
+      <div className="bg-obsidian-700 rounded-xl max-w-lg w-full shadow-2xl my-8" onClick={(e) => e.stopPropagation()}>
         <div className="px-6 py-4 border-b flex items-start justify-between">
           <h2 className="text-lg font-semibold flex items-center gap-2"><WebhookIcon className="h-5 w-5 text-indigo-600" /> New webhook</h2>
-          <button onClick={onClose} className="p-1 rounded hover:bg-gray-100 text-gray-400"><X className="h-4 w-4" /></button>
+          <button onClick={onClose} className="p-1 rounded hover:bg-obsidian-800 text-gray-400"><X className="h-4 w-4" /></button>
         </div>
         <div className="px-6 py-5 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Name</label>
             <Input
               value={name}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
@@ -538,7 +538,7 @@ function CreateWebhookDialog({ events, onClose, onCreated }: {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">URL</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">URL</label>
             <Input
               value={url}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUrl(e.target.value)}
@@ -559,49 +559,49 @@ function CreateWebhookDialog({ events, onClose, onCreated }: {
 
           {!detectedSlack && !detectedTeams && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Format</label>
+              <label className="block text-sm font-medium text-slate-300 mb-1">Format</label>
               <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={() => setType('generic')}
                   className={`flex-1 text-left p-2.5 rounded-md border text-sm transition-colors ${
-                    type === 'generic' ? 'border-indigo-500 bg-indigo-50 ring-1 ring-indigo-300' : 'border-gray-200 hover:border-gray-300'
+                    type === 'generic' ? 'border-indigo-500 bg-indigo-50 ring-1 ring-indigo-300' : 'border-white/10 hover:border-white/14'
                   }`}
                   data-testid="type-generic"
                 >
-                  <div className="font-medium text-gray-900">Generic JSON</div>
-                  <div className="text-[11px] text-gray-500">Standard envelope: {'{ event, timestamp, data }'}</div>
+                  <div className="font-medium text-white">Generic JSON</div>
+                  <div className="text-[11px] text-slate-500">Standard envelope: {'{ event, timestamp, data }'}</div>
                 </button>
                 <button
                   type="button"
                   onClick={() => setType('slack')}
                   className={`flex-1 text-left p-2.5 rounded-md border text-sm transition-colors ${
-                    type === 'slack' ? 'border-indigo-500 bg-indigo-50 ring-1 ring-indigo-300' : 'border-gray-200 hover:border-gray-300'
+                    type === 'slack' ? 'border-indigo-500 bg-indigo-50 ring-1 ring-indigo-300' : 'border-white/10 hover:border-white/14'
                   }`}
                   data-testid="type-slack"
                 >
-                  <div className="font-medium text-gray-900">Slack blocks</div>
-                  <div className="text-[11px] text-gray-500">Pretty rendering for Slack-compatible receivers</div>
+                  <div className="font-medium text-white">Slack blocks</div>
+                  <div className="text-[11px] text-slate-500">Pretty rendering for Slack-compatible receivers</div>
                 </button>
                 <button
                   type="button"
                   onClick={() => setType('teams')}
                   className={`flex-1 text-left p-2.5 rounded-md border text-sm transition-colors ${
-                    type === 'teams' ? 'border-indigo-500 bg-indigo-50 ring-1 ring-indigo-300' : 'border-gray-200 hover:border-gray-300'
+                    type === 'teams' ? 'border-indigo-500 bg-indigo-50 ring-1 ring-indigo-300' : 'border-white/10 hover:border-white/14'
                   }`}
                   data-testid="type-teams"
                 >
-                  <div className="font-medium text-gray-900">Teams card</div>
-                  <div className="text-[11px] text-gray-500">Adaptive Cards for Teams Workflows webhooks</div>
+                  <div className="font-medium text-white">Teams card</div>
+                  <div className="text-[11px] text-slate-500">Adaptive Cards for Teams Workflows webhooks</div>
                 </button>
               </div>
             </div>
           )}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Events</label>
-            <div className="grid grid-cols-2 gap-1.5 max-h-56 overflow-y-auto p-2 border border-gray-200 rounded-md">
+            <label className="block text-sm font-medium text-slate-300 mb-1">Events</label>
+            <div className="grid grid-cols-2 gap-1.5 max-h-56 overflow-y-auto p-2 border border-white/10 rounded-md">
               {events.map(e => (
-                <label key={e} className="flex items-center gap-1.5 text-xs cursor-pointer hover:bg-gray-50 px-1.5 py-1 rounded">
+                <label key={e} className="flex items-center gap-1.5 text-xs cursor-pointer hover:bg-obsidian-900 px-1.5 py-1 rounded">
                   <input
                     type="checkbox"
                     checked={selectedEvents.includes(e)}
@@ -619,7 +619,7 @@ function CreateWebhookDialog({ events, onClose, onCreated }: {
           </div>
           {error && <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">{error}</div>}
         </div>
-        <div className="px-6 py-4 border-t flex justify-end gap-2 bg-gray-50 rounded-b-xl">
+        <div className="px-6 py-4 border-t flex justify-end gap-2 bg-obsidian-900 rounded-b-xl">
           <Button variant="outline" onClick={onClose}>Cancel</Button>
           <Button
             onClick={() => create.mutate()}
@@ -676,7 +676,7 @@ const HEALTH_BADGE: Record<WebhookHealth['health'], { label: string; dot: string
   healthy:  { label: 'Healthy',  dot: 'bg-emerald-500', cls: 'bg-emerald-50 border-emerald-200 text-emerald-700' },
   degraded: { label: 'Degraded', dot: 'bg-amber-500',   cls: 'bg-amber-50 border-amber-200 text-amber-700' },
   failing:  { label: 'Failing',  dot: 'bg-red-500',     cls: 'bg-red-50 border-red-200 text-red-700' },
-  disabled: { label: 'Disabled', dot: 'bg-gray-300',    cls: 'bg-gray-100 border-gray-200 text-gray-500' },
+  disabled: { label: 'Disabled', dot: 'bg-gray-300',    cls: 'bg-obsidian-800 border-white/10 text-slate-500' },
 }
 
 function relativeTime(iso: string | null): string {
@@ -754,15 +754,15 @@ function HealthSection() {
 
       {/* Per-webhook health table */}
       {webhooks.length === 0 ? (
-        <div className="text-center py-12 px-6 border border-dashed border-gray-200 rounded-xl">
+        <div className="text-center py-12 px-6 border border-dashed border-white/10 rounded-xl">
           <Activity className="h-7 w-7 text-gray-300 mx-auto mb-2" />
-          <p className="text-sm text-gray-500 mb-1">No webhooks configured.</p>
+          <p className="text-sm text-slate-500 mb-1">No webhooks configured.</p>
           <p className="text-xs text-gray-400">Add one on the Webhooks tab — health appears here once deliveries start flowing.</p>
         </div>
       ) : (
-        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
+        <div className="bg-obsidian-700 border border-white/10 rounded-xl overflow-hidden">
           <table className="w-full text-sm" data-testid="health-table">
-            <thead className="bg-gray-50 text-xs uppercase tracking-wider text-gray-500">
+            <thead className="bg-obsidian-900 text-xs uppercase tracking-wider text-slate-500">
               <tr>
                 <th className="text-left px-4 py-3 font-medium">Status</th>
                 <th className="text-left px-4 py-3 font-medium">Webhook</th>
@@ -773,7 +773,7 @@ function HealthSection() {
                 <th className="text-right px-4 py-3 font-medium"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-white/5">
               {webhooks.map(w => {
                 const badge = HEALTH_BADGE[w.health]
                 return (
@@ -788,10 +788,10 @@ function HealthSection() {
                       )}
                     </td>
                     <td className="px-4 py-3">
-                      <div className="font-medium text-gray-900">{w.name}</div>
+                      <div className="font-medium text-white">{w.name}</div>
                       <div className="text-xs text-gray-400 truncate max-w-[220px]" title={w.url}>{w.url}</div>
                     </td>
-                    <td className="px-4 py-3 text-xs text-gray-600">
+                    <td className="px-4 py-3 text-xs text-slate-400">
                       <div>{relativeTime(w.lastDeliveryAt)}</div>
                       {w.lastDeliveryStatus && (
                         <div className={w.lastDeliveryStatus === 'success' ? 'text-emerald-600' : 'text-red-600'}>
@@ -807,7 +807,7 @@ function HealthSection() {
                       <span className="text-emerald-700">{w.deliveries.ok7d} ok</span>
                       {w.deliveries.fail7d > 0 && <span className="text-red-600"> · {w.deliveries.fail7d} failed</span>}
                     </td>
-                    <td className="px-4 py-3 text-xs text-gray-600 max-w-[240px]">
+                    <td className="px-4 py-3 text-xs text-slate-400 max-w-[240px]">
                       {w.lastFailure ? (
                         <div>
                           <div className="truncate" title={w.lastFailure.errorMessage ?? undefined}>
@@ -856,13 +856,13 @@ function SummaryCard({ label, value, sub, tone, testId }: {
     green: 'text-emerald-700',
     amber: 'text-amber-700',
     red:   'text-red-700',
-    gray:  'text-gray-900',
+    gray:  'text-white',
   }[tone]
   return (
-    <div className="bg-white border border-gray-200 rounded-xl px-4 py-3" data-testid={testId}>
+    <div className="bg-obsidian-700 border border-white/10 rounded-xl px-4 py-3" data-testid={testId}>
       <div className="text-[11px] uppercase tracking-wider text-gray-400 font-medium">{label}</div>
       <div className={`text-xl font-semibold mt-0.5 ${toneCls}`}>{value}</div>
-      <div className="text-xs text-gray-500 mt-0.5">{sub}</div>
+      <div className="text-xs text-slate-500 mt-0.5">{sub}</div>
     </div>
   )
 }
@@ -935,27 +935,27 @@ function SlackSection() {
   if (data?.connected) {
     return (
       <div className="max-w-2xl" data-testid="slack-connected">
-        <div className="bg-white border border-gray-200 rounded-xl p-5">
+        <div className="bg-obsidian-700 border border-white/10 rounded-xl p-5">
           <div className="flex items-center gap-2 mb-3">
             <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            <h2 className="text-sm font-semibold text-gray-900">Slack workspace connected</h2>
+            <h2 className="text-sm font-semibold text-white">Slack workspace connected</h2>
           </div>
           <dl className="text-sm space-y-2">
-            <div className="flex justify-between"><dt className="text-gray-500">Workspace (team ID)</dt><dd className="font-mono text-xs text-gray-900">{data.teamId}</dd></div>
-            <div className="flex justify-between"><dt className="text-gray-500">Signing secret</dt><dd className="text-emerald-700 text-xs">configured</dd></div>
+            <div className="flex justify-between"><dt className="text-slate-500">Workspace (team ID)</dt><dd className="font-mono text-xs text-white">{data.teamId}</dd></div>
+            <div className="flex justify-between"><dt className="text-slate-500">Signing secret</dt><dd className="text-emerald-700 text-xs">configured</dd></div>
             <div className="flex justify-between">
-              <dt className="text-gray-500">Bot token (button-click identity)</dt>
+              <dt className="text-slate-500">Bot token (button-click identity)</dt>
               <dd className={data.hasBotToken ? 'text-emerald-700 text-xs' : 'text-amber-700 text-xs'}>
                 {data.hasBotToken ? 'configured' : 'not set — buttons fall back to web links'}
               </dd>
             </div>
             {data.configuredAt && (
-              <div className="flex justify-between"><dt className="text-gray-500">Connected</dt><dd className="text-xs text-gray-600">{new Date(data.configuredAt).toLocaleString()}</dd></div>
+              <div className="flex justify-between"><dt className="text-slate-500">Connected</dt><dd className="text-xs text-slate-400">{new Date(data.configuredAt).toLocaleString()}</dd></div>
             )}
           </dl>
-          <div className="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-500 space-y-1">
-            <p>• <code className="bg-gray-100 px-1 rounded">/contract search &lt;query&gt;</code> works in any channel the app is in.</p>
-            <p>• Approval requests post Approve / Reject buttons via your <button className="text-indigo-600 hover:underline" onClick={() => { /* tab switch hint */ }}>Slack webhook</button> — add one on the Webhooks tab (paste a hooks.slack.com URL) subscribed to <code className="bg-gray-100 px-1 rounded">approval.submitted</code>.</p>
+          <div className="mt-4 pt-4 border-t border-white/[0.06] text-xs text-slate-500 space-y-1">
+            <p>• <code className="bg-obsidian-800 px-1 rounded">/contract search &lt;query&gt;</code> works in any channel the app is in.</p>
+            <p>• Approval requests post Approve / Reject buttons via your <button className="text-indigo-600 hover:underline" onClick={() => { /* tab switch hint */ }}>Slack webhook</button> — add one on the Webhooks tab (paste a hooks.slack.com URL) subscribed to <code className="bg-obsidian-800 px-1 rounded">approval.submitted</code>.</p>
           </div>
           <div className="mt-4 flex justify-end">
             <button
@@ -973,12 +973,12 @@ function SlackSection() {
 
   return (
     <div className="max-w-2xl space-y-4" data-testid="slack-setup">
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
-        <h2 className="text-sm font-semibold text-gray-900 mb-1">1 · Create the Slack app</h2>
-        <p className="text-xs text-gray-500 mb-3">
+      <div className="bg-obsidian-700 border border-white/10 rounded-xl p-5">
+        <h2 className="text-sm font-semibold text-white mb-1">1 · Create the Slack app</h2>
+        <p className="text-xs text-slate-500 mb-3">
           Go to <a href="https://api.slack.com/apps" target="_blank" rel="noreferrer" className="text-indigo-600 hover:underline">api.slack.com/apps</a> →
           “Create New App” → “From a manifest”, pick your workspace, and paste this manifest. It pre-wires the
-          <code className="bg-gray-100 px-1 rounded mx-1">/contract</code> command and the Approve/Reject interactivity URL.
+          <code className="bg-obsidian-800 px-1 rounded mx-1">/contract</code> command and the Approve/Reject interactivity URL.
         </p>
         <div className="relative">
           <pre className="text-[10.5px] bg-gray-900 text-gray-100 rounded-lg p-3 overflow-x-auto max-h-48" data-testid="slack-manifest">{SLACK_MANIFEST}</pre>
@@ -996,24 +996,24 @@ function SlackSection() {
         </p>
       </div>
 
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
-        <h2 className="text-sm font-semibold text-gray-900 mb-1">2 · Connect it here</h2>
-        <p className="text-xs text-gray-500 mb-3">
+      <div className="bg-obsidian-700 border border-white/10 rounded-xl p-5">
+        <h2 className="text-sm font-semibold text-white mb-1">2 · Connect it here</h2>
+        <p className="text-xs text-slate-500 mb-3">
           From the app's <span className="font-medium">Basic Information</span> page copy the <span className="font-medium">Signing Secret</span>;
           the <span className="font-medium">Team ID</span> (starts with T) is in your Slack workspace URL or app install page. The bot token
           (<span className="font-mono">xoxb-…</span>, after installing the app) is optional but lets Approve/Reject clicks act as the matching lawOS user.
         </p>
         <div className="space-y-3">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Team ID</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Team ID</label>
             <Input value={teamId} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTeamId(e.target.value)} placeholder="T0123ABCD" data-testid="slack-team-id" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Signing secret</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Signing secret</label>
             <Input value={signingSecret} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSigningSecret(e.target.value)} placeholder="8f742231b10e8888abcd99yyyzzz85a5" type="password" data-testid="slack-signing-secret" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Bot token <span className="text-gray-400 font-normal">(optional)</span></label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Bot token <span className="text-gray-400 font-normal">(optional)</span></label>
             <Input value={botToken} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBotToken(e.target.value)} placeholder="xoxb-…" type="password" data-testid="slack-bot-token" />
           </div>
           {error && <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">{error}</div>}
@@ -1030,12 +1030,12 @@ function SlackSection() {
         </div>
       </div>
 
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
-        <h2 className="text-sm font-semibold text-gray-900 mb-1">3 · Notifications channel</h2>
-        <p className="text-xs text-gray-500">
+      <div className="bg-obsidian-700 border border-white/10 rounded-xl p-5">
+        <h2 className="text-sm font-semibold text-white mb-1">3 · Notifications channel</h2>
+        <p className="text-xs text-slate-500">
           On the <span className="font-medium">Webhooks</span> tab, add your Slack incoming-webhook URL
           (<span className="font-mono">hooks.slack.com/…</span>) subscribed to the events you care about —
-          include <code className="bg-gray-100 px-1 rounded">approval.submitted</code> to get actionable
+          include <code className="bg-obsidian-800 px-1 rounded">approval.submitted</code> to get actionable
           Approve/Reject cards in the channel.
         </p>
       </div>

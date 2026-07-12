@@ -35,7 +35,7 @@ const POS_HEADLINE: Record<string, { label: string; cls: string; tone: string }>
   market:     { label: 'In line with market practice',   cls: 'bg-emerald-50 border-emerald-200 text-emerald-900',  tone: 'emerald' },
   aggressive: { label: 'Aggressive — review before send', cls: 'bg-red-50 border-red-200 text-red-900',              tone: 'red' },
   weak:       { label: 'Weaker than market',             cls: 'bg-amber-50 border-amber-200 text-amber-900',        tone: 'amber' },
-  off:        { label: 'Off the standard playbook',      cls: 'bg-gray-50 border-gray-300 text-gray-800',           tone: 'gray' },
+  off:        { label: 'Off the standard playbook',      cls: 'bg-obsidian-900 border-white/14 text-white',           tone: 'gray' },
 }
 
 export function ClauseDeviationPopover({
@@ -85,7 +85,7 @@ export function ClauseDeviationPopover({
 
   return (
     <div
-      className="fixed z-[60] rounded-xl border shadow-xl bg-white"
+      className="fixed z-[60] rounded-xl border shadow-xl bg-obsidian-700"
       style={{ top: detail.anchor.top, left, width }}
       data-testid="clause-deviation-popover"
     >
@@ -102,12 +102,12 @@ export function ClauseDeviationPopover({
       </div>
 
       <div className="p-3 space-y-2">
-        <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-gray-500">
+        <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-slate-500">
           <span className="font-mono">{detail.category || 'clause'}</span>
           {detail.keyTerm && (
             <>
               <span>·</span>
-              <span className="font-medium text-gray-700 normal-case tracking-normal">
+              <span className="font-medium text-slate-300 normal-case tracking-normal">
                 Key: <span className="font-mono">{detail.keyTerm}</span>
               </span>
             </>
@@ -115,7 +115,7 @@ export function ClauseDeviationPopover({
         </div>
 
         {detail.reasoning && (
-          <p className="text-[12px] text-gray-800 leading-snug" data-testid="clause-deviation-reasoning">
+          <p className="text-[12px] text-white leading-snug" data-testid="clause-deviation-reasoning">
             {detail.reasoning}
           </p>
         )}
@@ -136,14 +136,14 @@ export function ClauseDeviationPopover({
           <button
             onClick={() => setDetail(null)}
             data-testid="clause-deviation-accept"
-            className="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50"
+            className="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-md border border-white/10 text-slate-300 hover:bg-obsidian-900"
           >
             <CheckCircle2 className="h-3 w-3" /> Accept as-is
           </button>
           <button
             onClick={() => setDetail(null)}
             data-testid="clause-deviation-dismiss"
-            className="text-[11px] px-2 py-1 rounded-md text-gray-500 hover:bg-gray-50 ml-auto"
+            className="text-[11px] px-2 py-1 rounded-md text-slate-500 hover:bg-obsidian-900 ml-auto"
           >
             Dismiss
           </button>

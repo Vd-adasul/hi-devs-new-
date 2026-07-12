@@ -55,12 +55,12 @@ function PositionCard({
       </div>
       {position.content && (
         <div
-          className="text-sm text-gray-700 mt-2 prose prose-sm max-w-none line-clamp-4"
+          className="text-sm text-slate-300 mt-2 prose prose-sm max-w-none line-clamp-4"
           dangerouslySetInnerHTML={{ __html: sanitizeHtml(position.content) }}
         />
       )}
       {position.notes && (
-        <p className="text-xs text-gray-500 mt-2 italic">{position.notes}</p>
+        <p className="text-xs text-slate-500 mt-2 italic">{position.notes}</p>
       )}
       <div className="flex items-center gap-3 mt-2">
         <div className="flex items-center gap-1">
@@ -70,7 +70,7 @@ function PositionCard({
               style={{ width: `${(position.riskThreshold ?? 0.5) * 100}%`, background: 'currentColor' }}
             />
           </div>
-          <span className="text-xs text-gray-500">threshold {Math.round((position.riskThreshold ?? 0.5) * 100)}%</span>
+          <span className="text-xs text-slate-500">threshold {Math.round((position.riskThreshold ?? 0.5) * 100)}%</span>
         </div>
       </div>
     </div>
@@ -111,14 +111,14 @@ function PositionEditor({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-3xl h-[90vh] bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+      <div className="w-full max-w-3xl h-[90vh] bg-obsidian-700 rounded-xl shadow-2xl overflow-hidden flex flex-col">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
           <h2 className="text-lg font-semibold">{position ? 'Edit Position' : 'New Position'}</h2>
-          <button onClick={onClose}><X className="w-5 h-5 text-gray-400 hover:text-gray-600" /></button>
+          <button onClick={onClose}><X className="w-5 h-5 text-gray-400 hover:text-slate-400" /></button>
         </div>
         <div className="flex-1 min-h-0 overflow-y-auto p-6 space-y-4">
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Position Type</label>
+            <label className="text-sm font-medium text-slate-300 mb-1 block">Position Type</label>
             <div className="flex gap-2">
               {POSITION_TYPES.map(t => (
                 <button
@@ -128,7 +128,7 @@ function PositionEditor({
                     'px-3 py-1.5 rounded-lg text-sm font-medium border transition-colors',
                     positionType === t
                       ? cn(POSITION_COLORS[t].bg, POSITION_COLORS[t].text, POSITION_COLORS[t].border)
-                      : 'border-gray-200 text-gray-500 hover:bg-gray-50',
+                      : 'border-white/10 text-slate-500 hover:bg-obsidian-900',
                   )}
                 >
                   {t}
@@ -137,8 +137,8 @@ function PositionEditor({
             </div>
           </div>
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Position Language</label>
-            <div className="border border-gray-200 rounded-lg overflow-hidden" style={{ height: 280 }}>
+            <label className="text-sm font-medium text-slate-300 mb-1 block">Position Language</label>
+            <div className="border border-white/10 rounded-lg overflow-hidden" style={{ height: 280 }}>
               <ContractEditor
                 initialContent={content}
                 onChange={setContent}
@@ -147,16 +147,16 @@ function PositionEditor({
             </div>
           </div>
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Legal Team Notes</label>
+            <label className="text-sm font-medium text-slate-300 mb-1 block">Legal Team Notes</label>
             <input
               value={notes}
               onChange={e => setNotes(e.target.value)}
               placeholder="Guidance for the legal team..."
-              className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+              className="w-full border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
             />
           </div>
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">
+            <label className="text-sm font-medium text-slate-300 mb-1 block">
               Risk Threshold: {Math.round(riskThreshold * 100)}%
             </label>
             <input
@@ -174,8 +174,8 @@ function PositionEditor({
             </div>
           </div>
         </div>
-        <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-gray-50">
-          <button onClick={onClose} className="px-4 py-2 text-sm bg-gray-100 rounded-lg hover:bg-gray-200">Cancel</button>
+        <div className="flex justify-end gap-3 px-6 py-4 border-t border-white/10 bg-obsidian-900">
+          <button onClick={onClose} className="px-4 py-2 text-sm bg-obsidian-800 rounded-lg hover:bg-gray-200">Cancel</button>
           <button
             onClick={handleSave}
             disabled={saving}
@@ -219,17 +219,17 @@ function TestPanel({ categoryId }: { categoryId: string }) {
   }
 
   return (
-    <div className="border border-gray-200 rounded-xl p-4 bg-gray-50">
+    <div className="border border-white/10 rounded-xl p-4 bg-obsidian-900">
       <div className="flex items-center gap-2 mb-3">
-        <Play className="w-4 h-4 text-gray-600" />
-        <h3 className="text-sm font-semibold text-gray-700">Test Mode</h3>
+        <Play className="w-4 h-4 text-slate-400" />
+        <h3 className="text-sm font-semibold text-slate-300">Test Mode</h3>
       </div>
       <textarea
         value={clauseText}
         onChange={e => setClauseText(e.target.value)}
         rows={4}
         placeholder="Paste a clause to test against your playbook..."
-        className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400 resize-none bg-white"
+        className="w-full border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400 resize-none bg-obsidian-700"
       />
       <button
         onClick={handleTest}
@@ -252,9 +252,9 @@ function TestPanel({ categoryId }: { categoryId: string }) {
             <span className={cn('px-3 py-1 rounded-full text-sm font-semibold', MATCH_COLORS[result.bestMatch])}>
               {result.bestMatch?.toUpperCase()} MATCH
             </span>
-            <span className="text-sm text-gray-600">Score: {Math.round((result.score ?? 0) * 100)}%</span>
+            <span className="text-sm text-slate-400">Score: {Math.round((result.score ?? 0) * 100)}%</span>
           </div>
-          <p className="text-sm text-gray-700">{result.explanation}</p>
+          <p className="text-sm text-slate-300">{result.explanation}</p>
           {result.deviations?.length > 0 && (
             <div className="space-y-1">
               {result.deviations.map((d: any, i: number) => (
@@ -262,7 +262,7 @@ function TestPanel({ categoryId }: { categoryId: string }) {
                   'flex items-start gap-2 p-2 rounded text-xs',
                   d.severity === 'high' ? 'bg-red-50 text-red-700' :
                   d.severity === 'medium' ? 'bg-amber-50 text-amber-700' :
-                  'bg-gray-50 text-gray-600',
+                  'bg-obsidian-900 text-slate-400',
                 )}>
                   <span className="font-semibold capitalize">{d.positionType}:</span>
                   <span>{d.deviation}</span>
@@ -353,15 +353,15 @@ export function PlaybookPage() {
   }
 
   return (
-    <div className="flex h-full bg-white text-gray-900">
+    <div className="flex h-full bg-obsidian-700 text-white">
       {/* ── Category Tree ── */}
-      <div className="w-64 shrink-0 border-r border-gray-200 bg-gray-50 flex flex-col">
-        <div className="px-4 py-4 border-b border-gray-200">
+      <div className="w-64 shrink-0 border-r border-white/10 bg-obsidian-900 flex flex-col">
+        <div className="px-4 py-4 border-b border-white/10">
           <div className="flex items-center gap-2">
             <Shield className="w-5 h-5 text-blue-600" />
-            <h1 className="text-base font-bold text-gray-900">Playbook</h1>
+            <h1 className="text-base font-bold text-white">Playbook</h1>
           </div>
-          <p className="text-xs text-gray-500 mt-0.5">Negotiation positions per clause type</p>
+          <p className="text-xs text-slate-500 mt-0.5">Negotiation positions per clause type</p>
         </div>
         <div className="flex-1 overflow-y-auto p-3">
           {categories.map(cat => (
@@ -372,7 +372,7 @@ export function PlaybookPage() {
                   'w-full flex items-center gap-1.5 px-2 py-2 rounded text-sm transition-colors',
                   selectedCategoryId === cat.id
                     ? 'bg-blue-50 text-blue-700 font-medium'
-                    : 'text-gray-700 hover:bg-gray-100',
+                    : 'text-slate-300 hover:bg-obsidian-800',
                 )}
               >
                 {(cat.children?.length ?? 0) > 0
@@ -381,14 +381,14 @@ export function PlaybookPage() {
                 <span className="flex-1 text-left truncate">{cat.name}</span>
               </button>
               {expandedCategories.has(cat.id) && cat.children?.map(child => (
-                <div key={child.id} className="ml-3 border-l-2 border-gray-200 pl-2">
+                <div key={child.id} className="ml-3 border-l-2 border-white/10 pl-2">
                   <button
                     onClick={() => setSelectedCategoryId(child.id)}
                     className={cn(
                       'w-full flex items-center gap-1.5 px-2 py-1.5 rounded text-sm transition-colors',
                       selectedCategoryId === child.id
                         ? 'bg-blue-50 text-blue-700 font-medium'
-                        : 'text-gray-600 hover:bg-gray-100',
+                        : 'text-slate-400 hover:bg-obsidian-800',
                     )}
                   >
                     <span className="truncate">{child.name}</span>
@@ -415,7 +415,7 @@ export function PlaybookPage() {
               return (
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-lg font-semibold text-gray-900">
+                    <h2 className="text-lg font-semibold text-white">
                       {categories.find(c => c.id === selectedCategoryId)?.name ?? 'Positions'}
                     </h2>
                     {positions.length > 0 && !showTest && (
@@ -437,7 +437,7 @@ export function PlaybookPage() {
                         'flex items-center gap-1.5 px-3.5 py-1.5 text-sm rounded-lg font-medium border-2 transition-colors',
                         showTest
                           ? 'bg-blue-600 border-blue-600 text-white hover:bg-blue-700'
-                          : 'bg-white border-blue-300 text-blue-700 hover:bg-blue-50',
+                          : 'bg-obsidian-700 border-blue-300 text-blue-700 hover:bg-blue-50',
                       )}
                     >
                       <Play className="w-4 h-4" />
@@ -451,7 +451,7 @@ export function PlaybookPage() {
                       className={cn(
                         'flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors',
                         allFilled
-                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          ? 'bg-obsidian-800 text-gray-400 cursor-not-allowed'
                           : 'bg-blue-600 text-white hover:bg-blue-700',
                       )}
                     >
@@ -480,7 +480,7 @@ export function PlaybookPage() {
                 )
               })}
               {!positions.length && (
-                <div className="col-span-2 flex flex-col items-center justify-center py-12 text-gray-400 border-2 border-dashed border-gray-200 rounded-xl">
+                <div className="col-span-2 flex flex-col items-center justify-center py-12 text-gray-400 border-2 border-dashed border-white/10 rounded-xl">
                   <Shield className="w-10 h-10 mb-2" />
                   <p className="text-sm">No positions defined yet</p>
                   <p className="text-xs mt-1">Add preferred → acceptable → fallback → walkaway positions</p>
@@ -579,7 +579,7 @@ function PlaybookExplainer({ categoryCount, onPickFirst }: PlaybookExplainerProp
                 <span className={cn('text-xs font-semibold uppercase tracking-wide', c.text)}>
                   {p.type}
                 </span>
-                <p className="text-sm text-gray-700 mt-2 leading-relaxed">{p.body}</p>
+                <p className="text-sm text-slate-300 mt-2 leading-relaxed">{p.body}</p>
               </div>
             )
           })}

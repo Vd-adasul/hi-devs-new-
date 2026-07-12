@@ -44,16 +44,16 @@ interface Props {
 }
 
 const SEVERITY_COLOR: Record<string, string> = {
-  low:      'bg-yellow-50 border-yellow-200 text-yellow-800',
-  medium:   'bg-orange-50 border-orange-200 text-orange-800',
-  high:     'bg-red-50 border-red-200 text-red-800',
-  critical: 'bg-red-100 border-red-400 text-red-900',
+  low:      'bg-amber-500/10 border-amber-500/20 text-amber-300',
+  medium:   'bg-amber-500/10 border-amber-500/20 text-amber-300',
+  high:     'bg-rose-500/10 border-rose-500/20 text-rose-300',
+  critical: 'bg-rose-500/20 border-rose-500/30 text-rose-400',
 }
 
 const REC_CONFIG: Record<string, { color: string; label: string }> = {
-  approve:         { color: 'text-emerald-700 bg-emerald-50', label: 'AI recommends: Approve' },
-  review_required: { color: 'text-amber-700 bg-amber-50',     label: 'AI recommends: Review Required' },
-  reject_advised:  { color: 'text-red-700 bg-red-50',         label: 'AI recommends: Reject' },
+  approve:         { color: 'text-emerald-300 bg-emerald-500/10 border border-emerald-500/20', label: 'AI recommends: Approve' },
+  review_required: { color: 'text-amber-300 bg-amber-500/10 border border-amber-500/20',     label: 'AI recommends: Review Required' },
+  reject_advised:  { color: 'text-rose-300 bg-rose-500/10 border border-rose-500/20',         label: 'AI recommends: Reject' },
 }
 
 export function ApprovalCard({ stepId, instanceId, stepName, contract, instance, onDecided }: Props) {
@@ -91,25 +91,25 @@ export function ApprovalCard({ stepId, instanceId, stepName, contract, instance,
 
   return (
     <div
-      className="bg-white rounded-xl border shadow-sm overflow-hidden"
+      className="bg-obsidian-700 rounded-xl border shadow-sm overflow-hidden"
       data-testid={`approval-card-${stepId}`}
       data-instance-id={instanceId}
       data-contract-id={contract.id}
     >
       {/* Header */}
-      <div className="px-5 py-4 border-b bg-gray-50/60">
+      <div className="px-5 py-4 border-b bg-obsidian-900/60">
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-xs text-gray-400 font-medium uppercase tracking-wide">{stepName}</p>
             <button
               onClick={() => navigate(`/contracts/${contract.id}`)}
-              className="text-base font-semibold text-gray-900 mt-0.5 leading-snug hover:text-blue-700 transition-colors text-left flex items-center gap-1.5 group"
+              className="text-base font-semibold text-white mt-0.5 leading-snug hover:text-blue-700 transition-colors text-left flex items-center gap-1.5 group"
             >
               {contract.title}
               <ExternalLink className="h-3.5 w-3.5 text-gray-300 group-hover:text-blue-500 transition-colors" />
             </button>
           </div>
-          <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-blue-100 text-blue-700 shrink-0">
+          <span className="text-xs px-2 py-0.5 rounded-full font-medium bg-sky-500/10 text-sky-300 border border-sky-500/20 shrink-0">
             {contract.type}
           </span>
         </div>
@@ -117,16 +117,16 @@ export function ApprovalCard({ stepId, instanceId, stepName, contract, instance,
         {/* Contract meta */}
         <div className="flex flex-wrap gap-3 mt-3">
           {contract.counterpartyName && (
-            <span className="flex items-center gap-1 text-xs text-gray-500">
+            <span className="flex items-center gap-1 text-xs text-slate-500">
               <Building2 className="h-3 w-3" />{contract.counterpartyName}
             </span>
           )}
           {contract.value != null && (
-            <span className="flex items-center gap-1 text-xs text-gray-500">
+            <span className="flex items-center gap-1 text-xs text-slate-500">
               <DollarSign className="h-3 w-3" />{Number(contract.value).toLocaleString()}
             </span>
           )}
-          <span className="flex items-center gap-1 text-xs text-gray-500">
+          <span className="flex items-center gap-1 text-xs text-slate-500">
             <Calendar className="h-3 w-3" />
             Submitted {new Date(instance.submittedAt).toLocaleDateString()} by {instance.submittedByName ?? 'Unknown'}
           </span>
@@ -138,19 +138,19 @@ export function ApprovalCard({ stepId, instanceId, stepName, contract, instance,
         <div className="px-5 py-4 border-b">
           <div className="flex items-center gap-1.5 mb-2">
             <Sparkles className="h-3.5 w-3.5 text-purple-500" />
-            <span className="text-xs font-medium text-gray-600 uppercase tracking-wide">AI Summary</span>
+            <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">AI Summary</span>
             {rec && (
               <span className={`ml-auto text-xs font-medium px-2 py-0.5 rounded-full ${rec.color}`}>
                 {rec.label}
               </span>
             )}
           </div>
-          <p className="text-sm text-gray-700 leading-relaxed">{instance.aiSummary}</p>
+          <p className="text-sm text-slate-300 leading-relaxed">{instance.aiSummary}</p>
 
           {hasRisks && (
             <button
               onClick={() => setShowRisks(v => !v)}
-              className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 mt-2"
+              className="flex items-center gap-1 text-xs text-slate-500 hover:text-slate-300 mt-2"
             >
               <AlertTriangle className="h-3.5 w-3.5 text-amber-500" />
               {instance.keyRisks?.length ?? 0} risk{(instance.keyRisks?.length ?? 0) !== 1 ? 's' : ''} identified
@@ -167,8 +167,8 @@ export function ApprovalCard({ stepId, instanceId, stepName, contract, instance,
                 </div>
               ))}
               {instance.nonStandardTerms && instance.nonStandardTerms.length > 0 && (
-                <div className="text-xs text-gray-600 border rounded-md px-3 py-2 bg-gray-50">
-                  <p className="font-semibold mb-1 text-gray-700">Non-standard terms:</p>
+                <div className="text-xs text-slate-400 border rounded-md px-3 py-2 bg-obsidian-900">
+                  <p className="font-semibold mb-1 text-slate-300">Non-standard terms:</p>
                   <ul className="space-y-0.5 list-disc list-inside">
                     {instance.nonStandardTerms.map((t, i) => <li key={i}>{t}</li>)}
                   </ul>
@@ -197,7 +197,7 @@ export function ApprovalCard({ stepId, instanceId, stepName, contract, instance,
             <Button
               size="sm"
               variant={decision === 'APPROVED' ? 'default' : 'outline'}
-              className={decision === 'APPROVED' ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : 'text-emerald-700 border-emerald-300 hover:bg-emerald-50'}
+              className={decision === 'APPROVED' ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : 'text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/10'}
               onClick={() => setDecision(d => d === 'APPROVED' ? null : 'APPROVED')}
               data-testid="approval-approve-btn"
             >
@@ -206,7 +206,7 @@ export function ApprovalCard({ stepId, instanceId, stepName, contract, instance,
             <Button
               size="sm"
               variant={decision === 'REJECTED' ? 'default' : 'outline'}
-              className={decision === 'REJECTED' ? 'bg-red-600 hover:bg-red-700 text-white' : 'text-red-600 border-red-300 hover:bg-red-50'}
+              className={decision === 'REJECTED' ? 'bg-red-600 hover:bg-red-700 text-white' : 'text-rose-300 border-rose-500/30 hover:bg-rose-500/10'}
               onClick={() => setDecision(d => d === 'REJECTED' ? null : 'REJECTED')}
               data-testid="approval-reject-btn"
             >
@@ -215,7 +215,7 @@ export function ApprovalCard({ stepId, instanceId, stepName, contract, instance,
             <Button
               size="sm"
               variant={decision === 'DELEGATED' ? 'secondary' : 'ghost'}
-              className="text-gray-600"
+              className="text-slate-400"
               onClick={() => setDecision(d => d === 'DELEGATED' ? null : 'DELEGATED')}
             >
               <ArrowRight className="h-4 w-4 mr-1.5" />Delegate
@@ -229,7 +229,7 @@ export function ApprovalCard({ stepId, instanceId, stepName, contract, instance,
               value={comment}
               onChange={e => setComment(e.target.value)}
               rows={2}
-              className="w-full rounded-md border border-gray-300 text-sm px-3 py-1.5 resize-none focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full rounded-md border border-white/14 text-sm px-3 py-1.5 resize-none focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
           )}
 
@@ -248,7 +248,7 @@ export function ApprovalCard({ stepId, instanceId, stepName, contract, instance,
                 value={comment}
                 onChange={e => setComment(e.target.value)}
                 rows={2}
-                className="w-full rounded-md border border-gray-300 text-sm px-3 py-1.5 resize-none focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="w-full rounded-md border border-white/14 text-sm px-3 py-1.5 resize-none focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
             </div>
           )}
@@ -271,7 +271,7 @@ export function ApprovalCard({ stepId, instanceId, stepName, contract, instance,
                 Confirm {decision === 'APPROVED' ? 'Approval' : decision === 'REJECTED' ? 'Rejection' : 'Delegation'}
               </Button>
               {submitDecision.isError && (
-                <span className="text-xs text-red-600">
+                <span className="text-xs text-rose-300">
                   {(submitDecision.error as Error)?.message ?? 'Failed — try again'}
                 </span>
               )}

@@ -57,43 +57,43 @@ function AddCounterpartyModal({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h2 className="text-base font-semibold text-gray-900">Add Counterparty</h2>
-          <button onClick={onClose} className="p-1.5 hover:bg-gray-100 rounded-lg">
-            <X className="h-4 w-4 text-gray-500" />
+      <div className="bg-obsidian-700 rounded-2xl shadow-2xl w-full max-w-md mx-4">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
+          <h2 className="text-base font-semibold text-white">Add Counterparty</h2>
+          <button onClick={onClose} className="p-1.5 hover:bg-obsidian-800 rounded-lg">
+            <X className="h-4 w-4 text-slate-500" />
           </button>
         </div>
         <div className="px-6 py-5 space-y-4">
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1.5">
+            <label className="block text-xs font-medium text-slate-300 mb-1.5">
               Name <span className="text-red-400">*</span>
             </label>
             <Input value={form.name} onChange={set('name')} placeholder="Acme Corp" className="h-9 text-sm" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1.5">Legal name</label>
+            <label className="block text-xs font-medium text-slate-300 mb-1.5">Legal name</label>
             <Input value={form.legalName} onChange={set('legalName')} placeholder="Acme Corporation Inc." className="h-9 text-sm" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">Email</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Email</label>
               <Input type="email" value={form.email} onChange={set('email')} placeholder="legal@acme.com" className="h-9 text-sm" />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">Phone</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">Phone</label>
               <Input value={form.phone} onChange={set('phone')} placeholder="+1 555 000 0000" className="h-9 text-sm" />
             </div>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1.5">Website</label>
+            <label className="block text-xs font-medium text-slate-300 mb-1.5">Website</label>
             <Input value={form.website} onChange={set('website')} placeholder="https://acme.com" className="h-9 text-sm" />
           </div>
           {create.isError && (
             <p className="text-xs text-red-500">Failed to add counterparty. Name may already exist.</p>
           )}
         </div>
-        <div className="flex justify-end gap-2 px-6 py-4 border-t border-gray-100">
+        <div className="flex justify-end gap-2 px-6 py-4 border-t border-white/[0.06]">
           <Button variant="ghost" size="sm" onClick={onClose} disabled={create.isPending}>Cancel</Button>
           <Button
             size="sm"
@@ -135,11 +135,11 @@ export function CounterpartiesPage() {
   })
 
   return (
-    <div className="flex flex-col h-full bg-white text-gray-900">
+    <div className="flex flex-col h-full bg-obsidian-700 text-white">
       {/* Header */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06] bg-obsidian-700">
         <div>
-          <h1 className="text-lg font-semibold text-gray-900">Counterparties</h1>
+          <h1 className="text-lg font-semibold text-white">Counterparties</h1>
           <p className="text-xs text-gray-400 mt-0.5">
             {counterparties.length} counterpart{counterparties.length !== 1 ? 'ies' : 'y'}
           </p>
@@ -150,7 +150,7 @@ export function CounterpartiesPage() {
       </div>
 
       {/* Search */}
-      <div className="px-6 py-3 bg-white border-b border-gray-100">
+      <div className="px-6 py-3 bg-obsidian-700 border-b border-white/[0.06]">
         <div className="relative max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-400" />
           <Input
@@ -163,7 +163,7 @@ export function CounterpartiesPage() {
       </div>
 
       {/* Table */}
-      <div className="flex-1 overflow-auto bg-gray-50 p-6">
+      <div className="flex-1 overflow-auto bg-obsidian-900 p-6">
         {isLoading ? (
           <div className="flex items-center justify-center h-48 gap-2 text-gray-400 text-sm">
             <Loader2 className="h-4 w-4 animate-spin" /> Loading…
@@ -181,9 +181,9 @@ export function CounterpartiesPage() {
             )}
           </div>
         ) : (
-          <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="bg-obsidian-700 rounded-xl border border-white/[0.06] shadow-sm overflow-hidden">
             {/* Table header — B.6.9 adds Contracts + Last activity columns */}
-            <div className="grid grid-cols-[minmax(0,2fr)_100px_140px_1fr_auto_20px] gap-4 px-5 py-2.5 border-b border-gray-100 bg-gray-50">
+            <div className="grid grid-cols-[minmax(0,2fr)_100px_140px_1fr_auto_20px] gap-4 px-5 py-2.5 border-b border-white/[0.06] bg-obsidian-900">
               <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">Name</span>
               <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">Contracts</span>
               <span className="text-[10px] font-medium uppercase tracking-wide text-gray-400">Last activity</span>
@@ -212,7 +212,7 @@ export function CounterpartiesPage() {
                       <Link
                         to={`/counterparties/${cp.id}`}
                         onClick={(e) => e.stopPropagation()}
-                        className="text-sm font-medium text-gray-900 truncate hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
+                        className="text-sm font-medium text-white truncate hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
                       >
                         {cp.name}
                       </Link>
@@ -223,8 +223,8 @@ export function CounterpartiesPage() {
 
                     {/* Contract count — the headline metric */}
                     <div className="flex items-center gap-1.5">
-                      <FileText className={`h-3.5 w-3.5 ${count > 0 ? 'text-gray-500' : 'text-gray-300'}`} />
-                      <span className={`text-sm tabular-nums ${count > 0 ? 'font-medium text-gray-900' : 'text-gray-300'}`}>
+                      <FileText className={`h-3.5 w-3.5 ${count > 0 ? 'text-slate-500' : 'text-gray-300'}`} />
+                      <span className={`text-sm tabular-nums ${count > 0 ? 'font-medium text-white' : 'text-gray-300'}`}>
                         {count}
                       </span>
                     </div>
@@ -233,7 +233,7 @@ export function CounterpartiesPage() {
                         verb ("comment", "share", "update") makes "today"
                         meaningful rather than every-row-the-same. */}
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-xs text-gray-700 tabular-nums">
+                      <span className="text-xs text-slate-300 tabular-nums">
                         {relativeDate(cp.lastContractAt)}
                       </span>
                       {cp.lastActivityKind && cp.lastContractAt && (
@@ -251,7 +251,7 @@ export function CounterpartiesPage() {
                         <a
                           href={`mailto:${cp.email}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="text-sm text-gray-600 hover:text-gray-900 truncate block"
+                          className="text-sm text-slate-400 hover:text-white truncate block"
                         >
                           {cp.email}
                         </a>
@@ -287,7 +287,7 @@ export function CounterpartiesPage() {
                       </button>
                     </div>
 
-                    <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-gray-500 transition-colors" />
+                    <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-slate-500 transition-colors" />
                   </div>
                 )
               })}

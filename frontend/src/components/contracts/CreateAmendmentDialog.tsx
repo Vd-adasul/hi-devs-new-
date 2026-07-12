@@ -73,24 +73,24 @@ export function CreateAmendmentDialog({ parentContractId, parentTitle, open, onC
       data-testid="create-amendment-dialog"
     >
       <div
-        className="bg-white rounded-xl max-w-lg w-full shadow-2xl my-8"
+        className="bg-obsidian-700 rounded-xl max-w-lg w-full shadow-2xl my-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-gray-200 flex items-start justify-between">
+        <div className="px-6 py-4 border-b border-white/10 flex items-start justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
               <GitBranch className="h-5 w-5 text-indigo-600" />
               Create amendment
             </h2>
-            <p className="text-xs text-gray-500 mt-1 truncate max-w-md">
+            <p className="text-xs text-slate-500 mt-1 truncate max-w-md">
               Linked to <span className="font-medium">{parentTitle}</span>
             </p>
           </div>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="p-1 rounded hover:bg-gray-100 text-gray-400"
+            className="p-1 rounded hover:bg-obsidian-800 text-gray-400"
           >
             <X className="h-4 w-4" />
           </button>
@@ -100,7 +100,7 @@ export function CreateAmendmentDialog({ parentContractId, parentTitle, open, onC
         <div className="px-6 py-5 space-y-4">
           {/* Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">
+            <label className="block text-sm font-medium text-slate-300 mb-1.5">
               Relationship type
             </label>
             <div className="grid grid-cols-2 gap-2">
@@ -113,21 +113,21 @@ export function CreateAmendmentDialog({ parentContractId, parentTitle, open, onC
                   className={`text-left p-2.5 rounded-md border text-sm transition-colors ${
                     relationshipType === rt.key
                       ? 'border-indigo-500 bg-indigo-50 ring-1 ring-indigo-300'
-                      : 'border-gray-200 hover:border-gray-300 bg-white'
+                      : 'border-white/10 hover:border-white/14 bg-obsidian-700'
                   }`}
                 >
-                  <div className="font-medium text-gray-900">{rt.label}</div>
+                  <div className="font-medium text-white">{rt.label}</div>
                 </button>
               ))}
             </div>
             {selectedRel && (
-              <p className="text-xs text-gray-500 mt-2">{selectedRel.desc}</p>
+              <p className="text-xs text-slate-500 mt-2">{selectedRel.desc}</p>
             )}
           </div>
 
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-slate-300 mb-1">
               Title <span className="text-gray-400 font-normal">(optional)</span>
             </label>
             <Input
@@ -142,7 +142,7 @@ export function CreateAmendmentDialog({ parentContractId, parentTitle, open, onC
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-slate-300 mb-1">
               Description <span className="text-gray-400 font-normal">(optional)</span>
             </label>
             <textarea
@@ -151,7 +151,7 @@ export function CreateAmendmentDialog({ parentContractId, parentTitle, open, onC
               placeholder="What's changing? Effective date, scope, value impact, etc."
               rows={3}
               data-testid="amendment-description"
-              className="w-full text-sm border border-gray-200 rounded-md px-3 py-2 focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-y"
+              className="w-full text-sm border border-white/10 rounded-md px-3 py-2 focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-400 resize-y"
             />
           </div>
 
@@ -163,7 +163,7 @@ export function CreateAmendmentDialog({ parentContractId, parentTitle, open, onC
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-gray-200 flex justify-end gap-2 bg-gray-50 rounded-b-xl">
+        <div className="px-6 py-4 border-t border-white/10 flex justify-end gap-2 bg-obsidian-900 rounded-b-xl">
           <Button variant="outline" onClick={onClose} disabled={create.isPending}>
             Cancel
           </Button>

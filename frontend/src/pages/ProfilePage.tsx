@@ -121,7 +121,7 @@ export function ProfilePage() {
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <Label htmlFor="profile-email">Email</Label>
-              <span className="text-[10px] uppercase tracking-wider text-gray-500">read-only</span>
+              <span className="text-[10px] uppercase tracking-wider text-slate-500">read-only</span>
             </div>
             <Input
               id="profile-email"
@@ -129,7 +129,7 @@ export function ProfilePage() {
               value={profile?.email ?? ''}
               readOnly
               data-testid="profile-email"
-              className="bg-gray-50 text-gray-700 cursor-not-allowed select-all"
+              className="bg-obsidian-900 text-slate-300 cursor-not-allowed select-all"
             />
             <p className="text-[11px] text-muted-foreground">
               Email is your login identifier. Contact an admin to change it.

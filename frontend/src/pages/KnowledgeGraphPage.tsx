@@ -123,7 +123,7 @@ export default function KnowledgeGraphPage() {
           <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Legal Knowledge Fabric</h1>
           <p className="text-sm text-slate-500 mt-1">Neo4j-powered citation, matter &amp; clause relationship graph</p>
         </div>
-        <button onClick={loadGraph} className="flex items-center gap-2 text-sm border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 font-semibold px-4 py-2 rounded-lg transition-colors">
+        <button onClick={loadGraph} className="flex items-center gap-2 text-sm border border-slate-200 bg-obsidian-700 hover:bg-obsidian-900 text-slate-600 font-semibold px-4 py-2 rounded-lg transition-colors">
           <RefreshCw size={14} />
           Reload Graph
         </button>
@@ -140,7 +140,7 @@ export default function KnowledgeGraphPage() {
           <div
             key={stat.label}
             onClick={() => setFilter(stat.type as any)}
-            className={`bg-white border rounded-xl p-5 cursor-pointer transition-all shadow-sm hover:shadow ${filter === stat.type ? 'border-2' : 'border-slate-200'}`}
+            className={`bg-obsidian-700 border rounded-xl p-5 cursor-pointer transition-all shadow-sm hover:shadow ${filter === stat.type ? 'border-2' : 'border-slate-200'}`}
             style={{ borderColor: filter === stat.type ? stat.color : undefined }}
           >
             <p className="text-xs font-medium text-slate-500">{stat.label}</p>
@@ -153,7 +153,7 @@ export default function KnowledgeGraphPage() {
       </div>
 
       {/* Filter Row */}
-      <div className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+      <div className="flex items-center gap-3 bg-obsidian-700 border border-slate-200 rounded-xl p-4 shadow-sm">
         <Filter size={16} className="text-slate-400" />
         <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider mr-2">Filter by type:</span>
         {(['all', 'matter', 'document', 'clause', 'citation'] as const).map(f => (
@@ -171,7 +171,7 @@ export default function KnowledgeGraphPage() {
       </div>
 
       {/* Graph Canvas */}
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-obsidian-700 border border-slate-200 rounded-xl shadow-sm overflow-hidden">
         <div className="flex items-center justify-between px-6 py-3 border-b border-slate-100">
           <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
             <Network size={16} className="text-indigo-500" />
@@ -197,7 +197,7 @@ export default function KnowledgeGraphPage() {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
           </div>
         ) : (
-          <svg width="100%" viewBox={`0 0 ${W} ${H}`} className="bg-slate-50/30">
+          <svg width="100%" viewBox={`0 0 ${W} ${H}`} className="bg-obsidian-900/30">
             {/* Edges */}
             {filteredEdges.map((e, i) => {
               const src = posMap[e.source];
@@ -254,7 +254,7 @@ export default function KnowledgeGraphPage() {
               <p className="text-xs text-slate-500 capitalize mt-0.5">Type: {selectedNode.type} · ID: {selectedNode.id.slice(0, 16)}…</p>
             </div>
             <div className="ml-auto flex items-center gap-2">
-              <span className="text-xs bg-white border border-slate-200 text-slate-600 px-3 py-1.5 rounded-md font-medium">
+              <span className="text-xs bg-obsidian-700 border border-slate-200 text-slate-600 px-3 py-1.5 rounded-md font-medium">
                 <GitBranch size={12} className="inline mr-1" />
                 {edges.filter(e => e.source === selectedNode.id || e.target === selectedNode.id).length} connections
               </span>

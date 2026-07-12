@@ -25,7 +25,7 @@ export function ChipRow({ chips, onSelect, disabled, streaming }: ChipRowProps) 
         {[88, 124, 96].map((w, i) => (
           <span
             key={i}
-            className="h-6 rounded-full bg-gray-100 animate-pulse"
+            className="h-6 rounded-full bg-obsidian-800 animate-pulse"
             style={{ width: w }}
           />
         ))}

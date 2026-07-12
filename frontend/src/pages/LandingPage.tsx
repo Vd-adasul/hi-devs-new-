@@ -116,7 +116,7 @@ function NavBar() {
           type="button"
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           data-testid="mobile-menu-toggle"
-          className="md:hidden p-2 rounded-md text-slate-300 hover:text-white hover:bg-white/5"
+          className="md:hidden p-2 rounded-md text-slate-300 hover:text-white hover:bg-obsidian-700/5"
           onClick={() => setMobileOpen(o => !o)}
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -215,9 +215,9 @@ function Hero() {
             <div className="absolute -inset-x-20 -bottom-24 h-40 bg-gradient-to-t from-brass-400/10 via-brass-400/5 to-transparent blur-2xl" />
             <div className="glass-panel-brass overflow-hidden shadow-glow-brass-lg text-left">
               <div className="flex items-center gap-2 px-5 py-3 border-b border-white/6 bg-obsidian-800/50">
-                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                <span className="h-2.5 w-2.5 rounded-full bg-obsidian-700/15" />
+                <span className="h-2.5 w-2.5 rounded-full bg-obsidian-700/15" />
+                <span className="h-2.5 w-2.5 rounded-full bg-obsidian-700/15" />
                 <span className="ml-4 text-[11px] text-slate-500 font-mono">app.lawyeros.ai / dashboard</span>
               </div>
               <div className="grid grid-cols-12 min-h-[440px] md:min-h-[540px]">

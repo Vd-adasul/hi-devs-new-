@@ -268,7 +268,7 @@ export function LoginPage() {
                   type="button"
                   onClick={() => setStub('sso-google')}
                   data-testid="sso-google"
-                  className="w-full inline-flex items-center justify-center gap-2.5 h-11 rounded-md border border-white/10 bg-white/[0.02] text-sm font-medium text-white hover:bg-white/[0.06] hover:border-brass-400/30 transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2.5 h-11 rounded-md border border-white/10 bg-white/[0.03] text-sm font-medium text-white hover:bg-obsidian-700/[0.06] hover:border-brass-400/30 transition-colors"
                 >
                   <GoogleMark />
                   Continue with Google
@@ -277,7 +277,7 @@ export function LoginPage() {
                   type="button"
                   onClick={() => setStub('sso-microsoft')}
                   data-testid="sso-microsoft"
-                  className="w-full inline-flex items-center justify-center gap-2.5 h-11 rounded-md border border-white/10 bg-white/[0.02] text-sm font-medium text-white hover:bg-white/[0.06] hover:border-brass-400/30 transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2.5 h-11 rounded-md border border-white/10 bg-white/[0.03] text-sm font-medium text-white hover:bg-obsidian-700/[0.06] hover:border-brass-400/30 transition-colors"
                 >
                   <MicrosoftMark />
                   Continue with Microsoft

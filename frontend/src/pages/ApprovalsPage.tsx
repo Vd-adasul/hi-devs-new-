@@ -110,20 +110,20 @@ export function ApprovalsPage() {
   const showNoWorkflowsWarning = workflowList !== null && workflowList.length === 0
 
   return (
-    <div className="h-full flex flex-col bg-gray-50">
+    <div className="h-full flex flex-col bg-obsidian-900">
       {/* Header */}
-      <div className="bg-white border-b px-6 py-4">
+      <div className="bg-obsidian-700 border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-semibold text-gray-900">Approvals</h1>
+            <h1 className="text-xl font-semibold text-white">Approvals</h1>
             {pendingCount > 0 && (
-              <p className="text-sm text-gray-500 mt-0.5">{pendingCount} pending your decision</p>
+              <p className="text-sm text-slate-500 mt-0.5">{pendingCount} pending your decision</p>
             )}
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 mt-3 border-b border-gray-100 -mb-px">
+        <div className="flex gap-1 mt-3 border-b border-white/10 -mb-px">
           {([
             { id: 'queue' as Tab,     label: 'My Queue', icon: <CheckSquare className="h-4 w-4" />, badge: pendingCount },
             ...(canSeeAll ? [{ id: 'all' as Tab, label: 'All approvals', icon: <Globe2 className="h-4 w-4" />, badge: allCount }] : []),
@@ -135,7 +135,7 @@ export function ApprovalsPage() {
               className={`flex items-center gap-1.5 px-3 py-2.5 text-sm font-medium border-b-2 transition-colors ${
                 tab === t.id
                   ? 'border-blue-600 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  : 'border-transparent text-slate-500 hover:text-slate-300'
               }`}
             >
               {t.icon}
@@ -158,14 +158,14 @@ export function ApprovalsPage() {
           <div
             role="alert"
             data-testid="no-workflows-warning"
-            className="max-w-3xl mx-auto mb-5 rounded-md border border-amber-300 bg-amber-50 px-4 py-3 flex items-start gap-3"
+            className="max-w-3xl mx-auto mb-5 rounded-md border border-amber-500/25 bg-amber-500/10 px-4 py-3 flex items-start gap-3"
           >
             <AlertTriangle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
             <div className="flex-1 min-w-0 text-sm">
-              <p className="font-semibold text-amber-900">
+              <p className="font-semibold text-amber-300">
                 No approval workflows defined yet.
               </p>
-              <p className="text-amber-800/80 text-xs mt-0.5 leading-relaxed">
+              <p className="text-amber-300 text-xs mt-0.5 leading-relaxed">
                 Until someone creates a workflow, the "Submit for Approval"
                 button on contracts won't know where to route decisions and
                 will fail quietly. Create one to unblock your team.
@@ -173,7 +173,7 @@ export function ApprovalsPage() {
             </div>
             <button
               onClick={() => setTab('workflows')}
-              className="text-xs font-semibold text-amber-900 underline hover:text-amber-950 shrink-0"
+              className="text-xs font-semibold text-amber-300 underline hover:text-amber-200 shrink-0"
             >
               Create workflow →
             </button>
@@ -191,7 +191,7 @@ export function ApprovalsPage() {
               <div className="flex flex-col items-center justify-center py-20 text-gray-400 gap-3">
                 <Inbox className="w-12 h-12" />
                 <div className="text-center">
-                  <p className="text-base font-semibold text-gray-600">All clear</p>
+                  <p className="text-base font-semibold text-slate-400">All clear</p>
                   <p className="text-sm mt-1">No contracts are awaiting your approval.</p>
                 </div>
               </div>
@@ -199,7 +199,7 @@ export function ApprovalsPage() {
               <>
                 {items.length > 1 && (
                   <div className="max-w-5xl mx-auto mb-3 flex items-center justify-between gap-2">
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-slate-500">
                       {items.length} item{items.length === 1 ? '' : 's'} awaiting your decision
                     </span>
                     <Button
@@ -250,19 +250,19 @@ export function ApprovalsPage() {
               <div className="flex flex-col items-center justify-center py-20 text-gray-400 gap-3">
                 <Globe2 className="w-12 h-12" />
                 <div className="text-center">
-                  <p className="text-base font-semibold text-gray-600">No approvals in flight</p>
+                  <p className="text-base font-semibold text-slate-400">No approvals in flight</p>
                   <p className="text-sm mt-1">No contracts are pending approval anywhere in the org.</p>
                 </div>
               </div>
             ) : (
               <div className="max-w-5xl mx-auto" data-testid="all-approvals-list">
-                <p className="text-sm text-gray-500 mb-3">
+                <p className="text-sm text-slate-500 mb-3">
                   Org-wide view of every approval in flight. Use this to spot where deals are stuck.
                 </p>
-                <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
+                <div className="rounded-lg border border-white/10 bg-obsidian-700 overflow-hidden">
                   <table className="w-full text-sm">
-                    <thead className="bg-gray-50">
-                      <tr className="text-left text-xs uppercase tracking-wider text-gray-500">
+                    <thead className="bg-obsidian-900">
+                      <tr className="text-left text-xs uppercase tracking-wider text-slate-500">
                         <th className="px-4 py-2.5 font-semibold">Contract</th>
                         <th className="px-4 py-2.5 font-semibold">Current step</th>
                         <th className="px-4 py-2.5 font-semibold">Awaiting</th>
@@ -271,7 +271,7 @@ export function ApprovalsPage() {
                         <th className="px-4 py-2.5"></th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-100">
+                    <tbody className="divide-y divide-white/5">
                       {allItems.map(row => {
                         const dotClass = row.waitingDays >= 7 ? 'bg-red-500' :
                                          row.waitingDays >= 3 ? 'bg-amber-500' :
@@ -280,29 +280,29 @@ export function ApprovalsPage() {
                                             row.waitingDays === 1 ? '1d' :
                                             `${row.waitingDays}d`
                         return (
-                          <tr key={row.instanceId} className="hover:bg-gray-50 transition-colors">
+                          <tr key={row.instanceId} className="hover:bg-obsidian-900 transition-colors">
                             <td className="px-4 py-3">
                               <Link
                                 to={`/contracts/${row.contract?.id}`}
-                                className="font-medium text-gray-900 hover:text-blue-600"
+                                className="font-medium text-white hover:text-blue-600"
                               >
                                 {row.contract?.title ?? 'Unknown'}
                               </Link>
                               {row.contract?.counterpartyName && (
-                                <div className="text-xs text-gray-500 mt-0.5">
+                                <div className="text-xs text-slate-500 mt-0.5">
                                   {row.contract.counterpartyName}
                                   {row.contract.value && ` · ${row.contract.currency ?? 'USD'} ${row.contract.value.toLocaleString()}`}
                                 </div>
                               )}
                             </td>
-                            <td className="px-4 py-3 text-gray-700 text-xs">
+                            <td className="px-4 py-3 text-slate-300 text-xs">
                               <div className="font-medium">{row.currentStepName ?? '—'}</div>
                               <div className="text-gray-400 mt-0.5">step {row.currentStepOrder} of {row.totalSteps}</div>
                             </td>
-                            <td className="px-4 py-3 text-gray-700 text-sm">
+                            <td className="px-4 py-3 text-slate-300 text-sm">
                               {row.currentApproverName ?? <span className="text-gray-400 italic">unassigned</span>}
                             </td>
-                            <td className="px-4 py-3 text-gray-500 text-xs">
+                            <td className="px-4 py-3 text-slate-500 text-xs">
                               <div>{row.submittedByName}</div>
                               <div className="text-gray-400 mt-0.5">{new Date(row.submittedAt).toLocaleDateString()}</div>
                             </td>
@@ -335,7 +335,7 @@ export function ApprovalsPage() {
         {/* ── Manage Workflows ────────────────────────────────────────── */}
         {tab === 'workflows' && (
           <div className="max-w-3xl mx-auto">
-            <p className="text-sm text-gray-500 mb-5">
+            <p className="text-sm text-slate-500 mb-5">
               Workflow definitions control how contracts are routed for approval.
               Set a default workflow so contracts are auto-routed on submission.
             </p>
@@ -400,18 +400,18 @@ function BulkDecisionDialog({
 
   return (
     <div role="dialog" className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4 overflow-auto" onClick={onClose} data-testid="bulk-decision-dialog">
-      <div className="bg-white rounded-xl max-w-2xl w-full shadow-2xl my-8" onClick={(e) => e.stopPropagation()}>
+      <div className="bg-obsidian-700 rounded-xl max-w-2xl w-full shadow-2xl my-8" onClick={(e) => e.stopPropagation()}>
         <div className="px-6 py-4 border-b flex items-start justify-between">
           <div>
             <h2 className="text-lg font-semibold flex items-center gap-2">
               <ListChecks className="h-5 w-5 text-blue-600" />
               Bulk decision
             </h2>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-slate-500 mt-1">
               Apply a single decision (with optional comment) to multiple pending approvals.
             </p>
           </div>
-          <button onClick={onClose} className="p-1 rounded hover:bg-gray-100 text-gray-400">×</button>
+          <button onClick={onClose} className="p-1 rounded hover:bg-obsidian-800 text-gray-400">×</button>
         </div>
 
         <div className="px-6 py-5 space-y-4">
@@ -422,7 +422,7 @@ function BulkDecisionDialog({
               onClick={() => setDecision('APPROVED')}
               data-testid="bulk-decision-approve"
               className={`flex-1 p-3 rounded-md border text-sm font-medium transition-colors ${
-                decision === 'APPROVED' ? 'border-emerald-500 bg-emerald-50 text-emerald-700' : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                decision === 'APPROVED' ? 'border-emerald-500/20 bg-emerald-500/10 text-emerald-300' : 'border-white/10 hover:border-white/14 text-slate-300'
               }`}
             >Approve all selected</button>
             <button
@@ -430,15 +430,15 @@ function BulkDecisionDialog({
               onClick={() => setDecision('REJECTED')}
               data-testid="bulk-decision-reject"
               className={`flex-1 p-3 rounded-md border text-sm font-medium transition-colors ${
-                decision === 'REJECTED' ? 'border-red-500 bg-red-50 text-red-700' : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                decision === 'REJECTED' ? 'border-rose-500/20 bg-rose-500/10 text-rose-300' : 'border-white/10 hover:border-white/14 text-slate-300'
               }`}
             >Reject all selected</button>
           </div>
 
           {/* Selection list */}
-          <div className="border border-gray-200 rounded-md max-h-72 overflow-y-auto">
-            <div className="px-3 py-2 bg-gray-50 border-b text-xs flex items-center justify-between">
-              <span className="text-gray-600">{selected.size} of {items.length} selected</span>
+          <div className="border border-white/10 rounded-md max-h-72 overflow-y-auto">
+            <div className="px-3 py-2 bg-obsidian-900 border-b text-xs flex items-center justify-between">
+              <span className="text-slate-400">{selected.size} of {items.length} selected</span>
               <button
                 onClick={() => setSelected(new Set(selected.size === items.length ? [] : items.map(i => i.stepId)))}
                 className="text-blue-600 hover:text-blue-700"
@@ -446,9 +446,9 @@ function BulkDecisionDialog({
                 {selected.size === items.length ? 'Deselect all' : 'Select all'}
               </button>
             </div>
-            <ul className="divide-y divide-gray-100">
+            <ul className="divide-y divide-white/5">
               {items.map(it => (
-                <li key={it.stepId} className="px-3 py-2 hover:bg-gray-50 flex items-center gap-2">
+                <li key={it.stepId} className="px-3 py-2 hover:bg-obsidian-900 flex items-center gap-2">
                   <input
                     type="checkbox"
                     checked={selected.has(it.stepId)}
@@ -456,8 +456,8 @@ function BulkDecisionDialog({
                     className="h-4 w-4"
                   />
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-medium text-gray-900 truncate">{it.contract.title}</div>
-                    <div className="text-xs text-gray-500 truncate">
+                    <div className="text-sm font-medium text-white truncate">{it.contract.title}</div>
+                    <div className="text-xs text-slate-500 truncate">
                       {it.contract.type} · {it.stepName} · submitted by {it.instance.submittedByName ?? 'unknown'}
                     </div>
                   </div>
@@ -467,7 +467,7 @@ function BulkDecisionDialog({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-slate-300 mb-1">
               Comment {isRejecting && <span className="text-red-600">*</span>}
               {!isRejecting && <span className="text-gray-400 font-normal"> (optional)</span>}
             </label>
@@ -476,7 +476,7 @@ function BulkDecisionDialog({
               onChange={e => setComment(e.target.value)}
               placeholder={isRejecting ? 'Reason for rejection — applied to every selected item' : 'Optional note recorded against each decision'}
               rows={2}
-              className="w-full text-sm border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-blue-400 resize-y"
+              className="w-full text-sm border border-white/10 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brass-400 resize-y"
             />
           </div>
 
@@ -496,7 +496,7 @@ function BulkDecisionDialog({
           )}
         </div>
 
-        <div className="px-6 py-4 border-t flex justify-end gap-2 bg-gray-50 rounded-b-xl">
+        <div className="px-6 py-4 border-t flex justify-end gap-2 bg-obsidian-900 rounded-b-xl">
           <Button variant="outline" onClick={onClose} disabled={!!progress}>Cancel</Button>
           <Button
             onClick={submit}

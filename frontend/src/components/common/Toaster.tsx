@@ -69,9 +69,9 @@ function push(args: Omit<Toast, 'id'>) {
 // ─── React component ──────────────────────────────────────────────────────────
 
 const KIND_META: Record<Kind, { icon: typeof CheckCircle2; cls: string }> = {
-  success: { icon: CheckCircle2, cls: 'bg-white border-emerald-200 text-emerald-900' },
-  error:   { icon: AlertCircle,  cls: 'bg-white border-red-300    text-red-900' },
-  info:    { icon: Info,         cls: 'bg-white border-blue-200   text-blue-900' },
+  success: { icon: CheckCircle2, cls: 'bg-obsidian-700 border-emerald-200 text-emerald-900' },
+  error:   { icon: AlertCircle,  cls: 'bg-obsidian-700 border-red-300    text-red-900' },
+  info:    { icon: Info,         cls: 'bg-obsidian-700 border-blue-200   text-blue-900' },
 }
 
 export function Toaster() {

@@ -150,7 +150,7 @@ export function RegisterPage() {
                             <div
                               key={i}
                               className={`h-1 flex-1 rounded-full transition-colors ${
-                                i <= strength.score ? STRENGTH_COLORS[strength.score] : 'bg-white/10'
+                                i <= strength.score ? STRENGTH_COLORS[strength.score] : 'bg-obsidian-700/10'
                               }`}
                             />
                           ))}

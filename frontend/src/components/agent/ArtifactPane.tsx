@@ -131,7 +131,7 @@ export function ArtifactPane({
       data-testid="artifact-pane"
       data-artifact-kind={artifact.kind}
       data-artifact-id={artifact.id}
-      className="flex-1 flex flex-col min-w-0 bg-gray-50 border-l border-gray-200"
+      className="flex-1 flex flex-col min-w-0 bg-obsidian-900 border-l border-white/10"
     >
       <ArtifactHeader artifact={artifact} onClose={onClose} />
       <div className="flex-1 overflow-y-auto p-6">
@@ -145,7 +145,7 @@ export function ArtifactPane({
           inline buttons; doc/table/diff use the shared bar. */}
       {(artifact.kind === 'doc' || artifact.kind === 'table' || artifact.kind === 'diff')
         && (artifact.actions ?? []).length > 0 && (
-        <div className="bg-white border-t border-gray-200 px-5 py-3 flex items-center gap-2 flex-wrap">
+        <div className="bg-obsidian-700 border-t border-white/10 px-5 py-3 flex items-center gap-2 flex-wrap">
           {(artifact.actions ?? []).map(a => (
             <ActionButton key={a.id} action={a} onAction={a => onAction(a, artifact)} />
           ))}
@@ -163,16 +163,16 @@ function ArtifactHeader({ artifact, onClose }: { artifact: Artifact; onClose: ()
     artifact.kind === 'form'  ? FormInput :
                                 ListChecks
   return (
-    <div className="h-14 flex items-center px-5 bg-white border-b border-gray-200 gap-3 shrink-0">
+    <div className="h-14 flex items-center px-5 bg-obsidian-700 border-b border-white/10 gap-3 shrink-0">
       <div className="h-7 w-7 rounded-md bg-indigo-50 border border-indigo-100 flex items-center justify-center shrink-0">
         <Icon className="h-3.5 w-3.5 text-indigo-600" />
       </div>
       <div className="flex-1 min-w-0">
-        <div className="text-[13px] font-semibold text-gray-900 truncate" data-testid="artifact-title">
+        <div className="text-[13px] font-semibold text-white truncate" data-testid="artifact-title">
           {artifact.title}
         </div>
         {artifact.subtitle && (
-          <div className="text-[11px] text-gray-500 truncate">{artifact.subtitle}</div>
+          <div className="text-[11px] text-slate-500 truncate">{artifact.subtitle}</div>
         )}
       </div>
       <button
@@ -180,7 +180,7 @@ function ArtifactHeader({ artifact, onClose }: { artifact: Artifact; onClose: ()
         onClick={onClose}
         title="Close artifact (Esc)"
         data-testid="artifact-close"
-        className="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-50"
+        className="text-gray-400 hover:text-slate-400 p-1 rounded hover:bg-obsidian-900"
       >
         <X className="h-4 w-4" />
       </button>
@@ -192,19 +192,19 @@ function ArtifactHeader({ artifact, onClose }: { artifact: Artifact; onClose: ()
 
 function DocBody({ artifact }: { artifact: DocArtifact }) {
   return (
-    <div className="max-w-3xl mx-auto bg-white border border-gray-200 rounded-xl shadow-sm">
+    <div className="max-w-3xl mx-auto bg-obsidian-700 border border-white/10 rounded-xl shadow-sm">
       <div
-        className="p-10 prose prose-sm max-w-none prose-headings:font-bold prose-headings:text-gray-900"
+        className="p-10 prose prose-sm max-w-none prose-headings:font-bold prose-headings:text-white"
         // Doc HTML is already sanitized by the agent; we trust it like
         // the existing TipTap renderer does on contract pages.
         dangerouslySetInnerHTML={{ __html: sanitizeHtml(artifact.html) }}
       />
       {artifact.citations && artifact.citations.length > 0 && (
-        <div className="px-10 pb-6 pt-2 border-t border-gray-100 mt-4">
+        <div className="px-10 pb-6 pt-2 border-t border-white/[0.06] mt-4">
           <p className="text-[10px] uppercase tracking-wider text-gray-400 font-semibold mb-2">Sources</p>
           <ul className="space-y-1">
             {artifact.citations.map((c, i) => (
-              <li key={i} className="text-[12px] text-gray-600">
+              <li key={i} className="text-[12px] text-slate-400">
                 {c.href ? (
                   <a href={c.href} className="hover:underline text-indigo-700">{c.label}</a>
                 ) : c.label}
@@ -233,16 +233,16 @@ function formatCell(v: unknown, format?: string): string {
 
 function TableBody({ artifact }: { artifact: TableArtifact }) {
   return (
-    <div className="max-w-5xl mx-auto bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+    <div className="max-w-5xl mx-auto bg-obsidian-700 border border-white/10 rounded-xl shadow-sm overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-[13px]">
-          <thead className="bg-gray-50 border-b border-gray-200">
+          <thead className="bg-obsidian-900 border-b border-white/10">
             <tr>
               {artifact.columns.map(c => (
                 <th
                   key={c.key}
                   className={cn(
-                    'px-4 py-2.5 font-semibold text-gray-700 text-[11px] uppercase tracking-wider',
+                    'px-4 py-2.5 font-semibold text-slate-300 text-[11px] uppercase tracking-wider',
                     c.align === 'right' ? 'text-right' : 'text-left',
                   )}
                 >
@@ -251,7 +251,7 @@ function TableBody({ artifact }: { artifact: TableArtifact }) {
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-white/5">
             {artifact.rows.length === 0 ? (
               <tr>
                 <td colSpan={artifact.columns.length} className="px-4 py-12 text-center text-gray-400 text-[12px]">
@@ -270,7 +270,7 @@ function TableBody({ artifact }: { artifact: TableArtifact }) {
                       <td
                         key={c.key}
                         className={cn(
-                          'px-4 py-2.5 text-gray-700',
+                          'px-4 py-2.5 text-slate-300',
                           c.align === 'right' ? 'text-right tabular-nums' : '',
                         )}
                       >
@@ -286,7 +286,7 @@ function TableBody({ artifact }: { artifact: TableArtifact }) {
           </tbody>
         </table>
       </div>
-      <div className="px-4 py-2 border-t border-gray-100 text-[11px] text-gray-500 flex items-center justify-between">
+      <div className="px-4 py-2 border-t border-white/[0.06] text-[11px] text-slate-500 flex items-center justify-between">
         <span>{artifact.rows.length} {artifact.rows.length === 1 ? 'row' : 'rows'}</span>
       </div>
     </div>
@@ -300,11 +300,11 @@ function DiffBody({ artifact }: { artifact: DiffArtifact }) {
   const afterLines = artifact.after.split('\n')
   const max = Math.max(beforeLines.length, afterLines.length)
   return (
-    <div className="max-w-5xl mx-auto bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+    <div className="max-w-5xl mx-auto bg-obsidian-700 border border-white/10 rounded-xl shadow-sm overflow-hidden">
       <div className="grid grid-cols-2 text-[12px] font-mono">
-        <div className="border-r border-gray-200">
+        <div className="border-r border-white/10">
           <div className="px-3 py-1.5 bg-red-50 text-red-700 text-[10px] font-semibold uppercase tracking-wider border-b border-red-200">Before</div>
-          <pre className="p-3 whitespace-pre-wrap text-gray-700 leading-relaxed">
+          <pre className="p-3 whitespace-pre-wrap text-slate-300 leading-relaxed">
             {beforeLines.slice(0, max).map((l, i) => (
               <div key={i} className={l !== afterLines[i] ? 'bg-red-50' : ''}>{l || ' '}</div>
             ))}
@@ -312,7 +312,7 @@ function DiffBody({ artifact }: { artifact: DiffArtifact }) {
         </div>
         <div>
           <div className="px-3 py-1.5 bg-emerald-50 text-emerald-700 text-[10px] font-semibold uppercase tracking-wider border-b border-emerald-200">After</div>
-          <pre className="p-3 whitespace-pre-wrap text-gray-700 leading-relaxed">
+          <pre className="p-3 whitespace-pre-wrap text-slate-300 leading-relaxed">
             {afterLines.slice(0, max).map((l, i) => (
               <div key={i} className={l !== beforeLines[i] ? 'bg-emerald-50' : ''}>{l || ' '}</div>
             ))}
@@ -339,11 +339,11 @@ function FormBody({ artifact, onAction }: { artifact: FormArtifact; onAction: (a
     }
   }
   return (
-    <div className="max-w-2xl mx-auto bg-white border border-gray-200 rounded-xl shadow-sm">
+    <div className="max-w-2xl mx-auto bg-obsidian-700 border border-white/10 rounded-xl shadow-sm">
       <div className="p-6 space-y-4">
         {artifact.fields.map(f => (
           <div key={f.key}>
-            <label className="block text-[11.5px] font-medium text-gray-700 mb-1">
+            <label className="block text-[11.5px] font-medium text-slate-300 mb-1">
               {f.label}{f.required && <span className="text-red-400 ml-0.5">*</span>}
             </label>
             {f.type === 'textarea' ? (
@@ -351,13 +351,13 @@ function FormBody({ artifact, onAction }: { artifact: FormArtifact; onAction: (a
                 value={values[f.key]}
                 onChange={e => setValues(v => ({ ...v, [f.key]: e.target.value }))}
                 rows={4}
-                className="w-full text-[13px] border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500"
+                className="w-full text-[13px] border border-white/10 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500"
               />
             ) : f.type === 'select' ? (
               <select
                 value={values[f.key]}
                 onChange={e => setValues(v => ({ ...v, [f.key]: e.target.value }))}
-                className="w-full h-9 text-[13px] border border-gray-200 rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500"
+                className="w-full h-9 text-[13px] border border-white/10 rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500"
               >
                 {(f.options ?? []).map(o => (<option key={o.value} value={o.value}>{o.label}</option>))}
               </select>
@@ -366,13 +366,13 @@ function FormBody({ artifact, onAction }: { artifact: FormArtifact; onAction: (a
                 type={f.type}
                 value={values[f.key]}
                 onChange={e => setValues(v => ({ ...v, [f.key]: e.target.value }))}
-                className="w-full h-9 text-[13px] border border-gray-200 rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500"
+                className="w-full h-9 text-[13px] border border-white/10 rounded-md px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500"
               />
             )}
           </div>
         ))}
       </div>
-      <div className="bg-gray-50 border-t border-gray-200 px-5 py-3 flex items-center justify-end gap-2">
+      <div className="bg-obsidian-900 border-t border-white/10 px-5 py-3 flex items-center justify-end gap-2">
         <Button
           onClick={submit}
           disabled={submitting}
@@ -389,16 +389,16 @@ function FormBody({ artifact, onAction }: { artifact: FormArtifact; onAction: (a
 
 function CardBody({ artifact, onAction }: { artifact: CardArtifact; onAction: (a: ArtifactAction, art: Artifact) => Promise<void> | void }) {
   return (
-    <div className="max-w-2xl mx-auto bg-white border border-gray-200 rounded-xl shadow-sm">
+    <div className="max-w-2xl mx-auto bg-obsidian-700 border border-white/10 rounded-xl shadow-sm">
       <div className="p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-2">{artifact.headline}</h2>
+        <h2 className="text-xl font-semibold text-white mb-2">{artifact.headline}</h2>
         {artifact.details && artifact.details.length > 0 && (
-          <ul className="mt-3 space-y-1.5 text-[13px] text-gray-700 list-disc pl-5">
+          <ul className="mt-3 space-y-1.5 text-[13px] text-slate-300 list-disc pl-5">
             {artifact.details.map((d, i) => <li key={i}>{d}</li>)}
           </ul>
         )}
       </div>
-      <div className="bg-gray-50 border-t border-gray-200 px-5 py-3 flex items-center gap-2 flex-wrap">
+      <div className="bg-obsidian-900 border-t border-white/10 px-5 py-3 flex items-center gap-2 flex-wrap">
         {artifact.actions.map(a => (
           <ActionButton key={a.id} action={a} onAction={a => onAction(a, artifact)} large />
         ))}
@@ -436,7 +436,7 @@ function ActionButton({
   const variantCls =
     action.variant === 'primary'  ? 'bg-indigo-600 hover:bg-indigo-700 text-white' :
     action.variant === 'danger'   ? 'bg-red-600 hover:bg-red-700 text-white' :
-                                    'bg-white border border-gray-200 hover:bg-gray-50 text-gray-700'
+                                    'bg-obsidian-700 border border-white/10 hover:bg-obsidian-900 text-slate-300'
   return (
     <button
       type="button"

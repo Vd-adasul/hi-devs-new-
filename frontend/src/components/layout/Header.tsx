@@ -71,7 +71,7 @@ export function Header(_props: HeaderProps) {
           <button
             onClick={() => setShowUserMenu(prev => !prev)}
             data-testid="user-menu-trigger"
-            className="flex items-center gap-2.5 text-[13px] text-slate-300 hover:text-white transition-colors rounded-full pl-1 pr-2.5 py-1 hover:bg-white/[0.04]"
+            className="flex items-center gap-2.5 text-[13px] text-slate-300 hover:text-white transition-colors rounded-full pl-1 pr-2.5 py-1 hover:bg-obsidian-700/[0.04]"
             aria-label="Account menu"
           >
             <span
@@ -112,7 +112,7 @@ export function Header(_props: HeaderProps) {
                   to="/profile"
                   onClick={() => setShowUserMenu(false)}
                   data-testid="user-menu-profile"
-                  className="flex items-center gap-2.5 px-3 py-2 text-[13px] text-slate-300 hover:text-white hover:bg-white/[0.04] transition-colors"
+                  className="flex items-center gap-2.5 px-3 py-2 text-[13px] text-slate-300 hover:text-white hover:bg-obsidian-700/[0.04] transition-colors"
                   role="menuitem"
                 >
                   <User size={14} className="text-slate-500" />
@@ -122,7 +122,7 @@ export function Header(_props: HeaderProps) {
                   to="/settings"
                   onClick={() => setShowUserMenu(false)}
                   data-testid="user-menu-settings"
-                  className="flex items-center gap-2.5 px-3 py-2 text-[13px] text-slate-300 hover:text-white hover:bg-white/[0.04] transition-colors"
+                  className="flex items-center gap-2.5 px-3 py-2 text-[13px] text-slate-300 hover:text-white hover:bg-obsidian-700/[0.04] transition-colors"
                   role="menuitem"
                 >
                   <Settings size={14} className="text-slate-500" />

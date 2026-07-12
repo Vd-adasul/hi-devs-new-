@@ -104,10 +104,10 @@ export function ExternalPortalPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-obsidian-900 flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="h-8 w-8 animate-spin text-blue-500 mx-auto mb-3" />
-          <p className="text-gray-500 text-sm">Loading contract…</p>
+          <p className="text-slate-500 text-sm">Loading contract…</p>
         </div>
       </div>
     )
@@ -115,11 +115,11 @@ export function ExternalPortalPage() {
 
   if (isError || !data) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-obsidian-900 flex items-center justify-center p-4">
         <div className="text-center max-w-sm">
           <AlertCircle className="h-12 w-12 text-red-300 mx-auto mb-4" />
-          <h1 className="text-lg font-semibold text-gray-800 mb-2">Link unavailable</h1>
-          <p className="text-sm text-gray-500">
+          <h1 className="text-lg font-semibold text-white mb-2">Link unavailable</h1>
+          <p className="text-sm text-slate-500">
             This share link is invalid, has expired, or has been revoked. Please contact the sender for a new link.
           </p>
         </div>
@@ -143,7 +143,7 @@ export function ExternalPortalPage() {
     : null
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-obsidian-900 flex flex-col">
       {/* Branded header */}
       <header
         className="px-6 py-4 flex items-center justify-between shadow-sm"
@@ -154,10 +154,10 @@ export function ExternalPortalPage() {
             <img
               src={contract.org.logoUrl}
               alt={contract.org.name}
-              className="h-8 w-auto rounded object-contain bg-white/10 p-1"
+              className="h-8 w-auto rounded object-contain bg-obsidian-700/10 p-1"
             />
           ) : (
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/20">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-obsidian-700/20">
               <Building2 className="h-4 w-4 text-white" />
             </div>
           )}
@@ -191,7 +191,7 @@ export function ExternalPortalPage() {
             <span className="font-medium">Shared by {contract.org.name}</span>
           </div>
 
-          <div className="flex items-center gap-1 text-gray-600">
+          <div className="flex items-center gap-1 text-slate-400">
             <Clock className="h-3.5 w-3.5 text-gray-400" />
             <span>
               {daysToExpiry != null && daysToExpiry > 0
@@ -201,7 +201,7 @@ export function ExternalPortalPage() {
           </div>
 
           {shareLink.label && (
-            <span className="text-gray-500 truncate">· {shareLink.label}</span>
+            <span className="text-slate-500 truncate">· {shareLink.label}</span>
           )}
 
           {/* Primary CTAs pushed right. Download is always available on an
@@ -209,7 +209,7 @@ export function ExternalPortalPage() {
           <div className="ml-auto flex items-center gap-1.5 shrink-0">
             <a
               href={`/api/v1/portal/${portalToken}/download/docx`}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-colors"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-white/10 bg-obsidian-700 text-slate-300 hover:bg-obsidian-900 hover:border-white/14 transition-colors"
               title="Download this version as a Word document you can redline"
             >
               <Download className="h-3.5 w-3.5" />
@@ -269,17 +269,17 @@ export function ExternalPortalPage() {
       )}
 
       {/* Contract header */}
-      <div className="bg-white border-b px-6 py-5">
+      <div className="bg-obsidian-700 border-b px-6 py-5">
         <div className="max-w-5xl mx-auto">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h1 className="text-xl font-semibold text-gray-900">{contract.title}</h1>
+              <h1 className="text-xl font-semibold text-white">{contract.title}</h1>
               <div className="flex items-center gap-3 mt-2 flex-wrap">
-                <span className="text-xs bg-gray-100 text-gray-600 px-2.5 py-0.5 rounded-full font-medium">
+                <span className="text-xs bg-obsidian-800 text-slate-400 px-2.5 py-0.5 rounded-full font-medium">
                   {contract.type.replace(/_/g, ' ')}
                 </span>
                 {contract.counterpartyName && (
-                  <span className="text-xs text-gray-500 flex items-center gap-1">
+                  <span className="text-xs text-slate-500 flex items-center gap-1">
                     <ChevronRight className="h-3 w-3" />
                     {contract.counterpartyName}
                   </span>
@@ -310,7 +310,7 @@ export function ExternalPortalPage() {
               className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
                 activeTab === 'document'
                   ? 'border-blue-600 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  : 'border-transparent text-slate-500 hover:text-slate-300'
               }`}
             >
               <FileText className="h-3.5 w-3.5" />
@@ -322,7 +322,7 @@ export function ExternalPortalPage() {
                 className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium border-b-2 transition-colors ${
                   activeTab === 'comments'
                     ? 'border-blue-600 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
+                    : 'border-transparent text-slate-500 hover:text-slate-300'
                 }`}
               >
                 <MessageSquare className="h-3.5 w-3.5" />
@@ -337,12 +337,12 @@ export function ExternalPortalPage() {
       <main className="flex-1 py-8 px-4">
         <div className="max-w-5xl mx-auto">
           {activeTab === 'document' && (
-            <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-obsidian-700 border border-white/10 rounded-2xl shadow-sm overflow-hidden">
               <div className="p-8 md:p-12">
                 {editor ? (
                   <EditorContent
                     editor={editor}
-                    className="prose prose-sm md:prose max-w-none focus:outline-none [&_.ProseMirror]:outline-none [&_.ProseMirror]:min-h-[400px]"
+                    className="prose prose-invert prose-sm md:prose max-w-none focus:outline-none [&_.ProseMirror]:outline-none [&_.ProseMirror]:min-h-[400px]"
                   />
                 ) : (
                   <div className="flex items-center justify-center py-12">
@@ -366,7 +366,7 @@ export function ExternalPortalPage() {
       </main>
 
       {/* Footer */}
-      <footer className="py-4 px-6 border-t bg-white text-center">
+      <footer className="py-4 px-6 border-t bg-obsidian-700 text-center">
         <p className="text-xs text-gray-400">
           Shared securely via {contract.org.name} · View only · Do not distribute
         </p>

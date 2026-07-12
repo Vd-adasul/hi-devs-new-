@@ -48,14 +48,14 @@ export function RailSection({
   // and the action coexist without nesting.
   return (
     <section
-      className="border-b border-gray-100 last:border-b-0"
+      className="border-b border-white/[0.06] last:border-b-0"
       data-testid={`rail-section-${slug}`}
       data-state={open ? 'open' : 'closed'}
     >
       <div
         className={cn(
           'flex w-full items-center gap-2 px-5 py-3.5 text-left',
-          'hover:bg-gray-50',
+          'hover:bg-obsidian-900',
         )}
       >
         <button
@@ -75,7 +75,7 @@ export function RailSection({
             )}
             strokeWidth={2.5}
           />
-          <span className="text-[11px] font-semibold uppercase tracking-wide text-gray-600 flex-1">
+          <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 flex-1">
             {title}
           </span>
           {showCount && (
@@ -98,7 +98,7 @@ export function RailSection({
         )}
       </div>
       {open && (
-        <div className="px-5 pb-5 pt-0 text-sm text-gray-700" data-testid={`rail-section-body-${slug}`}>
+        <div className="px-5 pb-5 pt-0 text-sm text-slate-300" data-testid={`rail-section-body-${slug}`}>
           {children}
         </div>
       )}

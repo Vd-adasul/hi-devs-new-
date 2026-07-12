@@ -173,22 +173,22 @@ export function BubbleAiPopover({ editor, open, onClose, selectedText: incomingT
   return (
     <div
       ref={popRef}
-      className="fixed z-[60] rounded-xl border border-gray-200 bg-white shadow-xl"
+      className="fixed z-[60] rounded-xl border border-white/10 bg-obsidian-700 shadow-xl"
       style={{ top: position.top, left: position.left, width: position.width }}
       data-testid="bubble-ai-popover"
     >
       <div className="flex items-center justify-between px-3 py-2 border-b">
         {/* U.2.2 / decision 14a — drop "AI" from primary label; indigo accent. */}
-        <div className="flex items-center gap-1.5 text-xs font-medium text-gray-800">
+        <div className="flex items-center gap-1.5 text-xs font-medium text-white">
           <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
           Selection
         </div>
         <button
           onClick={onClose}
-          className="p-0.5 rounded hover:bg-gray-100"
+          className="p-0.5 rounded hover:bg-obsidian-800"
           aria-label="Close"
         >
-          <X className="h-3.5 w-3.5 text-gray-500" />
+          <X className="h-3.5 w-3.5 text-slate-500" />
         </button>
       </div>
 
@@ -199,10 +199,10 @@ export function BubbleAiPopover({ editor, open, onClose, selectedText: incomingT
               key={a.id}
               onClick={() => runAction(a.id)}
               data-testid={`bubble-ai-action-${a.id}`}
-              className="text-left px-2 py-1.5 rounded-md border border-gray-200 hover:border-violet-300 hover:bg-violet-50 transition-colors"
+              className="text-left px-2 py-1.5 rounded-md border border-white/10 hover:border-violet-300 hover:bg-violet-50 transition-colors"
             >
-              <div className="text-[11.5px] font-medium text-gray-900">{a.label}</div>
-              <div className="text-[10px] text-gray-500">{a.helper}</div>
+              <div className="text-[11.5px] font-medium text-white">{a.label}</div>
+              <div className="text-[10px] text-slate-500">{a.helper}</div>
             </button>
           ))}
         </div>
@@ -212,13 +212,13 @@ export function BubbleAiPopover({ editor, open, onClose, selectedText: incomingT
         <div className="p-3">
           <div
             className={cn(
-              'text-[12.5px] leading-relaxed text-gray-800 min-h-[40px] whitespace-pre-wrap',
+              'text-[12.5px] leading-relaxed text-white min-h-[40px] whitespace-pre-wrap',
               streaming && 'after:inline-block after:w-1.5 after:h-3.5 after:ml-0.5 after:bg-violet-400 after:animate-pulse after:align-middle',
             )}
             data-testid="bubble-ai-result"
           >
             {result || (streaming ? (
-              <span className="inline-flex items-center gap-1 text-gray-500">
+              <span className="inline-flex items-center gap-1 text-slate-500">
                 <Loader2 className="h-3 w-3 animate-spin" /> Streaming…
               </span>
             ) : null)}
@@ -235,14 +235,14 @@ export function BubbleAiPopover({ editor, open, onClose, selectedText: incomingT
               <button
                 onClick={insertBelow}
                 data-testid="bubble-ai-insert-below"
-                className="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50"
+                className="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-md border border-white/10 text-slate-300 hover:bg-obsidian-900"
               >
                 <ArrowDown className="h-3 w-3" /> Insert below
               </button>
               <button
                 onClick={copy}
                 data-testid="bubble-ai-copy"
-                className="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-md border border-gray-200 text-gray-700 hover:bg-gray-50"
+                className="inline-flex items-center gap-1 text-[11px] px-2 py-1 rounded-md border border-white/10 text-slate-300 hover:bg-obsidian-900"
               >
                 {copied ? <Check className="h-3 w-3 text-emerald-600" /> : <Copy className="h-3 w-3" />}
                 {copied ? 'Copied' : 'Copy'}
@@ -250,7 +250,7 @@ export function BubbleAiPopover({ editor, open, onClose, selectedText: incomingT
               <button
                 onClick={() => { setResult(''); setError(null) }}
                 data-testid="bubble-ai-retry"
-                className="text-[11px] px-2 py-1 rounded-md text-gray-500 hover:bg-gray-50 ml-auto"
+                className="text-[11px] px-2 py-1 rounded-md text-slate-500 hover:bg-obsidian-900 ml-auto"
               >
                 Try another action
               </button>

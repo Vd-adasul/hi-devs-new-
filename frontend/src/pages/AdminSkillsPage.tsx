@@ -53,7 +53,7 @@ const MODEL_TIERS = ['reasoning', 'default', 'fast'] as const
 const TRIGGER_TYPES = ['mention', 'chip', 'button'] as const
 
 const OWNER_BADGE: Record<SkillRow['ownerType'], { label: string; cls: string }> = {
-  built_in: { label: 'Built-in', cls: 'bg-gray-100 text-gray-700 border-gray-200' },
+  built_in: { label: 'Built-in', cls: 'bg-obsidian-800 text-slate-300 border-white/10' },
   org:      { label: 'Org',      cls: 'bg-indigo-50 text-indigo-800 border-indigo-200' },
   user:     { label: 'You',      cls: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
 }
@@ -91,10 +91,10 @@ export function AdminSkillsPage() {
   }, [listQ.data, search, scopeFilter])
 
   return (
-    <div className="px-6 py-5 max-w-5xl mx-auto bg-white text-gray-900 rounded-xl shadow-sm border border-gray-100 mt-4" data-testid="admin-skills-page">
+    <div className="px-6 py-5 max-w-5xl mx-auto bg-obsidian-700 text-white rounded-xl shadow-sm border border-white/[0.06] mt-4" data-testid="admin-skills-page">
       <div className="flex items-start justify-between mb-4">
         <div>
-          <h1 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+          <h1 className="text-xl font-semibold text-white flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-blue-600" />
             Skills
           </h1>
@@ -155,7 +155,7 @@ export function AdminSkillsPage() {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="font-mono text-[12px] text-blue-700">{s.slug}</span>
-                <span className="text-[12px] font-medium text-gray-900">{s.name}</span>
+                <span className="text-[12px] font-medium text-white">{s.name}</span>
                 <span className={`text-[10px] px-1.5 py-0.5 rounded border ${OWNER_BADGE[s.ownerType].cls}`}>
                   {OWNER_BADGE[s.ownerType].label}
                 </span>
@@ -165,7 +165,7 @@ export function AdminSkillsPage() {
                 </span>
                 <span className="text-[10px] text-muted-foreground font-mono">v{s.version}</span>
               </div>
-              <div className="text-[11.5px] text-gray-600 mt-0.5">{s.description}</div>
+              <div className="text-[11.5px] text-slate-400 mt-0.5">{s.description}</div>
               <div className="text-[10.5px] text-muted-foreground mt-1 flex items-center gap-2">
                 <span>Tools: <span className="font-mono">{s.allowedTools.join(', ') || '—'}</span></span>
               </div>

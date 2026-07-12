@@ -72,7 +72,7 @@ export default function NegotiationsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Start session form */}
-        <div className="glass-panel bg-white border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
+        <div className="glass-panel bg-obsidian-700 border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
           <h3 className="text-sm font-semibold text-slate-800 border-b border-slate-100 pb-2">Start Negotiation</h3>
           <form onSubmit={handleStartSession} className="flex flex-col gap-4 text-xs">
             <div className="flex flex-col gap-1">
@@ -80,7 +80,7 @@ export default function NegotiationsPage() {
               <select
                 value={selectedDocId}
                 onChange={(e) => setSelectedDocId(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2"
+                className="w-full bg-obsidian-900 border border-slate-200 rounded py-1.5 px-2"
               >
                 {documents.map((d) => (
                   <option key={d._id} value={d._id}>{d.name}</option>
@@ -94,7 +94,7 @@ export default function NegotiationsPage() {
                 value={counterpartyEmail}
                 onChange={(e) => setCounterpartyEmail(e.target.value)}
                 placeholder="partner@company.com"
-                className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2"
+                className="w-full bg-obsidian-900 border border-slate-200 rounded py-1.5 px-2"
                 required
               />
             </div>
@@ -106,7 +106,7 @@ export default function NegotiationsPage() {
                 onChange={(e) => setDeadlineDays(Number(e.target.value))}
                 min={1}
                 max={30}
-                className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2"
+                className="w-full bg-obsidian-900 border border-slate-200 rounded py-1.5 px-2"
                 required
               />
             </div>
@@ -117,11 +117,11 @@ export default function NegotiationsPage() {
         </div>
 
         {/* Sessions list */}
-        <div className="md:col-span-2 glass-panel bg-white border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
+        <div className="md:col-span-2 glass-panel bg-obsidian-700 border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
           <h3 className="text-sm font-semibold text-slate-800 border-b border-slate-100 pb-2">Active Sessions</h3>
           <div className="flex flex-col gap-3">
             {sessions.map((sess) => (
-              <div key={sess._id} className="p-4 border border-slate-100 rounded-lg flex justify-between items-center hover:border-indigo-100 hover:bg-slate-50/50 transition-colors">
+              <div key={sess._id} className="p-4 border border-slate-100 rounded-lg flex justify-between items-center hover:border-indigo-100 hover:bg-obsidian-900/50 transition-colors">
                 <div>
                   <h4 className="text-sm font-bold text-slate-800">
                     Negotiation on Document

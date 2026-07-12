@@ -92,7 +92,7 @@ export function ReviewQueuePage() {
     <div className="px-6 py-5 max-w-6xl mx-auto" data-testid="review-queue-page">
       <div className="flex items-start justify-between mb-4">
         <div>
-          <h1 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+          <h1 className="text-xl font-semibold text-white flex items-center gap-2">
             <ShieldCheck className="h-4 w-4 text-amber-600" />
             Extraction Queue
           </h1>
@@ -138,7 +138,7 @@ export function ReviewQueuePage() {
         </div>
       )}
       {filtered.length === 0 && !isLoading && (
-        <div className="px-4 py-10 text-center text-sm text-muted-foreground border border-dashed border-gray-300 rounded-lg">
+        <div className="px-4 py-10 text-center text-sm text-muted-foreground border border-dashed border-white/14 rounded-lg">
           Nothing to review at this threshold. Try widening it to surface more.
         </div>
       )}
@@ -154,7 +154,7 @@ export function ReviewQueuePage() {
               <div className="min-w-0 flex items-baseline gap-2">
                 <Link
                   to={`/contracts/${contractId}`}
-                  className="font-medium text-sm text-gray-900 hover:underline truncate"
+                  className="font-medium text-sm text-white hover:underline truncate"
                 >
                   {group.title}
                 </Link>
@@ -180,11 +180,11 @@ export function ReviewQueuePage() {
                   className="px-4 py-2.5 flex items-start gap-3"
                 >
                   <div className="min-w-[140px] flex-shrink-0">
-                    <div className="text-[11px] font-medium text-gray-900">{it.fieldLabel}</div>
+                    <div className="text-[11px] font-medium text-white">{it.fieldLabel}</div>
                     <div className="text-[10.5px] text-muted-foreground font-mono">{it.field}</div>
                   </div>
                   <div className="flex-1 min-w-0 space-y-0.5">
-                    <div className="text-[12px] text-gray-900 truncate">
+                    <div className="text-[12px] text-white truncate">
                       {it.value != null && it.value !== ''
                         ? String(it.value)
                         : <em className="text-gray-400">(empty)</em>}

@@ -89,7 +89,7 @@ export function StatusStepper({
     const toneClass = {
       red:   'bg-red-50    text-red-700   border-red-200',
       amber: 'bg-amber-50  text-amber-700 border-amber-200',
-      gray:  'bg-gray-50   text-gray-600  border-gray-200',
+      gray:  'bg-obsidian-900   text-slate-400  border-white/10',
     }[offPath.tone]
     return (
       <div className={cn('flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm', toneClass, className)}>
@@ -105,7 +105,7 @@ export function StatusStepper({
         'inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium',
         offPath.tone === 'red'   && 'bg-red-50   text-red-700',
         offPath.tone === 'amber' && 'bg-amber-50 text-amber-700',
-        offPath.tone === 'gray'  && 'bg-gray-100 text-gray-600',
+        offPath.tone === 'gray'  && 'bg-obsidian-800 text-slate-400',
         className,
       )}>
         <AlertCircle className="h-3 w-3" />
@@ -119,7 +119,7 @@ export function StatusStepper({
     // Just a labelled dot + step label — used in narrow contexts.
     const step = currentIdx >= 0 ? STEPS[currentIdx] : null
     return (
-      <span className={cn('inline-flex items-center gap-1.5 text-xs font-medium text-gray-700', className)}>
+      <span className={cn('inline-flex items-center gap-1.5 text-xs font-medium text-slate-300', className)}>
         <span className="relative flex h-2 w-2">
           <span className="absolute inset-0 animate-ping rounded-full bg-blue-400 opacity-40" />
           <span className="relative h-2 w-2 rounded-full bg-blue-500" />
@@ -148,8 +148,8 @@ export function StatusStepper({
                   'rounded-full flex items-center justify-center transition-colors border-2',
                   dotSize,
                   done    && 'bg-blue-600 border-blue-600 text-white',
-                  current && 'bg-white border-blue-600 text-blue-600 ring-4 ring-blue-100',
-                  future  && 'bg-white border-gray-300 text-gray-400',
+                  current && 'bg-obsidian-700 border-blue-600 text-blue-600 ring-4 ring-blue-100',
+                  future  && 'bg-obsidian-700 border-white/14 text-gray-400',
                 )}
               >
                 {done ? (
@@ -164,7 +164,7 @@ export function StatusStepper({
                 className={cn(
                   'mt-1 font-medium whitespace-nowrap',
                   labelSize,
-                  done    && 'text-gray-500',
+                  done    && 'text-slate-500',
                   current && 'text-blue-700',
                   future  && 'text-gray-400',
                 )}

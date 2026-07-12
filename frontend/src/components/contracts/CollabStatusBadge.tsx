@@ -21,7 +21,7 @@ export function CollabStatusBadge({ contractId }: { contractId: string }) {
   const config = {
     connecting:   { icon: Loader2,  cls: 'text-amber-700 bg-amber-50 border-amber-200',      label: 'Connecting…', spin: true  },
     connected:    { icon: Wifi,     cls: 'text-emerald-700 bg-emerald-50 border-emerald-200', label: 'Sync on',     spin: false },
-    disconnected: { icon: WifiOff,  cls: 'text-gray-600 bg-gray-100 border-gray-200',         label: 'Offline',     spin: false },
+    disconnected: { icon: WifiOff,  cls: 'text-slate-400 bg-obsidian-800 border-white/10',         label: 'Offline',     spin: false },
   }[status]
   const Icon = config.icon
 

@@ -167,16 +167,16 @@ export function BulkImportModal({ open, onClose }: BulkImportModalProps) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl mx-4 max-h-[90vh] flex flex-col">
+      <div className="bg-obsidian-700 rounded-xl shadow-xl w-full max-w-2xl mx-4 max-h-[90vh] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b shrink-0">
-          <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2">
             <FileSpreadsheet className="h-5 w-5" />
             Bulk Import Users
           </h2>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+            className="p-1 rounded-lg text-gray-400 hover:text-slate-400 hover:bg-obsidian-800"
           >
             <X className="h-4 w-4" />
           </button>
@@ -211,16 +211,16 @@ export function BulkImportModal({ open, onClose }: BulkImportModalProps) {
             <>
               {/* Upload area */}
               <div>
-                <p className="text-sm text-gray-600 mb-3">
-                  Upload a CSV file with columns: <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">name, email, roles</code>.
-                  Separate multiple roles with semicolons (e.g. <code className="text-xs bg-gray-100 px-1 py-0.5 rounded">ADMIN;LEGAL_COUNSEL</code>).
+                <p className="text-sm text-slate-400 mb-3">
+                  Upload a CSV file with columns: <code className="text-xs bg-obsidian-800 px-1 py-0.5 rounded">name, email, roles</code>.
+                  Separate multiple roles with semicolons (e.g. <code className="text-xs bg-obsidian-800 px-1 py-0.5 rounded">ADMIN;LEGAL_COUNSEL</code>).
                 </p>
                 <div
-                  className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors cursor-pointer"
+                  className="border-2 border-dashed border-white/14 rounded-lg p-6 text-center hover:border-blue-400 transition-colors cursor-pointer"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-slate-400">
                     {fileName ? fileName : 'Click to upload CSV file'}
                   </p>
                   <p className="text-xs text-gray-400 mt-1">Supports .csv files only</p>
@@ -246,31 +246,31 @@ export function BulkImportModal({ open, onClose }: BulkImportModalProps) {
               {rows.length > 0 && (
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <p className="text-sm font-medium text-gray-700">
+                    <p className="text-sm font-medium text-slate-300">
                       Preview ({validRows.length} valid, {errorRows.length} errors)
                     </p>
                     <button
                       onClick={handleReset}
-                      className="text-xs text-gray-500 hover:text-gray-700 underline"
+                      className="text-xs text-slate-500 hover:text-slate-300 underline"
                     >
                       Clear
                     </button>
                   </div>
-                  <div className="bg-white rounded-lg border overflow-hidden">
+                  <div className="bg-obsidian-700 rounded-lg border overflow-hidden">
                     <div className="overflow-x-auto max-h-64 overflow-y-auto">
                       <table className="w-full text-sm">
                         <thead>
-                          <tr className="border-b bg-gray-50">
-                            <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-2">
+                          <tr className="border-b bg-obsidian-900">
+                            <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-4 py-2">
                               Name
                             </th>
-                            <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-2">
+                            <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-4 py-2">
                               Email
                             </th>
-                            <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-2">
+                            <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-4 py-2">
                               Roles
                             </th>
-                            <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 py-2">
+                            <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-4 py-2">
                               Status
                             </th>
                           </tr>
@@ -281,8 +281,8 @@ export function BulkImportModal({ open, onClose }: BulkImportModalProps) {
                               key={i}
                               className={row.status === 'error' ? 'bg-red-50/50' : ''}
                             >
-                              <td className="px-4 py-2 text-gray-900">{row.name || '-'}</td>
-                              <td className="px-4 py-2 text-gray-600">{row.email || '-'}</td>
+                              <td className="px-4 py-2 text-white">{row.name || '-'}</td>
+                              <td className="px-4 py-2 text-slate-400">{row.email || '-'}</td>
                               <td className="px-4 py-2">
                                 <div className="flex flex-wrap gap-1">
                                   {row.roles.map(role => (

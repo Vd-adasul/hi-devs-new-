@@ -73,20 +73,20 @@ export function DefinedTermsRailSection({ editor }: { editor: Editor | null }) {
           </div>
         ) : (
           <>
-            <div className="text-[11px] text-gray-700" data-testid="defined-terms-flag-count">
+            <div className="text-[11px] text-slate-300" data-testid="defined-terms-flag-count">
               <span className="font-medium text-blue-900">{state.flags.length} inconsistent usage{state.flags.length === 1 ? '' : 's'}</span> — the author typed a variant of a defined term.
             </div>
             <ul className="space-y-1">
               {state.flags.slice(0, 6).map((f, i) => (
                 <li
                   key={i}
-                  className="text-[11px] border border-border rounded-md px-2 py-1 bg-white/60 flex items-center justify-between"
+                  className="text-[11px] border border-border rounded-md px-2 py-1 bg-obsidian-700/60 flex items-center justify-between"
                   data-testid={`defined-term-flag-${i}`}
                 >
                   <span>
                     <span className="font-mono text-blue-900 underline decoration-dotted">{f.found}</span>
                     {' → '}
-                    <span className="font-mono font-medium text-gray-900">{f.term}</span>
+                    <span className="font-mono font-medium text-white">{f.term}</span>
                   </span>
                 </li>
               ))}

@@ -46,7 +46,7 @@ function TemplateCard({
   return (
     <div
       data-testid={`template-card-${template.id}`}
-      className="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-blue-200 transition-all"
+      className="bg-obsidian-700 border border-white/10 rounded-xl p-4 hover:shadow-md hover:border-blue-200 transition-all"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
@@ -56,7 +56,7 @@ function TemplateCard({
               type="button"
               onClick={onEdit}
               data-testid={`template-card-title-${template.id}`}
-              className="font-semibold text-gray-900 truncate text-left hover:text-blue-700 hover:underline underline-offset-2 decoration-gray-300 hover:decoration-blue-400"
+              className="font-semibold text-white truncate text-left hover:text-blue-700 hover:underline underline-offset-2 decoration-gray-300 hover:decoration-blue-400"
             >
               {template.name}
             </button>
@@ -75,7 +75,7 @@ function TemplateCard({
             )}
           </div>
           {template.description && (
-            <p className="text-sm text-gray-500 mt-1 line-clamp-2">{template.description}</p>
+            <p className="text-sm text-slate-500 mt-1 line-clamp-2">{template.description}</p>
           )}
           <div className="flex items-center gap-2 mt-2 flex-wrap">
             {template.contractType && <RiskBadge type={template.contractType} />}
@@ -89,7 +89,7 @@ function TemplateCard({
                 <span className="text-xs text-gray-400">·</span>
                 <span
                   data-testid={`template-usage-${template.id}`}
-                  className="text-xs text-gray-500 tabular-nums"
+                  className="text-xs text-slate-500 tabular-nums"
                 >
                   Used {usageCount} {usageCount === 1 ? 'time' : 'times'}
                 </span>
@@ -98,8 +98,8 @@ function TemplateCard({
           </div>
         </div>
         <div className="flex gap-1 shrink-0">
-          <button onClick={onPreview} className="p-1.5 rounded hover:bg-gray-100 text-gray-400 hover:text-gray-600" title="Preview"><Eye className="w-4 h-4" /></button>
-          <button onClick={onEdit} className="p-1.5 rounded hover:bg-gray-100 text-gray-400 hover:text-blue-600" title="Edit"><Edit2 className="w-4 h-4" /></button>
+          <button onClick={onPreview} className="p-1.5 rounded hover:bg-obsidian-800 text-gray-400 hover:text-slate-400" title="Preview"><Eye className="w-4 h-4" /></button>
+          <button onClick={onEdit} className="p-1.5 rounded hover:bg-obsidian-800 text-gray-400 hover:text-blue-600" title="Edit"><Edit2 className="w-4 h-4" /></button>
           <button onClick={onDelete} className="p-1.5 rounded hover:bg-red-50 text-gray-400 hover:text-red-600" title="Delete"><Trash2 className="w-4 h-4" /></button>
         </div>
       </div>
@@ -128,27 +128,27 @@ function VariableEditor({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Variables</p>
+        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Variables</p>
         <button
           onClick={addVar}
-          className="text-xs px-2 py-1 bg-gray-100 rounded hover:bg-gray-200 text-gray-600"
+          className="text-xs px-2 py-1 bg-obsidian-800 rounded hover:bg-gray-200 text-slate-400"
         >+ Add</button>
       </div>
       {variables.map((v, i) => (
-        <div key={i} className="bg-gray-50 border border-gray-200 rounded-lg p-2 space-y-1.5">
+        <div key={i} className="bg-obsidian-900 border border-white/10 rounded-lg p-2 space-y-1.5">
           {/* Row 1: key + type */}
           <div className="flex gap-1.5">
             <input
               value={v.key}
               onChange={e => updateVar(i, { key: e.target.value.replace(/[^a-z0-9_]/g, '_') })}
               placeholder="variable_key"
-              className="flex-1 min-w-0 text-xs font-mono border border-gray-200 rounded px-2 py-1 outline-none focus:border-blue-400"
+              className="flex-1 min-w-0 text-xs font-mono border border-white/10 rounded px-2 py-1 outline-none focus:border-blue-400"
             />
             <select
               value={v.type}
               onChange={e => updateVar(i, { type: e.target.value as VariableDef['type'] })}
               aria-label={`Type for variable ${v.key || i + 1}`}
-              className="text-xs border border-gray-200 rounded px-1.5 py-1 outline-none bg-white"
+              className="text-xs border border-white/10 rounded px-1.5 py-1 outline-none bg-obsidian-700"
             >
               {VARIABLE_TYPES.map(t => <option key={t}>{t}</option>)}
             </select>
@@ -159,9 +159,9 @@ function VariableEditor({
               value={v.label}
               onChange={e => updateVar(i, { label: e.target.value })}
               placeholder="Display label"
-              className="flex-1 min-w-0 text-xs border border-gray-200 rounded px-2 py-1 outline-none focus:border-blue-400"
+              className="flex-1 min-w-0 text-xs border border-white/10 rounded px-2 py-1 outline-none focus:border-blue-400"
             />
-            <label className="flex items-center gap-1 text-xs text-gray-500 whitespace-nowrap shrink-0">
+            <label className="flex items-center gap-1 text-xs text-slate-500 whitespace-nowrap shrink-0">
               <input type="checkbox" checked={v.required} onChange={e => updateVar(i, { required: e.target.checked })} />
               Req.
             </label>
@@ -230,21 +230,21 @@ function TemplateBuilderModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-stretch bg-black/50">
-      <div className="relative m-auto w-full max-w-6xl h-[90vh] bg-white rounded-xl flex flex-col overflow-hidden shadow-2xl">
+      <div className="relative m-auto w-full max-w-6xl h-[90vh] bg-obsidian-700 rounded-xl flex flex-col overflow-hidden shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+          <h2 className="text-lg font-semibold text-white">
             {template ? 'Edit Template' : 'New Template'}
           </h2>
           <div className="flex items-center gap-3">
-            <label className="flex items-center gap-1.5 text-sm text-gray-600">
+            <label className="flex items-center gap-1.5 text-sm text-slate-400">
               <input type="checkbox" checked={isPublished} onChange={e => setIsPublished(e.target.checked)} />
               Published
             </label>
             {onPreview && (
               <button
                 onClick={onPreview}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-600"
+                className="flex items-center gap-1.5 px-3 py-1.5 text-sm border border-white/10 rounded-lg hover:bg-obsidian-900 text-slate-400"
               >
                 <Eye className="w-4 h-4" />
                 Preview
@@ -259,39 +259,39 @@ function TemplateBuilderModal({
               {saving && <Loader2 className="w-4 h-4 animate-spin" />}
               Save Template
             </button>
-            <button onClick={onClose} className="text-gray-400 hover:text-gray-600"><X className="w-5 h-5" /></button>
+            <button onClick={onClose} className="text-gray-400 hover:text-slate-400"><X className="w-5 h-5" /></button>
           </div>
         </div>
 
         <div className="flex flex-1 min-h-0">
           {/* Left panel: metadata + variables */}
-          <div className="w-72 shrink-0 border-r border-gray-200 p-4 overflow-y-auto space-y-4">
+          <div className="w-72 shrink-0 border-r border-white/10 p-4 overflow-y-auto space-y-4">
             <div className="space-y-3">
               <div>
-                <label className="text-xs font-medium text-gray-600 mb-1 block">Template Name *</label>
+                <label className="text-xs font-medium text-slate-400 mb-1 block">Template Name *</label>
                 <input
                   value={name}
                   onChange={e => setName(e.target.value)}
                   data-testid="template-name-input"
-                  className="w-full border border-gray-200 rounded px-3 py-1.5 text-sm outline-none focus:border-blue-400"
+                  className="w-full border border-white/10 rounded px-3 py-1.5 text-sm outline-none focus:border-blue-400"
                   placeholder="e.g. Mutual NDA — Standard"
                 />
               </div>
               <div>
-                <label className="text-xs font-medium text-gray-600 mb-1 block">Description</label>
+                <label className="text-xs font-medium text-slate-400 mb-1 block">Description</label>
                 <textarea
                   value={description}
                   onChange={e => setDescription(e.target.value)}
                   rows={2}
-                  className="w-full border border-gray-200 rounded px-3 py-1.5 text-sm outline-none focus:border-blue-400 resize-none"
+                  className="w-full border border-white/10 rounded px-3 py-1.5 text-sm outline-none focus:border-blue-400 resize-none"
                 />
               </div>
               <div>
-                <label className="text-xs font-medium text-gray-600 mb-1 block">Contract Type</label>
+                <label className="text-xs font-medium text-slate-400 mb-1 block">Contract Type</label>
                 <select
                   value={contractType}
                   onChange={e => setContractType(e.target.value)}
-                  className="w-full border border-gray-200 rounded px-3 py-1.5 text-sm outline-none"
+                  className="w-full border border-white/10 rounded px-3 py-1.5 text-sm outline-none"
                 >
                   <option value="">Generic (all types)</option>
                   {CONTRACT_TYPES.map(t => <option key={t}>{t}</option>)}
@@ -302,15 +302,15 @@ function TemplateBuilderModal({
             {/* Sections list */}
             <div>
               <div className="flex items-center justify-between mb-1">
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Sections</p>
-                <button onClick={addSection} className="text-xs px-2 py-0.5 bg-gray-100 rounded hover:bg-gray-200">+ Add</button>
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Sections</p>
+                <button onClick={addSection} className="text-xs px-2 py-0.5 bg-obsidian-800 rounded hover:bg-gray-200">+ Add</button>
               </div>
               <div className="space-y-0.5">
                 {sections.map((s, i) => (
                   <button
                     key={i}
                     onClick={() => setActiveSectionIdx(i)}
-                    className={`w-full text-left text-sm px-2 py-1.5 rounded truncate transition-colors ${i === activeSectionIdx ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-600 hover:bg-gray-100'}`}
+                    className={`w-full text-left text-sm px-2 py-1.5 rounded truncate transition-colors ${i === activeSectionIdx ? 'bg-blue-50 text-blue-700 font-medium' : 'text-slate-400 hover:bg-obsidian-800'}`}
                   >
                     {s.title || `Section ${i + 1}`}
                   </button>
@@ -329,7 +329,7 @@ function TemplateBuilderModal({
                 <input
                   value={sections[activeSectionIdx].title}
                   onChange={e => setSections(s => s.map((sec, i) => i === activeSectionIdx ? { ...sec, title: e.target.value } : sec))}
-                  className="text-base font-semibold border-0 border-b border-gray-200 pb-2 mb-3 w-full outline-none focus:border-blue-400"
+                  className="text-base font-semibold border-0 border-b border-white/10 pb-2 mb-3 w-full outline-none focus:border-blue-400"
                   placeholder="Section title..."
                 />
                 <div className="flex-1">
@@ -357,10 +357,10 @@ function PreviewModal({ templateId, onClose }: { templateId: string; onClose: ()
 
   return (
     <div className="fixed inset-0 z-50 flex items-stretch bg-black/50">
-      <div className="m-auto w-full max-w-4xl h-[80vh] bg-white rounded-xl flex flex-col overflow-hidden shadow-2xl">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+      <div className="m-auto w-full max-w-4xl h-[80vh] bg-obsidian-700 rounded-xl flex flex-col overflow-hidden shadow-2xl">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
           <h2 className="text-lg font-semibold">Template Preview (Sample Data)</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600"><X className="w-5 h-5" /></button>
+          <button onClick={onClose} className="text-gray-400 hover:text-slate-400"><X className="w-5 h-5" /></button>
         </div>
         <div className="flex-1 overflow-y-auto p-6">
           {isLoading && <p className="text-gray-400">Loading preview...</p>}
@@ -446,12 +446,12 @@ export function TemplatesPage() {
   })
 
   return (
-    <div className="flex flex-col h-full bg-white text-gray-900">
+    <div className="flex flex-col h-full bg-obsidian-700 text-white">
       {/* Header */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-white">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-obsidian-700">
         <div>
-          <h1 className="text-xl font-bold text-gray-900">Templates</h1>
-          <p className="text-sm text-gray-500">Contract templates for AI-powered drafting</p>
+          <h1 className="text-xl font-bold text-white">Templates</h1>
+          <p className="text-sm text-slate-500">Contract templates for AI-powered drafting</p>
         </div>
         <button
           onClick={() => { setEditTemplate(undefined); setShowBuilder(true) }}
@@ -464,21 +464,21 @@ export function TemplatesPage() {
       </div>
 
       {/* Filters */}
-      <div className="flex items-center gap-3 px-6 py-3 border-b border-gray-100 bg-gray-50">
+      <div className="flex items-center gap-3 px-6 py-3 border-b border-white/[0.06] bg-obsidian-900">
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" />
           <input
             value={q}
             onChange={e => setQ(e.target.value)}
             placeholder="Search templates..."
-            className="text-sm border border-gray-200 rounded pl-8 pr-3 py-1.5 outline-none focus:border-blue-400 bg-white w-52"
+            className="text-sm border border-white/10 rounded pl-8 pr-3 py-1.5 outline-none focus:border-blue-400 bg-obsidian-700 w-52"
           />
         </div>
         <select
           value={filterType}
           onChange={e => setFilterType(e.target.value)}
           aria-label="Filter templates by contract type"
-          className="text-sm border border-gray-200 rounded px-3 py-1.5 outline-none bg-white"
+          className="text-sm border border-white/10 rounded px-3 py-1.5 outline-none bg-obsidian-700"
         >
           <option value="">All Types</option>
           {CONTRACT_TYPES.map(t => <option key={t}>{t}</option>)}
@@ -487,7 +487,7 @@ export function TemplatesPage() {
           value={filterPublished}
           onChange={e => setFilterPublished(e.target.value)}
           aria-label="Filter templates by publish status"
-          className="text-sm border border-gray-200 rounded px-3 py-1.5 outline-none bg-white"
+          className="text-sm border border-white/10 rounded px-3 py-1.5 outline-none bg-obsidian-700"
         >
           <option value="">All Status</option>
           <option value="true">Published</option>
@@ -498,7 +498,7 @@ export function TemplatesPage() {
           onChange={e => setSortBy(e.target.value as SortKey)}
           data-testid="template-sort"
           aria-label="Sort templates"
-          className="text-sm border border-gray-200 rounded px-3 py-1.5 outline-none bg-white"
+          className="text-sm border border-white/10 rounded px-3 py-1.5 outline-none bg-obsidian-700"
         >
           <option value="used">Most used</option>
           <option value="updated">Recently updated</option>

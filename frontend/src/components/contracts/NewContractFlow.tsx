@@ -73,24 +73,24 @@ export function NewContractFlow({ onClose, onCreated }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div className="w-full max-w-lg bg-obsidian-700 rounded-2xl shadow-2xl overflow-hidden">
 
         {/* Header */}
-        <div className="flex items-center gap-3 px-6 py-4 border-b border-gray-200">
+        <div className="flex items-center gap-3 px-6 py-4 border-b border-white/10">
           <button
             onClick={() => setStep('template')}
-            className="text-gray-400 hover:text-gray-600"
+            className="text-gray-400 hover:text-slate-400"
             title="Back to templates"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div className="flex-1">
-            <h2 className="text-lg font-semibold text-gray-900">Draft Details</h2>
-            <p className="text-sm text-gray-500">
-              Template: <span className="font-medium text-gray-700">{selectedTemplate?.name}</span>
+            <h2 className="text-lg font-semibold text-white">Draft Details</h2>
+            <p className="text-sm text-slate-500">
+              Template: <span className="font-medium text-slate-300">{selectedTemplate?.name}</span>
             </p>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <button onClick={onClose} className="text-gray-400 hover:text-slate-400">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -98,7 +98,7 @@ export function NewContractFlow({ onClose, onCreated }: Props) {
         {/* Form */}
         <div className="px-6 py-5 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-slate-300 mb-1">
               Contract title <span className="text-red-500">*</span>
             </label>
             <input
@@ -106,12 +106,12 @@ export function NewContractFlow({ onClose, onCreated }: Props) {
               onChange={e => setTitle(e.target.value)}
               placeholder="e.g. NDA with Acme Corp"
               data-testid="draft-title-input"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200"
+              className="w-full border border-white/14 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-slate-300 mb-1">
               Counterparty name
             </label>
             <input
@@ -119,12 +119,12 @@ export function NewContractFlow({ onClose, onCreated }: Props) {
               onChange={e => setCounterparty(e.target.value)}
               placeholder="e.g. Acme Corporation"
               data-testid="draft-counterparty-input"
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200"
+              className="w-full border border-white/14 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-slate-300 mb-1">
               Additional context for AI
             </label>
             <textarea
@@ -132,7 +132,7 @@ export function NewContractFlow({ onClose, onCreated }: Props) {
               onChange={e => setContext(e.target.value)}
               placeholder="e.g. 2-year term, mutual NDA, governing law Delaware, SaaS licensing deal..."
               rows={3}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200 resize-none"
+              className="w-full border border-white/14 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-200 resize-none"
             />
           </div>
 
@@ -160,10 +160,10 @@ export function NewContractFlow({ onClose, onCreated }: Props) {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-200 bg-gray-50">
+        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-white/10 bg-obsidian-900">
           <button
             onClick={onClose}
-            className="text-sm px-4 py-2 text-gray-600 hover:text-gray-900"
+            className="text-sm px-4 py-2 text-slate-400 hover:text-white"
           >
             Cancel
           </button>

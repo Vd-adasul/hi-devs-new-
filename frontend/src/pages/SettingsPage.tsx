@@ -26,7 +26,7 @@ const FIELD_TYPES = [
 const CONTRACT_TYPES = ['', 'NDA', 'MSA', 'SOW', 'SLA', 'VENDOR_AGREEMENT', 'EMPLOYMENT', 'PARTNERSHIP', 'LICENSE', 'OTHER']
 
 const FIELD_TYPE_COLORS: Record<string, string> = {
-  text:        'bg-blue-50 text-blue-700 border-blue-200',
+  text:        'bg-sky-500/10 text-sky-300 border-sky-500/20',
   number:      'bg-purple-50 text-purple-700 border-purple-200',
   date:        'bg-green-50 text-green-700 border-green-200',
   boolean:     'bg-amber-50 text-amber-700 border-amber-200',
@@ -170,9 +170,9 @@ export function SettingsPage() {
   }
 
   return (
-    <div className="h-full flex bg-gray-50 text-gray-900">
+    <div className="h-full flex bg-obsidian-900 text-white">
       {/* Settings sidebar */}
-      <aside className="w-52 border-r bg-white flex-shrink-0 p-4">
+      <aside className="w-52 border-r bg-obsidian-700 flex-shrink-0 p-4">
         <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Settings</p>
         <nav className="space-y-0.5">
           {[
@@ -186,7 +186,7 @@ export function SettingsPage() {
               className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${
                 activeTab === id
                   ? 'bg-blue-600 text-white font-medium'
-                  : 'text-gray-600 hover:bg-gray-100'
+                  : 'text-slate-300 hover:bg-obsidian-800'
               }`}
             >
               <Icon className="h-4 w-4" />
@@ -204,8 +204,8 @@ export function SettingsPage() {
           <div className="max-w-3xl space-y-6">
             <div className="flex items-start justify-between">
               <div>
-                <h1 className="text-xl font-semibold text-gray-900">Custom Fields</h1>
-                <p className="text-sm text-gray-500 mt-1">
+                <h1 className="text-xl font-semibold text-white">Custom Fields</h1>
+                <p className="text-sm text-slate-500 mt-1">
                   Define extra fields for your contracts. Values are stored on each contract and fully searchable.
                 </p>
               </div>
@@ -216,13 +216,13 @@ export function SettingsPage() {
 
             {/* Filter by type */}
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">Show fields for:</span>
+              <span className="text-xs text-slate-500">Show fields for:</span>
               <div className="relative">
                 <select
                   value={filterType}
                   onChange={e => setFilterType(e.target.value)}
                   aria-label="Filter fields by contract type"
-                  className="appearance-none pl-3 pr-7 py-1.5 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="appearance-none pl-3 pr-7 py-1.5 text-sm bg-obsidian-700 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="">All contract types</option>
                   {CONTRACT_TYPES.filter(Boolean).map(t => (
@@ -235,12 +235,12 @@ export function SettingsPage() {
 
             {/* New field form */}
             {showNewForm && (
-              <div className="bg-white rounded-xl border-2 border-blue-200 shadow-sm p-5 space-y-4">
-                <h3 className="text-sm font-semibold text-gray-800">New Custom Field</h3>
+              <div className="bg-obsidian-700 rounded-xl border border-white/10 shadow-sm p-5 space-y-4">
+                <h3 className="text-sm font-semibold text-white">New Custom Field</h3>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label className="text-xs text-gray-500 mb-1.5 block">Field Label *</Label>
+                    <Label className="text-xs text-slate-500 mb-1.5 block">Field Label *</Label>
                     <Input
                       placeholder="e.g. Survival Period"
                       value={newField.fieldLabel}
@@ -251,7 +251,7 @@ export function SettingsPage() {
                     />
                   </div>
                   <div>
-                    <Label className="text-xs text-gray-500 mb-1.5 block">Field Key * (snake_case)</Label>
+                    <Label className="text-xs text-slate-500 mb-1.5 block">Field Key * (snake_case)</Label>
                     <Input
                       placeholder="e.g. survival_period"
                       value={newField.fieldKey}
@@ -263,7 +263,7 @@ export function SettingsPage() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label className="text-xs text-gray-500 mb-1.5 block">Field Type *</Label>
+                    <Label className="text-xs text-slate-500 mb-1.5 block">Field Type *</Label>
                     <div className="grid grid-cols-3 gap-1.5">
                       {FIELD_TYPES.map(({ value, label, icon: Icon }) => (
                         <button
@@ -271,8 +271,8 @@ export function SettingsPage() {
                           onClick={() => setNewField(f => ({ ...f, fieldType: value }))}
                           className={`flex flex-col items-center gap-1 p-2 rounded-lg border text-xs transition-colors ${
                             newField.fieldType === value
-                              ? 'border-blue-500 bg-blue-50 text-blue-700'
-                              : 'border-gray-200 text-gray-600 hover:bg-gray-50'
+                              ? 'border-sky-500 bg-sky-500/10 text-sky-300'
+                              : 'border-white/10 text-slate-400 hover:bg-obsidian-900'
                           }`}
                         >
                           <Icon className="h-3.5 w-3.5" />
@@ -283,13 +283,13 @@ export function SettingsPage() {
                   </div>
                   <div className="space-y-3">
                     <div>
-                      <Label className="text-xs text-gray-500 mb-1.5 block">Contract Type (optional)</Label>
+                      <Label className="text-xs text-slate-500 mb-1.5 block">Contract Type (optional)</Label>
                       <div className="relative">
                         <select
                           value={newField.contractType}
                           onChange={e => setNewField(f => ({ ...f, contractType: e.target.value }))}
                           aria-label="Contract type for new field"
-                          className="w-full appearance-none pl-3 pr-7 py-2 text-sm bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full appearance-none pl-3 pr-7 py-2 text-sm bg-obsidian-700 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
                           <option value="">All types (global)</option>
                           {CONTRACT_TYPES.filter(Boolean).map(t => (
@@ -305,9 +305,9 @@ export function SettingsPage() {
                         id="required"
                         checked={newField.required}
                         onChange={e => setNewField(f => ({ ...f, required: e.target.checked }))}
-                        className="rounded border-gray-300 text-blue-600"
+                        className="rounded border-white/14 text-blue-600"
                       />
-                      <label htmlFor="required" className="text-sm text-gray-600">Required field</label>
+                      <label htmlFor="required" className="text-sm text-slate-400">Required field</label>
                     </div>
                   </div>
                 </div>
@@ -315,12 +315,12 @@ export function SettingsPage() {
                 {/* Options for select/multiselect */}
                 {(newField.fieldType === 'select' || newField.fieldType === 'multiselect') && (
                   <div>
-                    <Label className="text-xs text-gray-500 mb-1.5 block">Options *</Label>
+                    <Label className="text-xs text-slate-500 mb-1.5 block">Options *</Label>
                     <div className="flex flex-wrap gap-1.5 mb-2">
                       {newField.options.map(opt => (
-                        <span key={opt} className="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 rounded-full text-xs">
+                        <span key={opt} className="inline-flex items-center gap-1 px-2.5 py-1 bg-obsidian-800 rounded-full text-xs">
                           {opt}
-                          <button onClick={() => setNewField(f => ({ ...f, options: f.options.filter(o => o !== opt) }))} className="text-gray-400 hover:text-gray-600">×</button>
+                          <button onClick={() => setNewField(f => ({ ...f, options: f.options.filter(o => o !== opt) }))} className="text-gray-400 hover:text-slate-400">×</button>
                         </span>
                       ))}
                     </div>
@@ -338,7 +338,7 @@ export function SettingsPage() {
                 )}
 
                 <div>
-                  <Label className="text-xs text-gray-500 mb-1.5 block">Help Text (optional)</Label>
+                  <Label className="text-xs text-slate-500 mb-1.5 block">Help Text (optional)</Label>
                   <Input
                     placeholder="Shown below the field in the contract form"
                     value={newField.helpText}
@@ -349,7 +349,7 @@ export function SettingsPage() {
                 {formError && (
                   <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg">
                     <AlertCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
-                    <p className="text-sm text-red-700">{formError}</p>
+                    <p className="text-sm text-rose-300">{formError}</p>
                   </div>
                 )}
 
@@ -367,42 +367,42 @@ export function SettingsPage() {
             {/* Field list */}
             {isLoading ? (
               <div className="flex justify-center py-12">
-                <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-white/14 border-t-blue-500 rounded-full animate-spin" />
               </div>
             ) : defs.length === 0 ? (
-              <div className="bg-white rounded-xl border border-dashed border-gray-300 p-12 text-center">
+              <div className="bg-obsidian-700 rounded-xl border border-dashed border-white/14 p-12 text-center">
                 <Layers className="h-8 w-8 text-gray-300 mx-auto mb-3" />
-                <p className="text-gray-600 font-medium">No custom fields yet</p>
+                <p className="text-slate-400 font-medium">No custom fields yet</p>
                 <p className="text-sm text-gray-400 mt-1">Add fields like "Survival Period" or "Auto-Renewal Notice Days" to capture org-specific data</p>
                 <Button onClick={() => setShowNewForm(true)} variant="outline" className="mt-4 gap-2">
                   <Plus className="h-4 w-4" /> Add your first field
                 </Button>
               </div>
             ) : (
-              <div className="bg-white rounded-xl border shadow-sm divide-y">
+              <div className="bg-obsidian-700 rounded-xl border shadow-sm divide-y">
                 {/* Group by contract type */}
                 {Array.from(new Set(defs.map((d: any) => d.contractType ?? ''))).map(group => {
                   const groupDefs = defs.filter((d: any) => (d.contractType ?? '') === group)
                   return (
                     <div key={String(group)}>
-                      <div className="px-5 py-2 bg-gray-50 border-b">
-                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                      <div className="px-5 py-2 bg-obsidian-900 border-b">
+                        <span className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
                           {group ? String(group).replace(/_/g, ' ') : 'Global (all contract types)'}
                         </span>
                       </div>
                       {groupDefs.map((def: any) => (
-                        <div key={def.id} className="flex items-center gap-4 px-5 py-4 hover:bg-gray-50">
+                        <div key={def.id} className="flex items-center gap-4 px-5 py-4 hover:bg-obsidian-900">
                           <GripVertical className="h-4 w-4 text-gray-300 flex-shrink-0" />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2">
-                              <p className="text-sm font-medium text-gray-900">{def.fieldLabel}</p>
+                              <p className="text-sm font-medium text-white">{def.fieldLabel}</p>
                               {def.required && (
                                 <span className="text-[10px] font-bold text-red-500 uppercase">Required</span>
                               )}
                             </div>
                             <div className="flex items-center gap-2 mt-1">
                               <span className="font-mono text-[11px] text-gray-400">{def.fieldKey}</span>
-                              <span className={`inline-flex items-center px-1.5 py-0.5 rounded border text-[10px] font-medium ${FIELD_TYPE_COLORS[def.fieldType] ?? 'bg-gray-50 text-gray-500 border-gray-200'}`}>
+                              <span className={`inline-flex items-center px-1.5 py-0.5 rounded border text-[10px] font-medium ${FIELD_TYPE_COLORS[def.fieldType] ?? 'bg-obsidian-900 text-slate-500 border-white/10'}`}>
                                 {def.fieldType}
                               </span>
                               {def.options?.length > 0 && (
@@ -415,7 +415,7 @@ export function SettingsPage() {
                           </div>
                           <button
                             onClick={() => deleteField.mutate(def.id)}
-                            className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors"
+                            className="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-rose-500/10 transition-colors"
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>
@@ -523,18 +523,18 @@ function GeneralTab() {
     <div className="max-w-2xl space-y-6" data-testid="general-tab">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-gray-900">General</h1>
-          <p className="text-sm text-gray-500 mt-1">Your profile and display preferences.</p>
+          <h1 className="text-xl font-semibold text-white">General</h1>
+          <p className="text-sm text-slate-500 mt-1">Your profile and display preferences.</p>
         </div>
         <SaveBadge state={savedFlash} />
       </div>
 
       {/* Profile */}
-      <section className="bg-white rounded-xl border shadow-sm p-6 space-y-4" data-testid="general-profile">
-        <h2 className="text-sm font-semibold text-gray-800">Profile</h2>
+      <section className="bg-obsidian-700 rounded-xl border shadow-sm p-6 space-y-4" data-testid="general-profile">
+        <h2 className="text-sm font-semibold text-white">Profile</h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Display name</Label>
+            <Label className="text-xs text-slate-500 mb-1.5 block">Display name</Label>
             <Input
               value={name}
               onChange={e => setName(e.target.value)}
@@ -544,9 +544,9 @@ function GeneralTab() {
             <p className="text-[11px] text-gray-400 mt-1">Shown on contracts you own and in the activity feed.</p>
           </div>
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Email</Label>
+            <Label className="text-xs text-slate-500 mb-1.5 block">Email</Label>
             <div
-              className="flex h-9 items-center rounded-md border border-input bg-gray-50 px-3 text-sm text-gray-700 select-text"
+              className="flex h-9 items-center rounded-md border border-input bg-obsidian-900 px-3 text-sm text-slate-300 select-text"
               data-testid="general-email-readonly"
             >
               {user?.email ?? '—'}
@@ -558,51 +558,51 @@ function GeneralTab() {
           <Button onClick={onSaveProfile} disabled={save.isPending || name.trim() === (me?.name ?? user?.name ?? '')} data-testid="general-save-profile" size="sm">
             {save.isPending ? <><Loader2 className="h-3.5 w-3.5 animate-spin mr-1.5" /> Saving…</> : 'Save profile'}
           </Button>
-          {errorMsg && <span className="text-xs text-red-600">{errorMsg}</span>}
+          {errorMsg && <span className="text-xs text-rose-300">{errorMsg}</span>}
         </div>
       </section>
 
       {/* Workspace */}
-      <section className="bg-white rounded-xl border shadow-sm p-6 space-y-4" data-testid="general-workspace">
-        <h2 className="text-sm font-semibold text-gray-800">Workspace</h2>
+      <section className="bg-obsidian-700 rounded-xl border shadow-sm p-6 space-y-4" data-testid="general-workspace">
+        <h2 className="text-sm font-semibold text-white">Workspace</h2>
         {orgName && (
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Organization</Label>
-            <div className="flex h-9 items-center rounded-md border border-input bg-gray-50 px-3 text-sm text-gray-700 select-text">
+            <Label className="text-xs text-slate-500 mb-1.5 block">Organization</Label>
+            <div className="flex h-9 items-center rounded-md border border-input bg-obsidian-900 px-3 text-sm text-slate-300 select-text">
               {orgName}
             </div>
           </div>
         )}
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Default currency</Label>
+            <Label className="text-xs text-slate-500 mb-1.5 block">Default currency</Label>
             <select
               value={prefs.currency}
               onChange={e => onPrefChange({ ...prefs, currency: e.target.value })}
               data-testid="general-currency"
-              className="w-full h-9 text-sm border border-gray-200 rounded-md px-2 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
+              className="w-full h-9 text-sm border border-white/10 rounded-md px-2 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
             >
               {CURRENCY_OPTIONS.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           </div>
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Date format</Label>
+            <Label className="text-xs text-slate-500 mb-1.5 block">Date format</Label>
             <select
               value={prefs.dateFormat}
               onChange={e => onPrefChange({ ...prefs, dateFormat: e.target.value as GeneralPrefs['dateFormat'] })}
               data-testid="general-date-format"
-              className="w-full h-9 text-sm border border-gray-200 rounded-md px-2 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
+              className="w-full h-9 text-sm border border-white/10 rounded-md px-2 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
             >
               {DATE_FORMAT_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
           </div>
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Timezone</Label>
+            <Label className="text-xs text-slate-500 mb-1.5 block">Timezone</Label>
             <select
               value={prefs.timezone}
               onChange={e => onPrefChange({ ...prefs, timezone: e.target.value })}
               data-testid="general-timezone"
-              className="w-full h-9 text-sm border border-gray-200 rounded-md px-2 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
+              className="w-full h-9 text-sm border border-white/10 rounded-md px-2 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500"
             >
               {COMMON_TIMEZONES.map(z => <option key={z} value={z}>{z.replace(/_/g, ' ')}</option>)}
               {!COMMON_TIMEZONES.includes(prefs.timezone) && (
@@ -676,47 +676,47 @@ function NotificationsTab() {
     <div className="max-w-2xl space-y-6" data-testid="notifications-tab">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-gray-900">Notifications</h1>
-          <p className="text-sm text-gray-500 mt-1">Pick what reaches you and how often.</p>
+          <h1 className="text-xl font-semibold text-white">Notifications</h1>
+          <p className="text-sm text-slate-500 mt-1">Pick what reaches you and how often.</p>
         </div>
         <SaveBadge state={savedFlash} />
       </div>
 
-      <section className="bg-white rounded-xl border shadow-sm divide-y" data-testid="notifications-triggers">
+      <section className="bg-obsidian-700 rounded-xl border shadow-sm divide-y" data-testid="notifications-triggers">
         <div className="p-4 flex items-center justify-between">
-          <h2 className="text-sm font-semibold text-gray-800">Email me when…</h2>
+          <h2 className="text-sm font-semibold text-white">Email me when…</h2>
           <span className="text-[11px] text-gray-400">All toggles persist immediately</span>
         </div>
         {triggers.map(({ key, icon: Icon, title, body }) => (
           <label
             key={key}
-            className="flex items-start gap-3 p-4 cursor-pointer hover:bg-gray-50 transition-colors"
+            className="flex items-start gap-3 p-4 cursor-pointer hover:bg-obsidian-900 transition-colors"
             data-testid={`notif-${key}-row`}
           >
-            <span className="h-9 w-9 rounded-lg bg-gray-50 flex items-center justify-center flex-shrink-0">
-              <Icon className="h-4 w-4 text-gray-500" />
+            <span className="h-9 w-9 rounded-lg bg-obsidian-900 flex items-center justify-center flex-shrink-0">
+              <Icon className="h-4 w-4 text-slate-500" />
             </span>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900">{title}</p>
-              <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">{body}</p>
+              <p className="text-sm font-medium text-white">{title}</p>
+              <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{body}</p>
             </div>
             <input
               type="checkbox"
               checked={!!prefs[key]}
               onChange={e => update({ [key]: e.target.checked } as Partial<NotificationPrefs>)}
               data-testid={`notif-${key}-toggle`}
-              className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-500/30"
+              className="mt-1 h-4 w-4 rounded border-white/14 text-blue-600 focus:ring-2 focus:ring-blue-500/30"
             />
           </label>
         ))}
       </section>
 
-      <section className="bg-white rounded-xl border shadow-sm p-4 space-y-3" data-testid="notifications-digest">
+      <section className="bg-obsidian-700 rounded-xl border shadow-sm p-4 space-y-3" data-testid="notifications-digest">
         <div className="flex items-center gap-2">
-          <Clock className="h-4 w-4 text-gray-500" />
-          <h2 className="text-sm font-semibold text-gray-800">Delivery cadence</h2>
+          <Clock className="h-4 w-4 text-slate-500" />
+          <h2 className="text-sm font-semibold text-white">Delivery cadence</h2>
         </div>
-        <p className="text-xs text-gray-500">How often we should batch and send the notifications you've chosen.</p>
+        <p className="text-xs text-slate-500">How often we should batch and send the notifications you've chosen.</p>
         <div className="grid grid-cols-3 gap-2">
           {[
             { value: 'real-time', label: 'Real-time',     hint: 'As things happen' },
@@ -730,12 +730,12 @@ function NotificationsTab() {
               aria-pressed={prefs.digest === opt.value}
               className={`p-3 rounded-lg border text-left transition-colors ${
                 prefs.digest === opt.value
-                  ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-500/20'
-                  : 'border-gray-200 hover:bg-gray-50'
+                  ? 'border-sky-500 bg-sky-500/10 ring-2 ring-sky-500/20'
+                  : 'border-white/10 hover:bg-obsidian-900'
               }`}
             >
-              <p className={`text-sm font-medium ${prefs.digest === opt.value ? 'text-blue-700' : 'text-gray-900'}`}>{opt.label}</p>
-              <p className="text-[11px] text-gray-500 mt-0.5">{opt.hint}</p>
+              <p className={`text-sm font-medium ${prefs.digest === opt.value ? 'text-sky-300' : 'text-white'}`}>{opt.label}</p>
+              <p className="text-[11px] text-slate-500 mt-0.5">{opt.hint}</p>
             </button>
           ))}
         </div>
@@ -752,9 +752,9 @@ function SaveBadge({ state }: { state: 'idle' | 'saving' | 'saved' | 'error' }) 
       data-testid="settings-save-badge"
       data-state={state}
       className={`inline-flex items-center gap-1.5 text-xs px-2 py-1 rounded-full ${
-        state === 'saving' ? 'bg-gray-100 text-gray-600' :
-        state === 'saved' ? 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200' :
-        'bg-red-50 text-red-700 ring-1 ring-red-200'
+        state === 'saving' ? 'bg-obsidian-800 text-slate-400' :
+        state === 'saved' ? 'bg-emerald-500/10 text-emerald-300 ring-1 ring-emerald-500/20' :
+        'bg-red-50 text-rose-300 ring-1 ring-red-200'
       }`}
     >
       {state === 'saving' ? <><Loader2 className="h-3 w-3 animate-spin" /> Saving…</> :

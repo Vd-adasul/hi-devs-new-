@@ -32,7 +32,12 @@ export const documentProcessingAgent = new Agent({
     You also extract parties, obligations, and legal events.
     Use the store-clauses tool to persist the structured clauses to PostgreSQL and index them in Qdrant Cloud.
   `,
-  model: 'google/gemini-2.0-flash',
+  model: {
+    providerId: 'openai-compatible',
+    modelId: 'Qwen/Qwen2.5-7B-Instruct',
+    url: 'https://api.featherless.ai/v1',
+    apiKey: process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY || ''
+  },
   tools: { storeClausesTool },
 });
 
@@ -45,7 +50,12 @@ export const timelineAgent = new Agent({
     Your goal is to parse extracted obligations and legal events (dates, renewal notice windows, schedules) and produce a clean, structured timeline report.
     Group events chronologically by: Deadlines, Renewals, Expirations, Notice Periods, and Payment Schedules.
   `,
-  model: 'google/gemini-2.0-flash',
+  model: {
+    providerId: 'openai-compatible',
+    modelId: 'Qwen/Qwen2.5-7B-Instruct',
+    url: 'https://api.featherless.ai/v1',
+    apiKey: process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY || ''
+  },
   tools: {},
 });
 
@@ -58,7 +68,12 @@ export const riskAgent = new Agent({
     You examine clauses and obligations, and determine their risk level (low, medium, high) based on standard contract rules (e.g. Unlimited Liability, Auto Renewal without termination, etc.).
     Provide a clear business impact analysis and reasoning for each risk identified.
   `,
-  model: 'google/gemini-2.0-flash',
+  model: {
+    providerId: 'openai-compatible',
+    modelId: 'Qwen/Qwen2.5-7B-Instruct',
+    url: 'https://api.featherless.ai/v1',
+    apiKey: process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY || ''
+  },
   tools: {},
 });
 
@@ -73,7 +88,12 @@ export const qaAgent = new Agent({
     Always cite your sources (clause ID, page number, document name) precisely.
     Use search-qdrant to retrieve relevant vector context.
   `,
-  model: 'google/gemini-2.0-flash',
+  model: {
+    providerId: 'openai-compatible',
+    modelId: 'Qwen/Qwen2.5-7B-Instruct',
+    url: 'https://api.featherless.ai/v1',
+    apiKey: process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY || ''
+  },
   tools: { searchQdrantTool },
 });
 
@@ -87,7 +107,12 @@ export const benchmarkAgent = new Agent({
     Identify gaps, favorable/unfavorable deviations, and suggest redlines.
     Use search-qdrant to find similar clauses.
   `,
-  model: 'google/gemini-2.0-flash',
+  model: {
+    providerId: 'openai-compatible',
+    modelId: 'Qwen/Qwen2.5-7B-Instruct',
+    url: 'https://api.featherless.ai/v1',
+    apiKey: process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY || ''
+  },
   tools: { searchQdrantTool },
 });
 
@@ -100,7 +125,12 @@ export const citationAgent = new Agent({
     Your job is to look at any citations mentioned in legal research or answers and verify them.
     Use verify-citation to check if the statutory case law actually exists in case law records or legal databases.
   `,
-  model: 'google/gemini-2.0-flash',
+  model: {
+    providerId: 'openai-compatible',
+    modelId: 'Qwen/Qwen2.5-7B-Instruct',
+    url: 'https://api.featherless.ai/v1',
+    apiKey: process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY || ''
+  },
   tools: { verifyCitationTool },
 });
 
@@ -119,7 +149,12 @@ export const researchAgent = new Agent({
     - Conclusion
     Always cite each case by full name, year, and its relevance score.
   `,
-  model: 'google/gemini-2.0-flash',
+  model: {
+    providerId: 'openai-compatible',
+    modelId: 'Qwen/Qwen2.5-7B-Instruct',
+    url: 'https://api.featherless.ai/v1',
+    apiKey: process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY || ''
+  },
   tools: {},
 });
 
@@ -133,7 +168,12 @@ export const draftingAgent = new Agent({
     Provide 2 alternative options. Rate each option by favorability (e.g., pro-client, balanced, pro-counterparty).
     Output structure should be JSON.
   `,
-  model: 'google/gemini-2.0-flash',
+  model: {
+    providerId: 'openai-compatible',
+    modelId: 'Qwen/Qwen2.5-7B-Instruct',
+    url: 'https://api.featherless.ai/v1',
+    apiKey: process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY || ''
+  },
   tools: {},
 });
 
@@ -147,7 +187,12 @@ export const negotiationAgent = new Agent({
     Perform a ZOPA (Zone of Possible Agreement) estimation and calculate the optimal concession rate based on time pressure/deadline countdown.
     Output if we should accept, reject, or make a counter-offer with adjusted clause values.
   `,
-  model: 'google/gemini-2.0-flash',
+  model: {
+    providerId: 'openai-compatible',
+    modelId: 'Qwen/Qwen2.5-7B-Instruct',
+    url: 'https://api.featherless.ai/v1',
+    apiKey: process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY || ''
+  },
   tools: {},
 });
 
@@ -160,7 +205,12 @@ export const playbookComplianceAgent = new Agent({
     Your task is to scan every clause in a contract and compare it against the corporate playbook positions.
     Identify any deviations, violations of red-lines, and suggest compliant redline edits.
   `,
-  model: 'google/gemini-2.0-flash',
+  model: {
+    providerId: 'openai-compatible',
+    modelId: 'Qwen/Qwen2.5-7B-Instruct',
+    url: 'https://api.featherless.ai/v1',
+    apiKey: process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY || ''
+  },
   tools: {},
 });
 
@@ -173,7 +223,12 @@ export const matterTwinAgent = new Agent({
     Compare existing clauses of a matter against incoming document clauses.
     Identify new, conflicting, or superseded clauses and generate a unified merged state of active clauses.
   `,
-  model: 'google/gemini-2.0-flash',
+  model: {
+    providerId: 'openai-compatible',
+    modelId: 'Qwen/Qwen2.5-7B-Instruct',
+    url: 'https://api.featherless.ai/v1',
+    apiKey: process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY || ''
+  },
   tools: {},
 });
 
@@ -556,6 +611,7 @@ researchWorkflow.then(runResearchStep).commit();
 export const redlineWorkflow = new Workflow({
   id: 'redline-workflow',
   inputSchema: z.object({
+    contractId: z.string().optional(),
     diffHtml: z.string(),
     contractType: z.string(),
     playbookPositions: z.any(),
@@ -566,6 +622,7 @@ export const redlineWorkflow = new Workflow({
 const runRedlineStep = createStep({
   id: 'run-redline-step',
   inputSchema: z.object({
+    contractId: z.string().optional(),
     diffHtml: z.string(),
     contractType: z.string(),
     playbookPositions: z.any(),
@@ -574,9 +631,47 @@ const runRedlineStep = createStep({
     redlines: z.string(),
   }),
   execute: async ({ getInitData }) => {
-    const { diffHtml, contractType, playbookPositions } = getInitData<any>();
-    const prompt = `Analyze this diff HTML for a ${contractType} contract: ${diffHtml}. Suggest redlines based on: ${JSON.stringify(playbookPositions)}`;
+    const { contractId, diffHtml, contractType, playbookPositions } = getInitData<any>();
+    const prompt = `
+      Analyze this diff HTML for a ${contractType} contract:
+      ${diffHtml}
+      
+      Compare it against our playbook positions: ${JSON.stringify(playbookPositions)}.
+      Identify key changes, issues, and suggest redlines or alternative text.
+      Return ONLY a valid JSON object matching this structure:
+      {
+        "findings": [
+          { "clauseType": "string", "severity": "high" | "medium" | "low", "description": "what changed and why it is a risk", "suggestion": "suggested alternative text" }
+        ]
+      }
+
+      Do not wrap in markdown or backticks. JSON only.
+    `;
     const res = await negotiationAgent.generate(prompt);
+    
+    let parsed: any = { findings: [] };
+    try {
+      const cleanJson = res.text.replace(/```json/g, '').replace(/```/g, '').trim();
+      parsed = JSON.parse(cleanJson);
+    } catch (e) {
+      console.warn('Failed to parse redline response:', e);
+    }
+
+    if (contractId) {
+      const contract = await prisma.contract.findUnique({ where: { id: contractId } });
+      const existingMeta = (contract?.metadata as Record<string, any>) || {};
+      await prisma.contract.update({
+        where: { id: contractId },
+        data: {
+          metadata: {
+            ...existingMeta,
+            _redlineAnalysis: parsed.findings || [],
+            _redlineStatus: 'DONE'
+          }
+        }
+      });
+    }
+
     return { redlines: res.text };
   }
 });
@@ -618,6 +713,7 @@ export const playbookAuditWorkflow = new Workflow({
   inputSchema: z.object({
     documentId: z.string(),
     playbookId: z.string(),
+    instanceId: z.string().optional(),
   }),
   outputSchema: z.any(),
 });
@@ -627,13 +723,72 @@ const runPlaybookAuditStep = createStep({
   inputSchema: z.object({
     documentId: z.string(),
     playbookId: z.string(),
+    instanceId: z.string().optional(),
   }),
   outputSchema: z.object({
     auditResult: z.string(),
   }),
   execute: async ({ getInitData }) => {
-    const { documentId } = getInitData<any>();
-    const res = await playbookComplianceAgent.generate(`Perform a playbook audit on document: ${documentId}`);
+    const { documentId, instanceId } = getInitData<any>();
+    
+    // Fetch contract clauses
+    const contract = await prisma.contract.findUnique({
+      where: { id: documentId },
+      include: {
+        versions: { orderBy: { versionNumber: 'desc' }, take: 1, include: { clauses: true } }
+      }
+    });
+    const clauses = contract?.versions[0]?.clauses ?? [];
+    const clausesText = clauses.map(c => `[Clause ID ${c.id} - ${c.clauseType}]: ${c.content}`).join('\n');
+
+    const prompt = `
+      Perform a playbook compliance audit on this document.
+      Here are the extracted contract clauses:
+      ---
+      ${clausesText}
+      ---
+
+      Identify any deviations, violations of red-lines, and suggest compliant redline edits.
+      Return ONLY a valid JSON object matching this structure:
+      {
+        "aiSummary": "2-3 sentences summary of the contract",
+        "keyRisks": [
+          { "title": "brief description of risk", "description": "detailed explanation", "severity": "high" | "medium" | "low" }
+        ],
+        "nonStandardTerms": ["brief description of non-standard term"],
+        "approvalRecommendation": "approve" | "review_required" | "reject_advised"
+      }
+
+      Do not wrap in markdown or backticks. JSON only.
+    `;
+    const res = await playbookComplianceAgent.generate(prompt);
+    
+    let parsed: any = {};
+    try {
+      const cleanJson = res.text.replace(/```json/g, '').replace(/```/g, '').trim();
+      parsed = JSON.parse(cleanJson);
+    } catch (e) {
+      console.warn('Failed to parse playbook audit response:', e);
+      parsed = {
+        aiSummary: res.text.slice(0, 500),
+        keyRisks: [],
+        nonStandardTerms: [],
+        approvalRecommendation: 'review_required'
+      };
+    }
+
+    if (instanceId) {
+      await prisma.approvalInstance.update({
+        where: { id: instanceId },
+        data: {
+          aiSummary: parsed.aiSummary,
+          keyRisks: parsed.keyRisks || [],
+          nonStandardTerms: parsed.nonStandardTerms || [],
+          approvalRecommendation: parsed.approvalRecommendation,
+        }
+      });
+    }
+
     return { auditResult: res.text };
   }
 });

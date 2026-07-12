@@ -56,7 +56,7 @@ interface SignatureRequestData {
 const STATUS_PILL: Record<string, { bg: string; fg: string; label: string }> = {
   PENDING:   { bg: 'bg-amber-50 border-amber-200',   fg: 'text-amber-700',   label: 'Awaiting signatures' },
   COMPLETED: { bg: 'bg-emerald-50 border-emerald-200', fg: 'text-emerald-700', label: 'Fully signed' },
-  VOIDED:    { bg: 'bg-gray-100 border-gray-200',     fg: 'text-gray-600',    label: 'Voided' },
+  VOIDED:    { bg: 'bg-obsidian-800 border-white/10',     fg: 'text-slate-400',    label: 'Voided' },
   EXPIRED:   { bg: 'bg-red-50 border-red-200',        fg: 'text-red-700',     label: 'Expired' },
 }
 
@@ -68,10 +68,10 @@ const SIGNER_PILL: Record<string, { bg: string; fg: string; icon: React.Componen
 
 const EVENT_LABEL: Record<EventData['kind'], { icon: React.ComponentType<{ className?: string }>; color: string; label: string }> = {
   SENT:      { icon: Send,        color: 'text-blue-600',    label: 'Sent for signature' },
-  VIEWED:    { icon: Eye,         color: 'text-gray-500',    label: 'Viewed by signer' },
+  VIEWED:    { icon: Eye,         color: 'text-slate-500',    label: 'Viewed by signer' },
   SIGNED:    { icon: CheckCircle2,color: 'text-emerald-600', label: 'Signed' },
   DECLINED:  { icon: XCircle,     color: 'text-red-600',     label: 'Declined' },
-  VOIDED:    { icon: Ban,         color: 'text-gray-500',    label: 'Voided' },
+  VOIDED:    { icon: Ban,         color: 'text-slate-500',    label: 'Voided' },
   REMINDED:  { icon: Mail,        color: 'text-blue-500',    label: 'Reminder sent' },
   COMPLETED: { icon: CheckCircle2,color: 'text-emerald-700', label: 'Fully completed' },
 }
@@ -119,7 +119,7 @@ export function SignatureStatus({
   const requests = data?.data ?? []
   if (isLoading) {
     return (
-      <div className="flex items-center gap-2 text-xs text-gray-500 py-2">
+      <div className="flex items-center gap-2 text-xs text-slate-500 py-2">
         <Loader2 className="h-3.5 w-3.5 animate-spin" />
         Loading signature status…
       </div>
@@ -160,11 +160,11 @@ export function SignatureStatus({
               <div className="flex items-center gap-2 flex-wrap">
                 <PenLine className={`h-4 w-4 flex-shrink-0 ${pill.fg}`} />
                 <span className={`text-sm font-semibold ${pill.fg}`}>{pill.label}</span>
-                <span className="text-xs text-gray-500">
+                <span className="text-xs text-slate-500">
                   · {signedCount}/{total} signed
                 </span>
               </div>
-              <div className="text-xs text-gray-500 mt-1 flex items-center gap-x-2 gap-y-0.5 flex-wrap">
+              <div className="text-xs text-slate-500 mt-1 flex items-center gap-x-2 gap-y-0.5 flex-wrap">
                 <span>Sent {relTime(sr.createdAt)}</span>
                 {sr.expiresAt && sr.status === 'PENDING' && (
                   <span className="inline-flex items-center gap-1">
@@ -188,7 +188,7 @@ export function SignatureStatus({
                     type="button"
                     onClick={() => remindMut.mutate(sr.id)}
                     disabled={remindMut.isPending}
-                    className="text-xs text-gray-600 hover:text-blue-700 inline-flex items-center gap-1 px-2 py-1 rounded border border-gray-200 hover:border-blue-300 bg-white whitespace-nowrap"
+                    className="text-xs text-slate-400 hover:text-blue-700 inline-flex items-center gap-1 px-2 py-1 rounded border border-white/10 hover:border-blue-300 bg-obsidian-700 whitespace-nowrap"
                     data-testid="remind-sr-btn"
                     title="Email a reminder to all still-pending signers"
                   >
@@ -203,7 +203,7 @@ export function SignatureStatus({
                       }
                     }}
                     disabled={voidMut.isPending}
-                    className="text-xs text-gray-600 hover:text-red-700 inline-flex items-center gap-1 px-2 py-1 rounded border border-gray-200 hover:border-red-300 bg-white whitespace-nowrap"
+                    className="text-xs text-slate-400 hover:text-red-700 inline-flex items-center gap-1 px-2 py-1 rounded border border-white/10 hover:border-red-300 bg-obsidian-700 whitespace-nowrap"
                     data-testid="void-sr-btn"
                     title="Void this signature request"
                   >
@@ -235,7 +235,7 @@ export function SignatureStatus({
                 return (
                   <div
                     key={signer.id}
-                    className="rounded-lg bg-white border border-gray-100 p-2.5"
+                    className="rounded-lg bg-obsidian-700 border border-white/[0.06] p-2.5"
                     data-testid={`signer-${signer.id}`}
                   >
                     {/* Row 1: avatar + name (+ role) + status pill */}
@@ -244,7 +244,7 @@ export function SignatureStatus({
                         <SignIcon className={`h-3.5 w-3.5 ${sp.fg}`} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-gray-900 truncate">
+                        <div className="text-sm font-medium text-white truncate">
                           {signer.name}
                           {signer.role && (
                             <span className="text-gray-400 font-normal ml-1.5">· {signer.role}</span>
@@ -259,7 +259,7 @@ export function SignatureStatus({
                     </div>
 
                     {/* Row 2: email (always full width below the row 1 cluster) */}
-                    <div className="text-[11.5px] text-gray-500 truncate mt-1 ml-9">
+                    <div className="text-[11.5px] text-slate-500 truncate mt-1 ml-9">
                       {signer.email}
                       {sr.signOrder === 'SEQUENTIAL' && (
                         <span className="text-gray-400 ml-1.5">· Order #{signer.signOrder}</span>
@@ -272,7 +272,7 @@ export function SignatureStatus({
                         <button
                           type="button"
                           onClick={() => copyLink(signer.token)}
-                          className="text-xs text-gray-600 hover:text-blue-700 inline-flex items-center gap-1 px-2 py-1 rounded border border-gray-200 hover:border-blue-300 whitespace-nowrap"
+                          className="text-xs text-slate-400 hover:text-blue-700 inline-flex items-center gap-1 px-2 py-1 rounded border border-white/10 hover:border-blue-300 whitespace-nowrap"
                           title="Copy signing link"
                         >
                           {copiedToken === signer.token ? (
@@ -291,7 +291,7 @@ export function SignatureStatus({
             {/* Audit timeline (collapsed to 6 most recent) */}
             {sr.events.length > 0 && (
               <details className="text-xs">
-                <summary className="cursor-pointer text-gray-500 hover:text-gray-700 inline-flex items-center gap-1 select-none">
+                <summary className="cursor-pointer text-slate-500 hover:text-slate-300 inline-flex items-center gap-1 select-none">
                   <span>Activity ({sr.events.length})</span>
                 </summary>
                 <ul className="mt-2 space-y-1.5 pl-1">
@@ -301,11 +301,11 @@ export function SignatureStatus({
                     const Icon = meta.icon
                     const sgn = e.signerId ? sr.signers.find(s => s.id === e.signerId) : null
                     return (
-                      <li key={e.id} className="flex items-start gap-2 text-gray-600">
+                      <li key={e.id} className="flex items-start gap-2 text-slate-400">
                         <Icon className={`h-3.5 w-3.5 mt-0.5 flex-shrink-0 ${meta.color}`} />
                         <div className="flex-1">
                           {meta.label}
-                          {sgn && <span className="text-gray-500"> · {sgn.name}</span>}
+                          {sgn && <span className="text-slate-500"> · {sgn.name}</span>}
                           <span className="text-gray-400 ml-1.5">{relTime(e.createdAt)}</span>
                         </div>
                       </li>
@@ -317,8 +317,8 @@ export function SignatureStatus({
 
             {/* Sender's optional message */}
             {sr.message && (
-              <div className="mt-3 p-2 rounded bg-white/50 text-xs text-gray-600 border border-gray-100">
-                <span className="font-medium text-gray-700">Cover note:</span> {sr.message}
+              <div className="mt-3 p-2 rounded bg-obsidian-700/50 text-xs text-slate-400 border border-white/[0.06]">
+                <span className="font-medium text-slate-300">Cover note:</span> {sr.message}
               </div>
             )}
           </div>

@@ -68,7 +68,7 @@ function statusBadge(s: string) {
   const tones: Record<string, string> = {
     DONE:        'bg-emerald-50 border-emerald-200 text-emerald-700',
     FAILED:      'bg-red-50 border-red-200 text-red-700',
-    PENDING:     'bg-gray-100 border-gray-200 text-gray-600',
+    PENDING:     'bg-obsidian-800 border-white/10 text-slate-400',
     ANALYZING:   'bg-blue-50 border-blue-200 text-blue-700',
     PARSING:     'bg-blue-50 border-blue-200 text-blue-700',
     EXTRACTING:  'bg-blue-50 border-blue-200 text-blue-700',
@@ -139,7 +139,7 @@ export function DiligenceRoomDetailPage() {
   }
   if (!room) {
     return (
-      <div className="px-6 py-6 max-w-6xl mx-auto bg-white text-gray-900 rounded-xl shadow-sm border border-gray-100 mt-4">
+      <div className="px-6 py-6 max-w-6xl mx-auto bg-obsidian-700 text-white rounded-xl shadow-sm border border-white/[0.06] mt-4">
         <div className="flex items-start gap-2 p-4 rounded-lg bg-red-50 border border-red-200 text-sm text-red-700">
           <AlertCircle className="h-4 w-4 mt-0.5" />
           Room not found.
@@ -155,18 +155,18 @@ export function DiligenceRoomDetailPage() {
   const hasAnyDone = (room.progress?.done ?? 0) > 0
 
   return (
-    <div className="px-6 py-6 max-w-6xl mx-auto bg-white text-gray-900 rounded-xl shadow-sm border border-gray-100 mt-4" data-testid="diligence-detail-page">
+    <div className="px-6 py-6 max-w-6xl mx-auto bg-obsidian-700 text-white rounded-xl shadow-sm border border-white/[0.06] mt-4" data-testid="diligence-detail-page">
       {/* Header */}
       <div className="flex items-start justify-between gap-4 mb-2">
         <div className="flex-1 min-w-0">
-          <Link to="/diligence" className="text-xs text-gray-500 hover:text-violet-600 inline-flex items-center gap-1 mb-2">
+          <Link to="/diligence" className="text-xs text-slate-500 hover:text-violet-600 inline-flex items-center gap-1 mb-2">
             <ArrowLeft className="h-3.5 w-3.5" /> All rooms
           </Link>
           <div className="flex items-center gap-3">
             <FolderOpen className="h-5 w-5 text-violet-600" />
-            <h1 className="text-2xl font-semibold text-gray-900">{room.name}</h1>
+            <h1 className="text-2xl font-semibold text-white">{room.name}</h1>
           </div>
-          {room.description && <p className="text-sm text-gray-500 mt-1">{room.description}</p>}
+          {room.description && <p className="text-sm text-slate-500 mt-1">{room.description}</p>}
         </div>
         <Button
           onClick={handleExport}
@@ -207,14 +207,14 @@ export function DiligenceRoomDetailPage() {
         className={`mb-6 rounded-xl border-2 border-dashed p-8 text-center transition-colors ${
           dragActive
             ? 'border-violet-400 bg-violet-50'
-            : 'border-gray-300 bg-white hover:border-violet-300 hover:bg-violet-50/30'
+            : 'border-white/14 bg-obsidian-700 hover:border-violet-300 hover:bg-violet-50/30'
         }`}
       >
         <Upload className={`h-8 w-8 mx-auto mb-2 ${dragActive ? 'text-violet-500' : 'text-gray-400'}`} />
-        <div className="text-sm font-medium text-gray-900 mb-1">
+        <div className="text-sm font-medium text-white mb-1">
           {upload.isPending ? 'Uploading…' : 'Drop contracts here or click to browse'}
         </div>
-        <div className="text-xs text-gray-500 mb-3">PDF or DOCX · up to 50 files per upload</div>
+        <div className="text-xs text-slate-500 mb-3">PDF or DOCX · up to 50 files per upload</div>
         <Button
           onClick={() => fileInputRef.current?.click()}
           disabled={upload.isPending}
@@ -246,19 +246,19 @@ export function DiligenceRoomDetailPage() {
 
       {/* Results table */}
       {items.length === 0 ? (
-        <div className="text-center py-12 px-6 border border-dashed border-gray-200 rounded-xl">
+        <div className="text-center py-12 px-6 border border-dashed border-white/10 rounded-xl">
           <FileText className="h-7 w-7 text-gray-300 mx-auto mb-2" />
-          <p className="text-sm text-gray-500">No documents in this room yet. Upload some to start.</p>
+          <p className="text-sm text-slate-500">No documents in this room yet. Upload some to start.</p>
         </div>
       ) : (
-        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-          <header className="flex items-center justify-between px-5 py-3 bg-gray-50 border-b border-gray-200">
-            <h3 className="text-sm font-semibold text-gray-900">Cross-document extraction</h3>
-            <span className="text-xs text-gray-500">{items.length} {items.length === 1 ? 'doc' : 'docs'}</span>
+        <div className="bg-obsidian-700 border border-white/10 rounded-xl overflow-hidden">
+          <header className="flex items-center justify-between px-5 py-3 bg-obsidian-900 border-b border-white/10">
+            <h3 className="text-sm font-semibold text-white">Cross-document extraction</h3>
+            <span className="text-xs text-slate-500">{items.length} {items.length === 1 ? 'doc' : 'docs'}</span>
           </header>
           <div className="overflow-x-auto">
             <table className="w-full text-sm" data-testid="results-table">
-              <thead className="bg-gray-50 text-xs uppercase tracking-wider text-gray-500 border-b border-gray-200">
+              <thead className="bg-obsidian-900 text-xs uppercase tracking-wider text-slate-500 border-b border-white/10">
                 <tr>
                   <th className="text-left px-4 py-2.5 font-medium">Title</th>
                   <th className="text-left px-4 py-2.5 font-medium">Counterparty</th>
@@ -270,13 +270,13 @@ export function DiligenceRoomDetailPage() {
                   <th className="text-right px-4 py-2.5 font-medium"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-white/5">
                 {items.map(d => {
                   const risk = riskBadge(d.riskScore)
                   return (
-                    <tr key={d.id} className="hover:bg-gray-50" data-testid={`result-row-${d.id}`}>
+                    <tr key={d.id} className="hover:bg-obsidian-900" data-testid={`result-row-${d.id}`}>
                       <td className="px-4 py-2.5 max-w-[260px]">
-                        <div className="font-medium text-gray-900 truncate" title={d.title}>{d.title}</div>
+                        <div className="font-medium text-white truncate" title={d.title}>{d.title}</div>
                         {d.type && d.type !== 'OTHER' && (
                           <div className="text-[10px] uppercase tracking-wider font-mono text-gray-400 mt-0.5">
                             {d.type}
@@ -286,13 +286,13 @@ export function DiligenceRoomDetailPage() {
                       <td className="px-4 py-2.5 text-xs">
                         {d.counterpartyName ?? <span className="text-gray-400">—</span>}
                       </td>
-                      <td className="px-4 py-2.5 text-xs whitespace-nowrap font-medium text-gray-800 tabular-nums">
+                      <td className="px-4 py-2.5 text-xs whitespace-nowrap font-medium text-white tabular-nums">
                         {formatMoney(d.value, d.currency ?? 'USD')}
                       </td>
-                      <td className="px-4 py-2.5 text-xs text-gray-700 whitespace-nowrap">
+                      <td className="px-4 py-2.5 text-xs text-slate-300 whitespace-nowrap">
                         {d.effectiveDate ?? <span className="text-gray-400">—</span>}
                       </td>
-                      <td className="px-4 py-2.5 text-xs text-gray-700 whitespace-nowrap">
+                      <td className="px-4 py-2.5 text-xs text-slate-300 whitespace-nowrap">
                         {d.expiryDate ?? <span className="text-gray-400">—</span>}
                       </td>
                       <td className="px-4 py-2.5">
@@ -347,13 +347,13 @@ function ProgressCard({ label, value, tone, icon: Icon, animate }: {
     blue:    'text-blue-700 bg-blue-50',
   }[tone]
   return (
-    <div className="border border-gray-200 rounded-xl p-3 bg-white flex items-center gap-3">
+    <div className="border border-white/10 rounded-xl p-3 bg-obsidian-700 flex items-center gap-3">
       <div className={`h-9 w-9 rounded-lg flex items-center justify-center ${toneClass}`}>
         <Icon className={`h-4 w-4 ${animate ? 'animate-spin' : ''}`} />
       </div>
       <div className="flex-1 min-w-0">
-        <div className="text-xs text-gray-500">{label}</div>
-        <div className="text-2xl font-semibold tabular-nums text-gray-900">{value}</div>
+        <div className="text-xs text-slate-500">{label}</div>
+        <div className="text-2xl font-semibold tabular-nums text-white">{value}</div>
       </div>
     </div>
   )

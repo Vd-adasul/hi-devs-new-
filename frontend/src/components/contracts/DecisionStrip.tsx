@@ -54,9 +54,9 @@ interface AwaitingMe {
 }
 
 const REC_TONE: Record<string, { label: string; tone: string; icon: React.ReactNode }> = {
-  approve:         { label: 'Approve',         tone: 'text-emerald-700 bg-emerald-50 border-emerald-200', icon: <CheckCircle2 className="h-3.5 w-3.5" /> },
-  review_required: { label: 'Review required', tone: 'text-amber-700 bg-amber-50 border-amber-200',       icon: <AlertTriangle className="h-3.5 w-3.5" /> },
-  reject_advised:  { label: 'Reject advised',  tone: 'text-red-700 bg-red-50 border-red-200',             icon: <XCircle className="h-3.5 w-3.5" /> },
+  approve:         { label: 'Approve',         tone: 'text-emerald-300 bg-emerald-500/10 border-emerald-500/20', icon: <CheckCircle2 className="h-3.5 w-3.5" /> },
+  review_required: { label: 'Review required', tone: 'text-amber-300 bg-amber-500/10 border-amber-500/20',       icon: <AlertTriangle className="h-3.5 w-3.5" /> },
+  reject_advised:  { label: 'Reject advised',  tone: 'text-rose-300 bg-rose-500/10 border-rose-500/20',             icon: <XCircle className="h-3.5 w-3.5" /> },
 }
 
 export function DecisionStrip({
@@ -109,17 +109,17 @@ export function DecisionStrip({
 
   const riskPct = riskScore != null ? Math.round(riskScore * 100) : null
   const riskTone =
-    riskPct == null ? 'text-gray-500 bg-gray-50 border-gray-200'
-      : riskPct >= 67 ? 'text-red-700 bg-red-50 border-red-200'
-      : riskPct >= 34 ? 'text-amber-700 bg-amber-50 border-amber-200'
-      : 'text-emerald-700 bg-emerald-50 border-emerald-200'
+    riskPct == null ? 'text-slate-500 bg-obsidian-900 border-white/10'
+      : riskPct >= 67 ? 'text-rose-300 bg-rose-500/10 border-rose-500/20'
+      : riskPct >= 34 ? 'text-amber-300 bg-amber-500/10 border-amber-500/20'
+      : 'text-emerald-300 bg-emerald-500/10 border-emerald-500/20'
 
   return (
     <div
       id="approval-decision-strip"
       role="region"
       aria-label="Approval decision strip"
-      className="border-b border-amber-200 bg-gradient-to-r from-amber-50 to-amber-50/40"
+      className="border-b border-white/10 bg-obsidian-800"
     >
       <div className="px-6 py-3 flex items-center gap-4 flex-wrap">
         {/* Status label */}
@@ -135,8 +135,8 @@ export function DecisionStrip({
         {/* AI Confidence */}
         <div className="flex items-center gap-1.5 text-xs" title="Higher = AI is more certain about its recommendation">
           <Sparkles className="h-3.5 w-3.5 text-violet-500" />
-          <span className="text-gray-500">Confidence</span>
-          <span className="font-semibold text-gray-900">{confidence}%</span>
+          <span className="text-slate-500">Confidence</span>
+          <span className="font-semibold text-white">{confidence}%</span>
         </div>
 
         {/* Risk score */}
@@ -163,7 +163,7 @@ export function DecisionStrip({
             onClick={() => topRisk.clauseId && onJumpToClause?.(topRisk.clauseId)}
             disabled={!topRisk.clauseId || !onJumpToClause}
             className={cn(
-              'flex items-center gap-1 text-xs text-gray-600 truncate max-w-[260px]',
+              'flex items-center gap-1 text-xs text-slate-400 truncate max-w-[260px]',
               topRisk.clauseId && onJumpToClause
                 ? 'hover:text-amber-700 hover:underline cursor-pointer'
                 : 'opacity-70 cursor-default',
@@ -190,7 +190,7 @@ export function DecisionStrip({
             size="sm"
             variant="outline"
             onClick={() => setPending('REJECTED')}
-            className="gap-1 border-red-200 text-red-700 hover:bg-red-50"
+            className="gap-1 border-rose-500/20 text-rose-300 hover:bg-rose-500/10"
           >
             <XCircle className="h-3.5 w-3.5" />
             Reject
@@ -199,11 +199,11 @@ export function DecisionStrip({
             size="sm"
             variant="outline"
             onClick={() => setPending('DELEGATED')}
-            className="gap-1 text-gray-600"
+            className="gap-1 text-slate-400"
           >
             <ArrowRight className="h-3.5 w-3.5" />
             Delegate
-            <ChevronDown className="h-3 w-3 opacity-60" />
+            <ChevronDown className="h-3 w-3 text-slate-500" />
           </Button>
         </div>
       </div>
@@ -211,7 +211,7 @@ export function DecisionStrip({
       {/* Inline confirmation row — appears below the strip once a decision
           is clicked. Collects the required input for the chosen action. */}
       {pending && (
-        <div className="px-6 pb-3 pt-0 flex items-start gap-2 border-t border-amber-200/60 bg-white/50">
+        <div className="px-6 pb-3 pt-0 flex items-start gap-2 border-t border-amber-200/60 bg-obsidian-700/50">
           <div className="flex-1 pt-3">
             {pending === 'REJECTED' && (
               <textarea
@@ -247,7 +247,7 @@ export function DecisionStrip({
               variant="ghost"
               onClick={() => { setPending(null); setComment(''); setDelegateTo('') }}
               disabled={decide.isPending}
-              className="text-gray-500"
+              className="text-slate-500"
             >
               Cancel
             </Button>

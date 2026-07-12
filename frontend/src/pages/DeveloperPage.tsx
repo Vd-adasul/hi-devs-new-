@@ -95,7 +95,7 @@ export default function DeveloperPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Column Left: Webhooks manager */}
-        <div className="glass-panel bg-white border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
+        <div className="glass-panel bg-obsidian-700 border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
           <h3 className="text-sm font-semibold text-slate-800 border-b border-slate-100 pb-2 flex items-center gap-1.5">
             <Webhook size={16} className="text-indigo-600" /> Webhook Endpoints
           </h3>
@@ -106,7 +106,7 @@ export default function DeveloperPage() {
               value={webhookUrl}
               onChange={(e) => setWebhookUrl(e.target.value)}
               placeholder="https://api.yourfirm.com/callbacks"
-              className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none"
+              className="flex-1 bg-obsidian-900 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none"
               required
             />
             <button type="submit" className="btn-primary rounded-lg text-xs py-2 px-4 font-semibold flex items-center gap-1">
@@ -123,7 +123,7 @@ export default function DeveloperPage() {
                 </div>
                 <button
                   onClick={() => handleDeleteWebhook(wh.id)}
-                  className="p-1 text-slate-400 hover:text-red-500 hover:bg-slate-50 rounded"
+                  className="p-1 text-slate-400 hover:text-red-500 hover:bg-obsidian-900 rounded"
                 >
                   <Trash size={14} />
                 </button>
@@ -136,7 +136,7 @@ export default function DeveloperPage() {
         </div>
 
         {/* Column Right: API Keys manager */}
-        <div className="glass-panel bg-white border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
+        <div className="glass-panel bg-obsidian-700 border border-slate-200 shadow-sm rounded-xl p-6 flex flex-col gap-4">
           <h3 className="text-sm font-semibold text-slate-800 border-b border-slate-100 pb-2 flex items-center gap-1.5">
             <Key size={16} className="text-indigo-600" /> Developer API Keys
           </h3>
@@ -147,7 +147,7 @@ export default function DeveloperPage() {
               value={keyName}
               onChange={(e) => setKeyName(e.target.value)}
               placeholder="Key label (e.g. CLI Sync tool)"
-              className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none"
+              className="flex-1 bg-obsidian-900 border border-slate-200 rounded-lg px-3 py-2 focus:outline-none"
               required
             />
             <button type="submit" className="btn-primary rounded-lg text-xs py-2 px-4 font-semibold flex items-center gap-1">
@@ -161,7 +161,7 @@ export default function DeveloperPage() {
                 <strong>API Key Generated:</strong>
                 <p className="text-[10px] text-emerald-600 mt-0.5">Copy this credential as it will not be displayed again.</p>
               </div>
-              <div className="flex items-center justify-between bg-white border border-emerald-100 rounded px-2.5 py-1.5 font-mono text-[11px]">
+              <div className="flex items-center justify-between bg-obsidian-700 border border-emerald-100 rounded px-2.5 py-1.5 font-mono text-[11px]">
                 <span className="truncate pr-4">{newlyCreatedKey}</span>
                 <button
                   onClick={() => {
@@ -186,7 +186,7 @@ export default function DeveloperPage() {
                 </div>
                 <button
                   onClick={() => handleDeleteKey(k.id)}
-                  className="p-1 text-slate-400 hover:text-red-500 hover:bg-slate-50 rounded"
+                  className="p-1 text-slate-400 hover:text-red-500 hover:bg-obsidian-900 rounded"
                 >
                   <Trash size={14} />
                 </button>

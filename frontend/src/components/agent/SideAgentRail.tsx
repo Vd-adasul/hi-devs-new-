@@ -1223,13 +1223,13 @@ export function SideAgentRail() {
         data-testid="side-agent-rail"
         data-state="collapsed"
         onClick={() => setOpen(true)}
-        className="w-8 border-l border-border bg-white hover:bg-indigo-50 transition-colors flex flex-col items-center py-4 gap-3 flex-shrink-0 cursor-pointer group"
+        className="w-8 border-l border-border bg-obsidian-700 hover:bg-indigo-50 transition-colors flex flex-col items-center py-4 gap-3 flex-shrink-0 cursor-pointer group"
         title="Open Ask · ⌘K"
       >
         <Sparkles className="h-3.5 w-3.5 text-indigo-600 group-hover:scale-110 transition-transform" />
         <div className="w-px h-12 bg-gray-200 group-hover:bg-indigo-200 transition-colors" />
         <span
-          className="text-[10.5px] tracking-wide font-medium text-gray-500 group-hover:text-indigo-700 select-none"
+          className="text-[10.5px] tracking-wide font-medium text-slate-500 group-hover:text-indigo-700 select-none"
           style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
         >
           Ask · ⌘K
@@ -1300,14 +1300,14 @@ export function SideAgentRail() {
               return next
             })
           }}
-          className="flex items-center gap-2 min-w-0 text-left hover:bg-gray-50 rounded-lg px-1.5 py-1 -ml-1.5 transition-colors"
+          className="flex items-center gap-2 min-w-0 text-left hover:bg-obsidian-900 rounded-lg px-1.5 py-1 -ml-1.5 transition-colors"
         >
           {/* U.2.1 — indigo accent (decision 14a) — distinct from product blue */}
           <div className="h-7 w-7 rounded-md bg-indigo-50 border border-indigo-100 flex items-center justify-center flex-shrink-0">
             <Sparkles className="h-3.5 w-3.5 text-indigo-600" />
           </div>
           <div className="min-w-0">
-            <div className="text-sm font-semibold text-gray-900 truncate">
+            <div className="text-sm font-semibold text-white truncate">
               {activeThread ? activeThread.title : 'Ask'}
             </div>
             <div className="text-[10px] text-gray-400 flex items-center gap-0.5">
@@ -1373,7 +1373,7 @@ export function SideAgentRail() {
               <div className="text-[11px] uppercase tracking-wider font-semibold text-indigo-700">
                 Focused on {context.type}
               </div>
-              <div className="text-[12.5px] font-medium text-gray-900 truncate" title={context.label}>
+              <div className="text-[12.5px] font-medium text-white truncate" title={context.label}>
                 {context.label}
               </div>
               <button
@@ -1421,7 +1421,7 @@ export function SideAgentRail() {
                 data-testid={`side-agent-skill-chip-${s.slug.slice(1)}`}
                 data-slug={s.slug}
                 title={s.description}
-                className="text-[11px] inline-flex items-center gap-1 rounded-full border border-indigo-200 bg-white px-2.5 py-1 text-indigo-800 hover:border-indigo-400 hover:bg-indigo-50 transition-colors"
+                className="text-[11px] inline-flex items-center gap-1 rounded-full border border-indigo-200 bg-obsidian-700 px-2.5 py-1 text-indigo-800 hover:border-indigo-400 hover:bg-indigo-50 transition-colors"
               >
                 <Sparkles className="h-2.5 w-2.5" />
                 {s.name}
@@ -1557,7 +1557,7 @@ export function SideAgentRail() {
                     >
                       <span className="text-base mt-0.5">{a.icon}</span>
                       <div className="min-w-0 flex-1">
-                        <div className="text-[12px] font-medium text-gray-900 truncate">{a.label}</div>
+                        <div className="text-[12px] font-medium text-white truncate">{a.label}</div>
                         {a.description && (
                           <div className="text-[10.5px] text-muted-foreground truncate">{a.description}</div>
                         )}
@@ -1607,7 +1607,7 @@ export function SideAgentRail() {
                     )
                   }
                   // P4.3 — entity row (contract / matter / counterparty)
-                  const tone = item.kind === 'contract' ? 'text-gray-700'
+                  const tone = item.kind === 'contract' ? 'text-slate-300'
                     : item.kind === 'matter' ? 'text-indigo-700'
                     : 'text-emerald-700'
                   const kindLabel = item.kind === 'contract' ? 'Contract'
@@ -1720,7 +1720,7 @@ export function SideAgentRail() {
         <a
           href="/agent"
           data-testid="side-agent-handoff-link"
-          className="block mt-2 px-2.5 py-1.5 rounded-md bg-gray-50 border border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 text-[11px] text-gray-600 hover:text-indigo-700 transition-colors text-center"
+          className="block mt-2 px-2.5 py-1.5 rounded-md bg-obsidian-900 border border-white/10 hover:border-indigo-300 hover:bg-indigo-50 text-[11px] text-slate-400 hover:text-indigo-700 transition-colors text-center"
         >
           For drafts, exports, multi-step work → <span className="font-medium">open Assistant ↗</span>
         </a>
@@ -1798,8 +1798,8 @@ function SideAgentEmptyState({
       <div className="h-10 w-10 mx-auto rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mb-3">
         <Sparkles className="h-5 w-5 text-blue-600" />
       </div>
-      <div className="text-sm font-medium text-gray-900">How can I help?</div>
-      <p className="text-[11px] text-gray-500 mt-1 max-w-[260px] mx-auto leading-relaxed">
+      <div className="text-sm font-medium text-white">How can I help?</div>
+      <p className="text-[11px] text-slate-500 mt-1 max-w-[260px] mx-auto leading-relaxed">
         {context
           ? `I'm focused on this ${context.type} — start with one below or ask anything.`
           : 'I\'m context-aware — the page you\'re on, the contract you\'re viewing, the matter you\'re working. Start with one below or type a question.'}
@@ -1819,9 +1819,9 @@ function SuggestedPrompt({ text, onSelect }: { text: string; onSelect: (t: strin
       type="button"
       data-testid="side-agent-suggestion"
       onClick={() => onSelect(text)}
-      className="w-full text-left px-3 py-2 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
+      className="w-full text-left px-3 py-2 rounded-lg border border-white/10 bg-obsidian-700 hover:bg-obsidian-900 transition-colors"
     >
-      <span className="text-[12px] text-gray-700">{text}</span>
+      <span className="text-[12px] text-slate-300">{text}</span>
     </button>
   )
 }
@@ -1920,7 +1920,7 @@ function MessageBubble({
             ? 'bg-blue-600 text-white rounded-br-sm whitespace-pre-wrap'
             : (msg.error
                 ? 'bg-red-50 border border-red-100 text-red-900 rounded-bl-sm whitespace-pre-wrap'
-                : 'bg-gray-100 text-gray-900 rounded-bl-sm'))
+                : 'bg-obsidian-800 text-white rounded-bl-sm'))
         }
       >
         {cleanProse
@@ -2010,7 +2010,7 @@ function ToolCallChip({ call }: { call: RailToolCall }) {
         </span>
       </button>
       {open && (
-        <div className="border-t border-current/10 bg-white/60 px-2 py-1.5 space-y-1.5">
+        <div className="border-t border-current/10 bg-obsidian-700/60 px-2 py-1.5 space-y-1.5">
           {/* Args block */}
           <div>
             <div className="text-[9px] font-medium uppercase tracking-wider opacity-60 mb-0.5">Args</div>
@@ -2124,7 +2124,7 @@ function ThreadPickerPanel({
       <div
         role="menu"
         data-testid="side-agent-thread-picker-panel"
-        className="absolute left-3 top-[52px] w-[372px] max-h-[480px] overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-xl z-40 py-1.5"
+        className="absolute left-3 top-[52px] w-[372px] max-h-[480px] overflow-y-auto rounded-xl border border-white/10 bg-obsidian-700 shadow-xl z-40 py-1.5"
       >
         {/* New thread — always first */}
         <button
@@ -2160,7 +2160,7 @@ function ThreadPickerPanel({
 
         {hasOther && (
           <>
-            {inScope.length > 0 && <div className="border-t border-gray-100 mt-1" />}
+            {inScope.length > 0 && <div className="border-t border-white/[0.06] mt-1" />}
             {otherBuckets.map((bucket, i) => (
               <div key={bucket.label}>
                 {/* Subtle divider between buckets so eye doesn't run them
@@ -2201,10 +2201,10 @@ function ThreadPickerRow({
       type="button"
       onClick={onSelect}
       data-testid={`side-agent-thread-picker-row-${t.id}`}
-      className={`w-full group flex items-center gap-2 px-3 py-1.5 text-left hover:bg-gray-50 transition-colors ${active ? 'bg-blue-50/50' : ''}`}
+      className={`w-full group flex items-center gap-2 px-3 py-1.5 text-left hover:bg-obsidian-900 transition-colors ${active ? 'bg-blue-50/50' : ''}`}
     >
       <div className="flex-1 min-w-0">
-        <div className={`text-[12px] truncate ${active ? 'font-semibold text-blue-800' : 'text-gray-900'}`}>
+        <div className={`text-[12px] truncate ${active ? 'font-semibold text-blue-800' : 'text-white'}`}>
           {t.title}
         </div>
         <div className="text-[10px] text-gray-400 flex items-center gap-1.5">
@@ -2297,7 +2297,7 @@ function QuickActionChips({
           disabled={disabled}
           onClick={() => onPick(a.prompt)}
           data-testid={`quick-action-${a.label.toLowerCase().replace(/\s+/g, '-')}`}
-          className="text-[10.5px] rounded-full border border-gray-200 bg-white px-2 py-0.5 text-gray-600 hover:text-blue-700 hover:border-blue-200 hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:pointer-events-none"
+          className="text-[10.5px] rounded-full border border-white/10 bg-obsidian-700 px-2 py-0.5 text-slate-400 hover:text-blue-700 hover:border-blue-200 hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:pointer-events-none"
           title={a.prompt}
         >
           {a.label}

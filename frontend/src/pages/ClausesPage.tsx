@@ -36,7 +36,7 @@ function CategoryTreeNode({
           'flex items-center gap-1 px-2 py-1.5 rounded cursor-pointer group text-sm',
           selected === category.id
             ? 'bg-blue-50 text-blue-700 font-medium'
-            : 'text-gray-700 hover:bg-gray-100',
+            : 'text-slate-300 hover:bg-obsidian-800',
         )}
         onClick={() => { onSelect(category.id); if (hasChildren) setOpen(o => !o) }}
       >
@@ -86,7 +86,7 @@ function ClauseRow({
   const RISK_COLORS: Record<string, string> = {
     favorable: 'bg-green-100 text-green-700',
     unfavorable: 'bg-red-100 text-red-700',
-    neutral: 'bg-gray-100 text-gray-600',
+    neutral: 'bg-obsidian-800 text-slate-400',
     standard: 'bg-blue-100 text-blue-700',
   }
 
@@ -101,13 +101,13 @@ function ClauseRow({
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect() }
       }}
       className={cn(
-        'px-4 py-3 border-b border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400',
+        'px-4 py-3 border-b border-white/[0.06] cursor-pointer hover:bg-obsidian-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400',
         selected && 'bg-blue-50 border-l-2 border-l-blue-500',
       )}
     >
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-gray-900 truncate">{clause.title}</p>
+          <p className="text-sm font-medium text-white truncate">{clause.title}</p>
           <div className="flex items-center gap-1.5 mt-1 flex-wrap">
             {clause.riskRating && (
               <span className={cn('text-xs px-1.5 py-0.5 rounded', RISK_COLORS[clause.riskRating])}>
@@ -122,7 +122,7 @@ function ClauseRow({
           {clause.tags.length > 0 && (
             <div className="flex gap-1 mt-1 flex-wrap">
               {clause.tags.slice(0, 3).map(t => (
-                <span key={t} className="text-xs px-1 py-0.5 bg-gray-100 text-gray-500 rounded">{t}</span>
+                <span key={t} className="text-xs px-1 py-0.5 bg-obsidian-800 text-slate-500 rounded">{t}</span>
               ))}
             </div>
           )}
@@ -131,7 +131,7 @@ function ClauseRow({
           <button
             onClick={e => { e.stopPropagation(); onApprove(!clause.isApproved) }}
             className={cn(
-              'p-1 rounded hover:bg-gray-100 transition-colors',
+              'p-1 rounded hover:bg-obsidian-800 transition-colors',
               clause.isApproved ? 'text-green-500 hover:text-green-700' : 'text-gray-300 hover:text-green-500',
             )}
             title={clause.isApproved ? 'Click to unapprove' : 'Click to approve'}
@@ -184,8 +184,8 @@ function ClauseDetailPanel({
 
   return (
     <div className="flex flex-col h-full">
-      <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-gray-800">{clause ? 'Edit Clause' : 'New Clause'}</h3>
+      <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between">
+        <h3 className="text-sm font-semibold text-white">{clause ? 'Edit Clause' : 'New Clause'}</h3>
         <div className="flex gap-2">
           <button
             onClick={handleSave}
@@ -195,24 +195,24 @@ function ClauseDetailPanel({
             {saving && <Loader2 className="w-3 h-3 animate-spin" />}
             Save
           </button>
-          <button onClick={onCancel} className="text-xs px-3 py-1.5 bg-gray-100 rounded hover:bg-gray-200">Cancel</button>
+          <button onClick={onCancel} className="text-xs px-3 py-1.5 bg-obsidian-800 rounded hover:bg-gray-200">Cancel</button>
         </div>
       </div>
 
-      <div className="p-4 space-y-3 border-b border-gray-100">
+      <div className="p-4 space-y-3 border-b border-white/[0.06]">
         <input
           value={title}
           onChange={e => setTitle(e.target.value)}
           placeholder="Clause title..."
-          className="w-full text-sm font-medium border border-gray-200 rounded px-3 py-2 outline-none focus:border-blue-400"
+          className="w-full text-sm font-medium border border-white/10 rounded px-3 py-2 outline-none focus:border-blue-400"
         />
         <div className="grid grid-cols-2 gap-2">
           <div>
-            <label className="text-xs text-gray-500 mb-0.5 block">Risk Rating</label>
+            <label className="text-xs text-slate-500 mb-0.5 block">Risk Rating</label>
             <select
               value={riskRating}
               onChange={e => setRiskRating(e.target.value)}
-              className="w-full text-xs border border-gray-200 rounded px-2 py-1.5 outline-none"
+              className="w-full text-xs border border-white/10 rounded px-2 py-1.5 outline-none"
             >
               <option value="">None</option>
               <option value="favorable">Favorable</option>
@@ -222,12 +222,12 @@ function ClauseDetailPanel({
             </select>
           </div>
           <div>
-            <label className="text-xs text-gray-500 mb-0.5 block">Tags (comma-separated)</label>
+            <label className="text-xs text-slate-500 mb-0.5 block">Tags (comma-separated)</label>
             <input
               value={tags}
               onChange={e => setTags(e.target.value)}
               placeholder="e.g. mutual, standard"
-              className="w-full text-xs border border-gray-200 rounded px-2 py-1.5 outline-none"
+              className="w-full text-xs border border-white/10 rounded px-2 py-1.5 outline-none"
             />
           </div>
         </div>
@@ -241,7 +241,7 @@ function ClauseDetailPanel({
       </div>
 
       {clause && (
-        <div className="px-4 py-2 border-t border-gray-100 bg-gray-50">
+        <div className="px-4 py-2 border-t border-white/[0.06] bg-obsidian-900">
           <p className="text-xs text-gray-400">
             {Array.isArray(clause.versions) ? clause.versions.length : 0} version(s) · used {clause.usageCount}×
           </p>
@@ -313,11 +313,11 @@ export function ClausesPage() {
   }
 
   return (
-    <div className="flex h-full bg-white text-gray-900">
+    <div className="flex h-full bg-obsidian-700 text-white">
       {/* ── Category Tree (Left) ── */}
-      <div className="w-56 shrink-0 border-r border-gray-200 bg-gray-50 flex flex-col">
-        <div className="flex items-center justify-between px-3 py-3 border-b border-gray-200">
-          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Categories</p>
+      <div className="w-56 shrink-0 border-r border-white/10 bg-obsidian-900 flex flex-col">
+        <div className="flex items-center justify-between px-3 py-3 border-b border-white/10">
+          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Categories</p>
           <button onClick={() => handleAddCategory()} className="text-gray-400 hover:text-blue-600">
             <Plus className="w-4 h-4" />
           </button>
@@ -327,7 +327,7 @@ export function ClausesPage() {
             onClick={() => setSelectedCategoryId(null)}
             className={cn(
               'px-2 py-1.5 rounded text-sm cursor-pointer mb-1',
-              !selectedCategoryId ? 'bg-blue-50 text-blue-700 font-medium' : 'text-gray-600 hover:bg-gray-100',
+              !selectedCategoryId ? 'bg-blue-50 text-blue-700 font-medium' : 'text-slate-400 hover:bg-obsidian-800',
             )}
           >
             All Clauses
@@ -345,13 +345,13 @@ export function ClausesPage() {
       </div>
 
       {/* ── Clause List (Center) ── */}
-      <div className="w-80 shrink-0 border-r border-gray-200 flex flex-col">
-        <div className="flex items-center gap-2 px-3 py-3 border-b border-gray-200">
+      <div className="w-80 shrink-0 border-r border-white/10 flex flex-col">
+        <div className="flex items-center gap-2 px-3 py-3 border-b border-white/10">
           <input
             value={q}
             onChange={e => setQ(e.target.value)}
             placeholder="Search clauses..."
-            className="flex-1 text-sm border border-gray-200 rounded px-2 py-1.5 outline-none focus:border-blue-400"
+            className="flex-1 text-sm border border-white/10 rounded px-2 py-1.5 outline-none focus:border-blue-400"
           />
           {/*
             B.6.18 — "New clause" button is always visible when at
@@ -397,7 +397,7 @@ export function ClausesPage() {
             />
           ))}
         </div>
-        <div className="px-3 py-2 border-t border-gray-100 bg-gray-50">
+        <div className="px-3 py-2 border-t border-white/[0.06] bg-obsidian-900">
           <p className="text-xs text-gray-400">{clauses.length} clauses</p>
         </div>
       </div>
@@ -416,7 +416,7 @@ export function ClausesPage() {
             onCancel={() => { setShowNewClause(false); setSelectedClause(null) }}
           />
         ) : (
-          <div className="flex flex-col items-center justify-center h-full text-gray-500 gap-3">
+          <div className="flex flex-col items-center justify-center h-full text-slate-500 gap-3">
             <BookOpen className="w-12 h-12 text-gray-300" />
             <p className="text-sm">Select a clause to edit, or create a new one.</p>
             {categories.length > 0 && (
@@ -426,7 +426,7 @@ export function ClausesPage() {
                   setShowNewClause(true)
                 }}
                 data-testid="empty-new-clause-button"
-                className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded border border-gray-200 bg-white hover:bg-gray-50 text-gray-700"
+                className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded border border-white/10 bg-obsidian-700 hover:bg-obsidian-900 text-slate-300"
               >
                 <Plus className="w-3.5 h-3.5" /> New clause
               </button>

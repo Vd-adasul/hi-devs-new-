@@ -38,11 +38,11 @@ export function DiligenceRoomsPage() {
   })
 
   return (
-    <div className="px-6 py-6 max-w-6xl mx-auto bg-white text-gray-900 rounded-xl shadow-sm border border-gray-100 mt-4" data-testid="diligence-rooms-page">
+    <div className="px-6 py-6 max-w-6xl mx-auto bg-obsidian-700 text-white rounded-xl shadow-sm border border-white/[0.06] mt-4" data-testid="diligence-rooms-page">
       <div className="flex items-center justify-between mb-1 gap-4">
         <div className="flex items-center gap-3">
           <FolderOpen className="h-5 w-5 text-violet-600" />
-          <h1 className="text-2xl font-semibold text-gray-900">Diligence Rooms</h1>
+          <h1 className="text-2xl font-semibold text-white">Diligence Rooms</h1>
         </div>
         <Button
           onClick={() => setCreateOpen(true)}
@@ -53,7 +53,7 @@ export function DiligenceRoomsPage() {
           New room
         </Button>
       </div>
-      <p className="text-sm text-gray-500 mb-5">
+      <p className="text-sm text-slate-500 mb-5">
         Bulk-upload contracts for cross-document analysis — M&amp;A due diligence, vendor consolidation, portfolio reviews.
       </p>
 
@@ -67,9 +67,9 @@ export function DiligenceRoomsPage() {
           Failed to load diligence rooms.
         </div>
       ) : (data?.data?.length ?? 0) === 0 ? (
-        <div className="text-center py-16 px-6 border border-dashed border-gray-200 rounded-xl" data-testid="rooms-empty">
+        <div className="text-center py-16 px-6 border border-dashed border-white/10 rounded-xl" data-testid="rooms-empty">
           <FolderOpen className="h-8 w-8 text-gray-300 mx-auto mb-2" />
-          <p className="text-sm text-gray-500 mb-1">No diligence rooms yet.</p>
+          <p className="text-sm text-slate-500 mb-1">No diligence rooms yet.</p>
           <p className="text-xs text-gray-400 mb-3">
             Create a room to bulk-upload up to 50 contracts and run cross-document analysis.
           </p>
@@ -125,25 +125,25 @@ function RoomCard({ r }: { r: ApiRoom }) {
     <div
       data-testid={`room-card-${r.id}`}
       data-expanded={expanded ? 'true' : 'false'}
-      className="block bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md hover:border-violet-300 transition-all"
+      className="block bg-obsidian-700 border border-white/10 rounded-xl p-4 hover:shadow-md hover:border-violet-300 transition-all"
     >
       <div className="flex items-start justify-between gap-2 mb-2">
         <Link to={`/diligence/${r.id}`} className="flex-1 min-w-0 group">
-          <h3 className="font-medium text-gray-900 truncate group-hover:text-violet-700 transition-colors" title={r.name ?? undefined}>{r.name}</h3>
+          <h3 className="font-medium text-white truncate group-hover:text-violet-700 transition-colors" title={r.name ?? undefined}>{r.name}</h3>
           {r.description && (
-            <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{r.description}</p>
+            <p className="text-xs text-slate-500 mt-0.5 line-clamp-2">{r.description}</p>
           )}
         </Link>
         <Link to={`/diligence/${r.id}`} className="text-gray-300 hover:text-violet-600 transition-colors flex-shrink-0 mt-1" title="Open room">
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
-      <div className="flex items-center gap-3 text-xs mt-3 pt-3 border-t border-gray-100">
+      <div className="flex items-center gap-3 text-xs mt-3 pt-3 border-t border-white/[0.06]">
         <button
           type="button"
           onClick={() => setExpanded(e => !e)}
           data-testid={`room-card-toggle-${r.id}`}
-          className="flex items-center gap-1 text-gray-700 font-medium hover:text-violet-700 transition-colors"
+          className="flex items-center gap-1 text-slate-300 font-medium hover:text-violet-700 transition-colors"
           aria-expanded={expanded}
           aria-controls={`room-card-docs-${r.id}`}
         >
@@ -176,7 +176,7 @@ function RoomCard({ r }: { r: ApiRoom }) {
         <div
           id={`room-card-docs-${r.id}`}
           data-testid={`room-card-docs-${r.id}`}
-          className="mt-3 pt-3 border-t border-gray-100 space-y-1.5"
+          className="mt-3 pt-3 border-t border-white/[0.06] space-y-1.5"
         >
           {docsLoading ? (
             <div className="flex items-center gap-1.5 text-[11px] text-gray-400">
@@ -195,7 +195,7 @@ function RoomCard({ r }: { r: ApiRoom }) {
                 >
                   <FileText className="h-3 w-3 text-violet-400 flex-shrink-0 mt-0.5" />
                   <div className="min-w-0 flex-1">
-                    <div className="text-gray-900 truncate">{d.title ?? 'Untitled'}</div>
+                    <div className="text-white truncate">{d.title ?? 'Untitled'}</div>
                     <div className="text-[10px] text-gray-400 flex items-center gap-1.5 mt-0.5">
                       <span>{d.type}</span>
                       <span aria-hidden>·</span>
@@ -257,24 +257,24 @@ function CreateRoomDialog({ onClose, onCreated }: { onClose: () => void; onCreat
       onClick={onClose}
       data-testid="create-room-dialog"
     >
-      <div className="bg-white rounded-xl max-w-md w-full shadow-2xl my-8" onClick={(e) => e.stopPropagation()}>
-        <div className="px-6 py-4 border-b border-gray-200 flex items-start justify-between">
+      <div className="bg-obsidian-700 rounded-xl max-w-md w-full shadow-2xl my-8" onClick={(e) => e.stopPropagation()}>
+        <div className="px-6 py-4 border-b border-white/10 flex items-start justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
               <FolderOpen className="h-5 w-5 text-violet-600" />
               New diligence room
             </h2>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-slate-500 mt-1">
               Group a batch of contracts for cross-document analysis.
             </p>
           </div>
-          <button onClick={onClose} aria-label="Close" className="p-1 rounded hover:bg-gray-100 text-gray-400">
+          <button onClick={onClose} aria-label="Close" className="p-1 rounded hover:bg-obsidian-800 text-gray-400">
             <X className="h-4 w-4" />
           </button>
         </div>
         <div className="px-6 py-5 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Name</label>
             <Input
               value={name}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
@@ -284,7 +284,7 @@ function CreateRoomDialog({ onClose, onCreated }: { onClose: () => void; onCreat
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-slate-300 mb-1">
               Description <span className="text-gray-400 font-normal">(optional)</span>
             </label>
             <textarea
@@ -293,14 +293,14 @@ function CreateRoomDialog({ onClose, onCreated }: { onClose: () => void; onCreat
               placeholder="Q3 2026 vendor contract review for the Acme acquisition…"
               rows={3}
               data-testid="room-description"
-              className="w-full text-sm border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-violet-400 resize-y"
+              className="w-full text-sm border border-white/10 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-violet-400 resize-y"
             />
           </div>
           {error && (
             <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">{error}</div>
           )}
         </div>
-        <div className="px-6 py-4 border-t border-gray-200 flex justify-end gap-2 bg-gray-50 rounded-b-xl">
+        <div className="px-6 py-4 border-t border-white/10 flex justify-end gap-2 bg-obsidian-900 rounded-b-xl">
           <Button variant="outline" onClick={onClose} disabled={create.isPending}>Cancel</Button>
           <Button
             onClick={() => create.mutate()}

@@ -775,7 +775,7 @@ export function AgentHomePage() {
 
   return (
     <div
-      className="h-full flex bg-white"
+      className="h-full flex bg-obsidian-700"
       data-testid="agent-home"
       data-streaming={streaming ? 'true' : 'false'}
       aria-busy={streaming || undefined}
@@ -793,8 +793,8 @@ export function AgentHomePage() {
       )}
 
       {/* ─── Conversation list (left) ─────────────────────────── */}
-      <aside className="w-64 border-r border-gray-200 bg-gray-50/50 flex flex-col">
-        <div className="px-3 py-3 border-b border-gray-200">
+      <aside className="w-64 border-r border-white/10 bg-obsidian-900/50 flex flex-col">
+        <div className="px-3 py-3 border-b border-white/10">
           <Button
             onClick={startNewConversation}
             data-testid="agent-new-conversation"
@@ -809,7 +809,7 @@ export function AgentHomePage() {
         {/* U.5.1 — by-resource filter chip. Lets users quickly find
             "every thread about Zynga MSA" — replaces the per-contract
             "Ask" tab pattern. */}
-        <div className="px-3 pt-2 pb-1.5 border-b border-gray-100 flex items-center gap-1.5 text-[11px]">
+        <div className="px-3 pt-2 pb-1.5 border-b border-white/[0.06] flex items-center gap-1.5 text-[11px]">
           <span className="text-gray-400">Filter:</span>
           <button
             onClick={() => setResourceFilter(resourceFilter ? null : 'pending')}
@@ -817,7 +817,7 @@ export function AgentHomePage() {
             className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full border transition-colors ${
               resourceFilter
                 ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
-                : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'
+                : 'bg-obsidian-700 border-white/10 hover:bg-obsidian-900 text-slate-300'
             }`}
           >
             by resource
@@ -842,7 +842,7 @@ export function AgentHomePage() {
           ) : (
             Object.entries(groupedThreads).map(([bucket, list]) => (
               <div key={bucket}>
-                <div className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold px-2 mb-1">{bucket}</div>
+                <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold px-2 mb-1">{bucket}</div>
                 <ul className="space-y-0.5">
                   {list.map(t => {
                     const active = t.id === threadId
@@ -852,7 +852,7 @@ export function AgentHomePage() {
                           onClick={() => setThreadId(t.id)}
                           data-testid={`thread-row-${t.id}`}
                           className={`w-full text-left px-2 py-1.5 pr-7 rounded-md transition-colors ${
-                            active ? 'bg-indigo-50 text-indigo-900 border border-indigo-200' : 'hover:bg-gray-100 text-gray-700'
+                            active ? 'bg-indigo-50 text-indigo-900 border border-indigo-200' : 'hover:bg-obsidian-800 text-slate-300'
                           }`}
                         >
                           <div className="flex items-center gap-1.5">
@@ -907,11 +907,11 @@ export function AgentHomePage() {
           openArtifactId ? 'w-[480px] shrink-0' : 'flex-1',
         )}
       >
-        <header className="px-6 py-3 border-b border-gray-200 flex items-center justify-between bg-white">
+        <header className="px-6 py-3 border-b border-white/10 flex items-center justify-between bg-obsidian-700">
           <div className="flex items-center gap-2">
             <button
               onClick={() => navigate('/dashboard')}
-              className="p-1 rounded hover:bg-gray-100 text-gray-500"
+              className="p-1 rounded hover:bg-obsidian-800 text-slate-500"
               aria-label="Back to dashboard"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -922,8 +922,8 @@ export function AgentHomePage() {
                 <Bot className="h-3.5 w-3.5 text-indigo-600" />
               </div>
               <div>
-                <h1 className="text-sm font-semibold text-gray-900">Assistant</h1>
-                <p className="text-[11px] text-gray-500">{activeThread?.title ?? 'New conversation'}</p>
+                <h1 className="text-sm font-semibold text-white">Assistant</h1>
+                <p className="text-[11px] text-slate-500">{activeThread?.title ?? 'New conversation'}</p>
               </div>
             </div>
           </div>
@@ -962,7 +962,7 @@ export function AgentHomePage() {
         {/* U.5.2 — artifact strip. Lets users re-open closed artifacts
             for this thread. Only renders when there's at least one. */}
         {artifacts.length > 0 && (
-          <div className="border-t border-gray-100 px-4 py-2 flex items-center gap-2 text-[11.5px] flex-wrap">
+          <div className="border-t border-white/[0.06] px-4 py-2 flex items-center gap-2 text-[11.5px] flex-wrap">
             <span className="text-gray-400">Artifacts:</span>
             {artifacts.map(a => {
               const Icon =
@@ -984,7 +984,7 @@ export function AgentHomePage() {
                     'inline-flex items-center gap-1.5 px-2 py-1 rounded-md font-medium transition-colors',
                     active
                       ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-                      : 'bg-white text-gray-700 border border-gray-200 hover:border-indigo-300',
+                      : 'bg-obsidian-700 text-slate-300 border border-white/10 hover:border-indigo-300',
                   )}
                 >
                   <Icon className="h-3 w-3" />
@@ -996,7 +996,7 @@ export function AgentHomePage() {
         )}
 
         {/* Composer */}
-        <div className="border-t border-gray-200 bg-white px-6 py-3">
+        <div className="border-t border-white/10 bg-obsidian-700 px-6 py-3">
           <div className="max-w-3xl mx-auto">
             {/* P-feedback (2026-05-02). Skill autocomplete picker —
                 shows when the user types `@<query>` so they can
@@ -1013,7 +1013,7 @@ export function AgentHomePage() {
               if (matches.length === 0) return null
               return (
                 <div
-                  className="mb-2 max-h-60 overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-md text-sm"
+                  className="mb-2 max-h-60 overflow-y-auto rounded-lg border border-white/10 bg-obsidian-700 shadow-md text-sm"
                   data-testid="agent-skill-picker"
                 >
                   {matches.map(s => (
@@ -1025,16 +1025,16 @@ export function AgentHomePage() {
                         const next = composer.replace(/@[a-z0-9-]*$/i, s.slug + ' ')
                         setComposer(next)
                       }}
-                      className="w-full text-left px-3 py-2 hover:bg-indigo-50 border-b border-gray-100 last:border-b-0"
+                      className="w-full text-left px-3 py-2 hover:bg-indigo-50 border-b border-white/[0.06] last:border-b-0"
                     >
                       <div className="flex items-center gap-2">
                         <Sparkles className="h-3.5 w-3.5 text-indigo-500" />
-                        <span className="font-medium text-gray-900">{s.slug}</span>
+                        <span className="font-medium text-white">{s.slug}</span>
                         <span className="text-gray-400">·</span>
-                        <span className="text-gray-700">{s.name}</span>
+                        <span className="text-slate-300">{s.name}</span>
                       </div>
                       {s.description && (
-                        <p className="text-xs text-gray-500 mt-0.5 ml-5 line-clamp-1">{s.description}</p>
+                        <p className="text-xs text-slate-500 mt-0.5 ml-5 line-clamp-1">{s.description}</p>
                       )}
                     </button>
                   ))}
@@ -1055,7 +1055,7 @@ export function AgentHomePage() {
                 rows={2}
                 disabled={streaming}
                 data-testid="agent-composer"
-                className="w-full resize-none rounded-lg border border-gray-200 px-3 py-2 pr-12 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
+                className="w-full resize-none rounded-lg border border-white/10 px-3 py-2 pr-12 text-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100"
               />
               <Button
                 onClick={() => send(composer)}
@@ -1199,7 +1199,7 @@ function MessageBubble({
             ))}
           </div>
         )}
-        <div className="text-sm text-gray-900 leading-relaxed">
+        <div className="text-sm text-white leading-relaxed">
           {/* Markdown rendering (bold, lists, code, links) — Gemini and
               Claude both return Markdown in assistant prose. Prior to
               this the response was rendered with whitespace-pre-wrap
@@ -1259,10 +1259,10 @@ function EmptyChat({
         <div className="h-12 w-12 mx-auto rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mb-4">
           <Sparkles className="h-6 w-6 text-blue-600" />
         </div>
-        <h2 className="text-2xl font-semibold text-gray-900">
+        <h2 className="text-2xl font-semibold text-white">
           Hello{userName ? `, ${userName.split(' ')[0]}` : ''} — what can I help with?
         </h2>
-        <p className="text-sm text-gray-500 mt-2">
+        <p className="text-sm text-slate-500 mt-2">
           I can search contracts, draft new ones, summarise risks, run playbook checks,
           and act on your portfolio. Pick a starter or just ask.
         </p>
@@ -1273,14 +1273,14 @@ function EmptyChat({
             key={i}
             onClick={() => onPick(s.prompt)}
             data-testid={`starter-prompt-${i}`}
-            className="group text-left p-3 rounded-lg border border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/40 transition-colors flex items-start gap-2.5"
+            className="group text-left p-3 rounded-lg border border-white/10 bg-obsidian-700 hover:border-indigo-300 hover:bg-indigo-50/40 transition-colors flex items-start gap-2.5"
           >
             <div className="h-7 w-7 shrink-0 rounded-md bg-indigo-50 border border-indigo-100 flex items-center justify-center group-hover:bg-indigo-100">
               <s.icon className="h-3.5 w-3.5 text-indigo-600" />
             </div>
             <div className="min-w-0 flex-1">
-              <div className="text-sm font-medium text-gray-900">{s.label}</div>
-              <div className="text-[11px] text-gray-500 mt-0.5 line-clamp-2">{s.prompt}</div>
+              <div className="text-sm font-medium text-white">{s.label}</div>
+              <div className="text-[11px] text-slate-500 mt-0.5 line-clamp-2">{s.prompt}</div>
             </div>
             <ChevronRight className="h-3.5 w-3.5 text-gray-300 group-hover:text-indigo-400 shrink-0 mt-1" />
           </button>

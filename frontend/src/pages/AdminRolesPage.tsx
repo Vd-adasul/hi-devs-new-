@@ -45,15 +45,15 @@ export function AdminRolesPage() {
   }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto space-y-6 bg-white text-gray-900 rounded-xl shadow-sm border border-gray-100 mt-4">
+    <div className="p-6 max-w-4xl mx-auto space-y-6 bg-obsidian-700 text-white rounded-xl shadow-sm border border-white/[0.06] mt-4">
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+          <h1 className="text-xl font-semibold text-white flex items-center gap-2">
             <ShieldCheck className="h-5 w-5" />
             Roles &amp; Permissions
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-slate-500 mt-1">
             View system roles and their associated permissions. Custom role editing is coming soon.
           </p>
         </div>
@@ -76,15 +76,15 @@ export function AdminRolesPage() {
       {/* Roles list */}
       {isLoading ? (
         <div className="flex justify-center py-12">
-          <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+          <div className="w-5 h-5 border-2 border-white/14 border-t-blue-500 rounded-full animate-spin" />
         </div>
       ) : !roles || roles.length === 0 ? (
-        <div className="bg-white rounded-xl border border-dashed border-gray-300 p-12 text-center">
+        <div className="bg-obsidian-700 rounded-xl border border-dashed border-white/14 p-12 text-center">
           <ShieldCheck className="h-8 w-8 text-gray-300 mx-auto mb-3" />
-          <p className="text-gray-600 font-medium">No roles configured</p>
+          <p className="text-slate-400 font-medium">No roles configured</p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl border shadow-sm divide-y">
+        <div className="bg-obsidian-700 rounded-xl border shadow-sm divide-y">
           {visibleRoles.map(role => {
             const isExpanded = expandedRoleId === role.id
             const unconfigured = role.permissions.length === 0
@@ -92,7 +92,7 @@ export function AdminRolesPage() {
               <div key={role.id} className={unconfigured ? 'bg-muted/20' : undefined}>
                 <button
                   onClick={() => toggleRole(role.id)}
-                  className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-50 transition-colors text-left"
+                  className="w-full flex items-center gap-4 px-5 py-4 hover:bg-obsidian-900 transition-colors text-left"
                 >
                   <ChevronRight
                     className={`h-4 w-4 text-gray-400 transition-transform ${
@@ -101,9 +101,9 @@ export function AdminRolesPage() {
                   />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <p className={`text-sm font-medium ${unconfigured ? 'text-gray-500' : 'text-gray-900'}`}>{role.name}</p>
+                      <p className={`text-sm font-medium ${unconfigured ? 'text-slate-500' : 'text-white'}`}>{role.name}</p>
                       {role.isSystem && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium bg-gray-100 text-gray-500 border border-gray-200">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium bg-obsidian-800 text-slate-500 border border-white/10">
                           <Lock className="h-2.5 w-2.5" />
                           System
                         </span>
@@ -115,7 +115,7 @@ export function AdminRolesPage() {
                       )}
                     </div>
                     {role.description && (
-                      <p className="text-xs text-gray-500 mt-0.5">{role.description}</p>
+                      <p className="text-xs text-slate-500 mt-0.5">{role.description}</p>
                     )}
                   </div>
                   <span className="text-xs text-gray-400 flex-shrink-0">
@@ -136,7 +136,7 @@ export function AdminRolesPage() {
                         lands with v1.1.
                       </div>
                     ) : (
-                      <div className="bg-gray-50 rounded-lg border p-3">
+                      <div className="bg-obsidian-900 rounded-lg border p-3">
                         <table className="w-full">
                           <thead>
                             <tr className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
@@ -145,7 +145,7 @@ export function AdminRolesPage() {
                               <th className="text-left pb-2">Scope</th>
                             </tr>
                           </thead>
-                          <tbody className="divide-y divide-gray-200">
+                          <tbody className="divide-y divide-white/10">
                             {role.permissions.map((perm, i) => (
                               <tr key={i}>
                                 <td className="py-1.5 pr-4">
@@ -159,7 +159,7 @@ export function AdminRolesPage() {
                                   </span>
                                 </td>
                                 <td className="py-1.5">
-                                  <span className="text-xs text-gray-600">{perm.scope}</span>
+                                  <span className="text-xs text-slate-400">{perm.scope}</span>
                                 </td>
                               </tr>
                             ))}

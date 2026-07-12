@@ -114,15 +114,15 @@ export function AnalyticsPage() {
       <div className="flex items-center justify-between mb-1 gap-4">
         <div className="flex items-center gap-3">
           <BarChart2 className="h-5 w-5 text-blue-600" />
-          <h1 className="text-2xl font-semibold text-gray-900">Analytics</h1>
+          <h1 className="text-2xl font-semibold text-white">Analytics</h1>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-500">Window:</span>
+          <span className="text-xs text-slate-500">Window:</span>
           <select
             value={windowDays}
             onChange={e => setWindowDays(Number(e.target.value))}
             data-testid="analytics-window"
-            className="text-sm border border-gray-200 rounded-md px-2 py-1.5 bg-white focus:outline-none focus:ring-1 focus:ring-blue-400"
+            className="text-sm border border-white/10 rounded-md px-2 py-1.5 bg-obsidian-700 focus:outline-none focus:ring-1 focus:ring-blue-400"
           >
             <option value={30}>Last 30 days</option>
             <option value={90}>Last 90 days</option>
@@ -131,7 +131,7 @@ export function AnalyticsPage() {
           </select>
         </div>
       </div>
-      <p className="text-sm text-gray-500 mb-5">
+      <p className="text-sm text-slate-500 mb-5">
         Portfolio KPIs, cycle time, and contract distribution at a glance.
       </p>
 
@@ -279,18 +279,18 @@ export function AnalyticsPage() {
       </div>
 
       {/* Top counterparties */}
-      <div className="bg-white border border-gray-200 rounded-xl overflow-hidden mb-6">
-        <header className="flex items-center justify-between px-5 py-3 border-b border-gray-200 bg-gray-50">
-          <h3 className="text-sm font-semibold text-gray-900 flex items-center gap-2">
+      <div className="bg-obsidian-700 border border-white/10 rounded-xl overflow-hidden mb-6">
+        <header className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-obsidian-900">
+          <h3 className="text-sm font-semibold text-white flex items-center gap-2">
             <Building2 className="h-4 w-4 text-blue-600" />
             Top counterparties by executed value
           </h3>
         </header>
         {!tops?.data?.length ? (
-          <div className="text-sm text-gray-500 px-5 py-8 text-center">No executed contracts yet.</div>
+          <div className="text-sm text-slate-500 px-5 py-8 text-center">No executed contracts yet.</div>
         ) : (
           <table className="w-full text-sm" data-testid="top-counterparties-table">
-            <thead className="text-xs uppercase text-gray-500">
+            <thead className="text-xs uppercase text-slate-500">
               <tr>
                 <th className="text-left px-5 py-2 font-medium">Counterparty</th>
                 <th className="text-right px-5 py-2 font-medium">Contracts</th>
@@ -298,12 +298,12 @@ export function AnalyticsPage() {
                 <th className="text-right px-5 py-2 font-medium"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-white/5">
               {tops.data.map(cp => (
-                <tr key={cp.counterparty} className="hover:bg-gray-50">
-                  <td className="px-5 py-2.5 font-medium text-gray-900">{cp.counterparty}</td>
-                  <td className="px-5 py-2.5 text-right text-gray-700 tabular-nums">{cp.count}</td>
-                  <td className="px-5 py-2.5 text-right font-medium text-gray-900 tabular-nums">{formatMoney(cp.value, cp.currency)}</td>
+                <tr key={cp.counterparty} className="hover:bg-obsidian-900">
+                  <td className="px-5 py-2.5 font-medium text-white">{cp.counterparty}</td>
+                  <td className="px-5 py-2.5 text-right text-slate-300 tabular-nums">{cp.count}</td>
+                  <td className="px-5 py-2.5 text-right font-medium text-white tabular-nums">{formatMoney(cp.value, cp.currency)}</td>
                   <td className="px-5 py-2.5 text-right">
                     {cp.counterpartyId ? (
                       <Link
@@ -344,17 +344,17 @@ function KpiCard({ label, value, subtitle, icon: Icon, tone, to, loading, ...res
     red:     'text-red-700 bg-red-50',
   }[tone]
   const card = (
-    <div className="border border-gray-200 rounded-xl p-3 bg-white hover:shadow-sm transition-shadow" {...rest}>
+    <div className="border border-white/10 rounded-xl p-3 bg-obsidian-700 hover:shadow-sm transition-shadow" {...rest}>
       <div className="flex items-start justify-between">
-        <div className="text-xs text-gray-500">{label}</div>
+        <div className="text-xs text-slate-500">{label}</div>
         <div className={`h-6 w-6 rounded-md flex items-center justify-center ${tones}`}>
           <Icon className="h-3.5 w-3.5" />
         </div>
       </div>
-      <div className="text-2xl font-semibold mt-1 tabular-nums text-gray-900">
+      <div className="text-2xl font-semibold mt-1 tabular-nums text-white">
         {loading ? <Loader2 className="h-5 w-5 animate-spin text-gray-300" /> : value}
       </div>
-      {subtitle && <div className="text-[10.5px] text-gray-500 mt-0.5 truncate">{subtitle}</div>}
+      {subtitle && <div className="text-[10.5px] text-slate-500 mt-0.5 truncate">{subtitle}</div>}
     </div>
   )
   return to ? <Link to={to} className="block">{card}</Link> : card
@@ -373,14 +373,14 @@ function MetricBar({ label, value, subtitle, icon: Icon, tone }: {
     purple:  'text-purple-700',
   }[tone]
   return (
-    <div className="border border-gray-200 rounded-xl p-3 bg-white flex items-center gap-3">
-      <div className="h-9 w-9 rounded-lg bg-gray-50 flex items-center justify-center text-gray-600">
+    <div className="border border-white/10 rounded-xl p-3 bg-obsidian-700 flex items-center gap-3">
+      <div className="h-9 w-9 rounded-lg bg-obsidian-900 flex items-center justify-center text-slate-400">
         <Icon className="h-4 w-4" />
       </div>
       <div className="flex-1 min-w-0">
-        <div className="text-xs text-gray-500">{label}</div>
+        <div className="text-xs text-slate-500">{label}</div>
         <div className={`text-xl font-semibold tabular-nums ${valueClass}`}>{value}</div>
-        <div className="text-[10.5px] text-gray-500 truncate">{subtitle}</div>
+        <div className="text-[10.5px] text-slate-500 truncate">{subtitle}</div>
       </div>
     </div>
   )
@@ -392,8 +392,8 @@ function ChartCard({ title, children, ...rest }: {
   'data-testid'?: string
 }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-4" {...rest}>
-      <h3 className="text-sm font-semibold text-gray-900 mb-3">{title}</h3>
+    <div className="bg-obsidian-700 border border-white/10 rounded-xl p-4" {...rest}>
+      <h3 className="text-sm font-semibold text-white mb-3">{title}</h3>
       {children}
     </div>
   )

@@ -46,7 +46,7 @@ interface ApiStats {
 }
 
 const STATUS_PILL: Record<string, { bg: string; label: string }> = {
-  PENDING:    { bg: 'bg-gray-100 border-gray-200 text-gray-700',           label: 'Pending' },
+  PENDING:    { bg: 'bg-obsidian-800 border-white/10 text-slate-300',           label: 'Pending' },
   MATCHED:    { bg: 'bg-blue-50 border-blue-200 text-blue-700',             label: 'Matched' },
   RECONCILED: { bg: 'bg-emerald-50 border-emerald-200 text-emerald-700',    label: 'Reconciled' },
   DISPUTED:   { bg: 'bg-red-50 border-red-200 text-red-700',                label: 'Disputed' },
@@ -132,7 +132,7 @@ export function InvoicesPage() {
       <div className="flex items-center justify-between mb-1 gap-4">
         <div className="flex items-center gap-3">
           <Receipt className="h-5 w-5 text-amber-600" />
-          <h1 className="text-2xl font-semibold text-gray-900">Invoices</h1>
+          <h1 className="text-2xl font-semibold text-white">Invoices</h1>
         </div>
         <Button
           onClick={() => setCreateOpen(true)}
@@ -143,7 +143,7 @@ export function InvoicesPage() {
           Add invoice
         </Button>
       </div>
-      <p className="text-sm text-gray-500 mb-5">
+      <p className="text-sm text-slate-500 mb-5">
         Match incoming vendor invoices to the payment obligations on your executed contracts.
       </p>
 
@@ -162,7 +162,7 @@ export function InvoicesPage() {
       </div>
 
       {/* Filter tabs + search */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 border-b border-gray-200 pb-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 border-b border-white/10 pb-2">
         <div className="flex items-center gap-1 -mb-2 overflow-x-auto">
           {FILTERS.map(f => {
             const active = status === f.key
@@ -176,13 +176,13 @@ export function InvoicesPage() {
                 className={`px-3 py-2 text-sm border-b-2 transition-colors whitespace-nowrap ${
                   active
                     ? 'border-amber-600 text-amber-700 font-medium'
-                    : 'border-transparent text-gray-500 hover:text-gray-800'
+                    : 'border-transparent text-slate-500 hover:text-white'
                 }`}
               >
                 {f.label}
                 {count != null && count > 0 && (
                   <span className={`ml-1.5 text-xs px-1.5 py-0.5 rounded-full ${
-                    active ? 'bg-amber-100 text-amber-700' : 'bg-gray-100 text-gray-500'
+                    active ? 'bg-amber-100 text-amber-700' : 'bg-obsidian-800 text-slate-500'
                   }`}>{count}</span>
                 )}
               </button>
@@ -197,7 +197,7 @@ export function InvoicesPage() {
             value={q}
             onChange={e => setQ(e.target.value)}
             data-testid="invoices-search"
-            className="pl-8 pr-3 py-2 text-sm border border-gray-200 rounded-md focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 w-full sm:w-64"
+            className="pl-8 pr-3 py-2 text-sm border border-white/10 rounded-md focus:border-amber-400 focus:outline-none focus:ring-1 focus:ring-amber-400 w-full sm:w-64"
           />
         </div>
       </div>
@@ -213,9 +213,9 @@ export function InvoicesPage() {
           Failed to load invoices.
         </div>
       ) : items.length === 0 ? (
-        <div className="text-center py-16 px-6 border border-dashed border-gray-200 rounded-xl" data-testid="invoices-empty">
+        <div className="text-center py-16 px-6 border border-dashed border-white/10 rounded-xl" data-testid="invoices-empty">
           <Receipt className="h-8 w-8 text-gray-300 mx-auto mb-2" />
-          <p className="text-sm text-gray-500 mb-1">
+          <p className="text-sm text-slate-500 mb-1">
             {q ? `No invoices match "${q}".` : 'No invoices yet.'}
           </p>
           <p className="text-xs text-gray-400 mb-3">
@@ -232,13 +232,13 @@ export function InvoicesPage() {
           </Button>
         </div>
       ) : (
-        <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-          <div className="px-5 py-2 text-xs text-gray-500 bg-gray-50 border-b border-gray-200">
+        <div className="bg-obsidian-700 border border-white/10 rounded-xl overflow-hidden">
+          <div className="px-5 py-2 text-xs text-slate-500 bg-obsidian-900 border-b border-white/10">
             {total} {total === 1 ? 'invoice' : 'invoices'}
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm" data-testid="invoices-table">
-              <thead className="bg-gray-50 text-xs uppercase tracking-wider text-gray-500">
+              <thead className="bg-obsidian-900 text-xs uppercase tracking-wider text-slate-500">
                 <tr>
                   <th className="text-left px-4 py-3 font-medium">Vendor</th>
                   <th className="text-left px-4 py-3 font-medium">Amount</th>
@@ -248,23 +248,23 @@ export function InvoicesPage() {
                   <th className="text-right px-4 py-3 font-medium"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-white/5">
                 {items.map(inv => {
                   const pill = STATUS_PILL[inv.status]
                   return (
-                    <tr key={inv.id} className="hover:bg-gray-50" data-testid={`invoice-row-${inv.id}`}>
+                    <tr key={inv.id} className="hover:bg-obsidian-900" data-testid={`invoice-row-${inv.id}`}>
                       <td className="px-4 py-3 max-w-[280px]">
-                        <div className="font-medium text-gray-900 truncate" title={inv.vendorName}>
+                        <div className="font-medium text-white truncate" title={inv.vendorName}>
                           {inv.vendorName}
                         </div>
                         {inv.invoiceNumber && (
-                          <div className="text-xs text-gray-500 mt-0.5 font-mono">#{inv.invoiceNumber}</div>
+                          <div className="text-xs text-slate-500 mt-0.5 font-mono">#{inv.invoiceNumber}</div>
                         )}
                       </td>
-                      <td className="px-4 py-3 whitespace-nowrap font-medium text-gray-900 tabular-nums">
+                      <td className="px-4 py-3 whitespace-nowrap font-medium text-white tabular-nums">
                         {formatMoney(inv.amount, inv.currency)}
                       </td>
-                      <td className="px-4 py-3 text-xs text-gray-600 whitespace-nowrap">
+                      <td className="px-4 py-3 text-xs text-slate-400 whitespace-nowrap">
                         {formatDate(inv.invoiceDate)}
                       </td>
                       <td className="px-4 py-3">
@@ -279,7 +279,7 @@ export function InvoicesPage() {
                               >
                                 {inv.contract.title}
                               </Link>
-                              <div className="text-[10.5px] text-gray-500 truncate" title={inv.matchedObligation.description}>
+                              <div className="text-[10.5px] text-slate-500 truncate" title={inv.matchedObligation.description}>
                                 {inv.matchedObligation.description}
                               </div>
                               <div className="mt-0.5">
@@ -338,7 +338,7 @@ export function InvoicesPage() {
                           {inv.contract?.id && (
                             <Link
                               to={`/contracts/${inv.contract.id}`}
-                              className="inline-flex items-center gap-0.5 text-xs text-gray-500 hover:text-gray-700"
+                              className="inline-flex items-center gap-0.5 text-xs text-slate-500 hover:text-slate-300"
                             >
                               <FileText className="h-3.5 w-3.5" />
                               <ArrowRight className="h-3 w-3" />
@@ -376,17 +376,17 @@ function StatCard({ label, value, tone, subtitle, ...rest }: {
   'data-testid'?: string
 }) {
   const toneClass = {
-    gray:    'text-gray-700',
+    gray:    'text-slate-300',
     blue:    'text-blue-700',
     emerald: 'text-emerald-700',
     amber:   'text-amber-700',
     red:     'text-red-700',
   }[tone]
   return (
-    <div className="border border-gray-200 rounded-xl p-3 bg-white" {...rest}>
-      <div className="text-xs text-gray-500">{label}</div>
+    <div className="border border-white/10 rounded-xl p-3 bg-obsidian-700" {...rest}>
+      <div className="text-xs text-slate-500">{label}</div>
       <div className={`text-2xl font-semibold mt-0.5 ${toneClass}`}>{value}</div>
-      {subtitle && <div className="text-[10.5px] text-gray-500 mt-0.5">{subtitle}</div>}
+      {subtitle && <div className="text-[10.5px] text-slate-500 mt-0.5">{subtitle}</div>}
     </div>
   )
 }
@@ -437,12 +437,12 @@ function CreateInvoiceDialog({ onClose, onCreated }: { onClose: () => void; onCr
   if (matchPreview) {
     return (
       <div role="dialog" className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4" onClick={onClose}>
-        <div className="bg-white rounded-xl max-w-md w-full shadow-2xl p-6" onClick={(e) => e.stopPropagation()}>
+        <div className="bg-obsidian-700 rounded-xl max-w-md w-full shadow-2xl p-6" onClick={(e) => e.stopPropagation()}>
           <div className="flex items-center gap-2 mb-3">
             <Sparkles className="h-5 w-5 text-blue-600" />
             <h2 className="text-lg font-semibold">Match found</h2>
           </div>
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-sm text-slate-400 mb-4">
             We linked this invoice to <strong>{matchPreview.vendor}</strong> at <strong>{matchPreview.score}%</strong> confidence.
           </p>
           <div className="text-xs bg-blue-50 border border-blue-200 rounded-md p-2 mb-4">
@@ -464,25 +464,25 @@ function CreateInvoiceDialog({ onClose, onCreated }: { onClose: () => void; onCr
       onClick={onClose}
       data-testid="create-invoice-dialog"
     >
-      <div className="bg-white rounded-xl max-w-lg w-full shadow-2xl my-8" onClick={(e) => e.stopPropagation()}>
-        <div className="px-6 py-4 border-b border-gray-200 flex items-start justify-between">
+      <div className="bg-obsidian-700 rounded-xl max-w-lg w-full shadow-2xl my-8" onClick={(e) => e.stopPropagation()}>
+        <div className="px-6 py-4 border-b border-white/10 flex items-start justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
               <Receipt className="h-5 w-5 text-amber-600" />
               Add invoice
             </h2>
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-slate-500 mt-1">
               Auto-matches against open payment obligations on your contracts.
             </p>
           </div>
-          <button onClick={onClose} aria-label="Close" className="p-1 rounded hover:bg-gray-100 text-gray-400">
+          <button onClick={onClose} aria-label="Close" className="p-1 rounded hover:bg-obsidian-800 text-gray-400">
             <X className="h-4 w-4" />
           </button>
         </div>
 
         <div className="px-6 py-5 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Vendor name</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Vendor name</label>
             <Input
               value={vendorName}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVendorName(e.target.value)}
@@ -493,7 +493,7 @@ function CreateInvoiceDialog({ onClose, onCreated }: { onClose: () => void; onCr
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Amount</label>
+              <label className="block text-sm font-medium text-slate-300 mb-1">Amount</label>
               <Input
                 type="number"
                 step="0.01"
@@ -504,11 +504,11 @@ function CreateInvoiceDialog({ onClose, onCreated }: { onClose: () => void; onCr
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Currency</label>
+              <label className="block text-sm font-medium text-slate-300 mb-1">Currency</label>
               <select
                 value={currency}
                 onChange={e => setCurrency(e.target.value)}
-                className="w-full text-sm border border-gray-200 rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-1 focus:ring-amber-400"
+                className="w-full text-sm border border-white/10 rounded-md px-3 py-2 bg-obsidian-700 focus:outline-none focus:ring-1 focus:ring-amber-400"
                 data-testid="invoice-currency"
               >
                 <option value="USD">USD</option>
@@ -520,7 +520,7 @@ function CreateInvoiceDialog({ onClose, onCreated }: { onClose: () => void; onCr
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Invoice date</label>
+              <label className="block text-sm font-medium text-slate-300 mb-1">Invoice date</label>
               <Input
                 type="date"
                 value={invoiceDate}
@@ -529,7 +529,7 @@ function CreateInvoiceDialog({ onClose, onCreated }: { onClose: () => void; onCr
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Due date <span className="text-gray-400 font-normal">(optional)</span></label>
+              <label className="block text-sm font-medium text-slate-300 mb-1">Due date <span className="text-gray-400 font-normal">(optional)</span></label>
               <Input
                 type="date"
                 value={dueDate}
@@ -539,7 +539,7 @@ function CreateInvoiceDialog({ onClose, onCreated }: { onClose: () => void; onCr
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Invoice number <span className="text-gray-400 font-normal">(optional)</span></label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Invoice number <span className="text-gray-400 font-normal">(optional)</span></label>
             <Input
               value={invoiceNumber}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInvoiceNumber(e.target.value)}
@@ -548,14 +548,14 @@ function CreateInvoiceDialog({ onClose, onCreated }: { onClose: () => void; onCr
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description <span className="text-gray-400 font-normal">(optional)</span></label>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Description <span className="text-gray-400 font-normal">(optional)</span></label>
             <textarea
               value={description}
               onChange={e => setDescription(e.target.value)}
               placeholder="Q2 2026 retainer, monthly hosting fee, etc."
               rows={2}
               data-testid="invoice-description"
-              className="w-full text-sm border border-gray-200 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-amber-400 resize-y"
+              className="w-full text-sm border border-white/10 rounded-md px-3 py-2 focus:outline-none focus:ring-1 focus:ring-amber-400 resize-y"
             />
           </div>
           {error && (
@@ -563,7 +563,7 @@ function CreateInvoiceDialog({ onClose, onCreated }: { onClose: () => void; onCr
           )}
         </div>
 
-        <div className="px-6 py-4 border-t border-gray-200 flex justify-end gap-2 bg-gray-50 rounded-b-xl">
+        <div className="px-6 py-4 border-t border-white/10 flex justify-end gap-2 bg-obsidian-900 rounded-b-xl">
           <Button variant="outline" onClick={onClose} disabled={create.isPending}>Cancel</Button>
           <Button
             onClick={() => create.mutate()}

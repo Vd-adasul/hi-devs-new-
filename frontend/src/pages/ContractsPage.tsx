@@ -36,7 +36,7 @@ const TYPE_DOT: Record<string, string> = {
 }
 
 const STATUS_PILL: Record<string, string> = {
-  DRAFT:               'bg-gray-100 text-gray-600',
+  DRAFT:               'bg-obsidian-800 text-slate-400',
   PENDING_REVIEW:      'bg-amber-100 text-amber-700',
   UNDER_NEGOTIATION:   'bg-orange-100 text-orange-700',
   PENDING_APPROVAL:    'bg-blue-100 text-blue-700',
@@ -45,7 +45,7 @@ const STATUS_PILL: Record<string, string> = {
   EXECUTED:            'bg-emerald-100 text-emerald-700',
   EXPIRED:             'bg-red-100 text-red-700',
   TERMINATED:          'bg-red-100 text-red-700',
-  ARCHIVED:            'bg-gray-100 text-gray-500',
+  ARCHIVED:            'bg-obsidian-800 text-slate-500',
 }
 
 /**
@@ -273,12 +273,12 @@ export function ContractsPage() {
   const highlights: Record<string, Record<string, string[]>> = data?.highlights ?? {}
 
   return (
-    <div className="h-full flex flex-col bg-gray-50">
+    <div className="h-full flex flex-col bg-obsidian-900">
       {/* Header */}
-      <div className="bg-white border-b px-6 py-4">
+      <div className="bg-obsidian-700 border-b px-6 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-semibold text-gray-900">Contract Repository</h1>
+            <h1 className="text-xl font-semibold text-white">Contract Repository</h1>
             <p className="text-sm text-gray-400 mt-0.5">{total} contract{total !== 1 ? 's' : ''}</p>
           </div>
           <div className="flex items-center gap-2">
@@ -327,7 +327,7 @@ export function ContractsPage() {
       </div>
 
       {/* Search bar */}
-      <div className="bg-white border-b px-6 py-3">
+      <div className="bg-obsidian-700 border-b px-6 py-3">
         <div className="flex items-center gap-3">
           <div className="relative flex-1 max-w-lg">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -335,13 +335,13 @@ export function ContractsPage() {
               value={search}
               onChange={e => handleSearch(e.target.value)}
               placeholder="Search by title, counterparty, or content…"
-              className="pl-9 bg-gray-50 border-gray-200"
+              className="pl-9 bg-obsidian-900 border-white/10"
             />
           </div>
           {hasFilters && (
             <button
               onClick={() => { setFilters({}); setSearch(''); setDebouncedSearch('') }}
-              className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600"
+              className="flex items-center gap-1 text-xs text-gray-400 hover:text-slate-400"
             >
               <X className="h-3.5 w-3.5" /> Clear all
             </button>
@@ -386,7 +386,7 @@ export function ContractsPage() {
       <div className="flex-1 flex overflow-hidden">
         {/* Facets sidebar */}
         {showFacets && (
-          <aside className="w-52 border-r bg-white overflow-y-auto flex-shrink-0 p-4 space-y-5">
+          <aside className="w-52 border-r bg-obsidian-700 overflow-y-auto flex-shrink-0 p-4 space-y-5">
             <FacetGroup title="Type">
               {(facets.types ?? []).map((b: any) => (
                 <FacetItem key={b.key} label={b.key.replace(/_/g, ' ')} count={b.doc_count}
@@ -472,16 +472,16 @@ export function ContractsPage() {
         <div className="flex-1 overflow-auto">
           {isLoading ? (
             <div className="flex items-center justify-center h-64 gap-2 text-gray-400">
-              <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-white/14 border-t-blue-500 rounded-full animate-spin" />
               <span className="text-sm">Loading contracts…</span>
             </div>
           ) : contracts.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-64 gap-3">
-              <div className="w-14 h-14 rounded-2xl bg-gray-100 flex items-center justify-center">
+              <div className="w-14 h-14 rounded-2xl bg-obsidian-800 flex items-center justify-center">
                 <FileText className="h-7 w-7 text-gray-400" />
               </div>
               <div className="text-center">
-                <p className="font-medium text-gray-700">
+                <p className="font-medium text-slate-300">
                   {hasFilters ? 'No contracts match your filters' : 'No contracts yet'}
                 </p>
                 <p className="text-sm text-gray-400 mt-1">
@@ -495,9 +495,9 @@ export function ContractsPage() {
               )}
             </div>
           ) : (
-            <div className="bg-white">
+            <div className="bg-obsidian-700">
               {/* Table header */}
-              <div className="grid grid-cols-[minmax(0,2fr)_120px_160px_100px_80px_64px] gap-4 px-6 py-2.5 border-b bg-gray-50 sticky top-0">
+              <div className="grid grid-cols-[minmax(0,2fr)_120px_160px_100px_80px_64px] gap-4 px-6 py-2.5 border-b bg-obsidian-900 sticky top-0">
                 <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Contract</span>
                 <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Status</span>
                 <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Counterparty</span>
@@ -532,7 +532,7 @@ export function ContractsPage() {
                       <div className="flex items-center gap-2">
                         <Link
                           to={`/contracts/${c.id}`}
-                          className="text-sm font-medium text-gray-900 truncate hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
+                          className="text-sm font-medium text-white truncate hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
                           onClick={(e) => e.stopPropagation()}
                         >
                           {displayTitle(c)}
@@ -557,7 +557,7 @@ export function ContractsPage() {
                                 e.stopPropagation()
                                 retry.mutate(c.id)
                               }}
-                              className="inline-flex items-center gap-1 rounded-full border border-red-200 bg-white px-1.5 py-0.5 text-[10px] font-medium text-red-600 hover:bg-red-50 transition-colors disabled:opacity-60"
+                              className="inline-flex items-center gap-1 rounded-full border border-red-200 bg-obsidian-700 px-1.5 py-0.5 text-[10px] font-medium text-red-600 hover:bg-red-50 transition-colors disabled:opacity-60"
                               title="Re-run analysis"
                             >
                               {retry.isPending && retryingId === c.id
@@ -597,7 +597,7 @@ export function ContractsPage() {
                             title={plain}
                           >
                             <span className="font-medium">Matched in {matchedField}:</span>{' '}
-                            <span className="text-gray-700">{plain.length > 60 ? plain.slice(0, 60) + '…' : plain}</span>
+                            <span className="text-slate-300">{plain.length > 60 ? plain.slice(0, 60) + '…' : plain}</span>
                           </p>
                         )
                       })()}
@@ -606,16 +606,16 @@ export function ContractsPage() {
 
                   {/* Status */}
                   <div>
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${STATUS_PILL[c.status] ?? 'bg-gray-100 text-gray-600'}`}>
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${STATUS_PILL[c.status] ?? 'bg-obsidian-800 text-slate-400'}`}>
                       {c.status.replace(/_/g, ' ')}
                     </span>
                   </div>
 
                   {/* Counterparty */}
-                  <p className="text-sm text-gray-600 truncate">{c.counterpartyName ?? c.counterparty?.name ?? <span className="text-gray-300">—</span>}</p>
+                  <p className="text-sm text-slate-400 truncate">{c.counterpartyName ?? c.counterparty?.name ?? <span className="text-gray-300">—</span>}</p>
 
                   {/* Expiry */}
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-slate-500">
                     {c.expiryDate ? new Date(c.expiryDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' }) : <span className="text-gray-300">—</span>}
                   </p>
 
@@ -623,13 +623,13 @@ export function ContractsPage() {
                   <div>
                     {c.riskScore != null ? (
                       <div className="flex items-center gap-1.5">
-                        <div className="flex-1 h-1.5 rounded-full bg-gray-100 overflow-hidden">
+                        <div className="flex-1 h-1.5 rounded-full bg-obsidian-800 overflow-hidden">
                           <div
                             className={`h-full rounded-full ${c.riskScore >= 0.67 ? 'bg-red-400' : c.riskScore >= 0.34 ? 'bg-amber-400' : 'bg-emerald-400'}`}
                             style={{ width: `${Math.round(c.riskScore * 100)}%` }}
                           />
                         </div>
-                        <span className="text-xs text-gray-500 w-7 text-right">{Math.round(c.riskScore * 100)}%</span>
+                        <span className="text-xs text-slate-500 w-7 text-right">{Math.round(c.riskScore * 100)}%</span>
                       </div>
                     ) : <span className="text-gray-300 text-xs">—</span>}
                   </div>
@@ -648,7 +648,7 @@ export function ContractsPage() {
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
-                    <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-gray-500 transition-colors" />
+                    <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-slate-500 transition-colors" />
                   </div>
                 </div>
               ))}
@@ -700,7 +700,7 @@ function FacetItem({ label, count, active, onClick }: {
     <button
       onClick={onClick}
       className={`w-full flex items-center justify-between px-2 py-1.5 rounded-lg text-xs transition-colors ${
-        active ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'
+        active ? 'bg-blue-600 text-white' : 'text-slate-400 hover:bg-obsidian-800'
       }`}
     >
       <span className="truncate">{label}</span>

@@ -25,7 +25,7 @@ export async function agentRoutes(app: FastifyInstance) {
   app.get('/models', { preHandler: requireAuth }, async (_req: unknown, reply) => {
     return reply.send({
       models: [
-        { id: 'gemini-2.0-flash', name: 'Gemini 2.0 Flash', provider: 'google' }
+        { id: 'Qwen/Qwen2.5-7B-Instruct', name: 'Qwen 2.5 7B Instruct (Featherless)', provider: 'featherless' }
       ]
     })
   })
@@ -56,17 +56,18 @@ export async function agentRoutes(app: FastifyInstance) {
     }
 
     // Retrieve contract context if available
+    const contractId = body.contractId || (body.pageContext?.type === 'contract' ? body.pageContext.id : undefined)
     let context = ''
-    if (body.contractId) {
+    if (contractId) {
       try {
-        const matches = await searchClauses(body.message, orgId, 5, body.contractId)
+        const matches = await searchClauses(body.message, orgId, 5, contractId)
         if (matches.length > 0) {
           context = matches.map((m, idx) => `Clause [${idx + 1}] (${m.clauseType}):\n${m.content}`).join('\n\n')
         }
       } catch (err) {
         app.log.warn({ err }, 'Failed to fetch search context for chat, falling back to database query')
         const dbClauses = await prisma.contractClause.findMany({
-          where: { version: { contractId: body.contractId } },
+          where: { version: { contractId } },
           take: 5,
           select: { clauseType: true, content: true }
         })
@@ -84,27 +85,33 @@ export async function agentRoutes(app: FastifyInstance) {
       ${context || 'No contract context provided.'}
     `
 
-    const googleKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY
-    if (!googleKey) {
-      return reply.status(500).send({ detail: 'Gemini API key is not configured' })
+    const featherlessKey = process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY
+    if (!featherlessKey) {
+      return reply.status(500).send({ detail: 'Featherless API key is not configured' })
     }
 
     const upstream = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?key=${googleKey}`,
+      `https://api.featherless.ai/v1/chat/completions`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${featherlessKey}`
+        },
         body: JSON.stringify({
-          systemInstruction: { parts: [{ text: systemPrompt }] },
-          contents: [{ role: 'user', parts: [{ text: body.message }] }],
-          generationConfig: { responseMimeType: 'text/plain' }
+          model: 'Qwen/Qwen2.5-7B-Instruct',
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: body.message }
+          ],
+          stream: true
         })
       }
     )
 
     if (!upstream.ok) {
       const err = await upstream.text()
-      return reply.status(502).send({ detail: err || 'Gemini API stream failed' })
+      return reply.status(502).send({ detail: err || 'Featherless API stream failed' })
     }
 
     reply.raw.writeHead(200, {
@@ -133,56 +140,33 @@ export async function agentRoutes(app: FastifyInstance) {
         if (done) break
         buffer += decoder.decode(value, { stream: true })
         
-        let braceCount = 0
-        let inString = false
-        let escapeNext = false
-        let objStart = -1
-        let i = 0
+        const lines = buffer.split('\n')
+        buffer = lines.pop() || ''
         
-        while (i < buffer.length) {
-          const char = buffer[i]
-          
-          if (inString) {
-            if (escapeNext) {
-              escapeNext = false
-            } else if (char === '\\') {
-              escapeNext = true
-            } else if (char === '"') {
-              inString = false
+        for (const line of lines) {
+          const trimmed = line.trim()
+          if (!trimmed) continue
+          if (trimmed.startsWith(':')) continue
+          if (trimmed.startsWith('data:')) {
+            const dataStr = trimmed.slice(5).trim()
+            if (dataStr === '[DONE]') {
+              continue
             }
-          } else {
-            if (char === '"') {
-              inString = true
-            } else if (char === '{') {
-              if (braceCount === 0) {
-                objStart = i
+            try {
+              const parsed = JSON.parse(dataStr)
+              const text = parsed?.choices?.[0]?.delta?.content || ''
+              if (text) {
+                streamedChars += text.length
+                reply.raw.write(`data: ${JSON.stringify({ type: 'token', delta: text })}\n\n`)
               }
-              braceCount++
-            } else if (char === '}') {
-              braceCount--
-              if (braceCount === 0 && objStart !== -1) {
-                const objStr = buffer.slice(objStart, i + 1)
-                try {
-                  const parsed = JSON.parse(objStr)
-                  const text = parsed?.candidates?.[0]?.content?.parts?.[0]?.text || ''
-                  if (text) {
-                    streamedChars += text.length
-                    reply.raw.write(`data: ${JSON.stringify({ type: 'token', delta: text })}\n\n`)
-                  }
-                } catch (e) {
-                  // Ignore parse errors on incomplete objects
-                }
-                buffer = buffer.slice(i + 1)
-                i = -1
-                objStart = -1
-              }
+            } catch (e) {
+              // Ignore parse errors on incomplete objects
             }
           }
-          i++
         }
       }
     } catch (err) {
-      app.log.warn({ err }, 'Gemini stream read failed')
+      app.log.warn({ err }, 'Featherless stream read failed')
     } finally {
       reply.raw.write('data: [DONE]\n\n')
       if (!reply.raw.writableEnded) {
@@ -235,28 +219,34 @@ export async function agentRoutes(app: FastifyInstance) {
       Output ONLY valid HTML content containing the contract body clauses. Use standard semantic tags like <h1>, <h2>, <p>, <ul>, <li>. Do not wrap in markdown backticks or markdown code blocks (e.g. do not start with \`\`\`html). Output raw HTML text directly.
     `
 
-    const googleKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY
-    if (!googleKey) {
-      return reply.status(500).send({ detail: 'Gemini API key is not configured' })
+    const featherlessKey = process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY
+    if (!featherlessKey) {
+      return reply.status(500).send({ detail: 'Featherless API key is not configured' })
     }
 
     try {
       const geminiRes = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${googleKey}`,
+        `https://api.featherless.ai/v1/chat/completions`,
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${featherlessKey}`
+          },
+          body: JSON.stringify({
+            model: 'Qwen/Qwen2.5-7B-Instruct',
+            messages: [{ role: 'user', content: prompt }]
+          })
         }
       )
       
       if (!geminiRes.ok) {
         const err = await geminiRes.text()
-        return reply.status(502).send({ detail: err || 'Gemini drafting failed' })
+        return reply.status(502).send({ detail: err || 'Featherless drafting failed' })
       }
 
       const data = await geminiRes.json() as any
-      let html = data?.candidates?.[0]?.content?.parts?.[0]?.text || ''
+      let html = data?.choices?.[0]?.message?.content || ''
       
       // Strip markdown code block wrappers if generated by the LLM
       html = html.replace(/```html/g, '').replace(/```/g, '').trim()
@@ -376,22 +366,29 @@ export async function agentRoutes(app: FastifyInstance) {
       Perform the requested action on the text. Return ONLY the rewritten text (no quotes, no markdown, no chat introduction).
     `
 
-    const googleKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY
-    if (!googleKey) {
-      return reply.status(500).send({ detail: 'Gemini API key is not configured' })
+    const featherlessKey = process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY
+    if (!featherlessKey) {
+      return reply.status(500).send({ detail: 'Featherless API key is not configured' })
     }
 
     const upstream = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?key=${googleKey}`,
+      `https://api.featherless.ai/v1/chat/completions`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${featherlessKey}`
+        },
+        body: JSON.stringify({
+          model: 'Qwen/Qwen2.5-7B-Instruct',
+          messages: [{ role: 'user', content: prompt }],
+          stream: true
+        })
       }
     )
 
     if (!upstream.ok || !upstream.body) {
-      return reply.status(502).send({ detail: 'Gemini API call failed' })
+      return reply.status(502).send({ detail: 'Featherless API call failed' })
     }
 
     reply.raw.setHeader('Content-Type', 'application/x-ndjson')
@@ -408,23 +405,26 @@ export async function agentRoutes(app: FastifyInstance) {
         if (done) break
         buffer += decoder.decode(value, { stream: true })
         
-        let parts = buffer.split('\n')
-        buffer = parts.pop() || ''
+        let lines = buffer.split('\n')
+        buffer = lines.pop() || ''
         
-        for (const part of parts) {
-          const trimmed = part.trim()
-          if (!trimmed || trimmed === '[' || trimmed === ']') continue
-          
-          try {
-            const cleanJson = trimmed.startsWith(',') ? trimmed.slice(1).trim() : trimmed
-            const parsed = JSON.parse(cleanJson)
-            const text = parsed?.candidates?.[0]?.content?.parts?.[0]?.text || ''
-            if (text) {
-              // Write in NDJSON format expected by frontend BubbleAiPopover
-              reply.raw.write(JSON.stringify({ type: 'delta', delta: text, text }) + '\n')
+        for (const line of lines) {
+          const trimmed = line.trim()
+          if (!trimmed) continue
+          if (trimmed.startsWith(':')) continue
+          if (trimmed.startsWith('data:')) {
+            const dataStr = trimmed.slice(5).trim()
+            if (dataStr === '[DONE]') {
+              continue
             }
-          } catch {
-            buffer = trimmed + buffer
+            try {
+              const parsed = JSON.parse(dataStr)
+              const text = parsed?.choices?.[0]?.delta?.content || ''
+              if (text) {
+                // Write in NDJSON format expected by frontend BubbleAiPopover
+                reply.raw.write(JSON.stringify({ type: 'delta', delta: text, text }) + '\n')
+              }
+            } catch {}
           }
         }
       }
@@ -459,22 +459,28 @@ export async function agentRoutes(app: FastifyInstance) {
       }
     `
 
-    const googleKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY
-    if (!googleKey) {
+    const featherlessKey = process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY
+    if (!featherlessKey) {
       return reply.send({ category: 'General', position: 'off', reasoning: 'API Key missing' })
     }
 
     try {
       const geminiRes = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${googleKey}`,
+        `https://api.featherless.ai/v1/chat/completions`,
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${featherlessKey}`
+          },
+          body: JSON.stringify({
+            model: 'Qwen/Qwen2.5-7B-Instruct',
+            messages: [{ role: 'user', content: prompt }]
+          })
         }
       )
       const data = await geminiRes.json() as any
-      let text = data?.candidates?.[0]?.content?.parts?.[0]?.text || ''
+      let text = data?.choices?.[0]?.message?.content || ''
       text = text.replace(/```json/g, '').replace(/```/g, '').trim()
       const parsed = JSON.parse(text)
       return reply.send(parsed)
@@ -506,22 +512,28 @@ export async function agentRoutes(app: FastifyInstance) {
       Predict the NEXT few words or next sentence to complete the clause naturally. Return ONLY the predicted text (no introductions, no markdown, no quotes). Keep it under 25 words.
     `
 
-    const googleKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY
-    if (!googleKey) {
+    const featherlessKey = process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY
+    if (!featherlessKey) {
       return reply.send({ completion: '', error: 'API Key missing' })
     }
 
     try {
       const geminiRes = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${googleKey}`,
+        `https://api.featherless.ai/v1/chat/completions`,
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${featherlessKey}`
+          },
+          body: JSON.stringify({
+            model: 'Qwen/Qwen2.5-7B-Instruct',
+            messages: [{ role: 'user', content: prompt }]
+          })
         }
       )
       const data = await geminiRes.json() as any
-      const completion = data?.candidates?.[0]?.content?.parts?.[0]?.text || ''
+      const completion = data?.choices?.[0]?.message?.content || ''
       return reply.send({ completion: completion.trim() })
     } catch (err: any) {
       return reply.send({ completion: '', error: err.message })
@@ -550,22 +562,28 @@ export async function agentRoutes(app: FastifyInstance) {
       Perform the requested action on the text. Return ONLY the rewritten text (no quotes, no markdown, no chat introduction).
     `
 
-    const googleKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY
-    if (!googleKey) {
-      return reply.status(500).send({ detail: 'Gemini API key is not configured' })
+    const featherlessKey = process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY
+    if (!featherlessKey) {
+      return reply.status(500).send({ detail: 'Featherless API key is not configured' })
     }
 
     try {
-      const geminiRes = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${googleKey}`,
+      const res = await fetch(
+        `https://api.featherless.ai/v1/chat/completions`,
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${featherlessKey}`
+          },
+          body: JSON.stringify({
+            model: 'Qwen/Qwen2.5-7B-Instruct',
+            messages: [{ role: 'user', content: prompt }]
+          })
         }
       )
-      const data = await geminiRes.json() as any
-      let suggestion = data?.candidates?.[0]?.content?.parts?.[0]?.text || ''
+      const data = await res.json() as any
+      let suggestion = data?.choices?.[0]?.message?.content || ''
       
       // Enkrypt AI Response Safety Check
       suggestion = await verifyResponseSafety(suggestion, 'AI Assist Suggestion')
@@ -637,22 +655,28 @@ export async function agentRoutes(app: FastifyInstance) {
       }
     `
 
-    const googleKey = process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY
-    if (!googleKey) {
-      return reply.status(500).send({ detail: 'Gemini API key is not configured' })
+    const featherlessKey = process.env.FEATHERLESS_API_KEY || process.env.OPENAI_API_KEY
+    if (!featherlessKey) {
+      return reply.status(500).send({ detail: 'Featherless API key is not configured' })
     }
 
     try {
       const geminiRes = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${googleKey}`,
+        `https://api.featherless.ai/v1/chat/completions`,
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${featherlessKey}`
+          },
+          body: JSON.stringify({
+            model: 'Qwen/Qwen2.5-7B-Instruct',
+            messages: [{ role: 'user', content: prompt }]
+          })
         }
       )
       const data = await geminiRes.json() as any
-      let text = data?.candidates?.[0]?.content?.parts?.[0]?.text || ''
+      let text = data?.choices?.[0]?.message?.content || ''
       text = text.replace(/```json/g, '').replace(/```/g, '').trim()
       const parsed = JSON.parse(text)
       return reply.send(parsed)

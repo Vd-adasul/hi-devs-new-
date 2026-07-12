@@ -187,19 +187,19 @@ export function ObligationsRailSection({
                   className={`group text-[11.5px] border rounded-md px-2 py-1.5 ${
                     o.status === 'COMPLETED'
                       ? 'border-emerald-200 bg-emerald-50/40 opacity-90'
-                      : 'border-border bg-white/60'
+                      : 'border-border bg-obsidian-700/60'
                   }`}
                 >
                   <div className="flex items-start gap-1.5">
-                    <Icon className={`h-3 w-3 mt-0.5 flex-shrink-0 ${o.status === 'COMPLETED' ? 'text-emerald-600' : 'text-gray-500'}`} />
+                    <Icon className={`h-3 w-3 mt-0.5 flex-shrink-0 ${o.status === 'COMPLETED' ? 'text-emerald-600' : 'text-slate-500'}`} />
                     <div className="flex-1 min-w-0">
-                      <div className={`font-medium text-[11.5px] leading-tight ${o.status === 'COMPLETED' ? 'text-gray-500 line-through' : 'text-gray-900'}`}>
+                      <div className={`font-medium text-[11.5px] leading-tight ${o.status === 'COMPLETED' ? 'text-slate-500 line-through' : 'text-white'}`}>
                         {o.description}
                       </div>
                       <div className="mt-0.5 flex items-center gap-1.5 flex-wrap text-[10px]">
                         <span className="font-mono uppercase tracking-wider text-gray-400">{o.type}</span>
                         <span className="text-muted-foreground">· {o.owner}</span>
-                        {o.sectionRef && <span className="font-mono text-gray-500">§{o.sectionRef}</span>}
+                        {o.sectionRef && <span className="font-mono text-slate-500">§{o.sectionRef}</span>}
                         {o.dueDate && (
                           <span className={dueColor}>
                             {days == null ? new Date(o.dueDate).toLocaleDateString()
@@ -257,7 +257,7 @@ export function ObligationsRailSection({
               onClick={() => extract.mutate()}
               disabled={extract.isPending}
               data-testid="obligations-refresh-btn"
-              className="ml-2 underline hover:text-gray-900"
+              className="ml-2 underline hover:text-white"
             >
               {extract.isPending ? 're-running…' : 're-run'}
             </button>

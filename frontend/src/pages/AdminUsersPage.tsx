@@ -143,15 +143,15 @@ export function AdminUsersPage() {
   const roleUser = filteredUsers.find(u => u.id === roleDropdownUserId)
 
   return (
-    <div className="p-6 max-w-6xl mx-auto space-y-6 bg-white text-gray-900 rounded-xl shadow-sm border border-gray-100 mt-4">
+    <div className="p-6 max-w-6xl mx-auto space-y-6 bg-obsidian-700 text-white rounded-xl shadow-sm border border-white/[0.06] mt-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
+          <h1 className="text-xl font-semibold text-white flex items-center gap-2">
             <Users className="h-5 w-5" />
             User Management
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-slate-500 mt-1">
             Manage users, roles, and permissions for your organization.
           </p>
         </div>
@@ -184,52 +184,52 @@ export function AdminUsersPage() {
       {/* Users table */}
       {isLoading ? (
         <div className="flex justify-center py-12">
-          <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+          <div className="w-5 h-5 border-2 border-white/14 border-t-blue-500 rounded-full animate-spin" />
         </div>
       ) : filteredUsers.length === 0 ? (
-        <div className="bg-white rounded-xl border border-dashed border-gray-300 p-12 text-center">
+        <div className="bg-obsidian-700 rounded-xl border border-dashed border-white/14 p-12 text-center">
           <Users className="h-8 w-8 text-gray-300 mx-auto mb-3" />
-          <p className="text-gray-600 font-medium">No users found</p>
+          <p className="text-slate-400 font-medium">No users found</p>
           <p className="text-sm text-gray-400 mt-1">
             {search ? 'Try a different search term.' : 'Invite your first team member to get started.'}
           </p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl border shadow-sm">
+        <div className="bg-obsidian-700 rounded-xl border shadow-sm">
           <table className="w-full">
             <thead>
-              <tr className="border-b bg-gray-50">
-                <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">
+              <tr className="border-b bg-obsidian-900">
+                <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3">
                   Name
                 </th>
-                <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">
+                <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3">
                   Email
                 </th>
-                <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">
+                <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3">
                   Status
                 </th>
-                <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">
+                <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3">
                   Roles
                 </th>
-                <th className="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3">
+                <th className="text-left text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3">
                   Last Active
                 </th>
-                <th className="text-right text-xs font-semibold text-gray-500 uppercase tracking-wider px-5 py-3 w-20">
+                <th className="text-right text-xs font-semibold text-slate-500 uppercase tracking-wider px-5 py-3 w-20">
                   Actions
                 </th>
               </tr>
             </thead>
             <tbody className="divide-y">
               {filteredUsers.map(user => (
-                <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-5 py-4 text-sm font-medium text-gray-900">
+                <tr key={user.id} className="hover:bg-obsidian-900 transition-colors">
+                  <td className="px-5 py-4 text-sm font-medium text-white">
                     {user.name}
                   </td>
-                  <td className="px-5 py-4 text-sm text-gray-600">{user.email}</td>
+                  <td className="px-5 py-4 text-sm text-slate-400">{user.email}</td>
                   <td className="px-5 py-4">
                     <span
                       className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                        STATUS_STYLES[user.status] ?? 'bg-gray-100 text-gray-700'
+                        STATUS_STYLES[user.status] ?? 'bg-obsidian-800 text-slate-300'
                       }`}
                     >
                       {user.status}
@@ -247,7 +247,7 @@ export function AdminUsersPage() {
                       ))}
                     </div>
                   </td>
-                  <td className="px-5 py-4 text-sm text-gray-500">
+                  <td className="px-5 py-4 text-sm text-slate-500">
                     {user.lastActiveAt
                       ? new Date(user.lastActiveAt).toLocaleDateString()
                       : 'Never'}
@@ -255,7 +255,7 @@ export function AdminUsersPage() {
                   <td className="px-5 py-4 text-right">
                     <button
                       onClick={e => handleActionClick(user.id, e.currentTarget)}
-                      className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+                      className="p-1.5 rounded-lg text-gray-400 hover:text-slate-400 hover:bg-obsidian-800 transition-colors"
                     >
                       <MoreVertical className="h-4 w-4" />
                     </button>
@@ -271,12 +271,12 @@ export function AdminUsersPage() {
       {actionMenuUserId && activeUser && actionMenuAnchor && createPortal(
         <div
           data-action-menu
-          className="fixed w-48 bg-white rounded-lg border shadow-lg z-50 py-1"
+          className="fixed w-48 bg-obsidian-700 rounded-lg border shadow-lg z-50 py-1"
           style={{ top: actionMenuAnchor.top, right: actionMenuAnchor.right }}
         >
           <button
             onClick={() => handleChangeRoles(actionMenuUserId)}
-            className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            className="w-full text-left px-4 py-2 text-sm text-slate-300 hover:bg-obsidian-800"
           >
             Change Roles
           </button>
@@ -303,7 +303,7 @@ export function AdminUsersPage() {
       {roleDropdownUserId && roleUser && roleDropdownAnchor && createPortal(
         <div
           data-role-selector
-          className="fixed w-56 bg-white rounded-lg border shadow-lg z-50 p-3"
+          className="fixed w-56 bg-obsidian-700 rounded-lg border shadow-lg z-50 p-3"
           style={{ top: roleDropdownAnchor.top, right: roleDropdownAnchor.right }}
         >
           <RoleSelector
@@ -356,20 +356,20 @@ function RoleSelector({
 
   return (
     <>
-      <p className="text-xs font-semibold text-gray-500 mb-2">Select Roles</p>
+      <p className="text-xs font-semibold text-slate-500 mb-2">Select Roles</p>
       <div className="space-y-1 max-h-48 overflow-y-auto">
         {ALL_ROLES.map(role => (
           <label
             key={role}
-            className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-50 cursor-pointer"
+            className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-obsidian-900 cursor-pointer"
           >
             <input
               type="checkbox"
               checked={selected.includes(role)}
               onChange={() => toggle(role)}
-              className="rounded border-gray-300 text-blue-600"
+              className="rounded border-white/14 text-blue-600"
             />
-            <span className="text-sm text-gray-700">{role}</span>
+            <span className="text-sm text-slate-300">{role}</span>
           </label>
         ))}
       </div>
@@ -420,7 +420,7 @@ function InviteLinkBanner({
           Share this link with them to accept the invite:
         </p>
         <div className="flex items-center gap-2 mt-2">
-          <code className="text-xs bg-white border border-blue-200 rounded px-2 py-1.5 text-blue-800 truncate block flex-1">
+          <code className="text-xs bg-obsidian-700 border border-blue-200 rounded px-2 py-1.5 text-blue-800 truncate block flex-1">
             {inviteUrl}
           </code>
           <Button
@@ -489,13 +489,13 @@ function InviteUserModal({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-md mx-4">
+      <div className="bg-obsidian-700 rounded-xl shadow-xl w-full max-w-md mx-4">
         {/* Modal header */}
         <div className="flex items-center justify-between px-6 py-4 border-b">
-          <h2 className="text-lg font-semibold text-gray-900">Invite User</h2>
+          <h2 className="text-lg font-semibold text-white">Invite User</h2>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+            className="p-1 rounded-lg text-gray-400 hover:text-slate-400 hover:bg-obsidian-800"
           >
             <X className="h-4 w-4" />
           </button>
@@ -504,7 +504,7 @@ function InviteUserModal({
         {/* Modal body */}
         <div className="px-6 py-4 space-y-4">
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Email *</Label>
+            <Label className="text-xs text-slate-500 mb-1.5 block">Email *</Label>
             <Input
               type="email"
               placeholder="colleague@company.com"
@@ -513,7 +513,7 @@ function InviteUserModal({
             />
           </div>
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Name *</Label>
+            <Label className="text-xs text-slate-500 mb-1.5 block">Name *</Label>
             <Input
               placeholder="Full name"
               value={name}
@@ -521,20 +521,20 @@ function InviteUserModal({
             />
           </div>
           <div>
-            <Label className="text-xs text-gray-500 mb-1.5 block">Roles *</Label>
+            <Label className="text-xs text-slate-500 mb-1.5 block">Roles *</Label>
             <div className="grid grid-cols-2 gap-1.5 max-h-48 overflow-y-auto">
               {ALL_ROLES.map(role => (
                 <label
                   key={role}
-                  className="flex items-center gap-2 px-2 py-1.5 rounded border border-gray-200 hover:bg-gray-50 cursor-pointer"
+                  className="flex items-center gap-2 px-2 py-1.5 rounded border border-white/10 hover:bg-obsidian-900 cursor-pointer"
                 >
                   <input
                     type="checkbox"
                     checked={selectedRoles.includes(role)}
                     onChange={() => toggleRole(role)}
-                    className="rounded border-gray-300 text-blue-600"
+                    className="rounded border-white/14 text-blue-600"
                   />
-                  <span className="text-xs text-gray-700">{role}</span>
+                  <span className="text-xs text-slate-300">{role}</span>
                 </label>
               ))}
             </div>

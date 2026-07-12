@@ -74,14 +74,14 @@ export function ShareLinkDialog({ contractId, onClose }: ShareLinkDialogProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg flex flex-col max-h-[85vh]">
+      <div className="bg-obsidian-700 rounded-2xl shadow-2xl w-full max-w-lg flex flex-col max-h-[85vh]">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b">
           <div className="flex items-center gap-2">
             <Link className="h-5 w-5 text-blue-600" />
-            <h2 className="text-base font-semibold text-gray-900">Share Contract</h2>
+            <h2 className="text-base font-semibold text-white">Share Contract</h2>
           </div>
-          <button onClick={onClose} className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors">
+          <button onClick={onClose} className="p-1.5 rounded-lg text-gray-400 hover:text-slate-400 hover:bg-obsidian-800 transition-colors">
             <X className="h-4 w-4" />
           </button>
         </div>
@@ -95,7 +95,7 @@ export function ShareLinkDialog({ contractId, onClose }: ShareLinkDialogProps) {
                 <input
                   readOnly
                   value={newLinkUrl}
-                  className="flex-1 text-xs font-mono bg-white border border-emerald-200 rounded-lg px-2 py-1.5 truncate"
+                  className="flex-1 text-xs font-mono bg-obsidian-700 border border-emerald-200 rounded-lg px-2 py-1.5 truncate"
                 />
                 <button
                   onClick={() => handleCopy(newLinkUrl, 'new')}
@@ -110,9 +110,9 @@ export function ShareLinkDialog({ contractId, onClose }: ShareLinkDialogProps) {
 
           {/* Create form */}
           <div className="space-y-4">
-            <p className="text-sm font-semibold text-gray-700">Create new link</p>
+            <p className="text-sm font-semibold text-slate-300">Create new link</p>
             <div>
-              <label className="text-xs text-gray-500 font-medium mb-1 block">Label (optional)</label>
+              <label className="text-xs text-slate-500 font-medium mb-1 block">Label (optional)</label>
               <Input
                 value={label}
                 onChange={e => setLabel(e.target.value)}
@@ -121,11 +121,11 @@ export function ShareLinkDialog({ contractId, onClose }: ShareLinkDialogProps) {
               />
             </div>
             <div>
-              <label className="text-xs text-gray-500 font-medium mb-1 block">Expires in</label>
+              <label className="text-xs text-slate-500 font-medium mb-1 block">Expires in</label>
               <select
                 value={expiresInHours}
                 onChange={e => setExpiresInHours(Number(e.target.value))}
-                className="w-full text-sm border border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full text-sm border border-white/10 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 {EXPIRY_OPTIONS.map(opt => (
                   <option key={opt.hours} value={opt.hours}>{opt.label}</option>
@@ -133,13 +133,13 @@ export function ShareLinkDialog({ contractId, onClose }: ShareLinkDialogProps) {
               </select>
             </div>
             <div>
-              <p className="text-xs text-gray-500 font-medium mb-2">Permissions</p>
+              <p className="text-xs text-slate-500 font-medium mb-2">Permissions</p>
               <div className="space-y-2">
                 <label className="flex items-center gap-2.5 cursor-pointer">
                   <div className="w-4 h-4 rounded border-2 border-blue-500 bg-blue-500 flex items-center justify-center flex-shrink-0">
                     <Check className="h-2.5 w-2.5 text-white" />
                   </div>
-                  <div className="flex items-center gap-1.5 text-sm text-gray-700">
+                  <div className="flex items-center gap-1.5 text-sm text-slate-300">
                     <Eye className="h-3.5 w-3.5 text-gray-400" />
                     Read — view contract
                   </div>
@@ -149,9 +149,9 @@ export function ShareLinkDialog({ contractId, onClose }: ShareLinkDialogProps) {
                     type="checkbox"
                     checked={canComment}
                     onChange={e => setCanComment(e.target.checked)}
-                    className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    className="w-4 h-4 rounded border-white/14 text-blue-600 focus:ring-blue-500"
                   />
-                  <div className="flex items-center gap-1.5 text-sm text-gray-700">
+                  <div className="flex items-center gap-1.5 text-sm text-slate-300">
                     <MessageSquare className="h-3.5 w-3.5 text-gray-400" />
                     Comment — add comments
                   </div>
@@ -171,12 +171,12 @@ export function ShareLinkDialog({ contractId, onClose }: ShareLinkDialogProps) {
           {/* Existing links */}
           {links.length > 0 && (
             <div className="space-y-3">
-              <p className="text-sm font-semibold text-gray-700">Active links</p>
+              <p className="text-sm font-semibold text-slate-300">Active links</p>
               {links.map(link => (
-                <div key={link.id} className="bg-gray-50 border border-gray-200 rounded-xl p-3.5 space-y-2">
+                <div key={link.id} className="bg-obsidian-900 border border-white/10 rounded-xl p-3.5 space-y-2">
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <p className="text-sm font-medium text-gray-800">
+                      <p className="text-sm font-medium text-white">
                         {link.label ?? 'Untitled link'}
                       </p>
                       <p className="text-xs text-gray-400 mt-0.5">
@@ -191,7 +191,7 @@ export function ShareLinkDialog({ contractId, onClose }: ShareLinkDialogProps) {
                             comment
                           </span>
                         )}
-                        <span className="text-xs bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded font-medium">
+                        <span className="text-xs bg-obsidian-800 text-slate-500 px-1.5 py-0.5 rounded font-medium">
                           read
                         </span>
                       </div>

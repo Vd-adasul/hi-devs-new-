@@ -103,7 +103,7 @@ export function CounterpartyPicker({
           onFocus={() => setOpen(true)}
           placeholder={placeholder}
           data-testid={`${testIdPrefix}-input`}
-          className="w-full h-9 text-sm border border-gray-200 rounded-lg pl-8 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+          className="w-full h-9 text-sm border border-white/10 rounded-lg pl-8 pr-8 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
         />
         {value.id && (
           <span
@@ -118,7 +118,7 @@ export function CounterpartyPicker({
           <button
             type="button"
             onClick={() => { setQuery(''); onChange({ id: null, name: '' }); setOpen(false) }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-slate-400"
             data-testid={`${testIdPrefix}-clear`}
           >
             <X className="h-3.5 w-3.5" />
@@ -129,7 +129,7 @@ export function CounterpartyPicker({
       {open && (matches.length > 0 || showCreate) && (
         <div
           data-testid={`${testIdPrefix}-dropdown`}
-          className="absolute z-30 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-72 overflow-y-auto"
+          className="absolute z-30 left-0 right-0 mt-1 bg-obsidian-700 border border-white/10 rounded-lg shadow-lg max-h-72 overflow-y-auto"
         >
           {isFetching && matches.length === 0 && (
             <div className="px-3 py-2 text-[12px] text-gray-400 inline-flex items-center gap-1.5">
@@ -149,7 +149,7 @@ export function CounterpartyPicker({
               className="w-full px-3 py-2 text-left hover:bg-blue-50 flex items-center justify-between gap-2 group"
             >
               <div className="min-w-0 flex-1">
-                <div className="text-[13px] font-medium text-gray-900 group-hover:text-blue-700 truncate">{cp.name}</div>
+                <div className="text-[13px] font-medium text-white group-hover:text-blue-700 truncate">{cp.name}</div>
                 {cp.legalName && cp.legalName !== cp.name && (
                   <div className="text-[10.5px] text-gray-400 truncate">{cp.legalName}</div>
                 )}
@@ -167,7 +167,7 @@ export function CounterpartyPicker({
               onClick={() => create.mutate()}
               disabled={create.isPending}
               data-testid={`${testIdPrefix}-create`}
-              className="w-full px-3 py-2 text-left border-t border-gray-100 hover:bg-emerald-50 inline-flex items-center gap-2 text-[12.5px] text-emerald-700 font-medium disabled:opacity-50"
+              className="w-full px-3 py-2 text-left border-t border-white/[0.06] hover:bg-emerald-50 inline-flex items-center gap-2 text-[12.5px] text-emerald-700 font-medium disabled:opacity-50"
             >
               {create.isPending ? <Loader2 className="h-3 w-3 animate-spin" /> : <Plus className="h-3.5 w-3.5" />}
               Create new counterparty <span className="font-semibold">"{trimmed}"</span>

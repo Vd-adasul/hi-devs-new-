@@ -19,24 +19,24 @@ const STATUS_TABS = [
 ]
 
 const STATUS_BADGE: Record<string, { label: string; cls: string }> = {
-  SUBMITTED:        { label: 'Submitted',       cls: 'bg-blue-50 text-blue-700' },
-  IN_REVIEW:        { label: 'In Review',        cls: 'bg-amber-50 text-amber-700' },
-  ACCEPTED:         { label: 'Accepted',         cls: 'bg-green-50 text-green-700' },
-  REJECTED:         { label: 'Rejected',         cls: 'bg-red-50 text-red-600' },
-  MORE_INFO_NEEDED: { label: 'More Info',        cls: 'bg-orange-50 text-orange-700' },
-  COMPLETED:        { label: 'Completed',        cls: 'bg-gray-100 text-gray-500' },
+  SUBMITTED:        { label: 'Submitted',       cls: 'bg-sky-500/10 text-sky-300 border border-sky-500/20' },
+  IN_REVIEW:        { label: 'In Review',        cls: 'bg-amber-500/10 text-amber-300 border border-amber-500/20' },
+  ACCEPTED:         { label: 'Accepted',         cls: 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/20' },
+  REJECTED:         { label: 'Rejected',         cls: 'bg-rose-500/10 text-rose-300 border border-rose-500/20' },
+  MORE_INFO_NEEDED: { label: 'More Info',        cls: 'bg-amber-500/10 text-amber-300 border border-amber-500/20' },
+  COMPLETED:        { label: 'Completed',        cls: 'bg-obsidian-800 text-slate-500' },
 }
 
 const PRIORITY_CLS: Record<string, string> = {
-  LOW:    'bg-gray-100 text-gray-500',
-  MEDIUM: 'bg-blue-50 text-blue-600',
-  HIGH:   'bg-amber-50 text-amber-700',
-  URGENT: 'bg-red-50 text-red-600',
+  LOW:    'bg-obsidian-800 text-slate-500',
+  MEDIUM: 'bg-sky-500/10 text-sky-300 border border-sky-500/20',
+  HIGH:   'bg-amber-500/10 text-amber-300 border border-amber-500/20',
+  URGENT: 'bg-rose-500/10 text-rose-300 border border-rose-500/20',
 }
 
 const TYPE_CLS: Record<string, string> = {
   NDA:              'bg-purple-100 text-purple-700',
-  MSA:              'bg-blue-100 text-blue-700',
+  MSA:              'bg-sky-500/10 text-sky-300 border border-sky-500/20',
   SOW:              'bg-cyan-100 text-cyan-700',
   SLA:              'bg-teal-100 text-teal-700',
   VENDOR_AGREEMENT: 'bg-orange-100 text-orange-700',
@@ -45,7 +45,7 @@ const TYPE_CLS: Record<string, string> = {
   LICENSE:          'bg-violet-100 text-violet-700',
   DATA_PROCESSING:  'bg-green-100 text-green-700',
   ORDER_FORM:       'bg-yellow-100 text-yellow-700',
-  OTHER:            'bg-gray-100 text-gray-600',
+  OTHER:            'bg-obsidian-800 text-slate-400',
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -92,14 +92,14 @@ export function RequestsPage() {
   const requests: any[] = data?.data ?? []
 
   return (
-    <div className="flex flex-col h-full bg-white text-gray-900">
+    <div className="flex flex-col h-full bg-obsidian-700 text-white">
       {/* Header */}
-      <div className="flex items-start justify-between px-6 py-4 border-b border-gray-100 bg-white gap-4">
+      <div className="flex items-start justify-between px-6 py-4 border-b border-white/[0.06] bg-obsidian-700 gap-4">
         <div className="min-w-0">
-          <h1 className="text-lg font-semibold text-gray-900">Contract Requests</h1>
+          <h1 className="text-lg font-semibold text-white">Contract Requests</h1>
           {/* B.6.16 — one-sentence explainer so first-time visitors
               understand what a "request" is before they hunt. */}
-          <p className="text-xs text-gray-500 mt-0.5 max-w-xl">
+          <p className="text-xs text-slate-500 mt-0.5 max-w-xl">
             Ask Legal to draft a contract. Fill out what you need —
             type, counterparty, timeline — and they'll produce the
             first version for you.
@@ -116,7 +116,7 @@ export function RequestsPage() {
       </div>
 
       {/* Tabs — B.6.16 adds inline counts so users see where work is */}
-      <div className="flex items-center gap-1 px-6 pt-3 border-b border-gray-100 bg-white">
+      <div className="flex items-center gap-1 px-6 pt-3 border-b border-white/[0.06] bg-obsidian-700">
         {STATUS_TABS.map(tab => {
           // For the "All" tab the count is the sum; otherwise look up
           // the specific status.
@@ -130,13 +130,13 @@ export function RequestsPage() {
               className={`px-3 py-2 text-xs font-medium rounded-t-lg transition-colors border-b-2 -mb-px inline-flex items-center gap-1.5 ${
                 isActive
                   ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  : 'border-transparent text-slate-500 hover:text-slate-300'
               }`}
             >
               <span>{tab.label}</span>
               {count > 0 && (
                 <span className={`tabular-nums rounded-full px-1.5 text-[10px] font-semibold ${
-                  isActive ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'
+                  isActive ? 'bg-sky-500/10 text-sky-300 border border-sky-500/20' : 'bg-obsidian-800 text-slate-400'
                 }`}>
                   {count}
                 </span>
@@ -147,7 +147,7 @@ export function RequestsPage() {
       </div>
 
       {/* Search */}
-      <div className="px-6 py-3 bg-white border-b border-gray-100">
+      <div className="px-6 py-3 bg-obsidian-700 border-b border-white/[0.06]">
         <div className="relative max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-400" />
           <Input
@@ -160,7 +160,7 @@ export function RequestsPage() {
       </div>
 
       {/* Table */}
-      <div className="flex-1 overflow-auto bg-gray-50">
+      <div className="flex-1 overflow-auto bg-obsidian-900">
         {isLoading ? (
           <div className="flex items-center justify-center h-48 gap-2 text-gray-400 text-sm">
             <Loader2 className="h-4 w-4 animate-spin" /> Loading…
@@ -178,7 +178,7 @@ export function RequestsPage() {
             )}
           </div>
         ) : (
-          <div className="divide-y divide-gray-100 bg-white mx-6 my-4 rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="divide-y divide-white/5 bg-obsidian-700 mx-6 my-4 rounded-xl border border-white/[0.06] shadow-sm overflow-hidden">
             {requests.map(req => {
               const badge   = STATUS_BADGE[req.status] ?? STATUS_BADGE.SUBMITTED
               const typeCls = TYPE_CLS[req.type] ?? TYPE_CLS.OTHER
@@ -191,7 +191,7 @@ export function RequestsPage() {
                   data-testid={`request-row-${req.id}`}
                   data-request-title={req.title}
                   onClick={() => setSelected(req)}
-                  className="w-full flex items-center gap-4 px-5 py-4 text-left hover:bg-gray-50 transition-colors group"
+                  className="w-full flex items-center gap-4 px-5 py-4 text-left hover:bg-obsidian-900 transition-colors group"
                 >
                   {/* Type dot */}
                   <div className={`w-2 h-2 rounded-full flex-shrink-0 ${typeCls.split(' ')[0].replace('bg-', 'bg-').replace('-100', '-400')}`} />
@@ -199,9 +199,9 @@ export function RequestsPage() {
                   {/* Main content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <p className="text-sm font-medium text-gray-900 truncate">{req.title}</p>
+                      <p className="text-sm font-medium text-white truncate">{req.title}</p>
                       {isClassifying && (
-                        <span className="flex items-center gap-1 text-[10px] text-blue-500 bg-blue-50 rounded-full px-1.5 py-0.5 flex-shrink-0">
+                        <span className="flex items-center gap-1 text-[10px] text-sky-300 bg-sky-500/10 rounded-full px-1.5 py-0.5 flex-shrink-0">
                           <Loader2 className="h-2.5 w-2.5 animate-spin" /> Classifying
                         </span>
                       )}
@@ -230,7 +230,7 @@ export function RequestsPage() {
                     <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${badge.cls}`}>
                       {badge.label}
                     </span>
-                    <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-gray-500 transition-colors" />
+                    <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-slate-500 transition-colors" />
                   </div>
                 </button>
               )

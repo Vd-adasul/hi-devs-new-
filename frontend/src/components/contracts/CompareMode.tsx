@@ -123,12 +123,12 @@ export function CompareMode({
     <div
       role="dialog"
       aria-label="Compare versions"
-      className="fixed inset-0 z-50 bg-white flex flex-col"
+      className="fixed inset-0 z-50 bg-obsidian-700 flex flex-col"
     >
       {/* ── Header ───────────────────────────────────────────────── */}
-      <div className="flex items-center gap-4 px-6 py-3 border-b border-gray-200 bg-white">
+      <div className="flex items-center gap-4 px-6 py-3 border-b border-white/10 bg-obsidian-700">
         <div className="flex items-center gap-2 text-sm">
-          <span className="font-semibold text-gray-900">Compare versions</span>
+          <span className="font-semibold text-white">Compare versions</span>
 
           {/* Newer picker */}
           <VersionPicker
@@ -150,7 +150,7 @@ export function CompareMode({
         </div>
 
         {/* Attribution chips for the two versions */}
-        <div className="hidden md:flex items-center gap-3 text-[11px] text-gray-500">
+        <div className="hidden md:flex items-center gap-3 text-[11px] text-slate-500">
           {newer && (
             <Attribution label={`v${newer.versionNumber}`} author={newer.authorName} createdAt={newer.createdAt} tone="blue" />
           )}
@@ -160,14 +160,14 @@ export function CompareMode({
         </div>
 
         {/* Filter chips — filter the per-change review list (theirs=added, ours=removed, pending=undecided) */}
-        <div className="ml-auto flex items-center gap-1 p-0.5 bg-gray-100 rounded-lg">
+        <div className="ml-auto flex items-center gap-1 p-0.5 bg-obsidian-800 rounded-lg">
           {(['all', 'theirs', 'ours', 'pending'] as const).map(f => (
             <button
               key={f}
               onClick={() => setFilter(f)}
               className={cn(
                 'px-2.5 py-1 rounded-md text-xs font-medium capitalize',
-                filter === f ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700',
+                filter === f ? 'bg-obsidian-700 shadow-sm text-white' : 'text-slate-500 hover:text-slate-300',
               )}
             >
               {f}
@@ -177,7 +177,7 @@ export function CompareMode({
 
         <button
           onClick={onClose}
-          className="p-1.5 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100"
+          className="p-1.5 rounded-md text-gray-400 hover:text-slate-400 hover:bg-obsidian-800"
           aria-label="Close compare (Esc)"
           title="Close (Esc)"
         >
@@ -187,18 +187,18 @@ export function CompareMode({
 
       {/* ── Bulk action bar — visible when diff loaded ──────────── */}
       {diff && (
-        <div className="flex items-center gap-3 px-6 py-2 border-b border-gray-100 bg-gray-50 text-xs">
-          <span className="text-gray-500">
+        <div className="flex items-center gap-3 px-6 py-2 border-b border-white/[0.06] bg-obsidian-900 text-xs">
+          <span className="text-slate-500">
             <span className="text-emerald-700 font-medium">{diff.stats.insertions}</span> added,{' '}
             <span className="text-red-700 font-medium">{diff.stats.deletions}</span> removed
           </span>
           {changes.length > 0 && (
             <>
               <div className="h-3 w-px bg-gray-300" aria-hidden />
-              <span className="text-gray-500">
+              <span className="text-slate-500">
                 <span className="text-emerald-700 font-medium">{acceptedCount}</span> accepted ·{' '}
                 <span className="text-red-700 font-medium">{rejectedCount}</span> rejected ·{' '}
-                <span className="text-gray-500 font-medium">{pendingCount}</span> pending
+                <span className="text-slate-500 font-medium">{pendingCount}</span> pending
               </span>
             </>
           )}
@@ -232,19 +232,19 @@ export function CompareMode({
       )}
 
       {/* ── Diff body ───────────────────────────────────────────── */}
-      <div className="flex-1 overflow-auto bg-gray-50 p-4">
+      <div className="flex-1 overflow-auto bg-obsidian-900 p-4">
         {sorted.length < 2 ? (
           <Centered>
-            <p className="text-sm text-gray-500">Only one version exists — nothing to compare.</p>
+            <p className="text-sm text-slate-500">Only one version exists — nothing to compare.</p>
           </Centered>
         ) : olderId === newerId ? (
           <Centered>
-            <p className="text-sm text-gray-500">Pick two different versions to see changes.</p>
+            <p className="text-sm text-slate-500">Pick two different versions to see changes.</p>
           </Centered>
         ) : isLoading ? (
           <Centered>
             <Loader2 className="h-5 w-5 animate-spin text-gray-400 mb-2" />
-            <p className="text-sm text-gray-500">Computing diff…</p>
+            <p className="text-sm text-slate-500">Computing diff…</p>
           </Centered>
         ) : diff?.diffHtml ? (
           <div className="flex gap-4 items-start">
@@ -267,7 +267,7 @@ export function CompareMode({
           </div>
         ) : (
           <Centered>
-            <p className="text-sm text-gray-500">No diff available for these versions.</p>
+            <p className="text-sm text-slate-500">No diff available for these versions.</p>
           </Centered>
         )}
       </div>
@@ -287,12 +287,12 @@ function VersionPicker({
   label:     string
 }) {
   return (
-    <label className="inline-flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-md px-2 py-1 text-xs">
-      <span className="text-gray-500 text-[10px] uppercase tracking-wide">{label}</span>
+    <label className="inline-flex items-center gap-1 bg-obsidian-900 border border-white/10 rounded-md px-2 py-1 text-xs">
+      <span className="text-slate-500 text-[10px] uppercase tracking-wide">{label}</span>
       <select
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="bg-transparent outline-none text-gray-800 font-medium pr-1"
+        className="bg-transparent outline-none text-white font-medium pr-1"
       >
         {versions.map(v => (
           <option key={v.id} value={v.id}>
@@ -321,7 +321,7 @@ function Attribution({
       'inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border',
       tone === 'blue'
         ? 'bg-blue-50 text-blue-700 border-blue-200'
-        : 'bg-gray-50 text-gray-600 border-gray-200',
+        : 'bg-obsidian-900 text-slate-400 border-white/10',
     )}>
       <span className="font-semibold">{label}</span>
       <span className="opacity-60">·</span>
@@ -346,8 +346,8 @@ function ChangesList({
   onDecide:     (id: string, d: RedlineDecision) => void
 }) {
   return (
-    <aside className="w-80 shrink-0 sticky top-0 self-start max-h-[calc(100vh-170px)] overflow-auto rounded-lg border border-gray-200 bg-white">
-      <div className="px-3 py-2 border-b border-gray-100 text-xs font-semibold text-gray-700 sticky top-0 bg-white">
+    <aside className="w-80 shrink-0 sticky top-0 self-start max-h-[calc(100vh-170px)] overflow-auto rounded-lg border border-white/10 bg-obsidian-700">
+      <div className="px-3 py-2 border-b border-white/[0.06] text-xs font-semibold text-slate-300 sticky top-0 bg-obsidian-700">
         Changes ({totalChanges})
       </div>
       {changes.length === 0 ? (
@@ -366,7 +366,7 @@ function ChangesList({
                     {c.type === 'ins' ? 'Added' : 'Removed'}
                   </span>
                   <p className={cn(
-                    'text-xs text-gray-700 line-clamp-3',
+                    'text-xs text-slate-300 line-clamp-3',
                     c.type === 'del' && 'line-through text-gray-400',
                   )}>
                     {c.text || <span className="italic text-gray-400">(formatting change)</span>}

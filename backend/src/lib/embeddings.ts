@@ -40,7 +40,8 @@ function realKey(v: string | undefined): boolean {
 
 export function activeEmbedProvider(): EmbedProvider {
   if (realKey(process.env.VOYAGE_API_KEY)) return 'voyage'
-  if (realKey(process.env.OPENAI_API_KEY)) return 'openai'
+  const openAiKey = process.env.OPENAI_API_KEY
+  if (realKey(openAiKey) && !openAiKey!.startsWith('rc_')) return 'openai'
   // Gemini embeddings (gemini-embedding-001). Matryoshka — we request
   // exactly 1536 dims so it slots into the existing pgvector column with
   // no padding. Task types map 1:1 onto our document/query split.

@@ -96,9 +96,9 @@ const STATUS_PILL: Record<string, string> = {
   PENDING_SIGNATURE:   'bg-indigo-50 text-indigo-700 border-indigo-200',
   EXECUTED:            'bg-emerald-50 text-emerald-700 border-emerald-200',
   PARTIALLY_EXECUTED:  'bg-emerald-50 text-emerald-700 border-emerald-200',
-  EXPIRED:             'bg-gray-100 text-gray-600 border-gray-200',
+  EXPIRED:             'bg-obsidian-800 text-slate-400 border-white/10',
   TERMINATED:          'bg-red-50 text-red-700 border-red-200',
-  CANCELLED:           'bg-gray-100 text-gray-600 border-gray-200',
+  CANCELLED:           'bg-obsidian-800 text-slate-400 border-white/10',
 }
 
 function relTime(iso: string | null | undefined): string {
@@ -151,7 +151,7 @@ export function CounterpartyDetailPage() {
       {/* Breadcrumb */}
       <Link
         to="/counterparties"
-        className="inline-flex items-center gap-1 text-[12px] text-muted-foreground hover:text-gray-900 mb-3"
+        className="inline-flex items-center gap-1 text-[12px] text-muted-foreground hover:text-white mb-3"
         data-testid="cp-back-link"
       >
         <ArrowLeft className="h-3 w-3" /> Counterparties
@@ -160,7 +160,7 @@ export function CounterpartyDetailPage() {
       {/* Header */}
       <div className="flex items-start justify-between gap-4 mb-5">
         <div className="min-w-0 flex-1">
-          <h1 className="text-2xl font-semibold text-gray-900 flex items-center gap-2.5" data-testid="cp-name">
+          <h1 className="text-2xl font-semibold text-white flex items-center gap-2.5" data-testid="cp-name">
             <span className="inline-flex items-center justify-center h-9 w-9 rounded-lg bg-blue-50 border border-blue-100">
               <Building2 className="h-5 w-5 text-blue-600" />
             </span>
@@ -179,7 +179,7 @@ export function CounterpartyDetailPage() {
                 href={cp.website.startsWith('http') ? cp.website : `https://${cp.website}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-gray-700 hover:text-blue-700"
+                className="inline-flex items-center gap-1.5 text-slate-300 hover:text-blue-700"
                 data-testid="cp-website"
               >
                 <Globe className="h-3.5 w-3.5 text-gray-400" />
@@ -190,7 +190,7 @@ export function CounterpartyDetailPage() {
             {cp.email && (
               <a
                 href={`mailto:${cp.email}`}
-                className="inline-flex items-center gap-1.5 text-gray-700 hover:text-blue-700"
+                className="inline-flex items-center gap-1.5 text-slate-300 hover:text-blue-700"
                 data-testid="cp-email"
               >
                 <Mail className="h-3.5 w-3.5 text-gray-400" />
@@ -198,12 +198,12 @@ export function CounterpartyDetailPage() {
               </a>
             )}
             {cp.phone && (
-              <span className="inline-flex items-center gap-1.5 text-gray-700">
+              <span className="inline-flex items-center gap-1.5 text-slate-300">
                 <Phone className="h-3.5 w-3.5 text-gray-400" />
                 {cp.phone}
               </span>
             )}
-            <span className="inline-flex items-center gap-1.5 text-gray-500">
+            <span className="inline-flex items-center gap-1.5 text-slate-500">
               <Clock className="h-3.5 w-3.5 text-gray-400" />
               Member since {new Date(cp.createdAt).toLocaleDateString(undefined, { month: 'short', year: 'numeric' })}
               {yearsActive > 0 && ` · ${yearsActive} ${yearsActive === 1 ? 'yr' : 'yrs'} of business`}
@@ -264,8 +264,8 @@ export function CounterpartyDetailPage() {
       {/* Contracts + Activity — two column on wide, stacked on narrow */}
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-5">
         <section className="border border-border rounded-xl bg-card overflow-hidden" data-testid="cp-contracts">
-          <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-gray-50/60">
-            <h2 className="text-[11px] font-semibold uppercase tracking-wider text-gray-600">
+          <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-obsidian-900/60">
+            <h2 className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
               Contracts ({cp.contracts.length})
             </h2>
             {cp.contracts.length > 0 && (
@@ -309,7 +309,7 @@ export function CounterpartyDetailPage() {
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2 flex-wrap">
                             <FileText className="h-3.5 w-3.5 text-gray-400 flex-shrink-0" />
-                            <span className="font-medium text-[13px] text-gray-900 group-hover:text-blue-700">
+                            <span className="font-medium text-[13px] text-white group-hover:text-blue-700">
                               {c.title}
                             </span>
                             {c.contractNumber && (
@@ -322,7 +322,7 @@ export function CounterpartyDetailPage() {
                             </span>
                             <span className="font-mono uppercase text-[9.5px] tracking-wider text-gray-400">{c.type}</span>
                             {v > 0 && (
-                              <span className="text-gray-700 font-medium tabular-nums">
+                              <span className="text-slate-300 font-medium tabular-nums">
                                 {formatMoney(v, c.currency ?? 'USD')}
                               </span>
                             )}
@@ -359,8 +359,8 @@ export function CounterpartyDetailPage() {
         </section>
 
         <aside className="border border-border rounded-xl bg-card overflow-hidden h-fit" data-testid="cp-activity">
-          <div className="px-4 py-2.5 border-b border-border bg-gray-50/60">
-            <h2 className="text-[11px] font-semibold uppercase tracking-wider text-gray-600">
+          <div className="px-4 py-2.5 border-b border-border bg-obsidian-900/60">
+            <h2 className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
               Recent activity
             </h2>
           </div>
@@ -376,7 +376,7 @@ export function CounterpartyDetailPage() {
                     to={`/contracts/${e.contractId}`}
                     className="block group"
                   >
-                    <p className="text-[12px] text-gray-800 group-hover:text-blue-700 line-clamp-2">
+                    <p className="text-[12px] text-white group-hover:text-blue-700 line-clamp-2">
                       {e.label}
                     </p>
                     <p className="text-[10.5px] text-muted-foreground mt-0.5">
@@ -426,8 +426,8 @@ function StatCard({
     <div className={`border rounded-lg px-3.5 py-3 ${toneCls}`}>
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-[10px] font-medium uppercase tracking-wider text-gray-500">{label}</p>
-          <p className="text-xl font-semibold text-gray-900 mt-1 tabular-nums">{value}</p>
+          <p className="text-[10px] font-medium uppercase tracking-wider text-slate-500">{label}</p>
+          <p className="text-xl font-semibold text-white mt-1 tabular-nums">{value}</p>
         </div>
         <Icon className={`h-4 w-4 ${iconCls}`} />
       </div>
@@ -471,11 +471,11 @@ function EditModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h2 className="text-base font-semibold text-gray-900">Edit Counterparty</h2>
-          <button onClick={onClose} className="p-1.5 hover:bg-gray-100 rounded-lg">
-            <X className="h-4 w-4 text-gray-500" />
+      <div className="bg-obsidian-700 rounded-2xl shadow-2xl w-full max-w-md mx-4">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
+          <h2 className="text-base font-semibold text-white">Edit Counterparty</h2>
+          <button onClick={onClose} className="p-1.5 hover:bg-obsidian-800 rounded-lg">
+            <X className="h-4 w-4 text-slate-500" />
           </button>
         </div>
         <div className="px-6 py-5 space-y-3.5">
@@ -503,7 +503,7 @@ function EditModal({
             <p className="text-xs text-red-500">Failed to save changes.</p>
           )}
         </div>
-        <div className="flex justify-end gap-2 px-6 py-4 border-t border-gray-100">
+        <div className="flex justify-end gap-2 px-6 py-4 border-t border-white/[0.06]">
           <Button variant="ghost" size="sm" onClick={onClose} disabled={save.isPending}>Cancel</Button>
           <Button
             size="sm"
@@ -523,7 +523,7 @@ function EditModal({
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-gray-700 mb-1.5">{label}</label>
+      <label className="block text-xs font-medium text-slate-300 mb-1.5">{label}</label>
       {children}
     </div>
   )

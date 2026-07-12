@@ -93,7 +93,7 @@ export function CitationPills({ bundle }: { bundle: CitationBundle }) {
                       §{c.sectionRef}
                     </span>
                   )}
-                  <span className="truncate text-[11.5px] text-gray-900 group-hover:text-blue-800">
+                  <span className="truncate text-[11.5px] text-white group-hover:text-blue-800">
                     {c.sectionTitle || c.quote.slice(0, 60)}
                   </span>
                   {c.page != null && (
@@ -124,7 +124,7 @@ export function CitationPills({ bundle }: { bundle: CitationBundle }) {
               {isExpanded && (
                 <div
                   data-testid={`citation-quote-${i}`}
-                  className="mt-1 text-[11px] text-gray-700 bg-white/70 border border-blue-100 rounded px-2 py-1 italic"
+                  className="mt-1 text-[11px] text-slate-300 bg-obsidian-700/70 border border-blue-100 rounded px-2 py-1 italic"
                 >
                   “{c.quote}”
                 </div>

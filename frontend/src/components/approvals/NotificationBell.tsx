@@ -74,11 +74,11 @@ export function NotificationBell() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setOpen(v => !v)}
-        className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors"
+        className="relative p-2 rounded-lg hover:bg-obsidian-800 transition-colors"
         aria-label="Notifications"
         data-testid="notification-bell"
       >
-        <Bell className="h-5 w-5 text-gray-600" />
+        <Bell className="h-5 w-5 text-slate-400" />
         {unreadCount > 0 && (
           <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-white text-[9px] font-bold leading-none">
             {unreadCount > 9 ? '9+' : unreadCount}
@@ -87,10 +87,10 @@ export function NotificationBell() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-1 w-80 bg-white rounded-xl shadow-lg border z-50 overflow-hidden">
+        <div className="absolute right-0 mt-1 w-80 bg-obsidian-700 rounded-xl shadow-lg border z-50 overflow-hidden">
           {/* Header */}
-          <div className="flex items-center justify-between px-3 py-2.5 border-b bg-gray-50">
-            <span className="text-sm font-semibold text-gray-800">Notifications</span>
+          <div className="flex items-center justify-between px-3 py-2.5 border-b bg-obsidian-900">
+            <span className="text-sm font-semibold text-white">Notifications</span>
             <div className="flex items-center gap-2">
               {unreadCount > 0 && (
                 <button
@@ -101,7 +101,7 @@ export function NotificationBell() {
                 </button>
               )}
               <button onClick={() => setOpen(false)} className="p-0.5 rounded hover:bg-gray-200">
-                <X className="h-3.5 w-3.5 text-gray-500" />
+                <X className="h-3.5 w-3.5 text-slate-500" />
               </button>
             </div>
           </div>
@@ -118,7 +118,7 @@ export function NotificationBell() {
                 <div
                   key={n.id}
                   data-testid={`notification-${n.type}`}
-                  className={`flex gap-2.5 px-3 py-2.5 hover:bg-gray-50 transition-colors cursor-pointer ${!n.read ? 'bg-blue-50/40' : ''}`}
+                  className={`flex gap-2.5 px-3 py-2.5 hover:bg-obsidian-900 transition-colors cursor-pointer ${!n.read ? 'bg-blue-50/40' : ''}`}
                   onClick={() => {
                     if (!n.read) markRead.mutate([n.id])
                     if (n.resourceType === 'contract') { setOpen(false); navigate(`/contracts/${n.resourceId}`) }
@@ -129,10 +129,10 @@ export function NotificationBell() {
                     {TYPE_ICON[n.type] ?? <Bell className="h-3.5 w-3.5 text-gray-400" />}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className={`text-xs font-medium leading-snug ${n.read ? 'text-gray-700' : 'text-gray-900'}`}>
+                    <p className={`text-xs font-medium leading-snug ${n.read ? 'text-slate-300' : 'text-white'}`}>
                       {n.title}
                     </p>
-                    <p className="text-xs text-gray-500 truncate mt-0.5">{n.body}</p>
+                    <p className="text-xs text-slate-500 truncate mt-0.5">{n.body}</p>
                     <p className="text-xs text-gray-400 mt-0.5">{relativeTime(n.createdAt)}</p>
                   </div>
                   {!n.read && (

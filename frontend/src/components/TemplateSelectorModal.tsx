@@ -39,30 +39,30 @@ export function TemplateSelectorModal({ onSelect, onClose, preferredType }: Prop
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div className="w-full max-w-2xl bg-obsidian-700 rounded-2xl shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Select Template</h2>
-            <p className="text-sm text-gray-500">Choose a template to start your contract draft</p>
+            <h2 className="text-lg font-semibold text-white">Select Template</h2>
+            <p className="text-sm text-slate-500">Choose a template to start your contract draft</p>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
+          <button onClick={onClose} className="text-gray-400 hover:text-slate-400">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Filters */}
-        <div className="flex items-center gap-3 px-6 py-3 border-b border-gray-100 bg-gray-50">
+        <div className="flex items-center gap-3 px-6 py-3 border-b border-white/[0.06] bg-obsidian-900">
           <input
             value={q}
             onChange={e => setQ(e.target.value)}
             placeholder="Search templates..."
-            className="flex-1 text-sm border border-gray-200 rounded px-3 py-1.5 outline-none focus:border-blue-400 bg-white"
+            className="flex-1 text-sm border border-white/10 rounded px-3 py-1.5 outline-none focus:border-blue-400 bg-obsidian-700"
           />
           <select
             value={filterType}
             onChange={e => setFilterType(e.target.value)}
-            className="text-sm border border-gray-200 rounded px-3 py-1.5 outline-none bg-white"
+            className="text-sm border border-white/10 rounded px-3 py-1.5 outline-none bg-obsidian-700"
           >
             <option value="">All Types</option>
             {CONTRACT_TYPES.map(t => <option key={t}>{t}</option>)}
@@ -70,7 +70,7 @@ export function TemplateSelectorModal({ onSelect, onClose, preferredType }: Prop
         </div>
 
         {/* Template list */}
-        <div className="max-h-96 overflow-y-auto divide-y divide-gray-100">
+        <div className="max-h-96 overflow-y-auto divide-y divide-white/5">
           {isLoading && (
             <div className="flex items-center justify-center py-10">
               <Loader2 className="w-6 h-6 text-gray-400 animate-spin" />
@@ -97,14 +97,14 @@ export function TemplateSelectorModal({ onSelect, onClose, preferredType }: Prop
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <FileText className="w-4 h-4 text-gray-400 shrink-0" />
-                    <span className="font-medium text-gray-900">{t.name}</span>
+                    <span className="font-medium text-white">{t.name}</span>
                     <Globe className="w-3.5 h-3.5 text-green-500" />
                     {preferredType && t.contractType === preferredType && (
                       <span className="text-xs px-1.5 py-0.5 bg-green-100 text-green-700 rounded-full">Recommended</span>
                     )}
                   </div>
                   {t.description && (
-                    <p className="text-sm text-gray-500 mt-0.5 line-clamp-1">{t.description}</p>
+                    <p className="text-sm text-slate-500 mt-0.5 line-clamp-1">{t.description}</p>
                   )}
                   <div className="flex items-center gap-2 mt-1">
                     {t.contractType && (
@@ -121,11 +121,11 @@ export function TemplateSelectorModal({ onSelect, onClose, preferredType }: Prop
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-6 py-3 border-t border-gray-200 bg-gray-50">
+        <div className="flex items-center justify-between px-6 py-3 border-t border-white/10 bg-obsidian-900">
           <p className="text-xs text-gray-400">{templates.length} templates available</p>
           <button
             onClick={onClose}
-            className="text-sm px-4 py-1.5 bg-gray-100 rounded-lg hover:bg-gray-200 text-gray-600"
+            className="text-sm px-4 py-1.5 bg-obsidian-800 rounded-lg hover:bg-gray-200 text-slate-400"
           >
             Cancel
           </button>

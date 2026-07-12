@@ -96,7 +96,7 @@ const NAV_SECTIONS: NavSection[] = [
 
 const BADGE_STYLES: Record<string, string> = {
   pendingApprovals: 'bg-brass-400/15 text-brass-300 border border-brass-400/30',
-  openRequests:     'bg-white/[0.06] text-slate-200 border border-white/10',
+  openRequests:     'bg-obsidian-700/[0.06] text-slate-200 border border-white/10',
 }
 
 const ADMIN_SECTION: NavSection = {
@@ -222,7 +222,7 @@ export function Sidebar() {
                         collapsed ? 'px-2' : 'px-2 lg:px-3',
                         isActive
                           ? 'bg-brass-400/12 text-brass-200 shadow-[inset_1px_0_0_0_rgba(212,175,55,0.6)]'
-                          : 'text-slate-400 hover:bg-white/[0.04] hover:text-white'
+                          : 'text-slate-400 hover:bg-obsidian-700/[0.04] hover:text-white'
                       )
                     }
                   >
@@ -278,7 +278,7 @@ export function Sidebar() {
               collapsed ? 'px-2' : 'px-2 lg:px-3',
               isActive
                 ? 'bg-brass-400/12 text-brass-200'
-                : 'text-slate-400 hover:bg-white/[0.04] hover:text-white'
+                : 'text-slate-400 hover:bg-obsidian-700/[0.04] hover:text-white'
             )
           }
         >
@@ -292,7 +292,7 @@ export function Sidebar() {
           aria-label={collapsed ? 'Expand sidebar (⌘\\)' : 'Collapse sidebar (⌘\\)'}
           title={collapsed ? 'Expand sidebar (⌘\\)' : 'Collapse sidebar (⌘\\)'}
           className={cn(
-            'hidden lg:flex w-full items-center gap-3 py-2 rounded-md text-[11.5px] font-medium text-slate-500 hover:bg-white/[0.04] hover:text-white transition-colors',
+            'hidden lg:flex w-full items-center gap-3 py-2 rounded-md text-[11.5px] font-medium text-slate-500 hover:bg-obsidian-700/[0.04] hover:text-white transition-colors',
             layoutCls,
             collapsed ? 'px-2' : 'px-2 lg:px-3',
           )}
@@ -301,7 +301,7 @@ export function Sidebar() {
             ? <PanelLeftOpen size={16} className="shrink-0" />
             : <PanelLeftClose size={16} className="shrink-0" />}
           <span className={showLabel}>Collapse</span>
-          <span className={cn('ml-auto text-[10px] font-mono opacity-60', showLabel)}>⌘\</span>
+          <span className={cn('ml-auto text-[10px] font-mono text-slate-500', showLabel)}>⌘\</span>
         </button>
       </div>
     </aside>
