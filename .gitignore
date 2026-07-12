@@ -56,3 +56,9 @@ Thumbs.db
 .cache/
 .gemini/
 .agents/
+.env.*
+*.env
+credentials.json
+*.pem
+*.key
+.credentials
