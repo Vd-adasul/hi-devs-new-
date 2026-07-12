@@ -1,7 +1,7 @@
 import { buildApp } from './app.js'
 import { startCollabServer } from './lib/collab-server.js'
 
-const PORT = process.env.PORT && Number(process.env.PORT) !== 3000 ? Number(process.env.PORT) : 8000
+const PORT = process.env.PORT ? Number(process.env.PORT) : 8000
 const HOST = process.env.HOST ?? '0.0.0.0'
 
 // Wave 4 — workers run in-process by default (dev + single-process deploys). In
