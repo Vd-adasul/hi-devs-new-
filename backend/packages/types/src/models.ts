@@ -12,7 +12,7 @@ import {
   PermissionAction,
   PermissionResource,
   PermissionScope,
-} from './enums'
+} from './enums.js'
 
 export interface Organization {
   id: string

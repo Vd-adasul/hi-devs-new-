@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { ContractType, RequestStatus, SystemRole, PermissionAction, PermissionResource, PermissionScope } from './enums'
+import { ContractType, RequestStatus, SystemRole, PermissionAction, PermissionResource, PermissionScope } from './enums.js'
 
 // ─── Auth ────────────────────────────────────────────────────────────────────
 
